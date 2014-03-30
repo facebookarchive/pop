@@ -1,0 +1,27 @@
+// 
+// Copyright (c) 2014-present, Facebook, Inc.
+// All rights reserved.
+// 
+// This source code is licensed under the BSD-style license found in the
+// LICENSE file in the root directory of this source tree. An additional grant
+// of patent rights can be found in the PATENTS file in the same directory.
+// 
+
+#include "../Base-iOS.xcconfig"
+
+// Deployment
+DSTROOT = /tmp/$(TARGET_NAME)
+INSTALL_PATH = $(SYMROOT)/Headers
+SKIP_INSTALL = YES
+
+// Packaging: Put headers in $(SYMROOT) instead of $(CONFIGURATION_BUILD_DIR)
+// so header paths across projects don't depend on all projects having an
+// identical configuration name.
+//
+// Note: PUBLIC_HEADERS_FOLDER_PATH is directly appended to $(CONFIGURATION_BUILD_DIR),
+// so the path is relative to that.
+
+PUBLIC_HEADERS_FOLDER_PATH = ../Headers/$(TARGET_NAME)
+
+// declare inlines as extern
+GCC_INLINES_ARE_PRIVATE_EXTERN = YES
