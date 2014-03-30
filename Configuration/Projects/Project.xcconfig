@@ -1,0 +1,48 @@
+// 
+// Copyright (c) 2014-present, Facebook, Inc.
+// All rights reserved.
+// 
+// This source code is licensed under the BSD-style license found in the
+// LICENSE file in the root directory of this source tree. An additional grant
+// of patent rights can be found in the PATENTS file in the same directory.
+// 
+
+#include "../Base-iOS.xcconfig"
+
+SDKROOT = iphoneos
+
+// Build Options
+GCC_VERSION = com.apple.compilers.llvm.clang.1_0
+
+// Deployment
+TARGETED_DEVICE_FAMILY = 1,2 // iPhone, iPad
+
+// Packaging
+PRODUCT_NAME = $(TARGET_NAME)
+INFOPLIST_FILE = $(TARGET_NAME)/$(TARGET_NAME)-Info.plist
+
+// Search Paths
+ALWAYS_SEARCH_USER_PATHS = NO
+HEADER_SEARCH_PATHS = $(SYMROOT)/Headers
+FRAMEWORK_SEARCH_PATHS = $(inherited) $(BUILT_PRODUCTS_DIR)
+LIBRARY_SEARCH_PATHS = $(BUILT_PRODUCTS_DIR) $(inherited)
+
+// Code Generation
+GCC_DYNAMIC_NO_PIC = NO
+GCC_INLINES_ARE_PRIVATE_EXTERN = YES
+GCC_SYMBOLS_PRIVATE_EXTERN = NO
+
+// Language
+GCC_C_LANGUAGE_STANDARD = gnu99
+CLANG_ENABLE_OBJC_ARC = NO
+GCC_PRECOMPILE_PREFIX_HEADER = YES
+GCC_PREFIX_HEADER = $(TARGET_NAME)/$(TARGET_NAME)-Prefix.pch
+
+// Warnings
+GCC_WARN_ABOUT_RETURN_TYPE = YES
+GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES
+GCC_WARN_MISSING_PARENTHESES = YES
+GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES
+GCC_WARN_SHADOW = YES
+GCC_WARN_UNUSED_VARIABLE = YES
+CLANG_WARN_CXX0X_EXTENSIONS = NO

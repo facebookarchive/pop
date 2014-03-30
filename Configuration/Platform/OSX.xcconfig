@@ -1,0 +1,18 @@
+// 
+// Copyright (c) 2014-present, Facebook, Inc.
+// All rights reserved.
+// 
+// This source code is licensed under the BSD-style license found in the
+// LICENSE file in the root directory of this source tree. An additional grant
+// of patent rights can be found in the PATENTS file in the same directory.
+// 
+
+// OS X Platform
+SDKROOT = macosx
+SUPPORTED_PLATFORMS = macosx
+
+// Standard Architectures
+ARCHS = $(ARCHS_STANDARD)
+
+// Limit to OS X 64-bit (x86_64)
+VALID_ARCHS = x86_64

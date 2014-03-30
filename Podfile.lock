@@ -1,0 +1,10 @@
+PODS:
+  - OCMock (2.2.3)
+
+DEPENDENCIES:
+  - OCMock (~> 2.2)
+
+SPEC CHECKSUMS:
+  OCMock: ea7fe30ee99e4e3186ad47d032a301fa7e8793ec
+
+COCOAPODS: 0.32.1
