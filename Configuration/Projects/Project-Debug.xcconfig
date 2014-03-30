@@ -1,0 +1,25 @@
+// 
+// Copyright (c) 2014-present, Facebook, Inc.
+// All rights reserved.
+// 
+// This source code is licensed under the BSD-style license found in the
+// LICENSE file in the root directory of this source tree. An additional grant
+// of patent rights can be found in the PATENTS file in the same directory.
+// 
+
+#include "Project.xcconfig"
+
+// Code Generation
+GCC_OPTIMIZATION_LEVEL = 0
+
+// Enable assertions
+ENABLE_NS_ASSERTIONS = YES
+
+// Avoid compression overhead
+COMPRESS_PNG_FILES = NO
+
+// Deployment
+COPY_PHASE_STRIP = NO
+
+// Default to dwarf
+DEBUG_INFORMATION_FORMAT = dwarf

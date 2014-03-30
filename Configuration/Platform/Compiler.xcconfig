@@ -1,0 +1,36 @@
+// 
+// Copyright (c) 2014-present, Facebook, Inc.
+// All rights reserved.
+// 
+// This source code is licensed under the BSD-style license found in the
+// LICENSE file in the root directory of this source tree. An additional grant
+// of patent rights can be found in the PATENTS file in the same directory.
+// 
+
+// Don't warn on implicit property synthesis
+CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO
+
+// Treat warnings as errors
+GCC_TREAT_WARNINGS_AS_ERRORS = YES
+CLANG_WARN_CONSTANT_CONVERSION = YES
+CLANG_WARN_ENUM_CONVERSION = YES
+CLANG_WARN_INT_CONVERSION = YES
+CLANG_WARN__DUPLICATE_METHOD_MATCH = YES
+CLANG_WARN_BOOL_CONVERSION = YES
+CLANG_WARN_EMPTY_BODY = YES
+GCC_WARN_UNINITIALIZED_AUTOS = YES
+GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO
+GCC_WARN_UNUSED_FUNCTION = YES
+
+// Silence Eigen warnings
+GCC_WARN_SHADOW = NO
+
+// Enable C++11 support
+CLANG_CXX_LANGUAGE_STANDARD = c++11
+CLANG_CXX_LIBRARY = libc++
+
+// Enable ARC
+CLANG_ENABLE_OBJC_ARC = YES
+
+// Allow #import'ing code generated headers from DERIVED_FILE_DIR.
+HEADER_SEARCH_PATHS = $(inherited) $(DERIVED_FILE_DIR)
