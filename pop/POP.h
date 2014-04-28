@@ -21,7 +21,6 @@
 #import <POP/POPDecayAnimation.h>
 #import <POP/POPDefines.h>
 #import <POP/POPGeometry.h>
-#import <POP/POPLayerExtras.h>
 #import <POP/POPPropertyAnimation.h>
 #import <POP/POPSpringAnimation.h>
 
