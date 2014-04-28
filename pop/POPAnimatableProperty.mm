@@ -18,6 +18,8 @@
 #if TARGET_OS_IPHONE
 #import <UIKit/UIView.h>
 #import <UIKit/UITableView.h>
+#else
+#import <AppKit/NSLayoutConstraint.h>
 #endif
 
 #pragma mark - Static
@@ -331,6 +333,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
   },
 
 #if TARGET_OS_IPHONE
+  
   /* UIView */
   
   {kPOPViewAlpha,
