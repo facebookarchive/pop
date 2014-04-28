@@ -9,7 +9,7 @@ Pop is available on [CocoaPods](http://cocoapods.org). Just add the following to
 ```ruby
 pod 'pop'
 ```
-Alternatively, you can add the project to your workspace and adopt the provided configuration files or manually copy the files under the pop subdirectory into your project.
+Alternatively, you can add the project to your workspace and adopt the provided configuration files or manually copy the files under the pop subdirectory into your project. If installing manually, ensure the C++ standard library is also linked by including `-lc++` to your project linker flags.
 
 ## Usage
 
