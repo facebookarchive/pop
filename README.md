@@ -144,6 +144,6 @@ Assuming CocoaPods is installed, this will include the necessary OCMock dependen
 ## Contributing
 See the CONTRIBUTING file for how to help out.
 
-## Licence
+## License
 
 Pop is released under a BSD License. See LICENSE file for details.
