@@ -141,6 +141,15 @@ pod install
 
 Assuming CocoaPods is installed, this will include the necessary OCMock dependency to the unit test targets.
 
+## Resources
+
+A collection of links to external resources that may prove valuable:
+
+* [Core Animation Programming Gude](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html)
+* [Tapity Tutorial – Getting Started with Pop](http://tapity.com/tutorial-getting-started-with-pop/)
+* [Rebound – Springs Animations for Android](http://facebook.github.io/rebound/)
+
+
 ## Contributing
 See the CONTRIBUTING file for how to help out.
 
