@@ -54,7 +54,7 @@ While a layer was used in the above examples, the Pop interface is implemented a
 
 There are four concrete animation types: spring, decay, basic and custom.
 
-Spring animations can be used to give objects a delightful bounce. In this example, we using a spring animation to animates a layer's bounds from its current value to (0, 0, 400, 400):
+Spring animations can be used to give objects a delightful bounce. In this example, we use a spring animation to animate a layer's bounds from its current value to (0, 0, 400, 400):
 
 ```objective-c
 POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerBounds];
