@@ -1,0 +1,7 @@
+language: objective-c
+xcode_workspace: pop.xcworkspace
+xcode_scheme: pop
+xcode_sdk: iphonesimulator7.0
+before_script:
+  - brew update
+  - brew upgrade xctool
