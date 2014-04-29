@@ -5,3 +5,4 @@ xcode_sdk: iphonesimulator7.0
 before_script:
   - brew update
   - brew upgrade xctool
+  - gem install cocoapods -v '0.32.1'
