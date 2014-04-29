@@ -370,8 +370,6 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     if(![animationSet containsObject:item->animation]) {
       iter++;
     } else {
-      POPAnimationState *state = POPAnimationGetState(item->animation);
-      state->stop(true, !state->active);
       iter = _list.erase(iter);
     }
   }
