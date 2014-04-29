@@ -77,7 +77,7 @@ POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPView
 anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
 anim.fromValue = @(0.0);
 anim.toValue = @(1.0);
-[view pop_addAnimation:anim forKey:@"slide"];
+[view pop_addAnimation:anim forKey:@"fade"];
 ```
 `POPCustomAnimation` makes creating custom animations and transitions easier by handling CADisplayLink and associated time-step management. See header for more details.
 
