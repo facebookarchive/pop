@@ -15,7 +15,7 @@
  @abstract POPCustomAnimationBlock is the callback block of a custom animation.
  @discussion This block will be executed for each animation frame and should update the property or properties being animated based on current timing.
  @param target The object being animated. Reference the passed in target to help avoid retain loops.
- @param target The custom animation instance. Use to determine the current and elapsed time since last callback. Reference the passed in animation to help avoid retain loops.
+ @param animation The custom animation instance. Use to determine the current and elapsed time since last callback. Reference the passed in animation to help avoid retain loops.
  @return Flag indicating whether the animation should continue animating. Return NO to indicate animation is done.
  */
 typedef BOOL (^POPCustomAnimationBlock)(id target, POPCustomAnimation *animation);
