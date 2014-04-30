@@ -17,7 +17,7 @@
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIView.h>
-#import <UIKit/UITableView.h>
+#import <UIKit/UIScrollView.h>
 #else
 #import <AppKit/NSLayoutConstraint.h>
 #endif
@@ -60,9 +60,12 @@ NSString * const kPOPViewScaleXY = @"view.scaleXY";
 NSString * const kPOPViewScaleY = @"view.scaleY";
 NSString * const kPOPViewSize = kPOPLayerSize;
 
-NSString * const kPOPTableViewContentOffset = @"tableView.contentOffset";
-NSString * const kPOPTableViewContentSize = @"tableView.contentSize";
+NSString * const kPOPScrollViewContentOffset = @"scrollView.contentOffset";
+NSString * const kPOPScrollViewContentSize = @"scrollView.contentSize";
 
+// alias UIScrollView
+NSString * const kPOPTableViewContentOffset = kPOPScrollViewContentOffset;
+NSString * const kPOPTableViewContentSize = kPOPScrollViewContentSize;
 
 /**
  State structure internal to static animatable property.
@@ -406,23 +409,23 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     0.005
   },
   
-  /* UITableView */
+  /* UIScrollView */
   
-  {kPOPTableViewContentOffset,
-    ^(UITableView *obj, CGFloat values[]) {
+  {kPOPScrollViewContentOffset,
+    ^(UIScrollView *obj, CGFloat values[]) {
       values_from_point(values, obj.contentOffset);
     },
-    ^(UITableView *obj, const CGFloat values[]) {
+    ^(UIScrollView *obj, const CGFloat values[]) {
       obj.contentOffset = values_to_point(values);
     },
     1.0
   },
 
-  {kPOPTableViewContentSize,
-    ^(UITableView *obj, CGFloat values[]) {
+  {kPOPScrollViewContentSize,
+    ^(UIScrollView *obj, CGFloat values[]) {
       values_from_size(values, obj.contentSize);
     },
-    ^(UITableView *obj, const CGFloat values[]) {
+    ^(UIScrollView *obj, const CGFloat values[]) {
       obj.contentSize = values_to_size(values);
     },
     1.0
