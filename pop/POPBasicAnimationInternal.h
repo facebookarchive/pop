@@ -47,7 +47,7 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
     if (_POPPropertyAnimationState::isDone()) {
       return true;
     }
-    return _EQLF_(progress, 1., 1e-3);
+    return progress >= 1.0f;
   }
 
   void updatedTimingFunction()
