@@ -11,7 +11,10 @@
 #import "POPPropertyAnimationInternal.h"
 
 // default animation duration
-static CGFloat kPOPAnimationDurationDefault = 0.4;
+static CGFloat const kPOPAnimationDurationDefault = 0.4;
+
+// progress threshold for computing done
+static CGFloat const kPOPProgressThreshold = 1e-6;
 
 static void interpolate(POPValueType valueType, NSUInteger count, const CGFloat *fromVec, const CGFloat *toVec, CGFloat *outVec, double p)
 {
@@ -47,7 +50,7 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
     if (_POPPropertyAnimationState::isDone()) {
       return true;
     }
-    return _EQLF_(progress, 1., 1e-3);
+    return progress + kPOPProgressThreshold >= 1.;
   }
 
   void updatedTimingFunction()
