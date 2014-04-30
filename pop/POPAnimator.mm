@@ -486,8 +486,17 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
           FBLogAnimDebug(@"time:%f running:%@", time, item->animation);
 
           if (state->isDone()) {
-            // set end value
-            applyAnimationProgress(obj, state, 1.0);
+              
+              // get state progress value
+              POPPropertyAnimationState *ps = dynamic_cast<POPPropertyAnimationState*>(state);
+              if (NULL != ps) {
+                  VectorRef currentVec = ps->currentValue();
+                  // if progress isn't 1.0f (due to rounding error), set 1.0f as end progress value
+                  if (currentVec->data()[0] != 1.0f) {
+                      // set end value
+                      applyAnimationProgress(obj, state, 1.0);
+                  }
+              }
 
             // finished succesfully, cleanup
             stopAndCleanup(self, item, state->removedOnCompletion, YES);
