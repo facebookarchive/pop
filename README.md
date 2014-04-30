@@ -9,7 +9,7 @@ Pop is an extensible animation engine for iOS and OS X. In addition to basic sta
 Pop is available on [CocoaPods](http://cocoapods.org). Just add the following to your project Podfile:
 
 ```ruby
-pod 'pop'
+pod 'pop', '~> 1.0.0'
 ```
 Alternatively, you can add the project to your workspace and adopt the provided configuration files or manually copy the files under the pop subdirectory into your project. If installing manually, ensure the C++ standard library is also linked by including `-lc++` to your project linker flags.
 
