@@ -238,6 +238,21 @@ using namespace POP;
   [delegate verify];
 }
 
+- (void)testCancelBeforeBegin
+{
+  POPAnimation *anim = FBTestLinearPositionAnimation(self.beginTime + 100000);
+  [anim.tracer start];
+
+  CALayer *layer = [CALayer layer];
+  [layer pop_addAnimation:anim forKey:@"key"];
+  [layer pop_removeAllAnimations];
+
+  NSArray *didStartEvents = [anim.tracer eventsWithType:kPOPAnimationEventDidStart];
+  NSArray *didStopEvents = [anim.tracer eventsWithType:kPOPAnimationEventDidStop];
+  STAssertTrue(1 == didStartEvents.count, @"unexpected start events %@", didStartEvents);
+  STAssertTrue(1 == didStopEvents.count, @"unexpected stop events %@", didStopEvents);
+}
+
 - (void)testAddedKeys
 {
   POPAnimation *anim = FBTestLinearPositionAnimation();
