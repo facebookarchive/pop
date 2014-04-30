@@ -149,6 +149,7 @@ A collection of links to external resources that may prove valuable:
 
 * [Core Animation Programming Guide](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html)
 * [Tapity Tutorial – Getting Started with Pop](http://tapity.com/tutorial-getting-started-with-pop/)
+* [Codeplease – Bridging the gesture to animation gap](http://codeplease.io/playing-with-pop-ii/)
 * [Tweaks – Easily adjust parameters for iOS apps in development](https://github.com/facebook/tweaks)
 * [Rebound – Springs Animations for Android](http://facebook.github.io/rebound/)
 
