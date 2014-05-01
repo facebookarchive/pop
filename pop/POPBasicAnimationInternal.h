@@ -24,6 +24,7 @@ static void interpolate(POPValueType valueType, NSUInteger count, const CGFloat 
     case kPOPValuePoint:
     case kPOPValueSize:
     case kPOPValueRect:
+    case kPOPValueColor:
       interpolate_vector(count, outVec, fromVec, toVec, p);
       break;
     default:
