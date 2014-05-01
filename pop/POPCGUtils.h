@@ -61,6 +61,11 @@ extern void POPCGColorGetRGBAComponents(CGColorRef color, CGFloat components[]);
  */
 extern CGColorRef POPCGColorRGBACreate(const CGFloat components[]) CF_RETURNS_RETAINED;
 
+/**
+ Takes a color reference and returns a CGColor.
+ */
+extern CGColorRef POPCGColorWithColor(id color);
+
 #if TARGET_OS_IPHONE
 
 /**

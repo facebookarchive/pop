@@ -56,6 +56,23 @@ CGColorRef POPCGColorRGBACreate(const CGFloat components[])
 #endif
 }
 
+CGColorRef POPCGColorWithColor(id color)
+{
+  if (CFGetTypeID((__bridge CFTypeRef)color) == CGColorGetTypeID()) {
+    return ((__bridge CGColorRef)color);
+  }
+#if TARGET_OS_IPHONE
+  else if ([color isKindOfClass:[UIColor class]]) {
+    return [color CGColor];
+  }
+#else
+  else if ([color isKindOfClass:[NSColor class]]) {
+    return [color CGColor];
+  }
+#endif
+  return nil;
+}
+
 #if TARGET_OS_IPHONE
 
 void POPUIColorGetRGBAComponents(UIColor *color, CGFloat components[])

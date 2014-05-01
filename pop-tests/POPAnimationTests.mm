@@ -20,6 +20,7 @@
 #import "POPAnimationRuntime.h"
 #import "POPAnimationTestsExtras.h"
 #import "POPBaseAnimationTests.h"
+#import "POPCGUtils.h"
 
 using namespace POP;
 
@@ -626,6 +627,41 @@ using namespace POP;
 
   // verify final value
   STAssertEqualObjects([layer valueForKey:@"opacity"], anim.toValue, @"expected equality; value1:%@ value2:%@", [layer valueForKey:@"opacity"], anim.toValue);
+}
+
+- (void)testPlatformColorSupport
+{
+  POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerBackgroundColor];
+
+#if TARGET_OS_IPHONE
+  STAssertNoThrow(anim.fromValue = [UIColor whiteColor], @"unexpected exception");
+  STAssertNoThrow(anim.toValue = [UIColor redColor], @"unexpected exception");
+#else
+  STAssertNoThrow(anim.fromValue = [NSColor whiteColor], @"unexpected exception");
+  STAssertNoThrow(anim.toValue = [NSColor redColor], @"unexpected exception");
+#endif
+  
+  POPAnimationTracer *tracer = anim.tracer;
+  [tracer start];
+  
+  CALayer *layer = [CALayer layer];
+  [layer pop_addAnimation:anim forKey:@"color"];
+  POPAnimatorRenderDuration(self.animator, self.beginTime, 1, 0.1);
+
+  // expect some interpolation
+  NSArray *writeEvents = tracer.writeEvents;
+  STAssertTrue(writeEvents.count > 1, @"unexpected write events %@", writeEvents);
+
+  // get layer color components
+  CGFloat layerValues[4];
+  POPCGColorGetRGBAComponents(layer.backgroundColor, layerValues);
+
+  // get to color components
+  CGFloat toValues[4];
+  POPCGColorGetRGBAComponents((__bridge CGColorRef)anim.toValue, toValues);
+
+  // assert equality
+  STAssertTrue(layerValues[0] == toValues[0] && layerValues[1] == toValues[1] && layerValues[2] == toValues[2] && layerValues[3] == toValues[3], @"unexpected last color: [r:%f g:%f b:%f a:%f]", layerValues[0], layerValues[1], layerValues[2], layerValues[3]);
 }
 
 @end

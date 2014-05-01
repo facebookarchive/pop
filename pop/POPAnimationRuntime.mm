@@ -21,6 +21,7 @@
 
 #import "POPVector.h"
 #import "POPAnimationRuntime.h"
+#import "POPCGUtils.h"
 #import "POPGeometry.h"
 
 static Boolean pointerEqual(const void *ptr1, const void *ptr2) {
@@ -137,7 +138,7 @@ POPValueType POPSelectValueType(id obj, const POPValueType *types, size_t length
 {
   if ([obj isKindOfClass:[NSValue class]]) {
     return POPSelectValueType([obj objCType], types, length);
-  } else if (CFGetTypeID((__bridge CFTypeRef)obj) == CGColorGetTypeID()) {
+  } else if (NULL != POPCGColorWithColor(obj)) {
     return kPOPValueColor;
   }
   return kPOPValueUnknown;
@@ -226,7 +227,7 @@ static VectorRef vectorize(id value, POPValueType type)
       vec = Vector::new_cg_affine_transform([value CGAffineTransformValue]);
       break;
     case kPOPValueColor:
-      vec = Vector::new_cg_color((__bridge CGColorRef)value);
+      vec = Vector::new_cg_color(POPCGColorWithColor(value));
     default:
       break;
   }
