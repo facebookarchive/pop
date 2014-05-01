@@ -111,6 +111,11 @@ extern NSString * const kPOPLayerTranslationY;
 extern NSString * const kPOPLayerTranslationZ;
 extern NSString * const kPOPLayerZPosition;
 
+/**
+ Common CAShapeLayer property names.
+ */
+extern NSString * const kPOPShapeLayerStrokeStart;
+extern NSString * const kPOPShapeLayerStrokeEnd;
 
 /**
  Common NSLayoutConstraint property names.
