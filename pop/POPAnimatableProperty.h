@@ -151,5 +151,9 @@ extern NSString * const kPOPScrollViewContentSize;
 extern NSString * const kPOPTableViewContentOffset;
 extern NSString * const kPOPTableViewContentSize;
 
+/**
+ Common UINavigationBar property names.
+ */
+extern NSString * const kPOPNavigationBarBarTintColor;
 
 #endif
