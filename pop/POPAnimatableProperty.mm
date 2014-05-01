@@ -16,8 +16,7 @@
 #import <POP/POPLayerExtras.h>
 
 #if TARGET_OS_IPHONE
-#import <UIKit/UIView.h>
-#import <UIKit/UIScrollView.h>
+#import <UIKit/UIKit.h>
 #else
 #import <AppKit/NSLayoutConstraint.h>
 #endif
@@ -69,6 +68,8 @@ NSString * const kPOPScrollViewContentSize = @"scrollView.contentSize";
 // alias UIScrollView
 NSString * const kPOPTableViewContentOffset = kPOPScrollViewContentOffset;
 NSString * const kPOPTableViewContentSize = kPOPScrollViewContentSize;
+
+NSString * const kPOPNavigationBarBarTintColor = @"barTintColor";
 
 /**
  State structure internal to static animatable property.
@@ -453,6 +454,18 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     1.0
   },
+  
+  /* UINavigationBar */
+    
+  {kPOPNavigationBarBarTintColor,
+    ^(UINavigationBar *obj, CGFloat values[]) { 
+      POPUIColorGetRGBAComponents(obj.barTintColor, values);
+    },
+    ^(UINavigationBar *obj, const CGFloat values[]) {
+      obj.barTintColor = POPUIColorRGBACreate(values);
+    },
+    1.0
+  }
 
 #endif
 
