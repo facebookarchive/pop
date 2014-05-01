@@ -89,10 +89,11 @@ static BOOL _disableBackgroundThread = YES;
 #endif
   POPAnimatorItemList _list;
   CFMutableDictionaryRef _dict;
-  NSMutableSet *_observers;
+  NSMutableArray *_observers;
   CFTimeInterval _slowMotionStartTime;
   CFTimeInterval _slowMotionLastTime;
   CFTimeInterval _slowMotionAccumulator;
+  OSSpinLock _lock;
 }
 @end
 
@@ -112,7 +113,8 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 }
 #endif
 
-static void updateAnimating(POPAnimator *self)
+// call while holding lock
+static void updateDisplayLink(POPAnimator *self)
 {
   BOOL paused = 0 == self->_observers.count && self->_list.empty();
 
@@ -221,21 +223,29 @@ static void applyAnimationProgress(id obj, POPAnimationState *state, CGFloat pro
 
 static POPAnimation *deleteDictEntry(POPAnimator *self, id __unsafe_unretained obj, NSString *key, BOOL cleanup = YES)
 {
-  NSMutableDictionary *animations = (__bridge id)CFDictionaryGetValue(self->_dict, (__bridge void *)obj);
-  if (nil == animations)
-    return nil;
+  POPAnimation *anim = nil;
 
-  POPAnimation *anim = animations[key];
-  if (nil == anim)
-    return nil;
+  // lock
+  OSSpinLockLock(&self->_lock);
 
-  // remove key
-  [animations removeObjectForKey:key];
+  NSMutableDictionary *keyAnimationsDict = (__bridge id)CFDictionaryGetValue(self->_dict, (__bridge void *)obj);
+  if (keyAnimationsDict) {
 
-  // cleanup empty dictionaries
-  if (cleanup && 0 == animations.count)
-    CFDictionaryRemoveValue(self->_dict, (__bridge void *)obj);
+    anim = keyAnimationsDict[key];
+    if (anim) {
 
+      // remove key
+      [keyAnimationsDict removeObjectForKey:key];
+
+      // cleanup empty dictionaries
+      if (cleanup && 0 == keyAnimationsDict.count) {
+        CFDictionaryRemoveValue(self->_dict, (__bridge void *)obj);
+      }
+    }
+  }
+
+  // unlock
+  OSSpinLockUnlock(&self->_lock);
   return anim;
 }
 
@@ -251,6 +261,9 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   state->stop(shouldRemove, finished);
 
   if (shouldRemove) {
+    // lock
+    OSSpinLockLock(&self->_lock);
+
     // find item im list
     // may have already been removed on animationDidStop:
     POPAnimatorItemListIterator find_iter = find(self->_list.begin(), self->_list.end(), item);
@@ -259,6 +272,9 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     if (found) {
       self->_list.erase(find_iter);
     }
+
+    // unlock
+    OSSpinLockUnlock(&self->_lock);
   }
 }
 
@@ -297,6 +313,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 #endif
 
   _dict = POPDictionaryCreateMutableWeakPointerToStrongObject(5);
+  _lock = OS_SPINLOCK_INIT;
 
   return self;
 }
@@ -311,6 +328,19 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 #endif
 }
 
+- (NSArray *)observers
+{
+  // lock
+  OSSpinLockLock(&_lock);
+
+  // get observers
+  NSArray *observers = 0 != _observers.count ? [_observers copy] : nil;
+
+  // unlock
+  OSSpinLockUnlock(&_lock);
+  return observers;
+}
+
 - (void)addAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key
 {
   if (!anim || !obj) {
@@ -321,24 +351,30 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   if (!key) {
     key = [[NSUUID UUID] UUIDString];
   }
-  
-  NSMutableDictionary *animations = (__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj);
+
+  // lock
+  OSSpinLockLock(&_lock);
+
+  // get key, animation dict associated with object
+  NSMutableDictionary *keyAnimationDict = (__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj);
 
   // update associated animation state
-  if (nil == animations) {
-    animations = [NSMutableDictionary dictionary];
-    CFDictionarySetValue(_dict, (__bridge void *)obj, (__bridge void *)animations);
+  if (nil == keyAnimationDict) {
+    keyAnimationDict = [NSMutableDictionary dictionary];
+    CFDictionarySetValue(_dict, (__bridge void *)obj, (__bridge void *)keyAnimationDict);
   } else {
     // if the animation instance already exists, avoid cancelling only to restart
-    POPAnimation *existingAnim = animations[key];
+    POPAnimation *existingAnim = keyAnimationDict[key];
     if (existingAnim) {
+      // unlock
+      OSSpinLockUnlock(&_lock);
       if (existingAnim == anim) {
         return;
       }
       [self removeAnimationForObject:obj key:key cleanupDict:NO];
     }
   }
-  animations[key] = anim;
+  keyAnimationDict[key] = anim;
 
   // create entry after potential removal
   POPAnimatorItemRef item(new POPAnimatorItem(obj, key, anim));
@@ -347,22 +383,35 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   // support animation re-use, reset all animation state
   POPAnimationGetState(anim)->reset(true);
 
-  // start animating if necessary
-  updateAnimating(self);
+  // update display link
+  updateDisplayLink(self);
+
+  // unlock
+  OSSpinLockUnlock(&_lock);
 }
 
 - (void)removeAllAnimationsForObject:(id)obj
 {
+  // lock
+  OSSpinLockLock(&_lock);
+
   NSArray *animations = [(__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj) allValues];
   CFDictionaryRemoveValue(_dict, (__bridge void *)obj);
 
-  if (0 == animations.count)
+  // unlock
+  OSSpinLockUnlock(&_lock);
+
+  if (0 == animations.count) {
     return;
+  }
 
   NSHashTable *animationSet = [[NSHashTable alloc] initWithOptions:NSHashTableObjectPointerPersonality capacity:animations.count];
   for (id animation in animations) {
     [animationSet addObject:animation];
   }
+
+  // lock
+  OSSpinLockLock(&_lock);
 
   POPAnimatorItemRef item;
   for (auto iter = _list.begin(); iter != _list.end();) {
@@ -374,6 +423,8 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     }
   }
 
+  // unlock
+  OSSpinLockUnlock(&_lock);
 
   for (POPAnimation *anim in animations) {
     POPAnimationState *state = POPAnimationGetState(anim);
@@ -384,21 +435,30 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 - (void)removeAnimationForObject:(id)obj key:(NSString *)key cleanupDict:(BOOL)cleanupDict
 {
   POPAnimation *anim = deleteDictEntry(self, obj, key, cleanupDict);
-  if (nil == anim)
+  if (nil == anim) {
     return;
+  }
+
+  // lock
+  OSSpinLockLock(&_lock);
 
   POPAnimatorItemRef item;
   for (auto iter = _list.begin(); iter != _list.end();) {
     item = *iter;
     if(anim == item->animation) {
-      POPAnimationState *state = POPAnimationGetState(item->animation);
-      state->stop(true, (!state->active && !state->paused));
-      iter = _list.erase(iter);
+      _list.erase(iter);
       break;
     } else {
       iter++;
     }
   }
+
+  // unlock
+  OSSpinLockUnlock(&_lock);
+
+  // stop animation and callout
+  POPAnimationState *state = POPAnimationGetState(anim);
+  state->stop(true, (!state->active && !state->paused));
 }
 
 - (void)removeAnimationForObject:(id)obj key:(NSString *)key
@@ -408,14 +468,29 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 
 - (NSArray *)animationKeysForObject:(id)obj
 {
+  // lock
+  OSSpinLockLock(&_lock);
+
+  // get keys
   NSArray *keys = [(__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj) allKeys];
+
+  // unlock
+  OSSpinLockUnlock(&_lock);
   return keys;
 }
 
 - (id)animationForObject:(id)obj key:(NSString *)key
 {
-  NSDictionary *animations = (__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj);
-  return animations[key];
+  // lock
+  OSSpinLockLock(&_lock);
+
+  // lookup animation
+  NSDictionary *keyAnimationsDict = (__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj);
+  POPAnimation *animation = keyAnimationsDict[key];
+
+  // unlock
+  OSSpinLockUnlock(&_lock);
+  return animation;
 }
 
 - (void)render
@@ -447,15 +522,27 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 
 - (void)renderTime:(CFTimeInterval)time
 {
+  // begin transaction with actions disabled
   [CATransaction begin];
   [CATransaction setDisableActions:YES];
 
+  // notify delegate
   [_delegate animatorWillAnimate:self];
 
-  const NSUInteger count = _list.size();
-  if (0 != count) {
+  // lock
+  OSSpinLockLock(&_lock);
 
+  // count active animations
+  const NSUInteger count = _list.size();
+  if (0 == count) {
+    // unlock
+    OSSpinLockUnlock(&_lock);
+  } else {
+    // copy list into vectory
     std::vector<POPAnimatorItemRef> vector{ std::begin(_list), std::end(_list) };
+
+    // unlock
+    OSSpinLockUnlock(&_lock);
     
     id obj;
     POPAnimation *anim;
@@ -495,40 +582,62 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     }
   }
 
-  for (id observer in _observers) {
+  // notify observers
+  for (id observer in self.observers) {
     [observer animatorDidAnimate:(id)self];
   }
   
-  updateAnimating(self);
-  [_delegate animatorDidAnimate:self];
+  // lock
+  OSSpinLockLock(&_lock);
 
+  // update display link
+  updateDisplayLink(self);
+
+  // unlock
+  OSSpinLockUnlock(&_lock);
+
+  // notify delegate and commit
+  [_delegate animatorDidAnimate:self];
   [CATransaction commit];
 }
 
 - (void)addObserver:(id<POPAnimatorObserving>)observer
 {
-  NSAssert([NSThread isMainThread], @"unexpected thread %@", [NSThread currentThread]);
   NSAssert(nil != observer, @"attempting to add nil %@ observer", self);
-  if (nil == observer)
+  if (nil == observer) {
     return;
+  }
 
-  NSMutableSet *observers = _observers ? [_observers mutableCopy] : [[NSMutableSet alloc] initWithCapacity:1];
-  [observers addObject:observer];
-  _observers = observers;
-  updateAnimating(self);
+  // lock
+  OSSpinLockLock(&_lock);
+
+  if (!_observers) {
+    // use ordered collection for deterministic callout
+    _observers = [[NSMutableArray alloc] initWithCapacity:1];
+  }
+
+  [_observers addObject:observer];
+  updateDisplayLink(self);
+
+  // unlock
+  OSSpinLockUnlock(&_lock);
 }
 
 - (void)removeObserver:(id<POPAnimatorObserving>)observer
 {
-  NSAssert([NSThread isMainThread], @"unexpected thread %@", [NSThread currentThread]);
   NSAssert(nil != observer, @"attempting to remove nil %@ observer", self);
-  if (nil == observer)
+  if (nil == observer) {
     return;
+  }
 
-  NSMutableSet *observers = [_observers mutableCopy];
-  [observers removeObject:observer];
-  _observers = observers;
-  updateAnimating(self);
+  // lock
+  OSSpinLockLock(&_lock);
+
+  [_observers removeObject:observer];
+  updateDisplayLink(self);
+
+  // unlock
+  OSSpinLockUnlock(&_lock);
 }
 
 @end
