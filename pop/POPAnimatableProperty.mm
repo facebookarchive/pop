@@ -48,6 +48,9 @@ NSString * const kPOPLayerTranslationY = @"translationY";
 NSString * const kPOPLayerTranslationZ = @"translationZ";
 NSString * const kPOPLayerZPosition = @"zPosition";
 
+NSString * const kPopShapeLayerStrokeStart = @"strokeStart";
+NSString * const kPopShapeLayerStrokeEnd = @"strokeEnd";
+
 NSString * const kPOPLayoutConstraintConstant = @"layoutConstraint.constant";
 
 NSString * const kPOPViewAlpha = @"view.alpha";
@@ -321,6 +324,26 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     ^(CALayer *obj, const CGFloat values[]) {
       POPLayerSetRotationX(obj, values[0]);
+    },
+    0.01
+  },
+    
+  {kPopShapeLayerStrokeStart,
+    ^(CAShapeLayer *obj, CGFloat values[]) {
+      values[0] = obj.strokeStart;
+    },
+    ^(CAShapeLayer *obj, const CGFloat values[]) {
+      [obj setStrokeStart:values[0]];
+    },
+    0.01
+  },
+
+  {kPopShapeLayerStrokeEnd,
+    ^(CAShapeLayer *obj, CGFloat values[]) {
+      values[0] = obj.strokeEnd;
+    },
+    ^(CAShapeLayer *obj, const CGFloat values[]) {
+      [obj setStrokeEnd:values[0]];
     },
     0.01
   },
