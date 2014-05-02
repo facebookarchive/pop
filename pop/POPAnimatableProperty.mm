@@ -69,7 +69,8 @@ NSString * const kPOPScrollViewContentSize = @"scrollView.contentSize";
 NSString * const kPOPTableViewContentOffset = kPOPScrollViewContentOffset;
 NSString * const kPOPTableViewContentSize = kPOPScrollViewContentSize;
 
-NSString * const kPOPNavigationBarBarTintColor = @"barTintColor";
+NSString * const kPOPNavigationBarBarTintColor = @"navigationBar.barTintColor";
+NSString * const kPOPTabBarBarTintColor; = @"tabBar.barTintColor";
 
 /**
  State structure internal to static animatable property.
@@ -462,6 +463,18 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPUIColorGetRGBAComponents(obj.barTintColor, values);
     },
     ^(UINavigationBar *obj, const CGFloat values[]) {
+      obj.barTintColor = POPUIColorRGBACreate(values);
+    },
+    1.0
+  },
+
+  /* UITabBar */
+    
+  {kPOPTabBarBarTintColor,
+    ^(UITabBar *obj, CGFloat values[]) { 
+      POPUIColorGetRGBAComponents(obj.barTintColor, values);
+    },
+    ^(UITabBar *obj, const CGFloat values[]) {
       obj.barTintColor = POPUIColorRGBACreate(values);
     },
     1.0
