@@ -64,6 +64,46 @@ struct _POPDecayAnimationState : _POPPropertyAnimationState
 
   }
 
+  void computeDuration() {
+
+    // compute duration till threshold velocity
+    Vector4r scaledVelocity = vector4(velocityVec) / 1000.;
+    
+    double k = dynamicsThreshold * kPOPAnimationDecayMinimalVelocityFactor / 1000.;
+    double vx = k / scaledVelocity.x;
+    double vy = k / scaledVelocity.y;
+    double vz = k / scaledVelocity.z;
+    double vw = k / scaledVelocity.w;
+    double d = log(deceleration) * 1000.;
+    duration = MAX(MAX(MAX(log(fabs(vx)) / d, log(fabs(vy)) / d), log(fabs(vz)) / d), log(fabs(vw)) / d);
+
+    // ensure velocity threshold is exceeded
+    if (isnan(duration) || duration < 0) {
+      duration = 0;
+    }
+  }
+  
+  void computeToValue() {
+    // to value assuming final velocity as a factor of dynamics threshold
+    // derived from v' = v * d^dt used in decay_position
+    // to compute the to value with maximal dt, p' = p + (v * d) / (1 - d)
+    VectorRef fromValue = NULL != currentVec ? currentVec : fromVec;
+    if (!fromValue) {
+      return;
+    }
+
+    // ensure duration is computed
+    if (0 == duration) {
+      computeDuration();
+    }
+    
+    // compute to value
+    VectorRef toValue(Vector::new_vector(fromValue.get()));
+    Vector4r velocity = velocityVec->vector4r();
+    decay_position(toValue->data(), velocity.data(), valueCount, duration, deceleration);
+    toVec = toValue;
+  }
+  
   void computeDestinationValues() {
     // to value assuming final velocity as a factor of dynamics threshold
     // derived from v' = v * d^dt used in decay_position

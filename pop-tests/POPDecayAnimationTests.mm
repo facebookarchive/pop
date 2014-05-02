@@ -459,4 +459,29 @@ static const CGFloat epsilon = 0.0001f;
   STAssertTrue(lastValue > toValue, @"unexpected last value:%f");
 }
 
+- (void)testComputedProperties
+{
+  POPDecayAnimation *anim = [POPDecayAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+  
+  // set velocity, test duration
+  anim.velocity = @(100);
+  CGFloat d1 = anim.duration;
+  STAssertTrue(d1 > 0, @"unexpected duration %@", anim);
+  
+  // set velocity, test duration
+  anim.velocity = @(1000);
+  CGFloat d2 = anim.duration;
+  STAssertTrue(d2 > d1, @"unexpected duration %@", anim);
+
+  // set from value, test to value
+  anim.fromValue = @(0);
+  CGFloat p1 = [anim.toValue floatValue];
+  STAssertTrue(p1 > [anim.fromValue floatValue], @"unexpected to value %@", anim);
+  
+  // set from value, test to value
+  anim.fromValue = @(10000);
+  CGFloat p2 = [anim.toValue floatValue];
+  STAssertTrue(p2 > [anim.fromValue floatValue] && p2 > p1, @"unexpected to value %@", anim);
+}
+
 @end

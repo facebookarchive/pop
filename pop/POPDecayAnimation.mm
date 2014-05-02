@@ -99,7 +99,8 @@ DEFINE_RW_PROPERTY(POPDecayAnimationState, deceleration, setDeceleration:, CGFlo
 - (void)_ensureComputedProperties
 {
   if (NULL == __state->toVec) {
-    __state->computeDestinationValues();
+    __state->computeDuration();
+    __state->computeToValue();
   }
 }
 
@@ -113,11 +114,13 @@ DEFINE_RW_PROPERTY(POPDecayAnimationState, deceleration, setDeceleration:, CGFlo
 {
   [super _appendDescription:s debug:debug];
 
-  if (NULL != __state->toVec)
+  if (0 != self.duration) {
     [s appendFormat:@"; duration = %f", self.duration];
+  }
 
-  if (__state->deceleration)
+  if (__state->deceleration) {
     [s appendFormat:@"; deceleration = %f", __state->deceleration];
+  }
 }
 
 @end
