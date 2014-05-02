@@ -39,8 +39,12 @@ void POPCGColorGetRGBAComponents(CGColorRef color, CGFloat components[])
     components[0] = components[1] = components[2] = colors[0];
     components[3] = colors[1];
   } else {
-    // TODO HSV and CMYK conversion
-    NSCAssert(NO, @"unsuported color space conversion, component count:%lu", count);
+    // Use CI to convert
+    CIColor *ciColor = [CIColor colorWithCGColor:color];
+    components[0] = ciColor.red;
+    components[1] = ciColor.green;
+    components[2] = ciColor.blue;
+    components[3] = ciColor.alpha;
   }
 }
 

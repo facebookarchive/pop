@@ -455,9 +455,7 @@ static NSString *animationKey = @"key";
   POPAnimationValueEvent *lastEvent = [writeEvents lastObject];
 
   // verify last written color is to color
-  CGFloat lastValues[4];
-  POPCGColorGetRGBAComponents((__bridge CGColorRef)lastEvent.value, lastValues);
-  STAssertTrue(lastValues[0] == toValues[0] && lastValues[1] == toValues[1] && lastValues[2] == toValues[2] && lastValues[3] == toValues[3], @"unexpected last color: [r:%f g:%f b:%f a:%f]", lastValues[0], lastValues[1], lastValues[2], lastValues[3]);
+  POPAssertColorEqual((__bridge CGColorRef)lastEvent.value, (__bridge CGColorRef)anim.toValue);
 }
 
 static BOOL _floatingPointEqual(CGFloat a, CGFloat b)
@@ -556,9 +554,7 @@ static BOOL _floatingPointEqual(CGFloat a, CGFloat b)
   STAssertTrue(fromColor, @"unexpected value %p", fromColor);
 
   // verify from color clear
-  CGFloat components[4];
-  POPCGColorGetRGBAComponents(fromColor, components);
-  STAssertTrue(components[0] == 0 && components[1] == 0 && components[2] == 0 && components[3] == 0, @"unexpected components {%f, %f, %f, %f}", components[0], components[1], components[2], components[3]);
+  POPAssertColorEqual(fromColor, [UIColor clearColor].CGColor);
 }
 
 - (void)testExcessiveJumpInTime

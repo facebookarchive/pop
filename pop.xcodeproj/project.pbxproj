@@ -69,6 +69,8 @@
 		EC6885D118C7BD8500C6194C /* TransformationMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = EC94B07817D95447003CE2C8 /* TransformationMatrix.h */; };
 		EC6885D218C7BD8900C6194C /* TransformationMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC94B07717D95447003CE2C8 /* TransformationMatrix.cpp */; };
 		EC6885D418C7C44E00C6194C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC6885D318C7C44E00C6194C /* QuartzCore.framework */; };
+		EC6C098919141BBD00F8EA96 /* POPBasicAnimationTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC6C098819141BBD00F8EA96 /* POPBasicAnimationTests.mm */; };
+		EC6C098A19141BBD00F8EA96 /* POPBasicAnimationTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC6C098819141BBD00F8EA96 /* POPBasicAnimationTests.mm */; };
 		EC70AC4418CCF4FC0067018C /* POPVector.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC70AC4218CCF4FC0067018C /* POPVector.mm */; };
 		EC70AC4518CCF4FC0067018C /* POPVector.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC70AC4218CCF4FC0067018C /* POPVector.mm */; };
 		EC70AC4618CCF4FC0067018C /* POPVector.h in Headers */ = {isa = PBXBuildFile; fileRef = EC70AC4318CCF4FC0067018C /* POPVector.h */; };
@@ -231,6 +233,7 @@
 		EC68858C18C7B60000C6194C /* pop-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pop-Prefix.pch"; sourceTree = "<group>"; };
 		EC68859518C7B60100C6194C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		EC6885D318C7C44E00C6194C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		EC6C098819141BBD00F8EA96 /* POPBasicAnimationTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = POPBasicAnimationTests.mm; sourceTree = "<group>"; };
 		EC6F55A1175E654B008D995D /* POPDecayAnimationTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = POPDecayAnimationTests.mm; sourceTree = "<group>"; };
 		EC6F55A3175E6641008D995D /* POPBaseAnimationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPBaseAnimationTests.h; sourceTree = "<group>"; };
 		EC6F55A4175E6641008D995D /* POPBaseAnimationTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = POPBaseAnimationTests.mm; sourceTree = "<group>"; };
@@ -521,6 +524,7 @@
 				EC6F55AA175E6B11008D995D /* POPSpringAnimationTests.mm */,
 				EC7D2CFB1795AB3100E50A78 /* POPEaseInEaseOutAnimationTests.mm */,
 				EC72875418E13348006EEE54 /* POPCustomAnimationTests.mm */,
+				EC6C098819141BBD00F8EA96 /* POPBasicAnimationTests.mm */,
 				EC7E319C18C93D6500B38170 /* Supporting Files - OSX */,
 				EC882A7618C91983007829CC /* Supporting Files - iOS */,
 			);
@@ -1025,6 +1029,7 @@
 				EC72875618E13348006EEE54 /* POPCustomAnimationTests.mm in Sources */,
 				EC7E31AB18C9419000B38170 /* POPAnimatable.mm in Sources */,
 				EC7E31AD18C9419600B38170 /* POPAnimationTests.mm in Sources */,
+				EC6C098A19141BBD00F8EA96 /* POPBasicAnimationTests.mm in Sources */,
 				EC7E31B318C941A700B38170 /* POPEaseInEaseOutAnimationTests.mm in Sources */,
 				EC7E31AE18C9419900B38170 /* POPAnimationMRRTests.mm in Sources */,
 				EC7E31AC18C9419200B38170 /* POPBaseAnimationTests.mm in Sources */,
@@ -1043,6 +1048,7 @@
 				EC72875518E13348006EEE54 /* POPCustomAnimationTests.mm in Sources */,
 				ECDA0CC618C92BC900D14897 /* POPAnimatable.mm in Sources */,
 				ECDA0CC818C92BD200D14897 /* POPAnimationTests.mm in Sources */,
+				EC6C098919141BBD00F8EA96 /* POPBasicAnimationTests.mm in Sources */,
 				ECDA0CCE18C92BD200D14897 /* POPEaseInEaseOutAnimationTests.mm in Sources */,
 				ECDA0CC918C92BD200D14897 /* POPAnimationMRRTests.mm in Sources */,
 				ECDA0CC718C92BD200D14897 /* POPBaseAnimationTests.mm in Sources */,
