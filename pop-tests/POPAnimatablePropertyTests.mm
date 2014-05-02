@@ -45,6 +45,7 @@ static void assertPropertyEqual(id self, POPAnimatableProperty *prop1, POPAnimat
                      kPOPLayerRotationX,
                      kPOPShapeLayerStrokeStart,
                      kPOPShapeLayerStrokeEnd,
+                     kPOPShapeLayerStrokeColor,
 #if TARGET_OS_IPHONE
                      kPOPViewAlpha,
                      kPOPViewBackgroundColor,
