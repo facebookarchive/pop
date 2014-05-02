@@ -48,7 +48,7 @@ NSString * const kPOPLayerTranslationZ = @"translationZ";
 NSString * const kPOPLayerZPosition = @"zPosition";
 
 NSString * const kPOPShapeLayerStrokeStart = @"shapeLayer.strokeStart";
-NSString * const kPOPShapeLayerStrokeEnd = @"shaperLayer.strokeEnd";
+NSString * const kPOPShapeLayerStrokeEnd = @"shapeLayer.strokeEnd";
 NSString * const kPOPShapeLayerStrokeColor = @"shapeLayer.strokeColor";
 
 NSString * const kPOPLayoutConstraintConstant = @"layoutConstraint.constant";
