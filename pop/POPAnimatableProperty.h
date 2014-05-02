@@ -116,6 +116,7 @@ extern NSString * const kPOPLayerZPosition;
  */
 extern NSString * const kPOPShapeLayerStrokeStart;
 extern NSString * const kPOPShapeLayerStrokeEnd;
+extern NSString * const kPOPShapeLayerStrokeColor;
 
 /**
  Common NSLayoutConstraint property names.
