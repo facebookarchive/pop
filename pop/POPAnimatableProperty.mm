@@ -85,6 +85,9 @@ NSString * const kPOPTableViewContentSize = kPOPScrollViewContentSize;
 // UINavigationBar
 NSString * const kPOPNavigationBarBarTintColor = @"navigationBar.barTintColor";
 
+// UIToolbar
+NSString * const kPOPToolbarBarTintColor = kPOPNavigationBarBarTintColor;
+
 // UITabBar
 NSString * const kPOPTabBarBarTintColor = kPOPNavigationBarBarTintColor;
 

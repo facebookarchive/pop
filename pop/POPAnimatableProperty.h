@@ -158,6 +158,11 @@ extern NSString * const kPOPTableViewContentSize;
 extern NSString * const kPOPNavigationBarBarTintColor;
 
 /**
+ Common UIToolbar property names.
+ */
+extern NSString * const kPOPToolbarBarTintColor;
+
+/**
  Common UITabBar property names.
  */
 extern NSString * const kPOPTabBarBarTintColor;
