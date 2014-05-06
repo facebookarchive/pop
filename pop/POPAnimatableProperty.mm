@@ -91,6 +91,9 @@ NSString * const kPOPToolbarBarTintColor = kPOPNavigationBarBarTintColor;
 // UITabBar
 NSString * const kPOPTabBarBarTintColor = kPOPNavigationBarBarTintColor;
 
+//UILabel
+NSString * const kPOPLabelTextColor = @"label.textColor";
+
 /**
  State structure internal to static animatable property.
  */
@@ -497,6 +500,18 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     ^(UINavigationBar *obj, const CGFloat values[]) {
       obj.barTintColor = POPUIColorRGBACreate(values);
+    },
+    kPOPThresholdColor
+  },
+  
+  /* UILabel */
+  
+  {kPOPLabelTextColor,
+    ^(UILabel *obj, CGFloat values[]) {
+      POPUIColorGetRGBAComponents(obj.textColor, values);
+    },
+    ^(UILabel *obj, const CGFloat values[]) {
+      obj.textColor = POPUIColorRGBACreate(values);
     },
     kPOPThresholdColor
   },
