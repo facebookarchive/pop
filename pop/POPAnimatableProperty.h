@@ -167,4 +167,9 @@ extern NSString * const kPOPToolbarBarTintColor;
  */
 extern NSString * const kPOPTabBarBarTintColor;
 
+/**
+ Common UILabel property names.
+ */
+extern NSString * const kPOPLabelTextColor;
+
 #endif
