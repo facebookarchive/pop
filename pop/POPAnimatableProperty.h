@@ -110,6 +110,10 @@ extern NSString * const kPOPLayerTranslationXY;
 extern NSString * const kPOPLayerTranslationY;
 extern NSString * const kPOPLayerTranslationZ;
 extern NSString * const kPOPLayerZPosition;
+extern NSString * const kPOPLayerShadowColor;
+extern NSString * const kPOPLayerShadowOffset;
+extern NSString * const kPOPLayerShadowOpacity;
+extern NSString * const kPOPLayerShadowRadius;
 
 /**
  Common CAShapeLayer property names.

@@ -54,6 +54,10 @@ NSString * const kPOPLayerTranslationXY = @"translationXY";
 NSString * const kPOPLayerTranslationY = @"translationY";
 NSString * const kPOPLayerTranslationZ = @"translationZ";
 NSString * const kPOPLayerZPosition = @"zPosition";
+NSString * const kPOPLayerShadowColor = @"shadowColor";
+NSString * const kPOPLayerShadowOffset = @"shadowOffset";
+NSString * const kPOPLayerShadowOpacity = @"shadowOpacity";
+NSString * const kPOPLayerShadowRadius = @"shadowRadius";
 
 // CAShapeLayer
 NSString * const kPOPShapeLayerStrokeStart = @"shapeLayer.strokeStart";
@@ -347,6 +351,49 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetRotationX(obj, values[0]);
     },
     kPOPThresholdRotation
+  },
+    
+  {kPOPLayerShadowColor,
+    ^(CALayer *obj, CGFloat values[]) {
+        POPCGColorGetRGBAComponents(obj.shadowColor, values);
+    },
+    ^(CALayer *obj, const CGFloat values[]) {
+        CGColorRef color = POPCGColorRGBACreate(values);
+        [obj setShadowColor:color];
+        CGColorRelease(color);
+    },
+    0.01
+  },
+    
+  {kPOPLayerShadowOffset,
+    ^(CALayer *obj, CGFloat values[]) {
+        values_from_size(values, [obj shadowOffset]);
+    },
+    ^(CALayer *obj, const CGFloat values[]) {
+        CGSize size = values_to_size(values);
+        [obj setShadowOffset:size];
+    },
+    0.01
+  },
+    
+  {kPOPLayerShadowOpacity,
+    ^(CALayer *obj, CGFloat values[]) {
+        values[0] = [obj shadowOpacity];
+    },
+    ^(CALayer *obj, const CGFloat values[]) {
+        [obj setShadowOpacity:values[0]];
+    },
+    0.01
+  },
+    
+  {kPOPLayerShadowRadius,
+    ^(CALayer *obj, CGFloat values[]) {
+        values[0] = [obj shadowRadius];
+    },
+    ^(CALayer *obj, const CGFloat values[]) {
+        [obj setShadowRadius:values[0]];
+    },
+    0.01
   },
   
   /* CAShapeLayer */
