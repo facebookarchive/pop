@@ -11,25 +11,25 @@
 #import "UnitBezier.h"
 #import "POPAnimationPrivate.h"
 
-void interpolate_vector(NSUInteger count, CGFloat *dst, const CGFloat *from, const CGFloat *to, double f)
+void POPInterpolateVector(NSUInteger count, CGFloat *dst, const CGFloat *from, const CGFloat *to, double f)
 {
   for (NSUInteger idx = 0; idx < count; idx++) {
     dst[idx] = MIX(from[idx], to[idx], f);
   }
 }
 
-double timing_function_solve(const double vec[4], double t, double eps)
+double POPTimingFunctionSolve(const double vec[4], double t, double eps)
 {
   WebCore::UnitBezier bezier(vec[0], vec[1], vec[2], vec[3]);
   return bezier.solve(t, eps);
 }
 
-double normalize(double value, double startValue, double endValue)
+double POPNormalize(double value, double startValue, double endValue)
 {
   return (value - startValue) / (endValue - startValue);
 }
 
-double project_normal(double n, double start, double end)
+double POPProjectNormal(double n, double start, double end)
 {
   return start + (n * (end - start));
 }
@@ -39,7 +39,7 @@ static double linear_interpolation(double t, double start, double end)
   return t * end + (1.f - t) * start;
 }
 
-double quadratic_out_interpolation(double t, double start, double end)
+double POPQuadraticOutInterpolation(double t, double start, double end)
 {
   return linear_interpolation(2*t - t*t, start, end);
 }
@@ -59,7 +59,7 @@ static double b3_friction3(double x)
   return (0.00000045 * pow(x, 3)) - (0.000332 * pow(x, 2)) + 0.1078 * x + 5.84;
 }
 
-double b3_nobounce(double tension)
+double POPBouncy3NoBounce(double tension)
 {
   double friction = 0;
   if (tension <= 18.) {
@@ -74,7 +74,7 @@ double b3_nobounce(double tension)
   return friction;
 }
 
-void quadratic_solve(CGFloat a, CGFloat b, CGFloat c, CGFloat &x1, CGFloat &x2)
+void POPQuadraticSolve(CGFloat a, CGFloat b, CGFloat c, CGFloat &x1, CGFloat &x2)
 {
   CGFloat discriminant = sqrt(b * b - 4 * a * c);
   x1 = (-b + discriminant) / (2 * a);

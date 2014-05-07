@@ -25,7 +25,7 @@ static void interpolate(POPValueType valueType, NSUInteger count, const CGFloat 
     case kPOPValueSize:
     case kPOPValueRect:
     case kPOPValueColor:
-      interpolate_vector(count, outVec, fromVec, toVec, p);
+      POPInterpolateVector(count, outVec, fromVec, toVec, p);
       break;
     default:
       NSCAssert(false, @"unhandled type %d", valueType);
@@ -74,7 +74,7 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
     CFTimeInterval t = MIN(time - startTime, duration) / duration;
 
     // solve for normalized time, aka progresss [0, 1]
-    double p = timing_function_solve(timingControlPoints, t, SOLVE_EPS(duration));
+    double p = POPTimingFunctionSolve(timingControlPoints, t, SOLVE_EPS(duration));
 
     // interpolate and advance
     if (p != progress) {

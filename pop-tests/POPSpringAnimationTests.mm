@@ -554,7 +554,11 @@ static BOOL _floatingPointEqual(CGFloat a, CGFloat b)
   STAssertTrue(fromColor, @"unexpected value %p", fromColor);
 
   // verify from color clear
+#if TARGET_OS_IPHONE
   POPAssertColorEqual(fromColor, [UIColor clearColor].CGColor);
+#else
+  POPAssertColorEqual(fromColor, [NSColor clearColor].CGColor);
+#endif
 }
 
 - (void)testExcessiveJumpInTime

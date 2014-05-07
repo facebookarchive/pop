@@ -160,7 +160,7 @@ struct _POPPropertyAnimationState : _POPAnimationState
           *outVec = *toVec;
         }
       } else {
-        interpolate_vector(count, vec_data(outVec), vec_data(fromVec), vec_data(toVec), progress);
+        POPInterpolateVector(count, vec_data(outVec), vec_data(fromVec), vec_data(toVec), progress);
       }
 
       currentVec = outVec;

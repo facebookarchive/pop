@@ -52,13 +52,13 @@ static const CGFloat POPBouncy3FrictionInterpolationMax = 0.01;
 
 + (void)convertBounciness:(CGFloat)bounciness speed:(CGFloat)speed toTension:(CGFloat *)outTension friction:(CGFloat *)outFriction mass:(CGFloat *)outMass
 {
-  double b = normalize(bounciness / POPBouncy3NormalizationScale, 0, POPBouncy3NormalizationRange);
-  b = project_normal(b, POPBouncy3BouncinessNormalizedMin, POPBouncy3BouncinessNormalizedMax);
+  double b = POPNormalize(bounciness / POPBouncy3NormalizationScale, 0, POPBouncy3NormalizationRange);
+  b = POPProjectNormal(b, POPBouncy3BouncinessNormalizedMin, POPBouncy3BouncinessNormalizedMax);
 
-  double s = normalize(speed / POPBouncy3NormalizationScale, 0, POPBouncy3NormalizationRange);
+  double s = POPNormalize(speed / POPBouncy3NormalizationScale, 0, POPBouncy3NormalizationRange);
 
-  CGFloat tension = project_normal(s, POPBouncy3SpeedNormalizedMin, POPBouncy3SpeedNormalizedMax);
-  CGFloat friction = quadratic_out_interpolation(b, b3_nobounce(tension), POPBouncy3FrictionInterpolationMax);
+  CGFloat tension = POPProjectNormal(s, POPBouncy3SpeedNormalizedMin, POPBouncy3SpeedNormalizedMax);
+  CGFloat friction = POPQuadraticOutInterpolation(b, POPBouncy3NoBounce(tension), POPBouncy3FrictionInterpolationMax);
 
   tension = POP_ANIMATION_TENSION_FOR_QC_TENSION(tension);
   friction = POP_ANIMATION_FRICTION_FOR_QC_FRICTION(friction);
@@ -83,13 +83,13 @@ static const CGFloat POPBouncy3FrictionInterpolationMax = 0.01;
   CGFloat qcTension = QC_TENSION_FOR_POP_ANIMATION_TENSION(tension);
 
   // Friction is a function of bounciness and tension, according to the following:
-  // friction = quadratic_out_interpolation(b, b3_nobounce(tension), POPBouncy3FrictionInterpolationMax);
+  // friction = POPQuadraticOutInterpolation(b, POPBouncy3NoBounce(tension), POPBouncy3FrictionInterpolationMax);
   // Solve for bounciness, given a tension and friction.
 
-  CGFloat nobounceTension = b3_nobounce(qcTension);
+  CGFloat nobounceTension = POPBouncy3NoBounce(qcTension);
   CGFloat bounciness1, bounciness2;
 
-  quadratic_solve((nobounceTension - POPBouncy3FrictionInterpolationMax),      // a
+  POPQuadraticSolve((nobounceTension - POPBouncy3FrictionInterpolationMax),      // a
                   2 * (POPBouncy3FrictionInterpolationMax - nobounceTension),  // b
                   (nobounceTension - qcFriction),                             // c
                   bounciness1,                                                // x1

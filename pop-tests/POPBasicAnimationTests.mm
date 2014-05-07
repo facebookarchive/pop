@@ -25,9 +25,15 @@
 - (void)testColorInterpolation
 {
   POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerBackgroundColor];
+
+#if TARGET_OS_IPHONE
   anim.fromValue = [UIColor whiteColor];
   anim.toValue = [UIColor redColor];
-
+#else
+  anim.fromValue = [NSColor whiteColor];
+  anim.toValue = [NSColor redColor];
+#endif
+  
   POPAnimationTracer *tracer = anim.tracer;
   [tracer start];
 
