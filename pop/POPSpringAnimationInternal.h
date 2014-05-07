@@ -9,7 +9,6 @@
 
 #import "POPAnimationExtras.h"
 #import "POPPropertyAnimationInternal.h"
-#import "POPSpringAnimation.h"
 
 struct _POPSpringAnimationState : _POPPropertyAnimationState
 {

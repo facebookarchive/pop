@@ -11,12 +11,9 @@
 
 #import "POPAnimation.h"
 #import "POPAnimationRuntime.h"
-#import "POPAnimationTracer.h"
 #import "POPAnimationTracerInternal.h"
 #import "POPSpringSolver.h"
-#import "POPVector.h"
 #import "POPAction.h"
-#import "POPMath.h"
 
 using namespace POP;
 
