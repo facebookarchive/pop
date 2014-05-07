@@ -8,7 +8,6 @@
  */
 
 #import "POPVector.h"
-#import "POPAnimationRuntime.h"
 #import "POPCGUtils.h"
 
 namespace POP

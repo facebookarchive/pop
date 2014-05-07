@@ -12,8 +12,6 @@
 
 #import <POP/POPDefines.h>
 
-#import "POPVector.h"
-
 NS_INLINE CGFloat sqrtr(CGFloat f)
 {
 #if CGFLOAT_IS_DOUBLE

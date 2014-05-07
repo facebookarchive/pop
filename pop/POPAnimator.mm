@@ -16,14 +16,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#import "POPAnimation.h"
 #import "POPAnimationExtras.h"
-#import "POPAnimationInternal.h"
-#import "POPAnimationRuntime.h"
 #import "POPBasicAnimationInternal.h"
-#import "POPDecayAnimationInternal.h"
-#import "POPSpringAnimationInternal.h"
-#import "POPSpringSolver.h"
 
 using namespace std;
 using namespace POP;
