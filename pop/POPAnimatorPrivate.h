@@ -32,6 +32,11 @@
 #endif
 
 /**
+ Used for externally driven animator instances.
+ */
+@property (assign, nonatomic) BOOL disableDisplayLink;
+
+/**
  Exposed for unit testing.
  */
 - (void)renderTime:(CFTimeInterval)time;

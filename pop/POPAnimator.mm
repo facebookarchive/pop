@@ -88,6 +88,7 @@ static BOOL _disableBackgroundThread = YES;
   CFTimeInterval _slowMotionLastTime;
   CFTimeInterval _slowMotionAccumulator;
   OSSpinLock _lock;
+  BOOL _disableDisplayLink;
 }
 @end
 
@@ -110,7 +111,7 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 // call while holding lock
 static void updateDisplayLink(POPAnimator *self)
 {
-  BOOL paused = 0 == self->_observers.count && self->_list.empty();
+  BOOL paused = (0 == self->_observers.count && self->_list.empty()) || self->_disableDisplayLink;
 
 #if TARGET_OS_IPHONE
   if (paused != self->_displayLink.paused) {

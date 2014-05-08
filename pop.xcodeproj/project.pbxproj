@@ -1186,7 +1186,6 @@
 				GCC_PREFIX_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Prefix.pch";
 				INFOPLIST_FILE = "POP/pop-Info.plist";
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = ../Headers/POP;
 			};
 			name = Debug;
 		};
@@ -1201,7 +1200,6 @@
 				GCC_PREFIX_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Prefix.pch";
 				INFOPLIST_FILE = "POP/pop-Info.plist";
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = ../Headers/POP;
 			};
 			name = GCOV;
 		};
@@ -1216,7 +1214,6 @@
 				GCC_PREFIX_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Prefix.pch";
 				INFOPLIST_FILE = "POP/pop-Info.plist";
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = ../Headers/POP;
 			};
 			name = Release;
 		};
@@ -1231,7 +1228,6 @@
 				GCC_PREFIX_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Prefix.pch";
 				INFOPLIST_FILE = "POP/pop-Info.plist";
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = ../Headers/POP;
 			};
 			name = Profile;
 		};
