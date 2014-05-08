@@ -7,6 +7,8 @@
 // of patent rights can be found in the PATENTS file in the same directory.
 // 
 
+//add by qlwu
+
 // Base xcconfig for OS X targets.
 #include "Platform/OSX.xcconfig"
 #include "Platform/Compiler.xcconfig"
