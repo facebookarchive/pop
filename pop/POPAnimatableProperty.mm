@@ -137,6 +137,16 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     kPOPThresholdPoint
   },
+    
+  {kPOPLayerCornerRadius,
+    ^(CALayer *obj, CGFloat values[]) {
+        values[0] = [obj cornerRadius];
+    },
+    ^(CALayer *obj, const CGFloat values[]) {
+        [obj setCornerRadius:values[0]];
+    },
+    kPOPThresholdRadius
+  },
 
   {kPOPLayerCornerRadius,
     ^(CALayer *obj, CGFloat values[]) {
