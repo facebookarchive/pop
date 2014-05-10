@@ -27,12 +27,14 @@ static CGFloat const kPOPThresholdPoint = 1.0;
 static CGFloat const kPOPThresholdOpacity = 0.01;
 static CGFloat const kPOPThresholdScale = 0.005;
 static CGFloat const kPOPThresholdRotation = 0.01;
+static CGFloat const kPOPThresholdRadius = 0.01;
 
 #pragma mark - Static
 
 // CALayer
 NSString * const kPOPLayerBackgroundColor = @"backgroundColor";
 NSString * const kPOPLayerBounds = @"bounds";
+NSString * const kPOPLayerCornerRadius = @"cornerRadius";
 NSString * const kPOPLayerOpacity = @"opacity";
 NSString * const kPOPLayerPosition = @"position";
 NSString * const kPOPLayerPositionX = @"positionX";
@@ -134,6 +136,16 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       [obj setBounds:values_to_rect(values)];
     },
     kPOPThresholdPoint
+  },
+    
+  {kPOPLayerCornerRadius,
+    ^(CALayer *obj, CGFloat values[]) {
+        values[0] = [obj cornerRadius];
+    },
+    ^(CALayer *obj, const CGFloat values[]) {
+        [obj setCornerRadius:values[0]];
+    },
+    kPOPThresholdRadius
   },
 
   {kPOPLayerPosition,
@@ -396,7 +408,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     ^(CALayer *obj, const CGFloat values[]) {
         [obj setShadowRadius:values[0]];
     },
-    0.01
+    kPOPThresholdRadius
   },
   
   /* CAShapeLayer */
