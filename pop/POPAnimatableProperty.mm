@@ -83,6 +83,7 @@ NSString * const kPOPViewSize = kPOPLayerSize;
 // UIScrollView
 NSString * const kPOPScrollViewContentOffset = @"scrollView.contentOffset";
 NSString * const kPOPScrollViewContentSize = @"scrollView.contentSize";
+NSString * const kPOPScrollViewZoomScale = @"scrollView.zoomScale";
 
 // UITableView
 NSString * const kPOPTableViewContentOffset = kPOPScrollViewContentOffset;
@@ -549,6 +550,16 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       obj.contentSize = values_to_size(values);
     },
     kPOPThresholdPoint
+  },
+    
+  {kPOPScrollViewZoomScale,
+    ^(UIScrollView *obj, CGFloat values[]) {
+      values[0]=obj.zoomScale;
+    },
+    ^(UIScrollView *obj, const CGFloat values[]) {
+      obj.zoomScale=values[0];
+    },
+    kPOPThresholdScale
   },
 
   /* UINavigationBar */
