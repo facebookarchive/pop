@@ -150,6 +150,7 @@ extern NSString * const kPOPViewSize;
  */
 extern NSString * const kPOPScrollViewContentOffset;
 extern NSString * const kPOPScrollViewContentSize;
+extern NSString * const kPOPScrollViewZoomScale;
 
 /**
  Common UITableView property names.
