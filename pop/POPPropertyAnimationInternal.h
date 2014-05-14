@@ -105,13 +105,11 @@ struct _POPPropertyAnimationState : _POPAnimationState
 
   // returns a copy of the currentVec, rounding if needed
   VectorRef currentValue() {
-    if (!shouldRound()) {
-      return VectorRef(Vector::new_vector(currentVec.get()));
-    } else {
-      VectorRef vec = VectorRef(Vector::new_vector(currentVec.get()));
+    VectorRef vec = VectorRef(Vector::new_vector(currentVec.get()));
+    if (shouldRound()) {
       vec->subRound(1 / roundingFactor);
-      return vec;
     }
+      return vec;
   }
 
   void resetProgressMarkerState()
@@ -219,7 +217,7 @@ struct _POPPropertyAnimationState : _POPAnimationState
             didReachToValue = true;
             const CGFloat *distanceValues = distanceVec->data();
             for (NSUInteger idx = 0; idx < valueCount; idx++) {
-              didReachToValue &= signbit(distance[idx]) != signbit(distanceValues[idx]);
+              didReachToValue &= (signbit(distance[idx]) != signbit(distanceValues[idx]));
             }
           }
         }
@@ -301,7 +299,7 @@ struct _POPPropertyAnimationState : _POPAnimationState
     // depends on current value set on one time start
     if (NULL == distanceVec) {
 
-      // not yet started animations may not have from value
+      // not yet started animations may not have current value
       VectorRef fromVec2 = NULL != currentVec ? currentVec : fromVec;
 
       if (fromVec2 && toVec) {
