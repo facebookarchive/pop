@@ -54,7 +54,7 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
 
 - (void)setToValue:(id)aValue
 {
-  POPPropertyAnimationState *s = (POPPropertyAnimationState *)POPAnimationGetState(self);
+  POPPropertyAnimationState *s = __state;
   VectorRef vec = POPUnbox(aValue, s->valueType, s->valueCount, YES);
 
   if (!vec_equal(vec, s->toVec)) {

@@ -40,10 +40,10 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
 
   _POPBasicAnimationState(id __unsafe_unretained anim) : _POPPropertyAnimationState(anim),
   duration(kPOPAnimationDurationDefault),
-  timingFunction(nil)
+  timingFunction(nil),
+  timingControlPoints{0.}
   {
     type = kPOPAnimationBasic;
-    memset(timingControlPoints, 0, sizeof(timingControlPoints));
   }
 
   bool isDone() {
@@ -55,7 +55,7 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
 
   void updatedTimingFunction()
   {
-    float vec[4] = {0., 0., 0., 0.};
+    float vec[4] = {0.};
     [timingFunction getControlPointAtIndex:1 values:&vec[0]];
     [timingFunction getControlPointAtIndex:2 values:&vec[2]];
     for (NSUInteger idx = 0; idx < POP_ARRAY_COUNT(vec); idx++) {

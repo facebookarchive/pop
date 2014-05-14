@@ -100,11 +100,10 @@ DEFINE_RW_FLAG(POPAnimationState, removedOnCompletion, removedOnCompletion, setR
 
 - (POPAnimationTracer *)tracer
 {
-  POPAnimationState *s = POPAnimationGetState(self);
-  if (!s->tracer) {
-    s->tracer = [[POPAnimationTracer alloc] initWithAnimation:self];
+  if (!_state->tracer) {
+    _state->tracer = [[POPAnimationTracer alloc] initWithAnimation:self];
   }
-  return s->tracer;
+  return _state->tracer;
 }
 
 - (NSString *)description
