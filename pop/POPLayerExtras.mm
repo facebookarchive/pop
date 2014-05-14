@@ -37,6 +37,21 @@ using namespace WebCore;
 
 #pragma mark - Scale
 
+NS_INLINE void ensureNonZeroValue(CGFloat &f)
+{
+  if (f == 0) {
+    f = 1e-6;
+  }
+}
+
+NS_INLINE void ensureNonZeroValue(CGPoint &p)
+{
+  if (p.x == 0 && p.y == 0) {
+    p.x = 1e-6;
+    p.y = 1e-6;
+  }
+}
+
 CGFloat POPLayerGetScaleX(CALayer *l)
 {
   DECOMPOSE_TRANSFORM(l);
@@ -45,6 +60,7 @@ CGFloat POPLayerGetScaleX(CALayer *l)
 
 void POPLayerSetScaleX(CALayer *l, CGFloat f)
 {
+  ensureNonZeroValue(f);
   DECOMPOSE_TRANSFORM(l);
   _d.scaleX = f;
   RECOMPOSE_TRANSFORM(l);
@@ -58,6 +74,7 @@ CGFloat POPLayerGetScaleY(CALayer *l)
 
 void POPLayerSetScaleY(CALayer *l, CGFloat f)
 {
+  ensureNonZeroValue(f);
   DECOMPOSE_TRANSFORM(l);
   _d.scaleY = f;
   RECOMPOSE_TRANSFORM(l);
@@ -71,6 +88,7 @@ CGFloat POPLayerGetScaleZ(CALayer *l)
 
 void POPLayerSetScaleZ(CALayer *l, CGFloat f)
 {
+  ensureNonZeroValue(f);
   DECOMPOSE_TRANSFORM(l);
   _d.scaleZ = f;
   RECOMPOSE_TRANSFORM(l);
@@ -84,6 +102,7 @@ CGPoint POPLayerGetScaleXY(CALayer *l)
 
 void POPLayerSetScaleXY(CALayer *l, CGPoint p)
 {
+  ensureNonZeroValue(p);
   DECOMPOSE_TRANSFORM(l);
   _d.scaleX = p.x;
   _d.scaleY = p.y;
@@ -206,6 +225,7 @@ CGPoint POPLayerGetSubScaleXY(CALayer *l)
 
 void POPLayerSetSubScaleXY(CALayer *l, CGPoint p)
 {
+  ensureNonZeroValue(p);
   DECOMPOSE_SUBLAYER_TRANSFORM(l);
   _d.scaleX = p.x;
   _d.scaleY = p.y;

@@ -21,12 +21,15 @@ void POPAnimatorRenderTimes(POPAnimator *animator, CFTimeInterval beginTime, NSA
 
 void POPAnimatorRenderDuration(POPAnimator *animator, CFTimeInterval beginTime, CFTimeInterval duration, CFTimeInterval step)
 {
+  CFTimeInterval initialTime = animator.beginTime;
+  animator.beginTime = beginTime;
   NSCAssert(step > 0, @"unexpected step %f", step);
   CFTimeInterval time = 0;
   while(time <= duration) {
     [animator renderTime:beginTime + time];
     time += step;
   }
+  animator.beginTime = initialTime;
 }
 
 POPBasicAnimation *FBTestLinearPositionAnimation(CFTimeInterval beginTime)

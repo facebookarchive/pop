@@ -32,8 +32,10 @@ static const CGFloat epsilon = 0.0001f;
   
   // animation
   POPCustomAnimation *anim = [POPCustomAnimation animationWithBlock:^BOOL(id target, POPCustomAnimation *animation) {
-    // validate elapsed time
-    STAssertEqualsWithAccuracy(animation.elapsedTime, timeInterval, epsilon, @"expected elapsedTime:%f %@", timeInterval, animation);
+    if (0 != callbackCount) {
+      // validate elapsed time
+      STAssertEqualsWithAccuracy(animation.elapsedTime, timeInterval, epsilon, @"expected elapsedTime:%f %@", timeInterval, animation);
+    }
 
     // increment callback count
     callbackCount++;
@@ -52,15 +54,15 @@ static const CGFloat epsilon = 0.0001f;
   [[delegate expect] pop_animationDidApply:anim];
   
   anim.delegate = delegate;
+
+  POPAnimationTracer *tracer = anim.tracer;
+  [tracer start];
   
   // layer
   id layer = [OCMockObject niceMockForClass:[CALayer class]];
   [layer pop_addAnimation:anim forKey:key];
   
-  POPAnimationTracer *tracer = anim.tracer;
-  [tracer start];
-
-  POPAnimatorRenderDuration(self.animator, self.beginTime, 5, 0.1);
+  POPAnimatorRenderDuration(self.animator, self.beginTime + 0.1, 5, 0.1);
   STAssertTrue(callbackCount == 3, @"unexpected callbackCount:%d", callbackCount);
   
   NSArray *startEvents = [tracer eventsWithType:kPOPAnimationEventDidStart];
@@ -82,8 +84,13 @@ static const CGFloat epsilon = 0.0001f;
   
   // animation
   POPCustomAnimation *anim = [POPCustomAnimation animationWithBlock:^BOOL(id target, POPCustomAnimation *animation) {
-    // validate elapsed time acruel
-    STAssertEqualsWithAccuracy(animation.elapsedTime, timeInterval, epsilon, @"expected elapsedTime:%f %@", timeInterval, animation);
+    if (0 == callbackCount) {
+      // validate elapsed time acruel
+      STAssertEqualsWithAccuracy(animation.elapsedTime, 0., epsilon, @"expected elapsedTime:%f %@", timeInterval, animation);
+    } else {
+      // validate elapsed time acruel
+      STAssertEqualsWithAccuracy(animation.elapsedTime, timeInterval, epsilon, @"expected elapsedTime:%f %@", timeInterval, animation);
+    }
     
     // increment callback count
     callbackCount++;
@@ -107,14 +114,14 @@ static const CGFloat epsilon = 0.0001f;
   
   anim.delegate = delegate;
   
+  POPAnimationTracer *tracer = anim.tracer;
+  [tracer start];
+
   // layer
   id layer = [OCMockObject niceMockForClass:[CALayer class]];
   [layer pop_addAnimation:anim forKey:key];
-
-  POPAnimationTracer *tracer = anim.tracer;
-  [tracer start];
   
-  POPAnimatorRenderDuration(self.animator, self.beginTime, 5, 0.1);
+  POPAnimatorRenderDuration(self.animator, self.beginTime + 0.1, 5, 0.1);
   STAssertTrue(callbackCount == 3, @"unexpected callbackCount:%d", callbackCount);
 
   NSArray *startEvents = [tracer eventsWithType:kPOPAnimationEventDidStart];

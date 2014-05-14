@@ -77,15 +77,11 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
     double p = POPTimingFunctionSolve(timingControlPoints, t, SOLVE_EPS(duration));
 
     // interpolate and advance
-    if (p != progress) {
-      interpolate(valueType, valueCount, fromVec->data(), toVec->data(), currentVec->data(), p);
-      progress = p;
-      return true;
-    }
-
+    interpolate(valueType, valueCount, fromVec->data(), toVec->data(), currentVec->data(), p);
+    progress = p;
     clampCurrentValue();
 
-    return false;
+    return true;
   }
 };
 

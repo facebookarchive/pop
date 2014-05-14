@@ -375,7 +375,7 @@ static const CGFloat epsilon = 0.0001f;
   [[delegate expect] pop_animationDidStop:anim finished:YES];
 
   // run animation some more
-  POPAnimatorRenderDuration(self.animator, CACurrentMediaTime(), 4, 1.0/60.0);
+  POPAnimatorRenderDuration(self.animator, self.beginTime + 1, 4, 1.0/60.0);
   NSArray *moreWriteEvents = [tracer eventsWithType:kPOPAnimationEventPropertyWrite];
 
   // verify stop delegation

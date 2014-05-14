@@ -14,6 +14,7 @@
 #import <OCMock/OCMock.h>
 
 #import <POP/POP.h>
+#import <POP/POPAnimatorPrivate.h>
 
 #import "POPAnimatable.h"
 #import "POPAnimationTestsExtras.h"
@@ -43,6 +44,7 @@
     prop.threshold = 0.01;
   }];
   _beginTime = CACurrentMediaTime();
+  _animator.beginTime = _beginTime;
 }
 
 @end

@@ -13,6 +13,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 #import <POP/POP.h>
+#import <POP/POPAnimatorPrivate.h>
 
 #import "POPAnimationTestsExtras.h"
 
@@ -30,6 +31,7 @@
   [super setUp];
   _animator = [[POPAnimator sharedAnimator] retain];
   _beginTime = CACurrentMediaTime();
+  _animator.beginTime = _beginTime;
 }
 
 - (void)tearDown

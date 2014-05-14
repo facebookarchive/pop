@@ -401,7 +401,7 @@ using namespace POP;
   // write events
   STAssertTrue(0 != writeEvents.count, @"unexpected writeEvents count %@", writeEvents);
   id firstWriteValue = [(POPAnimationValueEvent *)writeEvents.firstObject value];
-  STAssertTrue(NSOrderedAscending == [anim.fromValue compare:firstWriteValue], @"unexpected firstWriteValue; fromValue:%@ actual:%@", anim.fromValue, firstWriteValue);
+  STAssertTrue(NSOrderedSame == [anim.fromValue compare:firstWriteValue], @"unexpected firstWriteValue; fromValue:%@ actual:%@", anim.fromValue, firstWriteValue);
   id lastWriteValue = [(POPAnimationValueEvent *)writeEvents.lastObject value];
   STAssertEqualObjects(lastWriteValue, anim.toValue, @"unexpected lastWriteValue; expected:%@ actual:%@", anim.toValue, lastWriteValue);
 }
@@ -616,14 +616,17 @@ using namespace POP;
   [tracer start];
 
   CALayer *layer = [CALayer layer];
-  layer.opacity = 0;
   [layer pop_addAnimation:anim forKey:nil];
 
-  POPAnimatorRenderDuration(self.animator, self.beginTime, 1, 0.1);
+  POPAnimatorRenderDuration(self.animator, self.beginTime + 0.1, 1, 0.1);
 
   // verify writes happened
   NSArray *writeEvents = tracer.writeEvents;
   STAssertTrue(writeEvents.count == 5, @"unexpected events:%@", writeEvents);
+
+  // verify initial value
+  POPAnimationValueEvent *firstWriteEvent = writeEvents.firstObject;
+  STAssertTrue([firstWriteEvent.value isEqual:anim.fromValue], @"expected equality; value1:%@ value%@", firstWriteEvent.value, anim.fromValue);
 
   // verify final value
   STAssertEqualObjects([layer valueForKey:@"opacity"], anim.toValue, @"expected equality; value1:%@ value2:%@", [layer valueForKey:@"opacity"], anim.toValue);
