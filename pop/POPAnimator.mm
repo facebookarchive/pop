@@ -489,6 +489,11 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     key = [[NSUUID UUID] UUIDString];
   }
 
+  if ([self validateParametersForAnimation:anim forObject:obj key:key] == NO) {
+    //Animation is not possible ...
+    return;
+  }
+    
   // lock
   OSSpinLockLock(&_lock);
 
@@ -717,6 +722,22 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 
   // unlock
   OSSpinLockUnlock(&_lock);
+}
+
+- (BOOL)validateParametersForAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key
+{
+    id type = [obj class];
+    objc_property_t theProperty = class_getProperty(type, [key UTF8String]);
+    if (!theProperty) {
+        NSAssert(0x0 !=theProperty  , @"key (%@) for object (%@) doesn't exist !", key,obj);
+        return NO;
+    } else {
+        //TBD check attributes and expected type (in progress)
+        //const char *attributes = property_getAttributes(theProperty);
+        //printf("%s",attributes);
+    }
+    
+    return YES;
 }
 
 @end
