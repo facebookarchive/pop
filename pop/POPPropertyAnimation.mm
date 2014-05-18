@@ -114,7 +114,6 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
         
         // Check attributes and expected type
         const char *attributes = property_getAttributes(theProperty);
-        printf("%s",attributes);
         
         if(strcmp(self.property.expectedPropertyAttributes, attributes) != 0) {
             NSAssert(0x0 !=theProperty  , @"key (%@) for object (%@) is not of the expected type !", key,obj);
