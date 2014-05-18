@@ -102,4 +102,28 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
     [s appendFormat:@"; progress = %f", __state->progress];
 }
 
+- (BOOL)animationIsValidForObject:(id)obj andKey:(NSString *)key
+{
+    id type = [obj class];
+    //Check property exist
+    objc_property_t theProperty = class_getProperty(type, [key UTF8String]);
+    if (!theProperty) {
+        NSAssert(0x0 !=theProperty  , @"key (%@) for object (%@) doesn't exist !", key,obj);
+        return NO;
+    } else {
+        
+        // Check attributes and expected type
+        const char *attributes = property_getAttributes(theProperty);
+        printf("%s",attributes);
+        
+        if(strcmp(self.property.expectedPropertyAttributes, attributes) != 0) {
+            NSAssert(0x0 !=theProperty  , @"key (%@) for object (%@) is not of the expected type !", key,obj);
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+
 @end
