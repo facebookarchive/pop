@@ -62,4 +62,6 @@ typedef NS_OPTIONS(NSUInteger, POPAnimationClampFlags)
  */
 @property (assign, nonatomic, getter = isAdditive) BOOL additive;
 
+- (BOOL)animationIsValidForObject:(id)obj andKey:(NSString *)key;
+
 @end

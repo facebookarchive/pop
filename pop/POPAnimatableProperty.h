@@ -55,6 +55,11 @@
  */
 @property (readonly, nonatomic, assign) CGFloat threshold;
 
+/**
+ @abstract The expected property attributes.
+ */
+@property (assign, nonatomic) const char *expectedPropertyAttributes;
+
 @end
 
 /**
@@ -81,6 +86,11 @@
  @abstract A read-write version of POPAnimatableProperty threshold property.
  */
 @property (readwrite, nonatomic, assign) CGFloat threshold;
+
+/**
+ @abstract The expected property attributes.
+ */
+@property (assign, nonatomic) const char *expectedPropertyAttributes;
 
 @end
 
