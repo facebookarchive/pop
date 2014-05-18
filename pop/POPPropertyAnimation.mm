@@ -116,7 +116,7 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
         const char *attributes = property_getAttributes(theProperty);
         
         if(strcmp(self.property.expectedPropertyAttributes, attributes) != 0) {
-            NSAssert(0x0 !=theProperty  , @"key (%@) for object (%@) is not of the expected type !", key,obj);
+            NSAssert(0 , @"key (%@) for object (%@) is not of the expected type !", key,obj);
             return NO;
         }
     }
