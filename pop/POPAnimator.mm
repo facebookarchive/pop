@@ -335,7 +335,8 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 - (void)_processPendingList
 {
   // rendering pending animations
-  [self _renderTime:(0 != _beginTime) ? _beginTime : CACurrentMediaTime() items:_pendingList];
+  CFTimeInterval time = [self _currentRenderTime];
+  [self _renderTime:(0 != _beginTime) ? _beginTime : time items:_pendingList];
 
   // lock
   OSSpinLockLock(&_lock);
@@ -648,7 +649,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   return animation;
 }
 
-- (void)render
+- (CFTimeInterval)_currentRenderTime
 {
   CFTimeInterval time = CACurrentMediaTime();
 
@@ -672,6 +673,12 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   }
 #endif
 
+  return time;
+}
+
+- (void)render
+{
+  CFTimeInterval time = [self _currentRenderTime];
   [self renderTime:time];
 }
 
