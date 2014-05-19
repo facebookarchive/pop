@@ -153,7 +153,7 @@ A collection of links to external resources that may prove valuable:
 * [Codeplease – Bridging the gesture to animation gap](http://codeplease.io/playing-with-pop-ii/)
 * [Codeplease – Playing with Pop (iii)](http://codeplease.io/playing-with-pop-iii/)
 * [Codeplease – Adding a custom animatable property](http://codeplease.io/playing-with-pop-v/)
-* [iOS Devevelopment Tips – UIScrollView-like deceleration with Pop](http://iosdevtips.co/post/84571595353/replicating-uiscrollviews-deceleration-with-facebook)
+* [iOS Development Tips – UIScrollView-like deceleration with Pop](http://iosdevtips.co/post/84571595353/replicating-uiscrollviews-deceleration-with-facebook)
 * [Pop Playground – Repository of Pop animation examples](https://github.com/callmeed/pop-playground)
 * [Pop Playground 2 – Playing with Facebook's framework](http://victorbaro.com/2014/05/pop-playground-playing-with-facebooks-framework/)
 * [POP-MCAnimate – Concise syntax for the Pop animation framework](https://github.com/matthewcheok/POP-MCAnimate)
