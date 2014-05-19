@@ -89,6 +89,10 @@ NSString * const kPOPScrollViewZoomScale = @"scrollView.zoomScale";
 NSString * const kPOPTableViewContentOffset = kPOPScrollViewContentOffset;
 NSString * const kPOPTableViewContentSize = kPOPScrollViewContentSize;
 
+// UICollectionView
+NSString * const kPOPCollectionViewContentOffset = kPOPScrollViewContentOffset;
+NSString * const kPOPCollectionViewContentSize = kPOPScrollViewContentSize;
+
 // UINavigationBar
 NSString * const kPOPNavigationBarBarTintColor = @"navigationBar.barTintColor";
 
