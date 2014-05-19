@@ -50,7 +50,6 @@
  Funnel methods for category additions.
  */
 - (void)addAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key;
-- (void)addAnimation:(POPAnimation *)anim forObject:(id)obj keyPath:(NSString *)keyPath;
 - (void)removeAllAnimationsForObject:(id)obj;
 - (void)removeAnimationForObject:(id)obj key:(NSString *)key;
 - (NSArray *)animationKeysForObject:(id)obj;

@@ -478,12 +478,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   return observers;
 }
 
-- (void)addAnimation:(POPAnimation *)anim forObject:(id)obj keyPath:(NSString *)keyPath
-{
-    [self addAnimation:anim forObject:obj key:keyPath checkKeyPath:YES];
-}
-
-- (void)addAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key checkKeyPath:(BOOL)checkKeyPath
+- (void)addAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key
 {
     if (!anim || !obj) {
         return;
@@ -536,11 +531,6 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     
     // schedule runloop processing of pending animations
     [self _scheduleProcessPendingList];
-}
-
-- (void)addAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key
-{
-    [self addAnimation:anim forObject:obj key:key checkKeyPath:NO];
 }
 
 - (void)removeAllAnimationsForObject:(id)obj
