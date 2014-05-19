@@ -159,6 +159,12 @@ extern NSString * const kPOPTableViewContentOffset;
 extern NSString * const kPOPTableViewContentSize;
 
 /**
+ Common UICollectionView property names.
+ */
+extern NSString * const kPOPCollectionViewContentOffset;
+extern NSString * const kPOPCollectionViewContentSize;
+
+/**
  Common UINavigationBar property names.
  */
 extern NSString * const kPOPNavigationBarBarTintColor;
