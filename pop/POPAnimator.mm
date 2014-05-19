@@ -494,14 +494,6 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
         key = [[NSUUID UUID] UUIDString];
     }
     
-    //Check property animation validity
-    if (checkKeyPath == YES && [anim isKindOfClass:POPPropertyAnimation.class]) {
-        POPPropertyAnimation *propertyAnimation = (POPPropertyAnimation*)anim;
-        if ([propertyAnimation animationIsValidForObject:obj andKey:key] == NO) {
-            return;
-        }
-    }
-    
     // lock
     OSSpinLockLock(&_lock);
     
