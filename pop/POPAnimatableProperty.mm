@@ -756,17 +756,7 @@ static POPAnimatableProperty *placeholder = nil;
 + (id)propertyWithCustomName:(NSString *)name initializer:(void (^)(POPMutableAnimatableProperty *prop))aBlock
 {
     POPAnimatableProperty *prop = nil;
-    
-    static NSMutableDictionary *_propertyDict = nil;
-    if (nil == _propertyDict) {
-        _propertyDict = [[NSMutableDictionary alloc] initWithCapacity:10];
-    }
-    
-    prop = _propertyDict[name];
-    if (nil != prop) {
-        return prop;
-    }
-    
+
     if (NULL != aBlock) {
         POPMutableAnimatableProperty *mutableProp = [[POPMutableAnimatableProperty alloc] init];
         mutableProp.type = POPCustomProperty;
