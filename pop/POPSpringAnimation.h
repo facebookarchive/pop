@@ -26,7 +26,7 @@
  @param name The name of the animatable property.
  @returns An instance of a spring animation configured with specified animatable property.
  */
-+ (instancetype)animationWithPropertyNamed:(NSString *)name;
++ (instancetype)animationWithPropertyWithType:(POPAnimatablePropertyType)type;
 
 /**
  @abstract The current velocity value.

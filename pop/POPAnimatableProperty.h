@@ -9,6 +9,7 @@
 
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/NSObject.h>
+#import "POPAnimatablePropertyTypes.h"
 
 @class POPMutableAnimatableProperty;
 
@@ -23,7 +24,7 @@
  @return The animatable property with that name or nil if it does not exist.
  @discussion Common animatable properties are included by default. Use the provided constants to reference.
  */
-+ (id)propertyWithName:(NSString *)name;
++ (id)propertyWithType:(POPAnimatablePropertyType)type;
 
 /**
  @abstract The designated initializer.
@@ -32,7 +33,7 @@
  @return The animatable property with name if it exists, otherwise a newly created instance configured by block.
  @discussion Custom properties should use reverse-DNS naming. A newly created instance is only mutable in the scope of block. Once constructed, a property becomes immutable.
  */
-+ (id)propertyWithName:(NSString *)name initializer:(void (^)(POPMutableAnimatableProperty *prop))block;
++ (id)propertyWithType:(POPAnimatablePropertyType)type initializer:(void (^)(POPMutableAnimatableProperty *prop))block;
 
 /**
  @abstract The name of the property.
@@ -84,98 +85,3 @@
 
 @end
 
-/**
- Common CALayer property names.
- */
-extern NSString * const kPOPLayerBackgroundColor;
-extern NSString * const kPOPLayerBounds;
-extern NSString * const kPOPLayerCornerRadius;
-extern NSString * const kPOPLayerOpacity;
-extern NSString * const kPOPLayerPosition;
-extern NSString * const kPOPLayerPositionX;
-extern NSString * const kPOPLayerPositionY;
-extern NSString * const kPOPLayerRotation;
-extern NSString * const kPOPLayerRotationX;
-extern NSString * const kPOPLayerRotationY;
-extern NSString * const kPOPLayerScaleX;
-extern NSString * const kPOPLayerScaleXY;
-extern NSString * const kPOPLayerScaleY;
-extern NSString * const kPOPLayerSize;
-extern NSString * const kPOPLayerSubscaleXY;
-extern NSString * const kPOPLayerSubtranslationX;
-extern NSString * const kPOPLayerSubtranslationXY;
-extern NSString * const kPOPLayerSubtranslationY;
-extern NSString * const kPOPLayerSubtranslationZ;
-extern NSString * const kPOPLayerTranslationX;
-extern NSString * const kPOPLayerTranslationXY;
-extern NSString * const kPOPLayerTranslationY;
-extern NSString * const kPOPLayerTranslationZ;
-extern NSString * const kPOPLayerZPosition;
-extern NSString * const kPOPLayerShadowColor;
-extern NSString * const kPOPLayerShadowOffset;
-extern NSString * const kPOPLayerShadowOpacity;
-extern NSString * const kPOPLayerShadowRadius;
-
-/**
- Common CAShapeLayer property names.
- */
-extern NSString * const kPOPShapeLayerStrokeStart;
-extern NSString * const kPOPShapeLayerStrokeEnd;
-extern NSString * const kPOPShapeLayerStrokeColor;
-
-/**
- Common NSLayoutConstraint property names.
- */
-extern NSString * const kPOPLayoutConstraintConstant;
-
-
-#if TARGET_OS_IPHONE
-
-/**
- Common UIView property names.
- */
-extern NSString * const kPOPViewAlpha;
-extern NSString * const kPOPViewBackgroundColor;
-extern NSString * const kPOPViewBounds;
-extern NSString * const kPOPViewCenter;
-extern NSString * const kPOPViewFrame;
-extern NSString * const kPOPViewScaleX;
-extern NSString * const kPOPViewScaleXY;
-extern NSString * const kPOPViewScaleY;
-extern NSString * const kPOPViewSize;
-
-
-/**
- Common UIScrollView property names.
- */
-extern NSString * const kPOPScrollViewContentOffset;
-extern NSString * const kPOPScrollViewContentSize;
-extern NSString * const kPOPScrollViewZoomScale;
-
-/**
- Common UITableView property names.
- */
-extern NSString * const kPOPTableViewContentOffset;
-extern NSString * const kPOPTableViewContentSize;
-
-/**
- Common UINavigationBar property names.
- */
-extern NSString * const kPOPNavigationBarBarTintColor;
-
-/**
- Common UIToolbar property names.
- */
-extern NSString * const kPOPToolbarBarTintColor;
-
-/**
- Common UITabBar property names.
- */
-extern NSString * const kPOPTabBarBarTintColor;
-
-/**
- Common UILabel property names.
- */
-extern NSString * const kPOPLabelTextColor;
-
-#endif

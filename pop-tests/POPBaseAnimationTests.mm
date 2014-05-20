@@ -34,7 +34,7 @@
   _layer1 = [[CALayer alloc] init];
   _layer2 = [[CALayer alloc] init];
   _animator = [POPAnimator sharedAnimator];
-  _radiusProperty = [POPAnimatableProperty propertyWithName:@"radius" initializer:^(POPMutableAnimatableProperty *prop){
+  _radiusProperty = [POPAnimatableProperty propertyWithType:POPLayerCornerRadius initializer:^(POPMutableAnimatableProperty *prop){
     prop.readBlock = ^(POPAnimatable *obj, CGFloat values[]) {
       values[0] = [obj radius];
     };

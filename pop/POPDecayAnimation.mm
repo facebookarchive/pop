@@ -21,10 +21,10 @@
   return [[self alloc] init];
 }
 
-+ (instancetype)animationWithPropertyNamed:(NSString *)aName
++ (instancetype)animationWithPropertyType:(POPAnimatablePropertyType)aType
 {
   POPDecayAnimation *anim = [self animation];
-  anim.property = [POPAnimatableProperty propertyWithName:aName];
+  anim.property = [POPAnimatableProperty propertyWithType:aType];
   return anim;
 }
 

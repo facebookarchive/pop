@@ -29,7 +29,7 @@
   // animation
   // the default from, to and bounciness values are used
   POPBasicAnimation *anim = [POPBasicAnimation easeInEaseOutAnimation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerScaleXY];
   anim.fromValue = [NSValue valueWithCGPoint:CGPointMake(1.0, 1.0)];
   anim.toValue = [NSValue valueWithCGPoint:CGPointMake(0.97, 0.97)];
 
@@ -55,7 +55,7 @@
   const CGRect toRect = CGRectMake(100, 200, 200, 400);
 
   POPBasicAnimation *anim = [POPBasicAnimation easeInEaseOutAnimation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerBounds];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerBounds];
   anim.fromValue = [NSValue valueWithCGRect:fromRect];
   anim.toValue = [NSValue valueWithCGRect:toRect];
   

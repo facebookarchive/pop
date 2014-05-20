@@ -46,8 +46,8 @@ using namespace POP;
 
 - (void)testWithPropertyNamedConstruction
 {
-  POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerBounds];
-  POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithName:kPOPLayerBounds];
+  POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyWithType:POPLayerBounds];
+  POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithType:POPLayerBounds];
   STAssertTrue(anim.property == prop, @"expected:%@ actual:%@", prop, anim.property);
 }
 
@@ -572,42 +572,42 @@ using namespace POP;
   POPBasicAnimation *anim;
 
   // literal
-  anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+  anim = [POPBasicAnimation animationWithPropertyType:POPLayerOpacity];
   STAssertNoThrow(anim.toValue = @(toValue), @"unexpected exception");
   STAssertEqualObjects(anim.toValue, boxedToValue, @"expected equality; value1:%@ value2:%@", anim.toValue, boxedToValue);
 
   // integer
-  anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+  anim = [POPBasicAnimation animationWithPropertyType:POPLayerOpacity];
   STAssertNoThrow(anim.toValue = @(toValue), @"unexpected exception");
   STAssertEqualObjects(anim.toValue, boxedToValue, @"expected equality; value1:%@ value2:%@", anim.toValue, boxedToValue);
 
   // short
-  anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+  anim = [POPBasicAnimation animationWithPropertyType:POPLayerOpacity];
   STAssertNoThrow(anim.toValue = @(toValue), @"unexpected exception");
   STAssertEqualObjects(anim.toValue, boxedToValue, @"expected equality; value1:%@ value2:%@", anim.toValue, boxedToValue);
 
   // unsigned short
-  anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+  anim = [POPBasicAnimation animationWithPropertyType:POPLayerOpacity];
   STAssertNoThrow(anim.toValue = @(toValue), @"unexpected exception");
   STAssertEqualObjects(anim.toValue, boxedToValue, @"expected equality; value1:%@ value2:%@", anim.toValue, boxedToValue);
 
   // int
-  anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+  anim = [POPBasicAnimation animationWithPropertyType:POPLayerOpacity];
   STAssertNoThrow(anim.toValue = @(toValue), @"unexpected exception");
   STAssertEqualObjects(anim.toValue, boxedToValue, @"expected equality; value1:%@ value2:%@", anim.toValue, boxedToValue);
 
   // unsigned int
-  anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+  anim = [POPBasicAnimation animationWithPropertyType:POPLayerOpacity];
   STAssertNoThrow(anim.toValue = @(toValue), @"unexpected exception");
   STAssertEqualObjects(anim.toValue, boxedToValue, @"expected equality; value1:%@ value2:%@", anim.toValue, boxedToValue);
 
   // long
-  anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+  anim = [POPBasicAnimation animationWithPropertyType:POPLayerOpacity];
   STAssertNoThrow(anim.toValue = @(toValue), @"unexpected exception");
   STAssertEqualObjects(anim.toValue, boxedToValue, @"expected equality; value1:%@ value2:%@", anim.toValue, boxedToValue);
 
   // unsigned long
-  anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+  anim = [POPBasicAnimation animationWithPropertyType:POPLayerOpacity];
   STAssertNoThrow(anim.toValue = @(toValue), @"unexpected exception");
   STAssertEqualObjects(anim.toValue, boxedToValue, @"expected equality; value1:%@ value2:%@", anim.toValue, boxedToValue);
 
@@ -634,7 +634,7 @@ using namespace POP;
 
 - (void)testPlatformColorSupport
 {
-  POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerBackgroundColor];
+  POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyWithType:POPLayerBackgroundColor];
 
 #if TARGET_OS_IPHONE
   STAssertNoThrow(anim.fromValue = [UIColor whiteColor], @"unexpected exception");

@@ -21,10 +21,10 @@
   return [[self alloc] init];
 }
 
-+ (instancetype)animationWithPropertyNamed:(NSString *)aName
++ (instancetype)animationWithPropertyWithType:(POPAnimatablePropertyType)type
 {
   POPSpringAnimation *anim = [self animation];
-  anim.property = [POPAnimatableProperty propertyWithName:aName];
+  anim.property = [POPAnimatableProperty propertyWithType:type];
   return anim;
 }
 

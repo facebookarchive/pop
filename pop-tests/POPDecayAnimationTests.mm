@@ -30,7 +30,7 @@ static const CGFloat epsilon = 0.0001f;
 - (POPDecayAnimation *)_positionAnimation
 {
   POPDecayAnimation *anim = [POPDecayAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerPosition];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerPosition];
   anim.fromValue = [NSValue valueWithCGPoint:CGPointZero];
   anim.velocity = [NSValue valueWithCGPoint:CGPointMake(7223.021, 7223.021)];
   anim.deceleration = 0.998000;
@@ -40,7 +40,7 @@ static const CGFloat epsilon = 0.0001f;
 - (POPDecayAnimation *)_positionXAnimation
 {
   POPDecayAnimation *anim = [POPDecayAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerPositionX];
   anim.fromValue = @0.;
   anim.velocity = @7223.021;
   anim.deceleration = 0.998000;
@@ -50,7 +50,7 @@ static const CGFloat epsilon = 0.0001f;
 - (POPDecayAnimation *)_positionYAnimation
 {
   POPDecayAnimation *anim = self._positionXAnimation;
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionY];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerPositionY];
   return anim;
 }
 
@@ -320,7 +320,7 @@ static const CGFloat epsilon = 0.0001f;
   [layer pop_removeAllAnimations];
 
   POPDecayAnimation *anim = [POPDecayAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerPosition];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerPosition];
 
   id delegate = [OCMockObject niceMockForProtocol:@protocol(POPAnimationDelegate)];
   anim.delegate = delegate;
@@ -348,7 +348,7 @@ static const CGFloat epsilon = 0.0001f;
 - (void)testContinuation
 {
   POPDecayAnimation *anim = [POPDecayAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerPositionX];
   anim.fromValue = @0.0;
   anim.velocity = @1000.0;
 
@@ -394,7 +394,7 @@ static const CGFloat epsilon = 0.0001f;
   const CGRect fromRect = CGRectMake(0, 0, 0, 0);
 
   POPDecayAnimation *anim = [POPDecayAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerBounds];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerBounds];
   anim.fromValue = [NSValue valueWithCGRect:fromRect];
   anim.velocity = [NSValue valueWithCGRect:CGRectMake(100, 100, 1000, 1000)];
   
@@ -461,7 +461,7 @@ static const CGFloat epsilon = 0.0001f;
 
 - (void)testComputedProperties
 {
-  POPDecayAnimation *anim = [POPDecayAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+  POPDecayAnimation *anim = [POPDecayAnimation animationWithPropertyType:POPLayerPositionX];
   
   // set velocity, test duration
   anim.velocity = @(100);

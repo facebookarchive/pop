@@ -35,7 +35,7 @@ void POPAnimatorRenderDuration(POPAnimator *animator, CFTimeInterval beginTime, 
 POPBasicAnimation *FBTestLinearPositionAnimation(CFTimeInterval beginTime)
 {
   POPBasicAnimation *anim = [POPBasicAnimation linearAnimation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerPosition];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerPosition];
   anim.fromValue = [NSValue valueWithCGPoint:CGPointMake(0, 0)];
   anim.toValue = [NSValue valueWithCGPoint:CGPointMake(100, 100)];
   anim.duration = 1;

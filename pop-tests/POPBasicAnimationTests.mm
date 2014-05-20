@@ -24,7 +24,7 @@
 
 - (void)testColorInterpolation
 {
-  POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerBackgroundColor];
+    POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyType:POPLayerBackgroundColor];
 
 #if TARGET_OS_IPHONE
   anim.fromValue = [UIColor whiteColor];

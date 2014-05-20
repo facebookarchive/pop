@@ -35,7 +35,7 @@ static NSString *animationKey = @"key";
 {
   POPSpringAnimation *anim = [POPSpringAnimation animation];
   anim.fromValue = @0.0;
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerPositionX];
   anim.springBounciness = 4.0;
   return anim;
 }
@@ -46,7 +46,7 @@ static NSString *animationKey = @"key";
   // the default from, to and bounciness values are used
   NSArray *markers = @[@0.5, @0.75, @1.0];
   POPSpringAnimation *anim = [POPSpringAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerPosition];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerPosition];
   anim.progressMarkers = markers;
   STAssertEqualObjects(markers, anim.progressMarkers, @"%@ shoudl equal %@", markers, anim.progressMarkers);
 
@@ -76,7 +76,7 @@ static NSString *animationKey = @"key";
 {
   POPAnimatable *circle = [POPAnimatable new];
   POPSpringAnimation *anim = [POPSpringAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerPositionX];
   anim.fromValue = @0.0;
   anim.toValue = @100.0;
   anim.velocity = @100.0;
@@ -103,7 +103,7 @@ static NSString *animationKey = @"key";
 {
   POPAnimatable *circle = [POPAnimatable new];
   POPSpringAnimation *anim = [POPSpringAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerPositionX];
   anim.fromValue = @0.0;
   anim.toValue = @100.0;
   anim.velocity = @100.0;
@@ -131,7 +131,7 @@ static NSString *animationKey = @"key";
 {
   POPAnimatable *circle = [POPAnimatable new];
   POPSpringAnimation *anim = [POPSpringAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerPositionX];
   anim.fromValue = @0.0;
   anim.toValue = @100.0;
   anim.velocity = @100.0;
@@ -311,7 +311,7 @@ static NSString *animationKey = @"key";
   [layer pop_removeAllAnimations];
 
   POPSpringAnimation *anim = [POPSpringAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerPosition];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerPosition];
 
   id delegate = [OCMockObject niceMockForProtocol:@protocol(POPAnimationDelegate)];
   anim.delegate = delegate;
@@ -342,7 +342,7 @@ static NSString *animationKey = @"key";
   layer.position = CGPointZero;
 
   POPSpringAnimation *anim = [POPSpringAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerPositionX];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerPositionX];
   anim.fromValue = @100.0;
   anim.beginTime = self.beginTime + 0.3;
 
@@ -374,7 +374,7 @@ static NSString *animationKey = @"key";
   translationAnimation.dynamicsTension = 990;
   translationAnimation.dynamicsFriction = 230;
   translationAnimation.dynamicsMass = 1.0;
-  translationAnimation.property = [POPAnimatableProperty propertyWithName:kPOPLayerOpacity];
+  translationAnimation.property = [POPAnimatableProperty propertyWithType:POPLayerOpacity];
   translationAnimation.removedOnCompletion = NO;
   [self pop_addAnimation:translationAnimation forKey:@"test"];
   POPAnimatorRenderDuration(self.animator, self.beginTime + 0.4, 0.2, 1.0/60.0);
@@ -387,7 +387,7 @@ static NSString *animationKey = @"key";
   const CGRect velocityRect = CGRectMake(1000, 1000, 1000, 1000);
 
   POPSpringAnimation *anim = [POPSpringAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerBounds];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerBounds];
   anim.fromValue = [NSValue valueWithCGRect:fromRect];
   anim.toValue = [NSValue valueWithCGRect:toRect];
   anim.velocity = [NSValue valueWithCGRect:velocityRect];
@@ -428,7 +428,7 @@ static NSString *animationKey = @"key";
   CGColorRef toColor = POPCGColorRGBACreate(toValues);
 
   POPSpringAnimation *anim = [POPSpringAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerBounds];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerBounds];
   anim.fromValue = (__bridge_transfer id)fromColor;
   anim.toValue = (__bridge_transfer id)toColor;
 
@@ -532,7 +532,7 @@ static BOOL _floatingPointEqual(CGFloat a, CGFloat b)
 - (void)testNilColor
 {
   POPSpringAnimation *anim = [POPSpringAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerBackgroundColor];
+  anim.property = [POPAnimatableProperty propertyWithType:POPLayerBackgroundColor];
 
 #if TARGET_OS_IPHONE
   anim.toValue = (__bridge id)[UIColor redColor].CGColor;

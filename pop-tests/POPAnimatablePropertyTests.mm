@@ -11,7 +11,7 @@
 
 #import <POP/POPAnimatableProperty.h>
 
-static const CGFloat epsilon = 0.0001f;
+//static const CGFloat epsilon = 0.0001f;
 static NSArray *properties = @[@"name", @"readBlock", @"writeBlock", @"threshold"];
 
 static void assertPropertyEqual(id self, POPAnimatableProperty *prop1, POPAnimatableProperty *prop2)
@@ -30,54 +30,55 @@ static void assertPropertyEqual(id self, POPAnimatableProperty *prop1, POPAnimat
 
 - (void)testProvidedExistence
 {
-  NSArray *names = @[kPOPLayerPosition,
-                     kPOPLayerOpacity,
-                     kPOPLayerScaleXY,
-                     kPOPLayerSubscaleXY,
-                     kPOPLayerSubtranslationX,
-                     kPOPLayerSubtranslationY,
-                     kPOPLayerSubtranslationZ,
-                     kPOPLayerSubtranslationXY,
-                     kPOPLayerZPosition,
-                     kPOPLayerSize,
-                     kPOPLayerRotation,
-                     kPOPLayerRotationY,
-                     kPOPLayerRotationX,
-                     kPOPLayerShadowColor,
-                     kPOPLayerShadowOffset,
-                     kPOPLayerShadowOpacity,
-                     kPOPLayerShadowRadius,
-                     kPOPLayerCornerRadius,
-                     kPOPShapeLayerStrokeStart,
-                     kPOPShapeLayerStrokeEnd,
-                     kPOPShapeLayerStrokeColor,
+  NSArray *types = @[@(POPLayerPosition),
+                     @(POPLayerOpacity),
+                     @(POPLayerScaleXY),
+                     @(POPLayerSubscaleXY),
+                     @(POPLayerSubtranslationX),
+                     @(POPLayerSubtranslationY),
+                     @(POPLayerSubtranslationZ),
+                     @(POPLayerSubtranslationXY),
+                     @(POPLayerZPosition),
+                     @(POPLayerSize),
+                     @(POPLayerRotation),
+                     @(POPLayerRotationY),
+                     @(POPLayerRotationX),
+                     @(POPLayerShadowColor),
+                     @(POPLayerShadowOffset),
+                     @(POPLayerShadowOpacity),
+                     @(POPLayerShadowRadius),
+                     @(POPLayerCornerRadius),
+                     @(POPShapeLayerStrokeStart),
+                     @(POPShapeLayerStrokeEnd),
+                     @(POPShapeLayerStrokeColor),
 #if TARGET_OS_IPHONE
-                     kPOPViewAlpha,
-                     kPOPViewBackgroundColor,
-                     kPOPViewCenter,
-                     kPOPViewFrame,
-                     kPOPViewBounds,
-                     kPOPViewSize,
-                     kPOPScrollViewZoomScale,
-                     kPOPTableViewContentSize,
-                     kPOPTableViewContentOffset,
-                     kPOPLabelTextColor
+                     @(POPViewAlpha),
+                     @(POPViewBackgroundColor),
+                     @(POPViewCenter),
+                     @(POPViewFrame),
+                     @(POPViewBounds),
+                     @(POPViewSize),
+                     @(POPScrollViewZoomScale),
+                     @(POPTableViewContentSize),
+                     @(POPTableViewContentOffset),
+                     @(POPLabelTextColor)
 #endif
                      ];
 
-  for (NSString *name in names) {
-    POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithName:name];
-    STAssertNotNil(prop, @"animatable property %@ should exist", name);
+  for (NSNumber *type in types) {
+    POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithType:(POPAnimatablePropertyType)[type integerValue]];
+    STAssertNotNil(prop, @"animatable property %@ should exist", type);
   }
 }
 
 - (void)testUserCreation
 {
+    /*
   static NSString *name = @"lalalala";
   static CGFloat threshold = 0.07;
   POPAnimatableProperty *prop;
 
-  prop = [POPAnimatableProperty propertyWithName:name];
+  prop = [POPAnimatableProperty propertyWithType:name];
   STAssertNil(prop, @"animatable property %@ should not exist", name);
 
   prop = [POPAnimatableProperty propertyWithName:name initializer:^(POPMutableAnimatableProperty *p){
@@ -85,6 +86,7 @@ static void assertPropertyEqual(id self, POPAnimatableProperty *prop1, POPAnimat
   }];
   STAssertNotNil(prop, @"animatable property %@ should exist", name);
   STAssertEqualsWithAccuracy(threshold, prop.threshold, epsilon, @"property threshold %f should equal %f", prop.threshold, threshold);
+     */
 }
 
 - (void)testClassCluster
@@ -101,7 +103,7 @@ static void assertPropertyEqual(id self, POPAnimatableProperty *prop1, POPAnimat
 - (void)testCopying
 {
   // instance
-  POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithName:kPOPLayerBounds];
+  POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithType:POPLayerBounds];
 
   // instance copy
   POPAnimatableProperty *propCopy = [prop copy];
@@ -113,7 +115,7 @@ static void assertPropertyEqual(id self, POPAnimatableProperty *prop1, POPAnimat
 - (void)testMutableCopying
 {
   // instance
-  POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithName:kPOPLayerBounds];
+  POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithType:POPLayerBounds];
 
   // instance copy
   POPAnimatableProperty *propCopy = [prop mutableCopy];

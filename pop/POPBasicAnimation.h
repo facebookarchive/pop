@@ -26,7 +26,7 @@
  @param name The name of the animatable property.
  @returns An instance of a basic animation configured with specified animatable property.
  */
-+ (instancetype)animationWithPropertyNamed:(NSString *)name;
++ (instancetype)animationWithPropertyType:(POPAnimatablePropertyType)aType;
 
 /**
  @abstract Convenience constructor.
