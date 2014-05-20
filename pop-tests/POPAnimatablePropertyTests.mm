@@ -12,7 +12,7 @@
 #import <POP/POPAnimatableProperty.h>
 
 //static const CGFloat epsilon = 0.0001f;
-static NSArray *properties = @[@"name", @"readBlock", @"writeBlock", @"threshold"];
+static NSArray *properties = @[@"type", @"readBlock", @"writeBlock", @"threshold"];
 
 static void assertPropertyEqual(id self, POPAnimatableProperty *prop1, POPAnimatableProperty *prop2)
 {

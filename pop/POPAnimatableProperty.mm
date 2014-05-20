@@ -29,78 +29,6 @@ static CGFloat const kPOPThresholdScale = 0.005;
 static CGFloat const kPOPThresholdRotation = 0.01;
 static CGFloat const kPOPThresholdRadius = 0.01;
 
-#pragma mark - Static
-
-// CALayer
-NSString * const kPOPLayerBackgroundColor = @"backgroundColor";
-NSString * const kPOPLayerBounds = @"bounds";
-NSString * const kPOPLayerCornerRadius = @"cornerRadius";
-NSString * const kPOPLayerOpacity = @"opacity";
-NSString * const kPOPLayerPosition = @"position";
-NSString * const kPOPLayerPositionX = @"positionX";
-NSString * const kPOPLayerPositionY = @"positionY";
-NSString * const kPOPLayerRotation = @"rotation";
-NSString * const kPOPLayerRotationX = @"rotationX";
-NSString * const kPOPLayerRotationY = @"rotationY";
-NSString * const kPOPLayerScaleX = @"scaleX";
-NSString * const kPOPLayerScaleXY = @"scaleXY";
-NSString * const kPOPLayerScaleY = @"scaleY";
-NSString * const kPOPLayerSize = @"size";
-NSString * const kPOPLayerSubscaleXY = @"subscaleXY";
-NSString * const kPOPLayerSubtranslationX = @"subtranslationX";
-NSString * const kPOPLayerSubtranslationXY = @"subtranslationXY";
-NSString * const kPOPLayerSubtranslationY = @"subtranslationY";
-NSString * const kPOPLayerSubtranslationZ = @"subtranslationZ";
-NSString * const kPOPLayerTranslationX = @"translationX";
-NSString * const kPOPLayerTranslationXY = @"translationXY";
-NSString * const kPOPLayerTranslationY = @"translationY";
-NSString * const kPOPLayerTranslationZ = @"translationZ";
-NSString * const kPOPLayerZPosition = @"zPosition";
-NSString * const kPOPLayerShadowColor = @"shadowColor";
-NSString * const kPOPLayerShadowOffset = @"shadowOffset";
-NSString * const kPOPLayerShadowOpacity = @"shadowOpacity";
-NSString * const kPOPLayerShadowRadius = @"shadowRadius";
-
-// CAShapeLayer
-NSString * const kPOPShapeLayerStrokeStart = @"shapeLayer.strokeStart";
-NSString * const kPOPShapeLayerStrokeEnd = @"shapeLayer.strokeEnd";
-NSString * const kPOPShapeLayerStrokeColor = @"shapeLayer.strokeColor";
-
-// NSLayoutConstraint
-NSString * const kPOPLayoutConstraintConstant = @"layoutConstraint.constant";
-
-// UIView
-NSString * const kPOPViewAlpha = @"view.alpha";
-NSString * const kPOPViewBackgroundColor = @"view.backgroundColor";
-NSString * const kPOPViewBounds = kPOPLayerBounds;
-NSString * const kPOPViewCenter = @"view.center";
-NSString * const kPOPViewFrame = @"view.frame";
-NSString * const kPOPViewScaleX = @"view.scaleX";
-NSString * const kPOPViewScaleXY = @"view.scaleXY";
-NSString * const kPOPViewScaleY = @"view.scaleY";
-NSString * const kPOPViewSize = kPOPLayerSize;
-
-// UIScrollView
-NSString * const kPOPScrollViewContentOffset = @"scrollView.contentOffset";
-NSString * const kPOPScrollViewContentSize = @"scrollView.contentSize";
-NSString * const kPOPScrollViewZoomScale = @"scrollView.zoomScale";
-
-// UITableView
-NSString * const kPOPTableViewContentOffset = kPOPScrollViewContentOffset;
-NSString * const kPOPTableViewContentSize = kPOPScrollViewContentSize;
-
-// UINavigationBar
-NSString * const kPOPNavigationBarBarTintColor = @"navigationBar.barTintColor";
-
-// UIToolbar
-NSString * const kPOPToolbarBarTintColor = kPOPNavigationBarBarTintColor;
-
-// UITabBar
-NSString * const kPOPTabBarBarTintColor = kPOPNavigationBarBarTintColor;
-
-//UILabel
-NSString * const kPOPLabelTextColor = @"label.textColor";
-
 /**
  State structure internal to static animatable property.
  */
@@ -637,62 +565,6 @@ static POPStaticAnimatablePropertyState _staticStates[] =
 
 };
 
-static NSString * NSStringFromPropertyType(POPAnimatablePropertyType type)
-{
-    switch (type) {
-        case POPLayerBackgroundColor:   return kPOPLayerBackgroundColor;
-        case POPLayerBounds:            return kPOPLayerBounds;
-        case POPLayerCornerRadius:      return kPOPLayerCornerRadius;
-        case POPLayerOpacity:           return kPOPLayerOpacity;
-        case POPLayerPosition:          return kPOPLayerPosition;
-        case POPLayerPositionX:         return kPOPLayerPositionX;
-        case POPLayerPositionY:         return kPOPLayerPositionY;
-        case POPLayerRotation:          return kPOPLayerRotation;
-        case POPLayerRotationX:         return kPOPLayerRotationX;
-        case POPLayerRotationY:         return kPOPLayerRotationY;
-        case POPLayerScaleX:            return kPOPLayerScaleX;
-        case POPLayerScaleXY:           return kPOPLayerScaleXY;
-        case POPLayerScaleY:            return kPOPLayerScaleY;
-        case POPLayerSize:              return kPOPLayerSize;
-        case POPLayerSubscaleXY:        return kPOPLayerSubscaleXY;
-        case POPLayerSubtranslationX:   return kPOPLayerSubtranslationX;
-        case POPLayerSubtranslationXY:  return kPOPLayerSubtranslationXY;
-        case POPLayerSubtranslationY:   return kPOPLayerSubtranslationY;
-        case POPLayerSubtranslationZ:   return kPOPLayerSubtranslationZ;
-        case POPLayerTranslationX:      return kPOPLayerTranslationX;
-        case POPLayerTranslationXY:     return kPOPLayerTranslationXY;
-        case POPLayerTranslationY:      return kPOPLayerTranslationY;
-        case POPLayerTranslationZ:      return kPOPLayerTranslationZ;
-        case POPLayerZPosition:         return kPOPLayerZPosition;
-        case POPLayerShadowColor:       return kPOPLayerShadowColor;
-        case POPLayerShadowOffset:      return kPOPLayerShadowOffset;
-        case POPLayerShadowOpacity:     return kPOPLayerShadowOpacity;
-        case POPLayerShadowRadius:      return kPOPLayerShadowRadius;
-        case POPShapeLayerStrokeStart:  return kPOPShapeLayerStrokeStart;
-        case POPShapeLayerStrokeEnd:    return kPOPShapeLayerStrokeEnd;
-        case POPShapeLayerStrokeColor:  return kPOPShapeLayerStrokeColor;
-        case POPViewAlpha:              return kPOPViewAlpha;
-        case POPViewBackgroundColor:    return kPOPViewBackgroundColor;
-        case POPViewBounds:             return kPOPViewBounds;
-        case POPViewCenter:             return kPOPViewCenter;
-        case POPViewFrame:              return kPOPViewFrame;
-        case POPViewScaleX:             return kPOPViewScaleX;
-        case POPViewScaleXY:            return kPOPViewScaleXY;
-        case POPViewScaleY:             return kPOPViewScaleY;
-        case POPViewSize:               return kPOPViewSize;
-        case POPScrollViewContentOffset:return kPOPScrollViewContentOffset;
-        case POPScrollViewContentSize:  return kPOPScrollViewContentSize;
-        case POPScrollViewZoomScale:    return kPOPScrollViewZoomScale;
-        case POPTableViewContentOffset: return kPOPTableViewContentOffset;
-        case POPTableViewContentSize:   return kPOPTableViewContentSize;
-        case POPNavigationBarBarTintColor: return kPOPNavigationBarBarTintColor;
-        case POPToolbarBarTintColor:    return kPOPToolbarBarTintColor;
-        case POPLabelTextColor:         return kPOPLabelTextColor;
-        case POPLayoutConstraintConstant: return kPOPLayoutConstraintConstant;
-        default: return @"";
-    }
-}
-
 static NSUInteger staticIndexWithType(POPAnimatablePropertyType type)
 {
   NSUInteger idx = 0;
@@ -741,24 +613,23 @@ static NSUInteger staticIndexWithType(POPAnimatablePropertyType type)
 @end
 
 #pragma mark - Concrete
-
 /**
  Concrete immutable property class.
  */
 @interface POPConcreteAnimatableProperty : POPAnimatableProperty
-- (instancetype)initWithName:(NSString *)name readBlock:(pop_animatable_read_block)read writeBlock:(pop_animatable_write_block)write threshold:(CGFloat)threshold;
+- (instancetype)initWithType:(POPAnimatablePropertyType)type readBlock:(pop_animatable_read_block)read writeBlock:(pop_animatable_write_block)write threshold:(CGFloat)threshold;
 @end
 
 @implementation POPConcreteAnimatableProperty
 
 // default synthesis
-@synthesize name, readBlock, writeBlock, threshold;
+@synthesize type, readBlock, writeBlock, threshold;
 
-- (instancetype)initWithName:(NSString *)aName readBlock:(pop_animatable_read_block)aReadBlock writeBlock:(pop_animatable_write_block)aWriteBlock threshold:(CGFloat)aThreshold
+- (instancetype)initWithType:(POPAnimatablePropertyType)aType readBlock:(pop_animatable_read_block)aReadBlock writeBlock:(pop_animatable_write_block)aWriteBlock threshold:(CGFloat)aThreshold
 {
   self = [super init];
   if (nil != self) {
-    name = aName;
+    type = aType;
     readBlock = [aReadBlock copy];
     writeBlock = [aWriteBlock copy];
     threshold = aThreshold;
@@ -772,7 +643,7 @@ static NSUInteger staticIndexWithType(POPAnimatablePropertyType type)
 @implementation POPMutableAnimatableProperty
 
 // default synthesis
-@synthesize name, readBlock, writeBlock, threshold;
+@synthesize type, readBlock, writeBlock, threshold;
 
 @end
 
@@ -788,7 +659,7 @@ static NSUInteger staticIndexWithType(POPAnimatablePropertyType type)
 @implementation POPPlaceholderAnimatableProperty
 
 // default synthesis
-@synthesize name, readBlock, writeBlock, threshold;
+@synthesize type, readBlock, writeBlock, threshold;
 
 @end
 
@@ -798,7 +669,7 @@ static NSUInteger staticIndexWithType(POPAnimatablePropertyType type)
 @implementation POPAnimatableProperty
 
 // avoid creating backing ivars
-@dynamic name, readBlock, writeBlock, threshold;
+@dynamic type, readBlock, writeBlock, threshold;
 
 static POPAnimatableProperty *placeholder = nil;
 
@@ -823,7 +694,7 @@ static POPAnimatableProperty *placeholder = nil;
 - (id)copyWithZone:(NSZone *)zone
 {
   if ([self isKindOfClass:[POPMutableAnimatableProperty class]]) {
-    POPConcreteAnimatableProperty *copyProperty = [[POPConcreteAnimatableProperty alloc] initWithName:self.name readBlock:self.readBlock writeBlock:self.writeBlock threshold:self.threshold];
+    POPConcreteAnimatableProperty *copyProperty = [[POPConcreteAnimatableProperty alloc] initWithType:self.type readBlock:self.readBlock writeBlock:self.writeBlock threshold:self.threshold];
     return copyProperty;
   } else {
     return self;
@@ -833,7 +704,7 @@ static POPAnimatableProperty *placeholder = nil;
 - (id)mutableCopyWithZone:(NSZone *)zone
 {
   POPMutableAnimatableProperty *copyProperty = [[POPMutableAnimatableProperty alloc] init];
-  copyProperty.name = self.name;
+  copyProperty.type = self.type;
   copyProperty.readBlock = self.readBlock;
   copyProperty.writeBlock = self.writeBlock;
   copyProperty.threshold = self.threshold;
@@ -843,6 +714,11 @@ static POPAnimatableProperty *placeholder = nil;
 + (id)propertyWithType:(POPAnimatablePropertyType)aType
 {
   return [self propertyWithType:aType initializer:NULL];
+}
+
++ (id)propertyWithCustomProperty:(NSString *)customProperty
+{
+  return [self propertyWithCustomProperty:customProperty initializer:NULL];
 }
 
 + (id)propertyWithType:(POPAnimatablePropertyType)aType initializer:(void (^)(POPMutableAnimatableProperty *prop))aBlock
@@ -868,7 +744,7 @@ static POPAnimatableProperty *placeholder = nil;
     prop = staticProp;
   } else if (NULL != aBlock) {
     POPMutableAnimatableProperty *mutableProp = [[POPMutableAnimatableProperty alloc] init];
-    mutableProp.name = NSStringFromPropertyType(aType);
+    mutableProp.type = aType;
     mutableProp.threshold = 1.0;
     aBlock(mutableProp);
     prop = [mutableProp copy];
@@ -877,9 +753,34 @@ static POPAnimatableProperty *placeholder = nil;
   return prop;
 }
 
++ (id)propertyWithCustomProperty:(NSString *)customProperty initializer:(void (^)(POPMutableAnimatableProperty *prop))aBlock
+{
+    POPAnimatableProperty *prop = nil;
+    
+    static NSMutableDictionary *_propertyDict = nil;
+    if (nil == _propertyDict) {
+        _propertyDict = [[NSMutableDictionary alloc] initWithCapacity:10];
+    }
+    
+    prop = _propertyDict[customProperty];
+    if (nil != prop) {
+        return prop;
+    }
+    
+    if (NULL != aBlock) {
+        POPMutableAnimatableProperty *mutableProp = [[POPMutableAnimatableProperty alloc] init];
+        mutableProp.type = POPCustomProperty;
+        mutableProp.threshold = 1.0;
+        aBlock(mutableProp);
+        prop = [mutableProp copy];
+    }
+    
+    return prop;
+}
+
 - (NSString *)description
 {
-  NSMutableString *s = [NSMutableString stringWithFormat:@"%@ name:%@ threshold:%f", super.description, self.name, self.threshold];
+  NSMutableString *s = [NSMutableString stringWithFormat:@"%@ type:%d threshold:%f", super.description, self.type, self.threshold];
   return s;
 }
 

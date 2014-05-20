@@ -25,6 +25,7 @@
  @discussion Common animatable properties are included by default. Use the provided constants to reference.
  */
 + (id)propertyWithType:(POPAnimatablePropertyType)type;
++ (id)propertyWithCustomProperty:(NSString *)customProperty;
 
 /**
  @abstract The designated initializer.
@@ -35,11 +36,13 @@
  */
 + (id)propertyWithType:(POPAnimatablePropertyType)type initializer:(void (^)(POPMutableAnimatableProperty *prop))block;
 
++ (id)propertyWithCustomProperty:(NSString *)customProperty initializer:(void (^)(POPMutableAnimatableProperty *prop))block;
+
 /**
  @abstract The name of the property.
  @discussion Used to uniquely identify an animatable property.
  */
-@property (readonly, nonatomic, copy) NSString *name;
+@property (readwrite, nonatomic, assign) POPAnimatablePropertyType type;
 
 /**
  @abstract Block used to read values from a property into an array of floats.
@@ -66,7 +69,7 @@
 /**
  @abstract A read-write version of POPAnimatableProperty name property.
  */
-@property (readwrite, nonatomic, copy) NSString *name;
+@property (readwrite, nonatomic, assign) POPAnimatablePropertyType type;
 
 /**
  @abstract A read-write version of POPAnimatableProperty readBlock property.

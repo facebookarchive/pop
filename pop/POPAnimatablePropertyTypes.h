@@ -102,7 +102,12 @@ typedef NS_ENUM(NSUInteger, POPAnimatablePropertyType) {
     /**
      Common NSLayoutConstraint property names.
      */
-    POPLayoutConstraintConstant = 10000
+    POPLayoutConstraintConstant = 10000,
+    
+    /**
+     Custom Property
+     */
+    POPCustomProperty = 20000
 };
 
 
