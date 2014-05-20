@@ -11,7 +11,7 @@
 
 #import <POP/POPAnimatableProperty.h>
 
-//static const CGFloat epsilon = 0.0001f;
+static const CGFloat epsilon = 0.0001f;
 static NSArray *properties = @[@"type", @"readBlock", @"writeBlock", @"threshold"];
 
 static void assertPropertyEqual(id self, POPAnimatableProperty *prop1, POPAnimatableProperty *prop2)
@@ -73,20 +73,18 @@ static void assertPropertyEqual(id self, POPAnimatableProperty *prop1, POPAnimat
 
 - (void)testUserCreation
 {
-    /*
   static NSString *name = @"lalalala";
   static CGFloat threshold = 0.07;
   POPAnimatableProperty *prop;
 
-  prop = [POPAnimatableProperty propertyWithType:name];
+  prop = [POPAnimatableProperty propertyWithCustomName:name];
   STAssertNil(prop, @"animatable property %@ should not exist", name);
 
-  prop = [POPAnimatableProperty propertyWithName:name initializer:^(POPMutableAnimatableProperty *p){
+  prop = [POPAnimatableProperty propertyWithCustomName:name initializer:^(POPMutableAnimatableProperty *p){
     p.threshold = threshold;
   }];
   STAssertNotNil(prop, @"animatable property %@ should exist", name);
   STAssertEqualsWithAccuracy(threshold, prop.threshold, epsilon, @"property threshold %f should equal %f", prop.threshold, threshold);
-     */
 }
 
 - (void)testClassCluster

@@ -25,7 +25,7 @@
  @discussion Common animatable properties are included by default. Use the provided constants to reference.
  */
 + (id)propertyWithType:(POPAnimatablePropertyType)type;
-+ (id)propertyWithCustomProperty:(NSString *)customProperty;
++ (id)propertyWithCustomName:(NSString *)name;
 
 /**
  @abstract The designated initializer.
@@ -35,8 +35,7 @@
  @discussion Custom properties should use reverse-DNS naming. A newly created instance is only mutable in the scope of block. Once constructed, a property becomes immutable.
  */
 + (id)propertyWithType:(POPAnimatablePropertyType)type initializer:(void (^)(POPMutableAnimatableProperty *prop))block;
-
-+ (id)propertyWithCustomProperty:(NSString *)customProperty initializer:(void (^)(POPMutableAnimatableProperty *prop))block;
++ (id)propertyWithCustomName:(NSString *)name initializer:(void (^)(POPMutableAnimatableProperty *prop))block;
 
 /**
  @abstract The name of the property.

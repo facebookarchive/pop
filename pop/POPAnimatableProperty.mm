@@ -716,9 +716,9 @@ static POPAnimatableProperty *placeholder = nil;
   return [self propertyWithType:aType initializer:NULL];
 }
 
-+ (id)propertyWithCustomProperty:(NSString *)customProperty
++ (id)propertyWithCustomName:(NSString *)name
 {
-  return [self propertyWithCustomProperty:customProperty initializer:NULL];
+  return [self propertyWithCustomName:name initializer:NULL];
 }
 
 + (id)propertyWithType:(POPAnimatablePropertyType)aType initializer:(void (^)(POPMutableAnimatableProperty *prop))aBlock
@@ -753,7 +753,7 @@ static POPAnimatableProperty *placeholder = nil;
   return prop;
 }
 
-+ (id)propertyWithCustomProperty:(NSString *)customProperty initializer:(void (^)(POPMutableAnimatableProperty *prop))aBlock
++ (id)propertyWithCustomName:(NSString *)name initializer:(void (^)(POPMutableAnimatableProperty *prop))aBlock
 {
     POPAnimatableProperty *prop = nil;
     
@@ -762,7 +762,7 @@ static POPAnimatableProperty *placeholder = nil;
         _propertyDict = [[NSMutableDictionary alloc] initWithCapacity:10];
     }
     
-    prop = _propertyDict[customProperty];
+    prop = _propertyDict[name];
     if (nil != prop) {
         return prop;
     }
