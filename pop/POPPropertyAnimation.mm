@@ -127,10 +127,12 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
     } else {
         
         // Check attributes and expected type
-        if ([[self valueForKey:keyPath] respondsToSelector:@selector(objCType)]) {
-            if(strcmp((const char *)[[self valueForKey:keyPath] objCType],self.property.expectedPropertyAttributes) !=0) {
-                NSAssert(0 , @"object (%@) is not of the expected type !",keyPath);
-                return NO;
+        if(self.property.expectedPropertyAttributes){
+            if ([[self valueForKey:keyPath] respondsToSelector:@selector(objCType)]) {
+                if(strcmp((const char *)[[self valueForKey:keyPath] objCType],self.property.expectedPropertyAttributes) != 0) {
+                    NSAssert(0 , @"object (%@) is not of the expected type !",keyPath);
+                    return NO;
+                }
             }
         }
     }

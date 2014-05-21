@@ -101,26 +101,77 @@ NSString * const kPOPTabBarBarTintColor = kPOPNavigationBarBarTintColor;
 //UILabel
 NSString * const kPOPLabelTextColor = @"label.textColor";
 
-const char * propertyAttributesFromType(NSString *type);
-const char * propertyAttributesFromType(NSString *type) {
-    if ([type isEqualToString:@"UIColor"]) {
-        return @encode(UIColor);
-    } else if([type isEqualToString:@"CGColorRef"]) {
-        return @encode(CGColorRef);
-    } else if([type isEqualToString:@"CGRect"]) {
-        return @encode(CGRect);
-    } else if([type isEqualToString:@"CGFloat"]) {
-        return @encode(CGFloat);
-    } else if([type isEqualToString:@"float"]) {
-        return @encode(float);
-    } else if([type isEqualToString:@"CGPoint"]) {
-        return @encode(CGPoint);
-    } else if([type isEqualToString:@"CGSize"]) {
-        return @encode(CGSize);
-    }
+typedef NS_ENUM(NSUInteger, POPAttributeType) {
+    POPAttributeUnknown = 0,
+    POPAttributeInteger,
+    POPAttributeFloat,
+    POPAttributePoint,
+    POPAttributeSize,
+    POPAttributeRect,
+    POPAttributeAffineTransform,
+    POPAttributeTransform,
+    POPAttributeRange,
+    POPAttributeColorRef,
+    POPAttributeColor
+};
+
+const char * propertyAttributesFromType(POPAttributeType type);
+const char * propertyAttributesFromType(POPAttributeType type) {
     
-    return [@"" UTF8String];
+    switch (type) {
+        case POPAttributeUnknown:
+            return [@"" UTF8String];
+            break;
+          
+        case POPAttributeInteger:
+            return @encode(NSInteger);
+            break;
+        
+        case POPAttributeFloat:
+            return @encode(CGFloat);
+            break;
+
+        case POPAttributePoint:
+#if TARGET_OS_IPHONE
+            return @encode(CGPoint);
+#else
+            return @encode(NSPoint);
+#endif
+            
+        case POPAttributeSize:
+#if TARGET_OS_IPHONE
+            return @encode(CGSize);
+#else
+            return @encode(NSSize);
+#endif
+    
+        case POPAttributeRect:
+#if TARGET_OS_IPHONE
+            return @encode(CGRect);
+#else
+            return @encode(NSRect);
+#endif
+            
+        case POPAttributeAffineTransform:
+            return @encode(CGAffineTransform);
+
+        case POPAttributeTransform:
+            return @encode(CATransform3D);
+            
+        case POPAttributeRange:
+            return @encode(NSRange);
+
+        case POPAttributeColor:
+            return @encode(UIColor);
+
+        case POPAttributeColorRef:
+            return @encode(CGColorRef);
+            
+        default:
+            return [@"" UTF8String];
+    }
 }
+
 
 /**
  State structure internal to static animatable property.
@@ -149,7 +200,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       CGColorRelease(color);
     },
     kPOPThresholdColor,
-    propertyAttributesFromType(@"CGColorRef")
+    propertyAttributesFromType(POPAttributeColorRef)
   },
 
   {kPOPLayerBounds,
@@ -160,7 +211,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       [obj setBounds:values_to_rect(values)];
     },
     kPOPThresholdPoint,
-      propertyAttributesFromType(@"CGRect")
+    propertyAttributesFromType(POPAttributeRect)
   },
 
   {kPOPLayerCornerRadius,
@@ -171,7 +222,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
         [obj setCornerRadius:values[0]];
     },
     kPOPThresholdRadius,
-      propertyAttributesFromType(@"CGFloat")
+    propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerPosition,
@@ -182,7 +233,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       [obj setPosition:values_to_point(values)];
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGPoint")
+    propertyAttributesFromType(POPAttributePoint)
   },
     
   {kPOPLayerPositionX,
@@ -195,7 +246,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       [obj setPosition:p];
     },
     kPOPThresholdPoint,
-      propertyAttributesFromType(@"CGFloat")
+    propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerPositionY,
@@ -208,7 +259,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       [obj setPosition:p];
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerOpacity,
@@ -219,7 +270,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       [obj setOpacity:((float)values[0])];
     },
     kPOPThresholdOpacity,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerScaleX,
@@ -230,7 +281,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetScaleX(obj, values[0]);
     },
     kPOPThresholdScale,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerScaleY,
@@ -241,7 +292,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetScaleY(obj, values[0]);
     },
     kPOPThresholdScale,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerScaleXY,
@@ -252,7 +303,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetScaleXY(obj, values_to_point(values));
     },
     kPOPThresholdScale,
-    propertyAttributesFromType(@"CGPoint")
+      propertyAttributesFromType(POPAttributePoint)
   },
 
   {kPOPLayerSubscaleXY,
@@ -263,7 +314,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetSubScaleXY(obj, values_to_point(values));
     },
     kPOPThresholdScale,
-    propertyAttributesFromType(@"CGPoint")
+      propertyAttributesFromType(POPAttributePoint)
   },
 
   {kPOPLayerTranslationX,
@@ -274,7 +325,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetTranslationX(obj, values[0]);
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerTranslationY,
@@ -285,7 +336,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetTranslationY(obj, values[0]);
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerTranslationZ,
@@ -296,7 +347,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetTranslationZ(obj, values[0]);
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerTranslationXY,
@@ -307,7 +358,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetTranslationXY(obj, values_to_point(values));
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGPoint")
+      propertyAttributesFromType(POPAttributePoint)
   },
 
   {kPOPLayerSubtranslationX,
@@ -318,7 +369,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetSubTranslationX(obj, values[0]);
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerSubtranslationY,
@@ -329,7 +380,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetSubTranslationY(obj, values[0]);
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerSubtranslationZ,
@@ -340,7 +391,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetSubTranslationZ(obj, values[0]);
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerSubtranslationXY,
@@ -351,7 +402,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetSubTranslationXY(obj, values_to_point(values));
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGPoint")
+      propertyAttributesFromType(POPAttributePoint)
   },
 
   {kPOPLayerZPosition,
@@ -362,7 +413,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       [obj setZPosition:values[0]];
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerSize,
@@ -379,7 +430,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       [obj setBounds:b];
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGSize")
+      propertyAttributesFromType(POPAttributeSize)
   },
 
   {kPOPLayerRotation,
@@ -390,7 +441,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetRotation(obj, values[0]);
     },
     kPOPThresholdRotation,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerRotationY,
@@ -401,7 +452,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetRotationY(obj, values[0]);
     },
     kPOPThresholdRotation,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerRotationX,
@@ -412,7 +463,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetRotationX(obj, values[0]);
     },
     kPOPThresholdRotation,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerShadowColor,
@@ -425,7 +476,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
         CGColorRelease(color);
     },
     0.01,
-    propertyAttributesFromType(@"CGColorRef")
+      propertyAttributesFromType(POPAttributeColorRef)
   },
 
   {kPOPLayerShadowOffset,
@@ -437,7 +488,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
         [obj setShadowOffset:size];
     },
     0.01,
-    propertyAttributesFromType(@"CGSize")
+      propertyAttributesFromType(POPAttributeSize)
   },
 
   {kPOPLayerShadowOpacity,
@@ -448,7 +499,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
         [obj setShadowOpacity:values[0]];
     },
     0.01,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPLayerShadowRadius,
@@ -459,7 +510,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
         [obj setShadowRadius:values[0]];
     },
     kPOPThresholdRadius,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   /* CAShapeLayer */
@@ -472,7 +523,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       obj.strokeStart = values[0];
     },
     0.01,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPShapeLayerStrokeEnd,
@@ -483,7 +534,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       obj.strokeEnd = values[0];
     },
     0.01,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPShapeLayerStrokeColor,
@@ -496,7 +547,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
         CGColorRelease(color);
     },
     kPOPThresholdColor,
-    propertyAttributesFromType(@"CGColorRef")
+      propertyAttributesFromType(POPAttributeColorRef)
   },
 
   {kPOPLayoutConstraintConstant,
@@ -507,7 +558,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       obj.constant = values[0];
     },
     0.01,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
 #if TARGET_OS_IPHONE
@@ -522,7 +573,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       obj.alpha = values[0];
     },
     kPOPThresholdOpacity,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPViewBackgroundColor,
@@ -533,7 +584,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       obj.backgroundColor = POPUIColorRGBACreate(values);
     },
     kPOPThresholdColor,
-    propertyAttributesFromType(@"UIColor")
+      propertyAttributesFromType(POPAttributeColor)
   },
 
   {kPOPViewCenter,
@@ -544,7 +595,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       obj.center = values_to_point(values);
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGPoint")
+      propertyAttributesFromType(POPAttributePoint)
   },
 
   {kPOPViewFrame,
@@ -555,7 +606,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       obj.frame = values_to_rect(values);
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGRect")
+      propertyAttributesFromType(POPAttributeRect)
   },
 
   {kPOPViewScaleX,
@@ -566,7 +617,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetScaleX(obj.layer, values[0]);
     },
     kPOPThresholdScale,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPViewScaleY,
@@ -577,7 +628,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetScaleY(obj.layer, values[0]);
     },
     kPOPThresholdScale,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   {kPOPViewScaleXY,
@@ -588,7 +639,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetScaleXY(obj.layer, values_to_point(values));
     },
     kPOPThresholdScale,
-    propertyAttributesFromType(@"CGPoint")
+      propertyAttributesFromType(POPAttributePoint)
   },
 
   /* UIScrollView */
@@ -601,7 +652,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       obj.contentOffset = values_to_point(values);
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGPoint")
+      propertyAttributesFromType(POPAttributePoint)
   },
 
   {kPOPScrollViewContentSize,
@@ -612,7 +663,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       obj.contentSize = values_to_size(values);
     },
     kPOPThresholdPoint,
-    propertyAttributesFromType(@"CGSize")
+      propertyAttributesFromType(POPAttributeSize)
   },
     
   {kPOPScrollViewZoomScale,
@@ -623,7 +674,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       obj.zoomScale=values[0];
     },
     kPOPThresholdScale,
-    propertyAttributesFromType(@"CGFloat")
+      propertyAttributesFromType(POPAttributeFloat)
   },
 
   /* UINavigationBar */
@@ -636,7 +687,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       obj.barTintColor = POPUIColorRGBACreate(values);
     },
     kPOPThresholdColor,
-    propertyAttributesFromType(@"UIColor")
+      propertyAttributesFromType(POPAttributeColor)
   },
 
   /* UILabel */
@@ -649,7 +700,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       obj.textColor = POPUIColorRGBACreate(values);
     },
     kPOPThresholdColor,
-    propertyAttributesFromType(@"UIColor")
+      propertyAttributesFromType(POPAttributeColor)
   },
 
 #endif
