@@ -111,8 +111,10 @@ typedef NS_ENUM(NSUInteger, POPAttributeType) {
     POPAttributeAffineTransform,
     POPAttributeTransform,
     POPAttributeRange,
-    POPAttributeColorRef,
-    POPAttributeColor
+#if TARGET_OS_IPHONE
+    POPAttributeColor,
+#endif
+    POPAttributeColorRef
 };
 
 const char * propertyAttributesFromType(POPAttributeType type);
@@ -161,10 +163,9 @@ const char * propertyAttributesFromType(POPAttributeType type) {
         case POPAttributeRange:
             return @encode(NSRange);
 
-        case POPAttributeColor:
 #if TARGET_OS_IPHONE
+        case POPAttributeColor:
             return @encode(UIColor);
-#else
             return @encode(NSColor);
 #endif
             
