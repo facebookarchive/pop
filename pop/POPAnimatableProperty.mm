@@ -162,8 +162,12 @@ const char * propertyAttributesFromType(POPAttributeType type) {
             return @encode(NSRange);
 
         case POPAttributeColor:
+#if TARGET_OS_IPHONE
             return @encode(UIColor);
-
+#else
+            return @encode(NSColor);
+#endif
+            
         case POPAttributeColorRef:
             return @encode(CGColorRef);
             
