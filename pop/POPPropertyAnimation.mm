@@ -45,6 +45,8 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
       [s->tracer updateFromValue:aValue];
     }
   }
+
+  [self checkFromValueValidity];
 }
 
 - (id)toValue
@@ -54,6 +56,7 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
 
 - (void)setToValue:(id)aValue
 {
+
   POPPropertyAnimationState *s = __state;
   VectorRef vec = POPUnbox(aValue, s->valueType, s->valueCount, YES);
 
@@ -73,6 +76,8 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
       s->setPaused(false);
     }
   }
+    
+  [self checkToValueValidity];
 }
 
 - (id)currentValue
@@ -100,6 +105,39 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
 
   if (_state->active)
     [s appendFormat:@"; progress = %f", __state->progress];
+}
+
+- (BOOL)checkToValueValidity
+{
+    return [self checkValidityFromKeyPath:@"toValue"];
+}
+
+- (BOOL)checkFromValueValidity
+{
+    return [self checkValidityFromKeyPath:@"fromValue"];
+}
+
+- (BOOL)checkValidityFromKeyPath:(NSString *)keyPath
+{
+    //Check property exist
+    objc_property_t theProperty = class_getProperty([self class],[keyPath UTF8String]);
+    if (!theProperty) {
+        NSAssert(NULL !=theProperty  , @"keyPath (%@) for object (%@) doesn't exist !", keyPath,self);
+        return NO;
+    } else {
+        
+        // Check attributes and expected type
+        if(self.property.expectedPropertyAttributes){
+            if ([[self valueForKey:keyPath] respondsToSelector:@selector(objCType)]) {
+                if(strcmp((const char *)[[self valueForKey:keyPath] objCType],self.property.expectedPropertyAttributes) != 0) {
+                    NSAssert(0 , @"object (%@) is not of the expected type !",keyPath);
+                    return NO;
+                }
+            }
+        }
+    }
+    
+    return YES;
 }
 
 @end

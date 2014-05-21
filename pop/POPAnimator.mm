@@ -481,57 +481,57 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 
 - (void)addAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key
 {
-  if (!anim || !obj) {
-    return;
-  }
-
-  // support arbitrarily many nil keys
-  if (!key) {
-    key = [[NSUUID UUID] UUIDString];
-  }
-
-  // lock
-  OSSpinLockLock(&_lock);
-
-  // get key, animation dict associated with object
-  NSMutableDictionary *keyAnimationDict = (__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj);
-
-  // update associated animation state
-  if (nil == keyAnimationDict) {
-    keyAnimationDict = [NSMutableDictionary dictionary];
-    CFDictionarySetValue(_dict, (__bridge void *)obj, (__bridge void *)keyAnimationDict);
-  } else {
-    // if the animation instance already exists, avoid cancelling only to restart
-    POPAnimation *existingAnim = keyAnimationDict[key];
-    if (existingAnim) {
-      // unlock
-      OSSpinLockUnlock(&_lock);
-      if (existingAnim == anim) {
+    if (!anim || !obj) {
         return;
-      }
-      [self removeAnimationForObject:obj key:key cleanupDict:NO];
     }
-  }
-  keyAnimationDict[key] = anim;
-
-  // create entry after potential removal
-  POPAnimatorItemRef item(new POPAnimatorItem(obj, key, anim));
-
-  // add to list and pending list
-  _list.push_back(item);
-  _pendingList.push_back(item);
-
-  // support animation re-use, reset all animation state
-  POPAnimationGetState(anim)->reset(true);
-
-  // update display link
-  updateDisplayLink(self);
-
-  // unlock
-  OSSpinLockUnlock(&_lock);
-
-  // schedule runloop processing of pending animations
-  [self _scheduleProcessPendingList];
+    
+    // support arbitrarily many nil keys
+    if (!key) {
+        key = [[NSUUID UUID] UUIDString];
+    }
+    
+    // lock
+    OSSpinLockLock(&_lock);
+    
+    // get key, animation dict associated with object
+    NSMutableDictionary *keyAnimationDict = (__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj);
+    
+    // update associated animation state
+    if (nil == keyAnimationDict) {
+        keyAnimationDict = [NSMutableDictionary dictionary];
+        CFDictionarySetValue(_dict, (__bridge void *)obj, (__bridge void *)keyAnimationDict);
+    } else {
+        // if the animation instance already exists, avoid cancelling only to restart
+        POPAnimation *existingAnim = keyAnimationDict[key];
+        if (existingAnim) {
+            // unlock
+            OSSpinLockUnlock(&_lock);
+            if (existingAnim == anim) {
+                return;
+            }
+            [self removeAnimationForObject:obj key:key cleanupDict:NO];
+        }
+    }
+    keyAnimationDict[key] = anim;
+    
+    // create entry after potential removal
+    POPAnimatorItemRef item(new POPAnimatorItem(obj, key, anim));
+    
+    // add to list and pending list
+    _list.push_back(item);
+    _pendingList.push_back(item);
+    
+    // support animation re-use, reset all animation state
+    POPAnimationGetState(anim)->reset(true);
+    
+    // update display link
+    updateDisplayLink(self);
+    
+    // unlock
+    OSSpinLockUnlock(&_lock);
+    
+    // schedule runloop processing of pending animations
+    [self _scheduleProcessPendingList];
 }
 
 - (void)removeAllAnimationsForObject:(id)obj
