@@ -48,6 +48,8 @@ static void assertPropertyEqual(id self, POPAnimatableProperty *prop1, POPAnimat
                      kPOPLayerShadowOpacity,
                      kPOPLayerShadowRadius,
                      kPOPLayerCornerRadius,
+                     kPOPLayerBorderWidth,
+                     kPOPLayerBorderColor,
                      kPOPShapeLayerStrokeStart,
                      kPOPShapeLayerStrokeEnd,
                      kPOPShapeLayerStrokeColor,
