@@ -90,6 +90,8 @@
 extern NSString * const kPOPLayerBackgroundColor;
 extern NSString * const kPOPLayerBounds;
 extern NSString * const kPOPLayerCornerRadius;
+extern NSString * const kPOPLayerBorderWidth;
+extern NSString * const kPOPLayerBorderColor;
 extern NSString * const kPOPLayerOpacity;
 extern NSString * const kPOPLayerPosition;
 extern NSString * const kPOPLayerPositionX;
