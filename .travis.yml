@@ -1,6 +1,10 @@
 language: objective-c
 before_install:
-  - gem install xcpretty
-  - gem install cocoapods
-  - pod install
-script:  xcodebuild -workspace pop.xcworkspace -scheme pop -sdk iphonesimulator7.0 test | xcpretty -c
+  - brew update
+  - brew upgrade xctool
+  - gem update cocoapods
+xcode_workspace: pop.xcworkspace
+xcode_scheme: pop
+xcode_sdk:
+  - iphonesimulator7.0
+  - iphonesimulator7.1
