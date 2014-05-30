@@ -565,7 +565,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       values_from_point(values, obj.contentOffset);
     },
     ^(UIScrollView *obj, const CGFloat values[]) {
-      obj.contentOffset = values_to_point(values);
+      [obj setContentOffset:values_to_point(values) animated:NO];
     },
     kPOPThresholdPoint
   },
