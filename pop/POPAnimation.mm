@@ -23,6 +23,9 @@ using namespace POP;
 #pragma mark - POPAnimation
 
 @implementation POPAnimation
+@synthesize solver = _solver;
+@synthesize currentValue = _currentValue;
+@synthesize progressMarkers = _progressMarkers;
 
 #pragma mark - Lifecycle
 

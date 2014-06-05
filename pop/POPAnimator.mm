@@ -97,6 +97,9 @@ static BOOL _disableBackgroundThread = YES;
 @end
 
 @implementation POPAnimator
+@synthesize delegate = _delegate;
+@synthesize disableDisplayLink = _disableDisplayLink;
+@synthesize beginTime = _beginTime;
 
 #if !TARGET_OS_IPHONE
 static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp *now, const CVTimeStamp *outputTime, CVOptionFlags flagsIn, CVOptionFlags *flagsOut, void *context)
