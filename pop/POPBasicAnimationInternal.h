@@ -40,9 +40,9 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
   CFTimeInterval duration;
 
   _POPBasicAnimationState(id __unsafe_unretained anim) : _POPPropertyAnimationState(anim),
-  duration(kPOPAnimationDurationDefault),
   timingFunction(nil),
-  timingControlPoints{0.}
+  timingControlPoints{0.},
+  duration(kPOPAnimationDurationDefault)
   {
     type = kPOPAnimationBasic;
   }

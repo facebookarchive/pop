@@ -44,8 +44,9 @@ struct _POPDecayAnimationState : _POPPropertyAnimationState
 
   _POPDecayAnimationState(id __unsafe_unretained anim) :
   _POPPropertyAnimationState(anim),
-  duration(0),
-  deceleration(kPOPAnimationDecayDecelerationDefault) {
+  deceleration(kPOPAnimationDecayDecelerationDefault),
+  duration(0)
+  {
     type = kPOPAnimationDecay;
   }
 
