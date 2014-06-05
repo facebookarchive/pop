@@ -124,7 +124,7 @@ namespace POP
   Vector4r Vector::vector4r() const
   {
     Vector4r v = Vector4r::Zero();
-    for (int i = 0; i < _count; i++) {
+    for (size_t i = 0; i < _count; i++) {
       v(i) = _values[i];
     }
     return v;
