@@ -393,7 +393,8 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   [CATransaction setDisableActions:YES];
 
   // notify delegate
-  [_delegate animatorWillAnimate:self];
+  __strong __typeof__(_delegate) delegate = _delegate;
+  [delegate animatorWillAnimate:self];
 
   // lock
   OSSpinLockLock(&_lock);
@@ -430,7 +431,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   OSSpinLockUnlock(&_lock);
 
   // notify delegate and commit
-  [_delegate animatorDidAnimate:self];
+  [delegate animatorDidAnimate:self];
   [CATransaction commit];
 }
 
