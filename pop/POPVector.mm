@@ -253,7 +253,7 @@ namespace POP
     return d;
   }
 
-  NSString * const Vector::toString() const
+  NSString * Vector::toString() const
   {
     if (0 == _count)
       return @"()";
