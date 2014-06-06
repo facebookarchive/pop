@@ -27,6 +27,11 @@
   CFTimeInterval _beginTime;
   POPAnimatableProperty *_radiusProperty;
 }
+@synthesize layer1 = _layer1;
+@synthesize layer2 = _layer2;
+@synthesize animator = _animator;
+@synthesize beginTime = _beginTime;
+@synthesize radiusProperty = _radiusProperty;
 
 - (void)setUp
 {
