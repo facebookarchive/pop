@@ -8,7 +8,6 @@
  */
 
 #import <objc/runtime.h>
-#include <unordered_map>
 
 #import <Foundation/Foundation.h>
 

@@ -11,7 +11,6 @@
 #import "POPAnimationTracerInternal.h"
 
 #import <objc/runtime.h>
-#include <unordered_map>
 
 #import "POPAnimationExtras.h"
 #import "POPAnimationRuntime.h"
