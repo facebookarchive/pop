@@ -114,7 +114,7 @@ namespace POP
     Vector *v = new Vector(count);
 
     NSCAssert(count <= 4, @"unexpected count %lu", (unsigned long)count);
-    for (NSUInteger i = 0; i < MIN(count, 4); i++) {
+    for (NSUInteger i = 0; i < MIN(count, (NSUInteger)4); i++) {
       v->_values[i] = vec[i];
     }
 
