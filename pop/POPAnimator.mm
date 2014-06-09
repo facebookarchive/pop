@@ -266,7 +266,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     // lock
     OSSpinLockLock(&self->_lock);
 
-    // find item im list
+    // find item in list
     // may have already been removed on animationDidStop:
     POPAnimatorItemListIterator find_iter = find(self->_list.begin(), self->_list.end(), item);
     BOOL found = find_iter != self->_list.end();
