@@ -34,6 +34,16 @@
 + (NSValue *)valueWithCGRect:(CGRect)rect;
 
 /**
+ @abstract Creates an NSValue given a CFRange.
+ */
++ (NSValue *)valueWithCFRange:(CFRange)range;
+
+/**
+ @abstract Creates an NSValue given a CGAffineTransform.
+ */
++ (NSValue *)valueWithCGAffineTransform:(CGAffineTransform)transform;
+
+/**
  @abstract Returns the underlying CGPoint value.
  */
 - (CGPoint)CGPointValue;
@@ -47,6 +57,16 @@
  @abstract Returns the underlying CGRect value.
  */
 - (CGRect)CGRectValue;
+
+/**
+ @abstract Returns the underlying CFRange value.
+ */
+- (CFRange)CFRangeValue;
+
+/**
+ @abstract Returns the underlying CGAffineTransform value.
+ */
+- (CGAffineTransform)CGAffineTransformValue;
 
 @end
 
