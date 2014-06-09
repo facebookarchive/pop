@@ -11,7 +11,7 @@
 #import "UnitBezier.h"
 #import "POPAnimationPrivate.h"
 
-void POPInterpolateVector(NSUInteger count, CGFloat *dst, const CGFloat *from, const CGFloat *to, double f)
+void POPInterpolateVector(NSUInteger count, CGFloat *dst, const CGFloat *from, const CGFloat *to, CGFloat f)
 {
   for (NSUInteger idx = 0; idx < count; idx++) {
     dst[idx] = MIX(from[idx], to[idx], f);
