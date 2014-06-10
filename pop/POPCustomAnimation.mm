@@ -15,6 +15,9 @@
 @end
 
 @implementation POPCustomAnimation
+@synthesize currentTime = _currentTime;
+@synthesize elapsedTime = _elapsedTime;
+@synthesize animate = _animate;
 
 + (instancetype)animationWithBlock:(BOOL(^)(id target, POPCustomAnimation *))block
 {

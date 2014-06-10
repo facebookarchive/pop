@@ -342,7 +342,7 @@ namespace POP {
     void subRound(CGFloat sub);
 
     // Returns string description
-    NSString * const toString() const;
+    NSString * toString() const;
 
     // Operator overloads
     template<typename U> Vector& operator= (const Vector4<U>& other) {

@@ -114,7 +114,7 @@ namespace POP
     Vector *v = new Vector(count);
 
     NSCAssert(count <= 4, @"unexpected count %lu", (unsigned long)count);
-    for (NSUInteger i = 0; i < MIN(count, 4); i++) {
+    for (NSUInteger i = 0; i < MIN(count, (NSUInteger)4); i++) {
       v->_values[i] = vec[i];
     }
 
@@ -124,7 +124,7 @@ namespace POP
   Vector4r Vector::vector4r() const
   {
     Vector4r v = Vector4r::Zero();
-    for (int i = 0; i < _count; i++) {
+    for (size_t i = 0; i < _count; i++) {
       v(i) = _values[i];
     }
     return v;
@@ -253,7 +253,7 @@ namespace POP
     return d;
   }
 
-  NSString * const Vector::toString() const
+  NSString * Vector::toString() const
   {
     if (0 == _count)
       return @"()";

@@ -11,7 +11,6 @@
 #import "POPAnimationTracerInternal.h"
 
 #import <objc/runtime.h>
-#include <unordered_map>
 
 #import "POPAnimationExtras.h"
 #import "POPAnimationRuntime.h"
@@ -23,6 +22,9 @@ using namespace POP;
 #pragma mark - POPAnimation
 
 @implementation POPAnimation
+@synthesize solver = _solver;
+@synthesize currentValue = _currentValue;
+@synthesize progressMarkers = _progressMarkers;
 
 #pragma mark - Lifecycle
 

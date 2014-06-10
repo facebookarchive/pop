@@ -35,7 +35,7 @@ NS_INLINE CGFloat POPSubRound(CGFloat f, CGFloat sub)
 
 #define _EQLF_(x, y, epsilon) (fabsf ((x) - (y)) < epsilon)
 
-extern void POPInterpolateVector(NSUInteger count, CGFloat *dst, const CGFloat *from, const CGFloat *to, double f);
+extern void POPInterpolateVector(NSUInteger count, CGFloat *dst, const CGFloat *from, const CGFloat *to, CGFloat f);
 
 extern double POPTimingFunctionSolve(const double vec[4], double t, double eps);
 

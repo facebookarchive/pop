@@ -161,7 +161,7 @@ namespace POP {
         return false;
       }
       
-      for (int idx = 0; idx < _lastState.p.size(); idx++) {
+      for (size_t idx = 0; idx < _lastState.p.size(); idx++) {
         if (fabs(_lastState.p(idx)) >= _tp) {
           return false;
         }

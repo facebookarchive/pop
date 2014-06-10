@@ -97,6 +97,9 @@ static BOOL _disableBackgroundThread = YES;
 @end
 
 @implementation POPAnimator
+@synthesize delegate = _delegate;
+@synthesize disableDisplayLink = _disableDisplayLink;
+@synthesize beginTime = _beginTime;
 
 #if !TARGET_OS_IPHONE
 static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp *now, const CVTimeStamp *outputTime, CVOptionFlags flagsIn, CVOptionFlags *flagsOut, void *context)
@@ -263,7 +266,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     // lock
     OSSpinLockLock(&self->_lock);
 
-    // find item im list
+    // find item in list
     // may have already been removed on animationDidStop:
     POPAnimatorItemListIterator find_iter = find(self->_list.begin(), self->_list.end(), item);
     BOOL found = find_iter != self->_list.end();
@@ -390,7 +393,8 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   [CATransaction setDisableActions:YES];
 
   // notify delegate
-  [_delegate animatorWillAnimate:self];
+  __strong __typeof__(_delegate) delegate = _delegate;
+  [delegate animatorWillAnimate:self];
 
   // lock
   OSSpinLockLock(&_lock);
@@ -427,7 +431,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   OSSpinLockUnlock(&_lock);
 
   // notify delegate and commit
-  [_delegate animatorDidAnimate:self];
+  [delegate animatorDidAnimate:self];
   [CATransaction commit];
 }
 
