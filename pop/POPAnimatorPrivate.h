@@ -23,7 +23,7 @@
 
 @interface POPAnimator ()
 
-#if !TARGET_OS_PHONE
+#if !TARGET_OS_IPHONE
 /**
  Determines whether or not to use a high priority background thread for animation updates. Using a background thread can result in faster, more responsive updates, but may be less compatible. Defaults to YES.
  */
