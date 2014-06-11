@@ -30,9 +30,15 @@
 
 /**
  @abstract The current velocity value.
- @discussion Set before animation start to account for initial velocity. Expressed in change of value units per second.
+ @discussion Set before animation start to account for initial velocity. Expressed in change of value units per second. The only POPValueTypes supported for velocity are: kPOPValuePoint, kPOPValueInteger, kPOPValueFloat, kPOPValueRect, and kPOPValueSize.
  */
 @property (copy, nonatomic) id velocity;
+
+/**
+ @abstract The original velocity value.
+ @discussion Since the velocity property is modified as the animation progresses, this property stores the original, passed in velocity to support autoreverse and repeatCount.
+ */
+@property (copy, nonatomic, readonly) id originalVelocity;
 
 /**
  @abstract The deceleration factor.
@@ -50,5 +56,11 @@
  The to value is derived based on input velocity and deceleration.
  */
 - (void)setToValue:(id)toValue NS_UNAVAILABLE;
+
+/**
+ @abstract The reversed velocity.
+ @discussion The reversed velocity based on the originalVelocity when the animation was set up.
+ */
+- (id)reversedVelocity;
 
 @end

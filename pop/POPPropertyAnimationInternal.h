@@ -38,6 +38,7 @@ struct _POPPropertyAnimationState : _POPAnimationState
   VectorRef previousVec;
   VectorRef previous2Vec;
   VectorRef velocityVec;
+  VectorRef originalVelocityVec;
   VectorRef distanceVec;
   CGFloat roundingFactor;
   NSUInteger clampMode;
@@ -57,6 +58,7 @@ struct _POPPropertyAnimationState : _POPAnimationState
   previousVec(nullptr),
   previous2Vec(nullptr),
   velocityVec(nullptr),
+  originalVelocityVec(nullptr),
   distanceVec(nullptr),
   roundingFactor(0),
   clampMode(0),
@@ -292,6 +294,9 @@ struct _POPPropertyAnimationState : _POPAnimationState
       // ensure velocity values
       if (!velocityVec) {
         velocityVec = VectorRef(Vector::new_vector(valueCount, NULL));
+      }
+      if (!originalVelocityVec) {
+        originalVelocityVec = VectorRef(Vector::new_vector(valueCount, NULL));
       }
     }
 

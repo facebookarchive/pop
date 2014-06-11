@@ -144,6 +144,12 @@ static POPAnimationEvent *create_event(POPAnimationTracer *self, POPAnimationEve
   [_events addObject:event];
 }
 
+- (void)autoreversed
+{
+  POPAnimationEvent *event = create_event(self, kPOPAnimationEventAutoreversed);
+  [_events addObject:event];
+}
+
 - (void)start
 {
   POPAnimationState *s = POPAnimationGetState(_animation);

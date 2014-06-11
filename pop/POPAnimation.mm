@@ -78,6 +78,41 @@ using namespace POP;
   _state->setPaused(paused ? true : false);
 }
 
+- (NSInteger)repeatCount
+{
+  if (_state->autoreverses) {
+    return _state->repeatCount / 2;
+  } else {
+    return _state->repeatCount;
+  }
+}
+
+- (void)setRepeatCount:(NSInteger)repeatCount
+{
+  if (repeatCount > 0) {
+    if (_state->autoreverses) {
+      _state->repeatCount = (repeatCount * 2);
+    } else {
+      _state->repeatCount = repeatCount;
+    }
+  }
+}
+
+- (BOOL)autoreverses
+{
+  return _state->autoreverses;
+}
+
+- (void)setAutoreverses:(BOOL)autoreverses
+{
+  _state->autoreverses = autoreverses;
+  if (autoreverses) {
+    if (_state->repeatCount == 0) {
+      [self setRepeatCount:1];
+    }
+  }
+}
+
 FB_PROPERTY_GET(POPAnimationState, type, POPAnimationType);
 DEFINE_RW_PROPERTY_OBJ_COPY(POPAnimationState, completionBlock, setCompletionBlock:, POPAnimationCompletionBlock);
 DEFINE_RW_PROPERTY_OBJ_COPY(POPAnimationState, name, setName:, NSString*);

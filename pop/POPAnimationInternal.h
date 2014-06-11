@@ -203,6 +203,7 @@ struct _POPAnimationState
   NSMutableDictionary *dict;
   POPAnimationTracer *tracer;
   CGFloat progress;
+  NSInteger repeatCount;
   
   bool active:1;
   bool paused:1;
@@ -218,8 +219,9 @@ struct _POPAnimationState
   bool didReachToValue:1;
   bool tracing:1; // corresponds to tracer started
   bool userSpecifiedDynamics:1;
+  bool autoreverses:1;
   bool customFinished:1;
-  
+
   _POPAnimationState(id __unsafe_unretained anim) :
   self(anim),
   type((POPAnimationType)0),
@@ -233,6 +235,7 @@ struct _POPAnimationState
   dict(nil),
   tracer(nil),
   progress(0),
+  repeatCount(0),
   active(false),
   paused(true),
   removedOnCompletion(true),
@@ -245,6 +248,7 @@ struct _POPAnimationState
   didReachToValue(false),
   tracing(false),
   userSpecifiedDynamics(false),
+  autoreverses(false),
   customFinished(false) {}
   
   virtual ~_POPAnimationState()
@@ -396,7 +400,7 @@ struct _POPAnimationState
     bool advanced = false;
     bool computedProgress = false;
     CFTimeInterval dt = time - lastTime;
-    
+      
     switch (type) {
       case kPOPAnimationSpring:
         advanced = advance(time, dt, obj);

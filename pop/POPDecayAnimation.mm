@@ -9,6 +9,8 @@
 
 #import "POPDecayAnimationInternal.h"
 
+const POPValueType supportedVelocityTypes[5] = { kPOPValuePoint, kPOPValueInteger, kPOPValueFloat, kPOPValueRect, kPOPValueSize };
+
 @implementation POPDecayAnimation
 
 #pragma mark - Lifecycle
@@ -68,6 +70,41 @@ DEFINE_RW_PROPERTY(POPDecayAnimationState, deceleration, setDeceleration:, CGFlo
   NSLog(@"ignoring to value on decay animation %@", self);
 }
 
+- (id)reversedVelocity
+{
+  id reversedVelocity = nil;
+
+  POPValueType velocityType = POPSelectValueType(self.originalVelocity, supportedVelocityTypes, POP_ARRAY_COUNT(supportedVelocityTypes));
+  if (velocityType == kPOPValueFloat) {
+    CGFloat originalVelocityFloat = [(NSNumber *)self.originalVelocity floatValue];
+    NSNumber *negativeOriginalVelocityNumber = @(-originalVelocityFloat);
+    reversedVelocity = negativeOriginalVelocityNumber;
+  } else if (velocityType == kPOPValueInteger) {
+    NSInteger originalVelocityInteger = [(NSNumber *)self.originalVelocity integerValue];
+    NSNumber *negativeOriginalVelocityNumber = @(-originalVelocityInteger);
+    reversedVelocity = negativeOriginalVelocityNumber;
+  } else if (velocityType == kPOPValuePoint) {
+    CGPoint originalVelocityPoint = [self.originalVelocity CGPointValue];
+    CGPoint negativeOriginalVelocityPoint = CGPointMake(-originalVelocityPoint.x, -originalVelocityPoint.y);
+    reversedVelocity = [NSValue valueWithCGPoint:negativeOriginalVelocityPoint];
+  } else if (velocityType == kPOPValueRect) {
+    CGRect originalVelocityRect = [self.originalVelocity CGRectValue];
+    CGRect negativeOriginalVelocityRect = CGRectMake(-originalVelocityRect.origin.x, -originalVelocityRect.origin.y, -originalVelocityRect.size.width, -originalVelocityRect.size.height);
+    reversedVelocity = [NSValue valueWithCGRect:negativeOriginalVelocityRect];
+  } else if (velocityType == kPOPValueSize) {
+    CGSize originalVelocitySize = [self.originalVelocity CGSizeValue];
+    CGSize negativeOriginalVelocitySize = CGSizeMake(-originalVelocitySize.width, -originalVelocitySize.height);
+    reversedVelocity = [NSValue valueWithCGSize:negativeOriginalVelocitySize];
+  }
+
+  return reversedVelocity;
+}
+
+- (id)originalVelocity
+{
+  return POPBox(__state->originalVelocityVec, __state->valueType);
+}
+
 - (id)velocity
 {
   return POPBox(__state->velocityVec, __state->valueType);
@@ -75,22 +112,30 @@ DEFINE_RW_PROPERTY(POPDecayAnimationState, deceleration, setDeceleration:, CGFlo
 
 - (void)setVelocity:(id)aValue
 {
-  VectorRef vec = POPUnbox(aValue, __state->valueType, __state->valueCount, YES);
+  POPValueType valueType = POPSelectValueType(aValue, supportedVelocityTypes, POP_ARRAY_COUNT(supportedVelocityTypes));
+  if (valueType != kPOPValueUnknown) {
+    VectorRef vec = POPUnbox(aValue, __state->valueType, __state->valueCount, YES);
+    VectorRef origVec = POPUnbox(aValue, __state->valueType, __state->valueCount, YES);
 
-  if (!vec_equal(vec, __state->velocityVec)) {
-    __state->velocityVec = vec;
+    if (!vec_equal(vec, __state->velocityVec)) {
+      __state->velocityVec = vec;
+      __state->originalVelocityVec = origVec;
 
-    if (__state->tracing) {
-      [__state->tracer updateVelocity:aValue];
+      if (__state->tracing) {
+        [__state->tracer updateVelocity:aValue];
+      }
+
+      [self _invalidateComputedProperties];
+
+      // automatically unpause active animations
+      if (__state->active && __state->paused) {
+        __state->fromVec = NULL;
+        __state->setPaused(false);
+      }
     }
-
-    [self _invalidateComputedProperties];
-
-    // automatically unpause active animations
-    if (__state->active && __state->paused) {
-      __state->fromVec = NULL;
-      __state->setPaused(false);
-    }
+  } else {
+    __state->velocityVec = NULL;
+    NSLog(@"Invalid velocity value for the decayAnimation: %@", aValue);
   }
 }
 

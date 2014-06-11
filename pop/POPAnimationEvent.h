@@ -26,6 +26,7 @@ typedef NS_ENUM(NSUInteger, POPAnimationEventType) {
   kPOPAnimationEventDidStart,
   kPOPAnimationEventDidStop,
   kPOPAnimationEventDidReachToValue,
+  kPOPAnimationEventAutoreversed
 };
 
 /**
