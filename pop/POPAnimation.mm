@@ -90,6 +90,10 @@ using namespace POP;
 - (void)setRepeatCount:(NSInteger)repeatCount
 {
   if (repeatCount > 0) {
+    if (repeatCount > NSIntegerMax / 2) {
+      repeatCount = NSIntegerMax / 2;
+    }
+      
     if (_state->autoreverses) {
       _state->repeatCount = (repeatCount * 2);
     } else {
@@ -118,6 +122,7 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPAnimationState, completionBlock, setCompletionBlo
 DEFINE_RW_PROPERTY_OBJ_COPY(POPAnimationState, name, setName:, NSString*);
 DEFINE_RW_PROPERTY(POPAnimationState, beginTime, setBeginTime:, CFTimeInterval);
 DEFINE_RW_FLAG(POPAnimationState, removedOnCompletion, removedOnCompletion, setRemovedOnCompletion:);
+DEFINE_RW_FLAG(POPAnimationState, repeatForever, repeatForever, setRepeatForever:);
 
 - (id)valueForUndefinedKey:(NSString *)key
 {

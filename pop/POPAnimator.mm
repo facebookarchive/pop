@@ -462,35 +462,37 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
         applyAnimationProgress(obj, state, 1.0);
 
         state->repeatCount--;
-        if (state->repeatCount > 0) {
+        if (state->repeatForever || state->repeatCount > 0) {
           if ([anim isKindOfClass:[POPPropertyAnimation class]]) {
             POPPropertyAnimation *propAnim = (POPPropertyAnimation *)anim;
             id oldFromValue = propAnim.fromValue;
             propAnim.fromValue = propAnim.toValue;
 
-              if (state->autoreverses) {
-                  if (state->tracing) {
-                      [state->tracer autoreversed];
-                  }
-
-                  if (state->type == kPOPAnimationDecay) {
-                      POPDecayAnimation *decayAnimation = (POPDecayAnimation *)propAnim;
-                      decayAnimation.velocity = [decayAnimation reversedVelocity];
-                  } else {
-                      propAnim.toValue = oldFromValue;
-                  }
-              } else {
-                  if (state->type == kPOPAnimationDecay) {
-                      POPDecayAnimation *decayAnimation = (POPDecayAnimation *)propAnim;
-                      id originalVelocity = decayAnimation.originalVelocity;
-                      decayAnimation.velocity = originalVelocity;
-                  }
+            if (state->autoreverses) {
+              if (state->tracing) {
+                [state->tracer autoreversed];
               }
+
+              if (state->type == kPOPAnimationDecay) {
+                POPDecayAnimation *decayAnimation = (POPDecayAnimation *)propAnim;
+                decayAnimation.velocity = [decayAnimation reversedVelocity];
+              } else {
+                propAnim.toValue = oldFromValue;
+              }
+            } else {
+              if (state->type == kPOPAnimationDecay) {
+                POPDecayAnimation *decayAnimation = (POPDecayAnimation *)propAnim;
+                id originalVelocity = decayAnimation.originalVelocity;
+                decayAnimation.velocity = originalVelocity;
+              } else {
+                propAnim.fromValue = oldFromValue;
+              }
+            }
           }
 
           state->stop(NO, NO);
           state->reset(true);
-            
+
           state->startIfNeeded(obj, time, _slowMotionAccumulator);
         } else {
           stopAndCleanup(self, item, state->removedOnCompletion, YES);

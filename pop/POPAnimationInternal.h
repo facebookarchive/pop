@@ -220,6 +220,7 @@ struct _POPAnimationState
   bool tracing:1; // corresponds to tracer started
   bool userSpecifiedDynamics:1;
   bool autoreverses:1;
+  bool repeatForever:1;
   bool customFinished:1;
 
   _POPAnimationState(id __unsafe_unretained anim) :
@@ -249,6 +250,7 @@ struct _POPAnimationState
   tracing(false),
   userSpecifiedDynamics(false),
   autoreverses(false),
+  repeatForever(false),
   customFinished(false) {}
   
   virtual ~_POPAnimationState()

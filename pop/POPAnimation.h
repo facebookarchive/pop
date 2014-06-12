@@ -83,6 +83,12 @@ When combined with the autoreverses property, a singular animation is effectivel
  */
 @property (assign, nonatomic) NSInteger repeatCount;
 
+/**
+ @abstract Repeat the animation forever.
+ @discussion This property will make the animation repeat forever. The value of the repeatCount property is undefined when this property is set. The finished parameter of the delegate callback animationDidStop:finished: will always be NO.
+ */
+@property (assign, nonatomic) BOOL repeatForever;
+
 @end
 
 /**
