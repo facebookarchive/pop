@@ -50,7 +50,7 @@ struct _POPPropertyAnimationState : _POPAnimationState
   _POPPropertyAnimationState(id __unsafe_unretained anim) : _POPAnimationState(anim),
   property(nil),
   valueType((POPValueType)0),
-  valueCount(nil),
+  valueCount(0),
   fromVec(nullptr),
   toVec(nullptr),
   currentVec(nullptr),
