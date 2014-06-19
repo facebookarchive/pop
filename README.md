@@ -160,7 +160,7 @@ A collection of links to external resources that may prove valuable:
 * [Rebound – Spring Animations for Android](http://facebook.github.io/rebound/)
 * [Tapity Tutorial – Getting Started with Pop](http://tapity.com/tutorial-getting-started-with-pop/)
 * [Tweaks – Easily adjust parameters for iOS apps in development](https://github.com/facebook/tweaks)
-
+* [POP Tutorial in 5 steps](https://github.com/maxmyers/FacebookPop)
 
 ## Contributing
 See the CONTRIBUTING file for how to help out.
