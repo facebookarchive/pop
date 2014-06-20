@@ -88,4 +88,9 @@
  */
 - (void)didReachToValue:(id)aValue;
 
+/**
+ @abstract Records when an autoreverse animation takes place.
+ */
+- (void)autoreversed;
+
 @end

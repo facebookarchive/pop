@@ -11,6 +11,7 @@
 @class POPAnimator;
 @class POPBasicAnimation;
 
+extern void POPAnimatorRenderTime(POPAnimator *animator, CFTimeInterval beginTime, CFTimeInterval time);
 extern void POPAnimatorRenderTimes(POPAnimator *animator, CFTimeInterval beginTime, NSArray *times);
 extern void POPAnimatorRenderDuration(POPAnimator *animator, CFAbsoluteTime beginTime, CFTimeInterval duration, CFTimeInterval step);
 

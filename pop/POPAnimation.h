@@ -61,6 +61,34 @@
  */
 @property (assign, nonatomic, getter = isPaused) BOOL paused;
 
+/**
+ @abstract Flag indicating whether animation autoreverses.
+ @discussion An animation that autoreverses will have twice the duration before it is considered finished. It will animate to the toValue, stop, then animate back to the original fromValue. The delegate methods are called as follows:
+ 
+     1) animationDidStart: is called at the beginning, as usual, and then after each toValue is reached and the autoreverse is going to start.
+     2) animationDidReachToValue: is called every time the toValue is reached. The toValue is swapped with the fromValue at the end of each animation segment. This means that with autoreverses set to YES, the animationDidReachToValue: delegate method will be called a minimum of twice.
+     3) animationDidStop:finished: is called every time the toValue is reached, the finished argument will be NO if the autoreverse is not yet complete.
+ */
+@property (assign, nonatomic) BOOL autoreverses;
+
+/**
+ @abstract The number of times to repeat the animation.
+ @discussion A repeatCount of 0 or 1 means that the animation will not repeat, just like Core Animation. A repeatCount of 2 or greater means that the animation will run that many times before stopping. The delegate methods are called as follows:
+     
+     1) animationDidStart: is called at the beginning of each animation repeat.
+     2) animationDidReachToValue: is called every time the toValue is reached.
+     3) animationDidStop:finished: is called every time the toValue is reached, the finished argument will be NO if the autoreverse is not yet complete.
+ 
+When combined with the autoreverses property, a singular animation is effectively twice as long.
+ */
+@property (assign, nonatomic) NSInteger repeatCount;
+
+/**
+ @abstract Repeat the animation forever.
+ @discussion This property will make the animation repeat forever. The value of the repeatCount property is undefined when this property is set. The finished parameter of the delegate callback animationDidStop:finished: will always be NO.
+ */
+@property (assign, nonatomic) BOOL repeatForever;
+
 @end
 
 /**

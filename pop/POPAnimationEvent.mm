@@ -39,6 +39,8 @@ static NSString *stringFromType(POPAnimationEventType aType)
       return @"didStop";
     case kPOPAnimationEventDidReachToValue:
       return @"didReachToValue";
+    case kPOPAnimationEventAutoreversed:
+      return @"autoreversed";
     default:
       return nil;
   }
