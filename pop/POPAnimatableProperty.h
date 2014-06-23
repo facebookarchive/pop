@@ -182,6 +182,11 @@ extern NSString * const kPOPToolbarBarTintColor;
 extern NSString * const kPOPTabBarBarTintColor;
 
 /**
+ Common UIImageView property names.
+ */
+extern NSString * const kPOPImageViewTintColor;
+
+/**
  Common UILabel property names.
  */
 extern NSString * const kPOPLabelTextColor;
