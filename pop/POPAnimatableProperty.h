@@ -145,7 +145,7 @@ extern NSString * const kPOPViewScaleX;
 extern NSString * const kPOPViewScaleXY;
 extern NSString * const kPOPViewScaleY;
 extern NSString * const kPOPViewSize;
-
+extern NSString * const kPOPViewTintColor;
 
 /**
  Common UIScrollView property names.

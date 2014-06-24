@@ -81,6 +81,7 @@ NSString * const kPOPViewScaleX = @"view.scaleX";
 NSString * const kPOPViewScaleXY = @"view.scaleXY";
 NSString * const kPOPViewScaleY = @"view.scaleY";
 NSString * const kPOPViewSize = kPOPLayerSize;
+NSString * const kPOPViewTintColor = @"view.tintColor";
 
 // UIScrollView
 NSString * const kPOPScrollViewContentOffset = @"scrollView.contentOffset";
@@ -556,6 +557,16 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       POPLayerSetScaleXY(obj.layer, values_to_point(values));
     },
     kPOPThresholdScale
+  },
+
+  {kPOPViewTintColor,
+    ^(UIView *obj, CGFloat values[]) {
+      POPUIColorGetRGBAComponents(obj.tintColor, values);
+    },
+    ^(UIView *obj, const CGFloat values[]) {
+        obj.tintColor = POPUIColorRGBACreate(values);
+    },
+    kPOPThresholdColor
   },
 
   /* UIScrollView */
