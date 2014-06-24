@@ -81,6 +81,7 @@ NSString * const kPOPViewScaleX = @"view.scaleX";
 NSString * const kPOPViewScaleXY = @"view.scaleXY";
 NSString * const kPOPViewScaleY = @"view.scaleY";
 NSString * const kPOPViewSize = kPOPLayerSize;
+NSString * const kPOPViewTintColor = @"view.tintColor";
 
 // UIScrollView
 NSString * const kPOPScrollViewContentOffset = @"scrollView.contentOffset";
@@ -103,9 +104,6 @@ NSString * const kPOPToolbarBarTintColor = kPOPNavigationBarBarTintColor;
 
 // UITabBar
 NSString * const kPOPTabBarBarTintColor = kPOPNavigationBarBarTintColor;
-
-// UIImageView
-NSString * const kPOPImageViewTintColor = @"imageView.tintColor";
 
 //UILabel
 NSString * const kPOPLabelTextColor = @"label.textColor";
@@ -561,6 +559,16 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     kPOPThresholdScale
   },
 
+  {kPOPViewTintColor,
+    ^(UIView *obj, CGFloat values[]) {
+      POPUIColorGetRGBAComponents(obj.tintColor, values);
+    },
+    ^(UIView *obj, const CGFloat values[]) {
+        obj.tintColor = POPUIColorRGBACreate(values);
+    },
+    kPOPThresholdColor
+  },
+
   /* UIScrollView */
 
   {kPOPScrollViewContentOffset,
@@ -601,18 +609,6 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     ^(UINavigationBar *obj, const CGFloat values[]) {
       obj.barTintColor = POPUIColorRGBACreate(values);
-    },
-    kPOPThresholdColor
-  },
-    
-    /* UIImageView */
-    
-  {kPOPImageViewTintColor,
-    ^(UIImageView *obj, CGFloat values[]) {
-      POPUIColorGetRGBAComponents(obj.tintColor, values);
-    },
-    ^(UIImageView *obj, const CGFloat values[]) {
-      obj.tintColor = POPUIColorRGBACreate(values);
     },
     kPOPThresholdColor
   },

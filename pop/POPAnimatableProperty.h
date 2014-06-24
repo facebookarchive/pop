@@ -145,7 +145,7 @@ extern NSString * const kPOPViewScaleX;
 extern NSString * const kPOPViewScaleXY;
 extern NSString * const kPOPViewScaleY;
 extern NSString * const kPOPViewSize;
-
+extern NSString * const kPOPViewTintColor;
 
 /**
  Common UIScrollView property names.
@@ -180,11 +180,6 @@ extern NSString * const kPOPToolbarBarTintColor;
  Common UITabBar property names.
  */
 extern NSString * const kPOPTabBarBarTintColor;
-
-/**
- Common UIImageView property names.
- */
-extern NSString * const kPOPImageViewTintColor;
 
 /**
  Common UILabel property names.
