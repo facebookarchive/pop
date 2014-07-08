@@ -67,6 +67,7 @@ NSString * const kPOPLayerShadowRadius = @"shadowRadius";
 NSString * const kPOPShapeLayerStrokeStart = @"shapeLayer.strokeStart";
 NSString * const kPOPShapeLayerStrokeEnd = @"shapeLayer.strokeEnd";
 NSString * const kPOPShapeLayerStrokeColor = @"shapeLayer.strokeColor";
+NSString * const kPOPShapeLayerFillColor = @"shapeLayer.fillColor";
 
 // NSLayoutConstraint
 NSString * const kPOPLayoutConstraintConstant = @"layoutConstraint.constant";
@@ -470,6 +471,18 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     ^(CAShapeLayer *obj, const CGFloat values[]) {
         CGColorRef color = POPCGColorRGBACreate(values);
         [obj setStrokeColor:color];
+        CGColorRelease(color);
+    },
+    kPOPThresholdColor
+  },
+  
+  {kPOPShapeLayerFillColor,
+    ^(CAShapeLayer *obj, CGFloat values[]) {
+        POPCGColorGetRGBAComponents(obj.fillColor, values);
+    },
+    ^(CAShapeLayer *obj, const CGFloat values[]) {
+        CGColorRef color = POPCGColorRGBACreate(values);
+        [obj setFillColor:color];
         CGColorRelease(color);
     },
     kPOPThresholdColor
