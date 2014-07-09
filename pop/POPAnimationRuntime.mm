@@ -14,9 +14,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #if TARGET_OS_IPHONE
-#import <UIKit/UIScreen.h>
-#else
-#import <AppKit/NSScreen.h>
+#import <UIKit/UIKit.h>
 #endif
 
 #import "POPVector.h"
@@ -98,6 +96,13 @@ static bool FBCompareTypeEncoding(const char *objctype, POPValueType type)
 #endif
               );
 
+    case kPOPValueEdgeInsets:
+#if TARGET_OS_IPHONE
+      return strcmp(objctype, @encode(UIEdgeInsets)) == 0;
+#else
+      return false;
+#endif
+
     case kPOPValueAffineTransform:
       return strcmp(objctype, @encode(CGAffineTransform)) == 0;
 
@@ -144,9 +149,9 @@ POPValueType POPSelectValueType(id obj, const POPValueType *types, size_t length
   return kPOPValueUnknown;
 }
 
-const POPValueType kPOPAnimatableAllTypes[9] = {kPOPValueInteger, kPOPValueFloat, kPOPValuePoint, kPOPValueSize, kPOPValueRect, kPOPValueAffineTransform, kPOPValueTransform, kPOPValueRange, kPOPValueColor};
+const POPValueType kPOPAnimatableAllTypes[10] = {kPOPValueInteger, kPOPValueFloat, kPOPValuePoint, kPOPValueSize, kPOPValueRect, kPOPValueEdgeInsets, kPOPValueAffineTransform, kPOPValueTransform, kPOPValueRange, kPOPValueColor};
 
-const POPValueType kPOPAnimatableSupportTypes[7] = {kPOPValueInteger, kPOPValueFloat, kPOPValuePoint, kPOPValueSize, kPOPValueRect, kPOPValueColor};
+const POPValueType kPOPAnimatableSupportTypes[8] = {kPOPValueInteger, kPOPValueFloat, kPOPValuePoint, kPOPValueSize, kPOPValueRect, kPOPValueEdgeInsets, kPOPValueColor};
 
 NSString *POPValueTypeToString(POPValueType t)
 {
@@ -163,6 +168,8 @@ NSString *POPValueTypeToString(POPValueType t)
       return @"CGSize";
     case kPOPValueRect:
       return @"CGRect";
+    case kPOPValueEdgeInsets:
+      return @"UIEdgeInsets";
     case kPOPValueAffineTransform:
       return @"CGAffineTransform";
     case kPOPValueTransform:
@@ -195,6 +202,11 @@ id POPBox(VectorConstRef vec, POPValueType type, bool force)
     case kPOPValueRect:
       return [NSValue valueWithCGRect:vec->cg_rect()];
       break;
+#if TARGET_OS_IPHONE
+    case kPOPValueEdgeInsets:
+      return [NSValue valueWithUIEdgeInsets:vec->ui_edge_insets()];
+      break;
+#endif
     case kPOPValueColor: {
       return (__bridge_transfer id)vec->cg_color();
       break;
@@ -223,6 +235,11 @@ static VectorRef vectorize(id value, POPValueType type)
     case kPOPValueRect:
       vec = Vector::new_cg_rect([value CGRectValue]);
       break;
+#if TARGET_OS_IPHONE
+    case kPOPValueEdgeInsets:
+      vec = Vector::new_ui_edge_insets([value UIEdgeInsetsValue]);
+      break;
+#endif
     case kPOPValueAffineTransform:
       vec = Vector::new_cg_affine_transform([value CGAffineTransformValue]);
       break;

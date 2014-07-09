@@ -9,7 +9,11 @@
 
 #import "POPDecayAnimationInternal.h"
 
-const POPValueType supportedVelocityTypes[5] = { kPOPValuePoint, kPOPValueInteger, kPOPValueFloat, kPOPValueRect, kPOPValueSize };
+#if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
+#endif
+
+const POPValueType supportedVelocityTypes[6] = { kPOPValuePoint, kPOPValueInteger, kPOPValueFloat, kPOPValueRect, kPOPValueSize, kPOPValueEdgeInsets };
 
 @implementation POPDecayAnimation
 
@@ -95,6 +99,12 @@ DEFINE_RW_PROPERTY(POPDecayAnimationState, deceleration, setDeceleration:, CGFlo
     CGSize originalVelocitySize = [self.originalVelocity CGSizeValue];
     CGSize negativeOriginalVelocitySize = CGSizeMake(-originalVelocitySize.width, -originalVelocitySize.height);
     reversedVelocity = [NSValue valueWithCGSize:negativeOriginalVelocitySize];
+  } else if (velocityType == kPOPValueEdgeInsets) {
+#if TARGET_OS_IPHONE
+    UIEdgeInsets originalVelocityInsets = [self.originalVelocity UIEdgeInsetsValue];
+    UIEdgeInsets negativeOriginalVelocityInsets = UIEdgeInsetsMake(-originalVelocityInsets.top, -originalVelocityInsets.left, -originalVelocityInsets.bottom, -originalVelocityInsets.right);
+    reversedVelocity = [NSValue valueWithUIEdgeInsets:negativeOriginalVelocityInsets];
+#endif
   }
 
   return reversedVelocity;

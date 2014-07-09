@@ -427,6 +427,49 @@ static const CGFloat epsilon = 0.0001f;
   STAssertTrue(lastRect.origin.x == lastRect.origin.y && lastRect.size.width == lastRect.size.height && lastRect.origin.x < lastRect.size.width, @"unexpected last rect value: %@", lastEvent);
 }
 
+#if TARGET_OS_IPHONE
+
+- (void)testEdgeInsetsSupport
+{
+  const UIEdgeInsets fromEdgeInsets = UIEdgeInsetsZero;
+  const UIEdgeInsets velocityEdgeInsets = UIEdgeInsetsMake(100, 100, 1000, 1000);
+
+  POPDecayAnimation *anim = [POPDecayAnimation animation];
+  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerBounds];
+  anim.fromValue = [NSValue valueWithUIEdgeInsets:fromEdgeInsets];
+  anim.velocity = [NSValue valueWithUIEdgeInsets:velocityEdgeInsets];
+
+  id delegate = [OCMockObject niceMockForProtocol:@protocol(POPAnimationDelegate)];
+  anim.delegate = delegate;
+
+  // expect start and stop to be called
+  [[delegate expect] pop_animationDidStart:anim];
+  [[delegate expect] pop_animationDidStop:anim finished:YES];
+
+  // start tracer
+  POPAnimationTracer *tracer = anim.tracer;
+  [tracer start];
+
+  CALayer *layer = self.layer1;
+  [layer pop_addAnimation:anim forKey:animationKey];
+
+  // run animation
+  POPAnimatorRenderDuration(self.animator, self.beginTime, 3, 1.0/60.0);
+
+  NSArray *writeEvents = [tracer eventsWithType:kPOPAnimationEventPropertyWrite];
+
+  // verify delegate
+  [delegate verify];
+
+  POPAnimationValueEvent *lastEvent = [writeEvents lastObject];
+  UIEdgeInsets lastEdgeInsets = [lastEvent.value UIEdgeInsetsValue];
+
+  STAssertTrue(!UIEdgeInsetsEqualToEdgeInsets(fromEdgeInsets, lastEdgeInsets), @"unexpected last edge insets value: %@", lastEvent);
+  STAssertTrue(lastEdgeInsets.top == lastEdgeInsets.left && lastEdgeInsets.bottom == lastEdgeInsets.right && lastEdgeInsets.top < lastEdgeInsets.bottom, @"unexpected last edge insets value: %@", lastEvent);
+}
+
+#endif
+
 - (void)testEndValueOnReuse
 {
   POPAnimatable *circle = [POPAnimatable new];
