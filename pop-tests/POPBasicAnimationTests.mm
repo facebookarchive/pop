@@ -51,4 +51,36 @@
   POPAssertColorEqual((__bridge CGColorRef)anim.toValue, layer.backgroundColor);
 }
 
+- (void)testZeroDurationAnimation
+{
+    POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerBackgroundColor];
+    anim.duration = 0.0f;
+    
+#if TARGET_OS_IPHONE
+    anim.fromValue = [UIColor whiteColor];
+    anim.toValue = [UIColor redColor];
+#else
+    anim.fromValue = [NSColor whiteColor];
+    anim.toValue = [NSColor redColor];
+#endif
+    
+    POPAnimationTracer *tracer = anim.tracer;
+    [tracer start];
+    
+    CALayer *layer = [CALayer layer];
+    [layer pop_addAnimation:anim forKey:nil];
+    
+    // run animation
+    POPAnimatorRenderDuration(self.animator, self.beginTime, 3, 1.0/60.0);
+    
+    // verify write events
+    NSArray *writeEvents = [tracer eventsWithType:kPOPAnimationEventPropertyWrite];
+    STAssertTrue(writeEvents.count == 1, @"expected one write event %@", tracer.allEvents);
+    NSArray *stopEvents = [tracer eventsWithType:kPOPAnimationEventDidStop];
+    STAssertTrue(stopEvents.count == 1, @"expected one stop event %@", tracer.allEvents);
+    
+    // assert final value
+    POPAssertColorEqual((__bridge CGColorRef)anim.toValue, layer.backgroundColor);
+}
+
 @end
