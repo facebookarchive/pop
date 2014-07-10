@@ -416,9 +416,24 @@ using namespace POP;
   STAssertEqualObjects(anim2.toValue, rectValue, @"property value read should equal write");
   STAssertEqualObjects(anim2.velocity, rectValue, @"property value read should equal write");
 
+#if TARGET_OS_IPHONE
+
   POPSpringAnimation *anim3 = [POPSpringAnimation animation];
+
+  id edgeInsetsValue = [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(20, 40, 20, 40)];
+  anim3.fromValue = edgeInsetsValue;
+  anim3.toValue = edgeInsetsValue;
+  anim3.velocity = edgeInsetsValue;
+
+  STAssertEqualObjects(anim3.fromValue, edgeInsetsValue, @"property value read should equal write");
+  STAssertEqualObjects(anim3.toValue, edgeInsetsValue, @"property value read should equal write");
+  STAssertEqualObjects(anim3.velocity, edgeInsetsValue, @"property value read should equal write");
+
+#endif
+
+  POPSpringAnimation *anim4 = [POPSpringAnimation animation];
   id transformValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
-  STAssertThrows(anim3.fromValue = transformValue, @"should not be able to set %@", transformValue);
+  STAssertThrows(anim4.fromValue = transformValue, @"should not be able to set %@", transformValue);
 }
 
 - (void)testTracer

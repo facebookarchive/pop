@@ -8,6 +8,9 @@
  */
 
 #import <CoreGraphics/CoreGraphics.h>
+#if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
+#endif
 #import "POPDefines.h"
 
 #if TARGET_OS_IPHONE
@@ -31,6 +34,15 @@ NS_INLINE CGRect values_to_rect(const CGFloat values[])
   return CGRectMake(values[0], values[1], values[2], values[3]);
 }
 
+#if TARGET_OS_IPHONE
+
+NS_INLINE UIEdgeInsets values_to_edge_insets(const CGFloat values[])
+{
+  return UIEdgeInsetsMake(values[0], values[1], values[2], values[3]);
+}
+
+#endif
+
 NS_INLINE void values_from_point(CGFloat values[], CGPoint p)
 {
   values[0] = p.x;
@@ -50,6 +62,18 @@ NS_INLINE void values_from_rect(CGFloat values[], CGRect r)
   values[2] = r.size.width;
   values[3] = r.size.height;
 }
+
+#if TARGET_OS_IPHONE
+
+NS_INLINE void values_from_edge_insets(CGFloat values[], UIEdgeInsets i)
+{
+  values[0] = i.top;
+  values[1] = i.left;
+  values[2] = i.bottom;
+  values[3] = i.right;
+}
+
+#endif
 
 /**
  Takes a CGColorRef and converts it into RGBA components, if necessary.

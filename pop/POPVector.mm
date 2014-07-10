@@ -188,6 +188,25 @@ namespace POP
     return v;
   }
 
+#if TARGET_OS_IPHONE
+
+  UIEdgeInsets Vector::ui_edge_insets() const
+  {
+    return _count < 4 ? UIEdgeInsetsZero : UIEdgeInsetsMake(_values[0], _values[1], _values[2], _values[3]);
+  }
+
+  Vector *Vector::new_ui_edge_insets(const UIEdgeInsets &i)
+  {
+    Vector *v = new Vector(4);
+    v->_values[0] = i.top;
+    v->_values[1] = i.left;
+    v->_values[2] = i.bottom;
+    v->_values[3] = i.right;
+    return v;
+  }
+  
+#endif
+
   CGAffineTransform Vector::cg_affine_transform() const
   {
     if (_count < 6) {
