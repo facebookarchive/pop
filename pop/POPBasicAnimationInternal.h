@@ -70,11 +70,13 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
       ((POPBasicAnimation *)self).timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
     }
 
-    // cap local time to duration
-    CFTimeInterval t = MIN(time - startTime, duration) / duration;
-
     // solve for normalized time, aka progresss [0, 1]
-    CGFloat p = POPTimingFunctionSolve(timingControlPoints, t, SOLVE_EPS(duration));
+    CGFloat p = 1.0f;
+    if (duration > 0.0f) {
+        // cap local time to duration
+        CFTimeInterval t = MIN(time - startTime, duration) / duration;
+        p = POPTimingFunctionSolve(timingControlPoints, t, SOLVE_EPS(duration));
+    }
 
     // interpolate and advance
     interpolate(valueType, valueCount, fromVec->data(), toVec->data(), currentVec->data(), p);
