@@ -544,10 +544,14 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     if (existingAnim) {
       // unlock
       OSSpinLockUnlock(&_lock);
+
       if (existingAnim == anim) {
         return;
       }
       [self removeAnimationForObject:obj key:key cleanupDict:NO];
+        
+      // lock
+      OSSpinLockLock(&_lock);
     }
   }
   keyAnimationDict[key] = anim;
