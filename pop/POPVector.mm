@@ -204,7 +204,7 @@ namespace POP
     v->_values[3] = i.right;
     return v;
   }
-  
+
 #endif
 
   CGAffineTransform Vector::cg_affine_transform() const

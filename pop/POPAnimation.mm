@@ -93,7 +93,7 @@ using namespace POP;
     if (repeatCount > NSIntegerMax / 2) {
       repeatCount = NSIntegerMax / 2;
     }
-      
+
     if (_state->autoreverses) {
       _state->repeatCount = (repeatCount * 2);
     } else {

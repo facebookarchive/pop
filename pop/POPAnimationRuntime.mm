@@ -95,6 +95,11 @@ static bool FBCompareTypeEncoding(const char *objctype, POPValueType type)
               || strcmp(objctype, @encode(NSRect)) == 0
 #endif
               );
+#if TARGET_OS_IPHONE
+    case kPOPValueUIEdgeInsets:
+      return (strcmp(objctype, @encode(UIEdgeInsets)) == 0
+              );
+#endif
 
     case kPOPValueEdgeInsets:
 #if TARGET_OS_IPHONE
@@ -211,6 +216,11 @@ id POPBox(VectorConstRef vec, POPValueType type, bool force)
       return (__bridge_transfer id)vec->cg_color();
       break;
     }
+#if TARGET_OS_IPHONE
+    case kPOPValueUIEdgeInsets:
+      return [NSValue valueWithUIEdgeInsets:vec->ui_edge_insets()];
+      break;
+#endif
     default:
       return force ? [NSValue valueWithCGPoint:vec->cg_point()] : nil;
       break;
@@ -245,6 +255,11 @@ static VectorRef vectorize(id value, POPValueType type)
       break;
     case kPOPValueColor:
       vec = Vector::new_cg_color(POPCGColorWithColor(value));
+#if TARGET_OS_IPHONE
+    case kPOPValueUIEdgeInsets:
+      vec = Vector::new_ui_edge_insets([value UIEdgeInsetsValue]);
+      break;
+#endif
     default:
       break;
   }

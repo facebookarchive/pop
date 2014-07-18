@@ -88,6 +88,7 @@ NSString * const kPOPViewTintColor = @"view.tintColor";
 NSString * const kPOPScrollViewContentOffset = @"scrollView.contentOffset";
 NSString * const kPOPScrollViewContentSize = @"scrollView.contentSize";
 NSString * const kPOPScrollViewZoomScale = @"scrollView.zoomScale";
+NSString * const kPOPScrollViewContentInset = @"scrollView.contentInset";
 
 // UITableView
 NSString * const kPOPTableViewContentOffset = kPOPScrollViewContentOffset;
@@ -475,7 +476,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     kPOPThresholdColor
   },
-  
+
   {kPOPShapeLayerFillColor,
     ^(CAShapeLayer *obj, CGFloat values[]) {
         POPCGColorGetRGBAComponents(obj.fillColor, values);
@@ -603,7 +604,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     kPOPThresholdPoint
   },
-    
+
   {kPOPScrollViewZoomScale,
     ^(UIScrollView *obj, CGFloat values[]) {
       values[0]=obj.zoomScale;
@@ -614,10 +615,23 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     kPOPThresholdScale
   },
 
+  {kPOPScrollViewContentInset,
+    ^(UIScrollView *obj, CGFloat values[]) {
+      values[0] = obj.contentInset.top;
+      values[1] = obj.contentInset.left;
+      values[2] = obj.contentInset.bottom;
+      values[3] = obj.contentInset.right;
+    },
+    ^(UIScrollView *obj, const CGFloat values[]) {
+      obj.contentInset = values_to_edge_insets(values);
+    },
+    kPOPThresholdPoint
+  },
+
   /* UINavigationBar */
 
   {kPOPNavigationBarBarTintColor,
-    ^(UINavigationBar *obj, CGFloat values[]) { 
+    ^(UINavigationBar *obj, CGFloat values[]) {
       POPUIColorGetRGBAComponents(obj.barTintColor, values);
     },
     ^(UINavigationBar *obj, const CGFloat values[]) {

@@ -25,6 +25,7 @@ enum POPValueType
   kPOPValueAffineTransform,
   kPOPValueTransform,
   kPOPValueRange,
+  kPOPValueUIEdgeInsets,
   kPOPValueColor,
 };
 

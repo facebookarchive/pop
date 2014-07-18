@@ -402,7 +402,7 @@ struct _POPAnimationState
     bool advanced = false;
     bool computedProgress = false;
     CFTimeInterval dt = time - lastTime;
-      
+
     switch (type) {
       case kPOPAnimationSpring:
         advanced = advance(time, dt, obj);
