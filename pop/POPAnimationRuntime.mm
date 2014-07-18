@@ -255,6 +255,7 @@ static VectorRef vectorize(id value, POPValueType type)
       break;
     case kPOPValueColor:
       vec = Vector::new_cg_color(POPCGColorWithColor(value));
+      break;
 #if TARGET_OS_IPHONE
     case kPOPValueUIEdgeInsets:
       vec = Vector::new_ui_edge_insets([value UIEdgeInsetsValue]);
