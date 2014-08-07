@@ -12,11 +12,11 @@
 #import <OCMock/OCMock.h>
 #import <QuartzCore/QuartzCore.h>
 
-#import <POP/POPAnimation.h>
-#import <POP/POPAnimationPrivate.h>
-#import <POP/POPAnimator.h>
-#import <POP/POPAnimatorPrivate.h>
-#import <POP/POPAnimationExtras.h>
+#import <pop/POPAnimation.h>
+#import <pop/POPAnimationPrivate.h>
+#import <pop/POPAnimator.h>
+#import <pop/POPAnimatorPrivate.h>
+#import <pop/POPAnimationExtras.h>
 
 #import "POPAnimatable.h"
 #import "POPAnimationInternal.h"

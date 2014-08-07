@@ -1115,7 +1115,7 @@
 			baseConfigurationReference = ECC1DB1A18CA291B008C7DEA /* StaticLibrary-iOS.xcconfig */;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "pop/pop-Prefix.pch";
-				INFOPLIST_FILE = "POP/pop-Info.plist";
+				INFOPLIST_FILE = "pop/pop-Info.plist";
 				PRODUCT_NAME = pop;
 				PUBLIC_HEADERS_FOLDER_PATH = ../Headers/POP;
 			};
@@ -1133,7 +1133,7 @@
 			baseConfigurationReference = ECC1DB1A18CA291B008C7DEA /* StaticLibrary-iOS.xcconfig */;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "pop/pop-Prefix.pch";
-				INFOPLIST_FILE = "POP/pop-Info.plist";
+				INFOPLIST_FILE = "pop/pop-Info.plist";
 				PRODUCT_NAME = pop;
 				PUBLIC_HEADERS_FOLDER_PATH = ../Headers/POP;
 			};
@@ -1158,7 +1158,7 @@
 			baseConfigurationReference = ECC1DB1A18CA291B008C7DEA /* StaticLibrary-iOS.xcconfig */;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "pop/pop-Prefix.pch";
-				INFOPLIST_FILE = "POP/pop-Info.plist";
+				INFOPLIST_FILE = "pop/pop-Info.plist";
 				PRODUCT_NAME = pop;
 				PUBLIC_HEADERS_FOLDER_PATH = ../Headers/POP;
 			};
@@ -1169,7 +1169,7 @@
 			baseConfigurationReference = ECC1DB1A18CA291B008C7DEA /* StaticLibrary-iOS.xcconfig */;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "pop/pop-Prefix.pch";
-				INFOPLIST_FILE = "POP/pop-Info.plist";
+				INFOPLIST_FILE = "pop/pop-Info.plist";
 				PRODUCT_NAME = pop;
 				PUBLIC_HEADERS_FOLDER_PATH = ../Headers/POP;
 			};
@@ -1184,7 +1184,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PREFIX_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Prefix.pch";
-				INFOPLIST_FILE = "POP/pop-Info.plist";
+				INFOPLIST_FILE = "pop/pop-Info.plist";
 				PRODUCT_NAME = pop;
 			};
 			name = Debug;
@@ -1198,7 +1198,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PREFIX_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Prefix.pch";
-				INFOPLIST_FILE = "POP/pop-Info.plist";
+				INFOPLIST_FILE = "pop/pop-Info.plist";
 				PRODUCT_NAME = pop;
 			};
 			name = GCOV;
@@ -1212,7 +1212,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PREFIX_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Prefix.pch";
-				INFOPLIST_FILE = "POP/pop-Info.plist";
+				INFOPLIST_FILE = "pop/pop-Info.plist";
 				PRODUCT_NAME = pop;
 			};
 			name = Release;
@@ -1226,7 +1226,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PREFIX_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Prefix.pch";
-				INFOPLIST_FILE = "POP/pop-Info.plist";
+				INFOPLIST_FILE = "pop/pop-Info.plist";
 				PRODUCT_NAME = pop;
 			};
 			name = Profile;

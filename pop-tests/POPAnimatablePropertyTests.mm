@@ -9,7 +9,7 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-#import <POP/POPAnimatableProperty.h>
+#import <pop/POPAnimatableProperty.h>
 
 static const CGFloat epsilon = 0.0001f;
 static NSArray *properties = @[@"name", @"readBlock", @"writeBlock", @"threshold"];

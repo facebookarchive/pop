@@ -13,7 +13,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#import <POP/POPLayerExtras.h>
+#import <pop/POPLayerExtras.h>
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>

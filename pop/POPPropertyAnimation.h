@@ -7,8 +7,8 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <POP/POPAnimatableProperty.h>
-#import <POP/POPAnimation.h>
+#import <pop/POPAnimatableProperty.h>
+#import <pop/POPAnimation.h>
 
 /**
  @abstract Flags for clamping animation values.

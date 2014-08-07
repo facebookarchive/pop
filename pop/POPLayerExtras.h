@@ -9,7 +9,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#import <POP/POPDefines.h>
+#import <pop/POPDefines.h>
 
 POP_EXTERN_C_BEGIN
 

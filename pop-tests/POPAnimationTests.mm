@@ -12,9 +12,9 @@
 #import <OCMock/OCMock.h>
 #import <SenTestingKit/SenTestingKit.h>
 
-#import <POP/POP.h>
-#import <POP/POPAnimationPrivate.h>
-#import <POP/POPAnimatorPrivate.h>
+#import <pop/POP.h>
+#import <pop/POPAnimationPrivate.h>
+#import <pop/POPAnimatorPrivate.h>
 
 #import "POPAnimatable.h"
 #import "POPAnimationRuntime.h"

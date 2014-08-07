@@ -10,7 +10,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 #import <OCMock/OCMock.h>
-#import <POP/POPBasicAnimation.h>
+#import <pop/POPBasicAnimation.h>
 
 #import "POPAnimatable.h"
 #import "POPAnimationTestsExtras.h"

@@ -9,7 +9,7 @@
 
 #import "POPAnimatable.h"
 
-#import <POP/POP.h>
+#import <pop/POP.h>
 
 @implementation POPAnimatable
 {
