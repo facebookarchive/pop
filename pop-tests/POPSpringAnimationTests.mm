@@ -421,7 +421,6 @@ static NSString *animationKey = @"key";
 }
 
 #if TARGET_OS_IPHONE
-
 - (void)testEdgeInsetsSupport
 {
   const UIEdgeInsets fromEdgeInsets = UIEdgeInsetsZero;
@@ -429,7 +428,7 @@ static NSString *animationKey = @"key";
   const UIEdgeInsets velocityEdgeInsets = UIEdgeInsetsMake(1000, 1000, 1000, 1000);
 
   POPSpringAnimation *anim = [POPSpringAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerBounds];
+  anim.property = [POPAnimatableProperty propertyWithName:kPOPScrollViewContentInset];
   anim.fromValue = [NSValue valueWithUIEdgeInsets:fromEdgeInsets];
   anim.toValue = [NSValue valueWithUIEdgeInsets:toEdgeInsets];
   anim.velocity = [NSValue valueWithUIEdgeInsets:velocityEdgeInsets];
@@ -444,8 +443,11 @@ static NSString *animationKey = @"key";
   POPAnimationTracer *tracer = anim.tracer;
   [tracer start];
 
-  CALayer *layer = [CALayer layer];
-  [layer pop_addAnimation:anim forKey:@""];
+  id scrollView = [OCMockObject niceMockForClass:[UIScrollView class]];
+  [scrollView pop_addAnimation:anim forKey:nil];
+
+  // expect final value to be set
+  [[scrollView expect] setContentInset:toEdgeInsets];
 
   // run animation
   POPAnimatorRenderDuration(self.animator, self.beginTime, 3, 1.0/60.0);
@@ -455,13 +457,15 @@ static NSString *animationKey = @"key";
   // verify delegate
   [delegate verify];
 
+  // verify scroll view
+  [scrollView verify];
+
   POPAnimationValueEvent *lastEvent = [writeEvents lastObject];
   UIEdgeInsets lastEdgeInsets = [lastEvent.value UIEdgeInsetsValue];
 
   // verify last insets are to insets
   STAssertTrue(UIEdgeInsetsEqualToEdgeInsets(lastEdgeInsets, toEdgeInsets), @"unexpected last edge insets value: %@", lastEvent);
 }
-
 #endif
 
 - (void)testColorSupport
