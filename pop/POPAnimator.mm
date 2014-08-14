@@ -765,3 +765,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 }
 
 @end
+
+////////////////////////////////////////////////////////////
+#include "POPAnimationGroup.h"
+#include "POPAnimationGroup.m"

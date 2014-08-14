@@ -195,6 +195,8 @@
 		D411892A480A401FB4D1AA07 /* libPods-pop-tests-osx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pop-tests-osx.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49ED131870840178CA788F1 /* Pods-pop-tests-osx.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pop-tests-osx.xcconfig"; path = "Pods/Pods-pop-tests-osx.xcconfig"; sourceTree = "<group>"; };
 		D52A06EC505A4B82B3BBD5E6 /* libEvent.a */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = archive.ar; path = libEvent.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E184990F199CE3DB00609429 /* POPAnimationGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POPAnimationGroup.h; sourceTree = "<group>"; };
+		E1849910199CE3DB00609429 /* POPAnimationGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = POPAnimationGroup.m; sourceTree = "<group>"; };
 		E5D894724A104C729754ABCA /* libGLog.a */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = archive.ar; path = libGLog.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC0AE12F16BC73CE001DA2CE /* POPAnimationExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPAnimationExtras.h; sourceTree = "<group>"; };
 		EC0AE13016BC73CE001DA2CE /* POPAnimationExtras.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = POPAnimationExtras.mm; sourceTree = "<group>"; };
@@ -459,6 +461,8 @@
 			children = (
 				EC8F015918FFBD7A00DF8905 /* Animations */,
 				EC8F017318FFC4CB00DF8905 /* Engine */,
+				E184990F199CE3DB00609429 /* POPAnimationGroup.h */,
+				E1849910199CE3DB00609429 /* POPAnimationGroup.m */,
 				EC8F017218FFC44800DF8905 /* Utility */,
 				ECA0D5BE18D818C3003720DF /* WebCore */,
 				EC6885AF18C7BCA400C6194C /* iOS Supporting Files */,
@@ -823,7 +827,7 @@
 			name = "pop-tests-osx";
 			productName = "pop-tests-osx";
 			productReference = EC7E319918C93D6500B38170 /* pop-tests-osx.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		ECF01ED218C92B7F009E0AD1 /* pop-tests */ = {
 			isa = PBXNativeTarget;
@@ -843,7 +847,7 @@
 			name = "pop-tests";
 			productName = "pop-tests";
 			productReference = ECF01ED318C92B7F009E0AD1 /* pop-tests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
