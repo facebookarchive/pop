@@ -45,3 +45,22 @@
 - (void)animatorDidAnimate:(POPAnimator *)animator;
 
 @end
+
+////////////////////////////////////////////////////////////
+@class POPAnimation;
+
+////////////////////////////////////////////////////////////
+// POPAnimationGroup
+@interface POPAnimationGroup : NSObject
+@property (nonatomic, copy) void (^completionBlock)();
+
+- (void)addAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key;
+- (void)removeAnimationForObject:(id)obj key:(NSString *)key;
+@end
+
+////////////////////////////////////////////////////////////
+// POPAnimator (NPExtensions)
+@interface POPAnimator (NPExtensions)
+- (void)batchAddRemoveAnimations:(void (^)(POPAnimationGroup * group))block;
+- (void)addAnimationsForObject:(id)obj withDictionary:(NSDictionary *)animationsDictionary;
+@end

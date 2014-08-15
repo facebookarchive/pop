@@ -767,5 +767,293 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 @end
 
 ////////////////////////////////////////////////////////////
-#include "POPAnimationGroup.h"
-#include "POPAnimationGroup.m"
+// POPAnimationGroup ()
+@interface POPAnimationGroup ()
+@property (nonatomic, copy) void(^addAnimation)(POPAnimation *anim, id obj, NSString *key);
+@property (nonatomic, copy) void(^removeAnimation)(id obj, NSString *key);
+@end
+
+////////////////////////////////////////////////////////////
+// POPAnimationGroup
+@implementation POPAnimationGroup
+{
+	NSMutableSet *_animations;
+	void (^_completionBlock)();
+}
+////////////////////////////////////////////////////////////
+@synthesize addAnimation, removeAnimation, completionBlock;
+
+////////////////////////////////////////////////////////////
+- (void)addAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key
+{
+	if(anim)
+	{
+		if(anim.completionBlock)
+		{
+			void(^originalCompletionBlock)(POPAnimation *animation, BOOL finished) = anim.completionBlock;
+			anim.completionBlock = ^(POPAnimation *animation, BOOL finished) {
+				originalCompletionBlock(animation, finished);
+				[self pop_animation:animation didFinish:finished];
+			};
+		}
+		else
+		{
+			anim.completionBlock = ^(POPAnimation *animation, BOOL finished) {
+				[self pop_animation:animation didFinish:finished];
+			};
+		}
+		
+		self.addAnimation(anim, obj, key);
+		[_animations addObject:anim];
+	}
+}
+
+- (void)removeAnimationForObject:(id)obj key:(NSString *)key
+{
+    NSString *reason = [NSString stringWithFormat:@"%c[%@ %s] should not be invoked (%s:%d)",
+		'-', self.class, sel_getName(_cmd), __FILE__, __LINE__];
+    NSLog(@"%@", reason);
+    [[NSException exceptionWithName:@"CEUnusedImplementation" reason:reason userInfo:nil] raise];
+    exit(1);  // notreached, but needed to pacify the compiler
+
+	self.removeAnimation(obj, key);
+}
+
+////////////////////////////////////////////////////////////
+- (void)pop_animation:(POPAnimation *)animation didFinish:(BOOL)finished
+{
+	NSUInteger count;
+	@synchronized(_animations)
+	{
+		[_animations removeObject:animation];
+		count = _animations.count;
+	}
+	
+	if(!count && self.completionBlock)
+		self.completionBlock();
+}
+
+////////////////////////////////////////////////////////////
+#pragma mark - 
+- (instancetype)init
+{
+	if(!(self = [super init]))
+		return NULL;
+
+	_animations = [NSMutableSet setWithCapacity:11];
+	return self;
+}
+@end
+
+////////////////////////////////////////////////////////////
+@implementation POPAnimator (NPExtensions)
+static POPAnimation *deleteDictEntryDoNotLock(POPAnimator *self, id __unsafe_unretained obj, NSString *key, BOOL cleanup = YES)
+{
+	POPAnimation *anim = nil;
+
+	NSMutableDictionary *keyAnimationsDict = (__bridge id)CFDictionaryGetValue(self->_dict, (__bridge void *)obj);
+	if(keyAnimationsDict)
+	{
+		anim = keyAnimationsDict[key];
+		if(anim)
+		{
+			// remove key
+			[keyAnimationsDict removeObjectForKey:key];
+
+			// cleanup empty dictionaries
+			if(cleanup && (0 == keyAnimationsDict.count))
+				CFDictionaryRemoveValue(self->_dict, (__bridge void *)obj);
+		}
+	}
+
+	return anim;
+}
+
+////////////////////////////////////////////////////////////
+- (void)batchAddRemoveAnimations:(void (^)(POPAnimationGroup * group))block
+{
+	if(!block)
+		return;
+
+	POPAnimationGroup *group = [POPAnimationGroup new];
+	group.addAnimation =^(POPAnimation * anim, id obj, NSString * key) {
+		if(!key)
+			key = [[NSUUID UUID] UUIDString];
+
+		NSMutableDictionary *keyAnimationDict = (__bridge id)CFDictionaryGetValue (_dict, (__bridge void *)obj);
+
+		if(nil == keyAnimationDict)
+		{
+			keyAnimationDict = [NSMutableDictionary dictionary];
+			CFDictionarySetValue (_dict, (__bridge void *)obj, (__bridge void *)keyAnimationDict);
+		}
+		else
+		{
+			// if the animation instance already exists, avoid cancelling only to restart
+			POPAnimation *existingAnim = keyAnimationDict[key];
+
+			if(existingAnim)
+			{
+				if(existingAnim == anim)
+					return;
+				{
+					existingAnim = deleteDictEntryDoNotLock (self, obj, key, NO);
+
+					if(nil == existingAnim)
+						return;
+
+					// remove from list
+					POPAnimatorItemRef item;
+					for(auto iter = _list.begin (); iter != _list.end (); )
+					{
+						item = *iter;
+
+						if(existingAnim == item->animation)
+						{
+							_list.erase (iter);
+							break;
+						}
+
+						iter++;
+					}
+
+					// remove from pending list
+					for(auto iter = _pendingList.begin (); iter != _pendingList.end (); )
+					{
+						item = *iter;
+
+						if(existingAnim == item->animation)
+						{
+							_pendingList.erase (iter);
+							break;
+						}
+
+						iter++;
+					}
+
+					// stop animation and callout
+					POPAnimationState *state = POPAnimationGetState (existingAnim);
+					state->stop (true, (!state->active && !state->paused));
+				}
+			}
+		}
+
+		keyAnimationDict[key] = anim;
+
+		POPAnimatorItemRef item (new POPAnimatorItem (obj, key, anim));
+
+		_list.push_back (item);
+		_pendingList.push_back (item);
+
+		POPAnimationGetState (anim)->reset (true);
+	};
+
+	group.removeAnimation =^(id obj, NSString * key) {
+		POPAnimation *anim = deleteDictEntryDoNotLock (self, obj, key, YES);
+
+		if(nil == anim)
+			return;
+
+		// remove from list
+		POPAnimatorItemRef item;
+		for(auto iter = _list.begin (); iter != _list.end (); )
+		{
+			item = *iter;
+
+			if(anim == item->animation)
+			{
+				_list.erase (iter);
+				break;
+			}
+
+			iter++;
+		}
+
+		// remove from pending list
+		for(auto iter = _pendingList.begin (); iter != _pendingList.end (); )
+		{
+			item = *iter;
+
+			if(anim == item->animation)
+			{
+				_pendingList.erase (iter);
+				break;
+			}
+
+			iter++;
+		}
+
+		// stop animation and callout
+		POPAnimationState *state = POPAnimationGetState (anim);
+		state->stop (true, (!state->active && !state->paused));
+	};
+
+	// lock
+	OSSpinLockLock (&_lock);
+
+	block (group);
+	// update display link
+	updateDisplayLink (self);
+
+	// unlock
+	OSSpinLockUnlock (&_lock);
+
+	// schedule runloop processing of pending animations
+	[self _scheduleProcessPendingList];
+}
+
+- (void)addAnimationsForObject:(id)obj withDictionary:(NSDictionary *)animationsDictionary
+{
+	if(!obj || !animationsDictionary.count)
+		return;
+
+	// lock
+	OSSpinLockLock(&_lock);
+
+	// get key, animation dict associated with object
+	NSMutableDictionary *keyAnimationDict = (__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj);
+
+	// update associated animation state
+	if(nil == keyAnimationDict)
+	{
+		keyAnimationDict = [NSMutableDictionary dictionary];
+		CFDictionarySetValue(_dict, (__bridge void *)obj, (__bridge void *)keyAnimationDict);
+	}
+
+	for(id key in animationsDictionary)
+	{
+		id anim = animationsDictionary[key];
+		// if the animation instance already exists, avoid cancelling only to restart
+		POPAnimation *existingAnim = keyAnimationDict[key];
+
+		if(existingAnim)
+		{
+			if(existingAnim == anim)
+				continue;
+
+			[self removeAnimationForObject:obj key:key cleanupDict:NO];
+		}
+
+		keyAnimationDict[key] = anim;
+
+		// create entry after potential removal
+		POPAnimatorItemRef item(new POPAnimatorItem(obj, key, anim));
+
+		// add to list and pending list
+		_list.push_back(item);
+		_pendingList.push_back(item);
+
+		// support animation re-use, reset all animation state
+		POPAnimationGetState(anim)->reset(true);
+	}
+
+	// update display link
+	updateDisplayLink(self);
+
+	// unlock
+	OSSpinLockUnlock(&_lock);
+
+	// schedule runloop processing of pending animations
+	[self _scheduleProcessPendingList];
+}
+@end
