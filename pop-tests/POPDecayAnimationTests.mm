@@ -428,14 +428,13 @@ static const CGFloat epsilon = 0.0001f;
 }
 
 #if TARGET_OS_IPHONE
-
 - (void)testEdgeInsetsSupport
 {
   const UIEdgeInsets fromEdgeInsets = UIEdgeInsetsZero;
   const UIEdgeInsets velocityEdgeInsets = UIEdgeInsetsMake(100, 100, 1000, 1000);
 
   POPDecayAnimation *anim = [POPDecayAnimation animation];
-  anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerBounds];
+  anim.property = [POPAnimatableProperty propertyWithName:kPOPScrollViewContentInset];
   anim.fromValue = [NSValue valueWithUIEdgeInsets:fromEdgeInsets];
   anim.velocity = [NSValue valueWithUIEdgeInsets:velocityEdgeInsets];
 
@@ -450,8 +449,8 @@ static const CGFloat epsilon = 0.0001f;
   POPAnimationTracer *tracer = anim.tracer;
   [tracer start];
 
-  CALayer *layer = self.layer1;
-  [layer pop_addAnimation:anim forKey:animationKey];
+  id scrollView = [OCMockObject niceMockForClass:[UIScrollView class]];
+  [scrollView pop_addAnimation:anim forKey:nil];
 
   // run animation
   POPAnimatorRenderDuration(self.animator, self.beginTime, 3, 1.0/60.0);
@@ -467,7 +466,6 @@ static const CGFloat epsilon = 0.0001f;
   STAssertTrue(!UIEdgeInsetsEqualToEdgeInsets(fromEdgeInsets, lastEdgeInsets), @"unexpected last edge insets value: %@", lastEvent);
   STAssertTrue(lastEdgeInsets.top == lastEdgeInsets.left && lastEdgeInsets.bottom == lastEdgeInsets.right && lastEdgeInsets.top < lastEdgeInsets.bottom, @"unexpected last edge insets value: %@", lastEvent);
 }
-
 #endif
 
 - (void)testEndValueOnReuse
