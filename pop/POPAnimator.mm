@@ -784,6 +784,12 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 @synthesize addAnimation, removeAnimation, completionBlock;
 
 ////////////////////////////////////////////////////////////
+- (NSSet *)animations
+{
+	return _animations;
+}
+
+////////////////////////////////////////////////////////////
 - (void)addAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key
 {
 	if(anim)
@@ -846,7 +852,8 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 @end
 
 ////////////////////////////////////////////////////////////
-@implementation POPAnimator (NPExtensions)
+// POPAnimator (POPAnimationGroup)
+@implementation POPAnimator (POPAnimationGroup)
 static POPAnimation *deleteDictEntryDoNotLock(POPAnimator *self, id __unsafe_unretained obj, NSString *key, BOOL cleanup = YES)
 {
 	POPAnimation *anim = nil;
@@ -876,7 +883,7 @@ static POPAnimation *deleteDictEntryDoNotLock(POPAnimator *self, id __unsafe_unr
 		return;
 
 	POPAnimationGroup *group = [POPAnimationGroup new];
-	group.addAnimation =^(POPAnimation * anim, id obj, NSString * key) {
+	group.addAnimation = ^(POPAnimation * anim, id obj, NSString * key) {
 		if(!key)
 			key = [[NSUUID UUID] UUIDString];
 
@@ -891,29 +898,28 @@ static POPAnimation *deleteDictEntryDoNotLock(POPAnimator *self, id __unsafe_unr
 		{
 			// if the animation instance already exists, avoid cancelling only to restart
 			POPAnimation *existingAnim = keyAnimationDict[key];
-
 			if(existingAnim)
 			{
 				if(existingAnim == anim)
 					return;
+				else
 				{
-					existingAnim = deleteDictEntryDoNotLock (self, obj, key, NO);
-
-					if(nil == existingAnim)
+					POPAnimation *existingAnim2 = deleteDictEntryDoNotLock(self, obj, key, NO);
+					if(nil == existingAnim2)
 						return;
 
+//					NSLog(@"Existing animation: %@ for object: %@ while adding animation: %@ forKey: %@", existingAnim, obj, anim, key);
+	
 					// remove from list
 					POPAnimatorItemRef item;
 					for(auto iter = _list.begin (); iter != _list.end (); )
 					{
 						item = *iter;
-
-						if(existingAnim == item->animation)
+						if(existingAnim2 == item->animation)
 						{
 							_list.erase (iter);
 							break;
 						}
-
 						iter++;
 					}
 
@@ -921,18 +927,17 @@ static POPAnimation *deleteDictEntryDoNotLock(POPAnimator *self, id __unsafe_unr
 					for(auto iter = _pendingList.begin (); iter != _pendingList.end (); )
 					{
 						item = *iter;
-
-						if(existingAnim == item->animation)
+						if(existingAnim2 == item->animation)
 						{
 							_pendingList.erase (iter);
 							break;
 						}
-
 						iter++;
 					}
 
 					// stop animation and callout
-					POPAnimationState *state = POPAnimationGetState (existingAnim);
+					POPAnimationState *state = POPAnimationGetState (existingAnim2);
+					existingAnim2.completionBlock = NULL;
 					state->stop (true, (!state->active && !state->paused));
 				}
 			}
@@ -948,7 +953,7 @@ static POPAnimation *deleteDictEntryDoNotLock(POPAnimator *self, id __unsafe_unr
 		POPAnimationGetState (anim)->reset (true);
 	};
 
-	group.removeAnimation =^(id obj, NSString * key) {
+	group.removeAnimation = ^(id obj, NSString * key) {
 		POPAnimation *anim = deleteDictEntryDoNotLock (self, obj, key, YES);
 
 		if(nil == anim)
@@ -992,6 +997,8 @@ static POPAnimation *deleteDictEntryDoNotLock(POPAnimator *self, id __unsafe_unr
 	OSSpinLockLock (&_lock);
 
 	block (group);
+	NSInteger numberOfAnimations = group.animations.count;
+
 	// update display link
 	updateDisplayLink (self);
 
@@ -1000,6 +1007,9 @@ static POPAnimation *deleteDictEntryDoNotLock(POPAnimator *self, id __unsafe_unr
 
 	// schedule runloop processing of pending animations
 	[self _scheduleProcessPendingList];
+
+	if(!numberOfAnimations && group.completionBlock)
+		group.completionBlock();
 }
 
 - (void)addAnimationsForObject:(id)obj withDictionary:(NSDictionary *)animationsDictionary

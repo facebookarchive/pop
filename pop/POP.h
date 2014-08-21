@@ -17,6 +17,7 @@
 #import <pop/POPAnimationTracer.h>
 #import <pop/POPAnimator.h>
 #import <pop/POPBasicAnimation.h>
+#import <pop/POPCustomEasingAnimation.h>
 #import <pop/POPCustomAnimation.h>
 #import <pop/POPDecayAnimation.h>
 #import <pop/POPDefines.h>

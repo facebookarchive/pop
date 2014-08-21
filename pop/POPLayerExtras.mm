@@ -286,3 +286,36 @@ extern void POPLayerSetSubTranslationXY(CALayer *l, CGPoint p)
   _d.translateY = p.y;
   RECOMPOSE_SUBLAYER_TRANSFORM(l);
 }
+
+extern "C" {
+	NSString *NSStringFromTransform3D(CATransform3D transform);
+	void DecomposeTransform3D(CATransform3D transform, double *buffer);
+}
+
+NSString *NSStringFromTransform3D(CATransform3D transform)
+{
+	TransformationMatrix matrix(transform);
+	TransformationMatrix::DecomposedType d;
+	matrix.decompose(d);
+
+	return [NSString stringWithFormat:@"\n\tscaleX: %.3f\t\tscaleY: %.3f\t\tscaleZ: %.3f\n"
+		@"\tskewXY: %.3f\t\tskewXZ: %.3f\t\tskewYZ: %.3f\n"
+		@"\trotateX: %.3f\t\trotateY: %.3f\t\trotateZ: %.3f\n"
+		@"\tquaternionX: %.3f\t\tquaternionY: %.3f\t\tquaternionZ: %.3f\t\tquaternionW: %.3f\n"
+		@"\ttranslateX: %.3f\t\ttranslateY: %.3f\t\ttranslateZ: %.3f\n"
+		@"\tperspectiveX: %.3f\t\tperspectiveY: %.3f\t\tperspectiveZ: %.3f\t\tperspectiveW: %.3f",
+		d.scaleX, d.scaleY, d.scaleZ,
+		d.skewXY, d.skewXZ, d.skewYZ,
+		d.rotateX, d.rotateY, d.rotateZ,
+		d.quaternionX, d.quaternionY, d.quaternionZ, d.quaternionW,
+		d.translateX, d.translateY, d.translateZ,
+		d.perspectiveX, d.perspectiveY, d.perspectiveZ, d.perspectiveW];
+}
+
+void DecomposeTransform3D(CATransform3D transform, double *buffer)
+{
+	TransformationMatrix matrix(transform);
+	TransformationMatrix::DecomposedType *d = (TransformationMatrix::DecomposedType *)buffer;
+	matrix.decompose(*d);
+}
+
