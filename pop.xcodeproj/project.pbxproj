@@ -200,7 +200,7 @@
 		EC0AE13016BC73CE001DA2CE /* POPAnimationExtras.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = POPAnimationExtras.mm; sourceTree = "<group>"; };
 		EC191218162FB53A00E0CC76 /* libpop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC19121B162FB53A00E0CC76 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		EC19121F162FB53A00E0CC76 /* POP-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "POP-Prefix.pch"; path = "../pop/POP-Prefix.pch"; sourceTree = "<group>"; };
+		EC19121F162FB53A00E0CC76 /* pop-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "pop-Prefix.pch"; path = "../pop/pop-Prefix.pch"; sourceTree = "<group>"; };
 		EC19122A162FB53A00E0CC76 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		EC19122C162FB53A00E0CC76 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		EC191239162FB53A00E0CC76 /* POPAnimationTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = POPAnimationTests.mm; sourceTree = "<group>"; };
@@ -245,7 +245,7 @@
 		EC7E319918C93D6500B38170 /* pop-tests-osx.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pop-tests-osx.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC7E319D18C93D6500B38170 /* pop-tests-osx-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "pop-tests-osx-Info.plist"; sourceTree = "<group>"; };
 		EC7E319F18C93D6500B38170 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		EC7E31A318C93D6500B38170 /* pop-tests-osx-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pop-tests-osx-Prefix.pch"; sourceTree = "<group>"; };
+		EC7E31A318C93D6500B38170 /* pop-tests-OSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pop-tests-OSX-Prefix.pch"; sourceTree = "<group>"; };
 		EC882A7718C91983007829CC /* pop-tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "pop-tests-Info.plist"; sourceTree = "<group>"; };
 		EC882A7918C91983007829CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EC882A7D18C91983007829CC /* pop-tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "pop-tests-Prefix.pch"; sourceTree = "<group>"; };
@@ -491,7 +491,7 @@
 		EC6885AF18C7BCA400C6194C /* iOS Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EC19121F162FB53A00E0CC76 /* POP-Prefix.pch */,
+				EC19121F162FB53A00E0CC76 /* pop-Prefix.pch */,
 			);
 			name = "iOS Supporting Files";
 			path = "pop-tests";
@@ -502,7 +502,7 @@
 			children = (
 				EC7E319D18C93D6500B38170 /* pop-tests-osx-Info.plist */,
 				EC7E319E18C93D6500B38170 /* InfoPlist.strings */,
-				EC7E31A318C93D6500B38170 /* pop-tests-osx-Prefix.pch */,
+				EC7E31A318C93D6500B38170 /* pop-tests-OSX-Prefix.pch */,
 			);
 			name = "Supporting Files - OSX";
 			path = "pop-tests-osx";
@@ -1258,7 +1258,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "pop-tests-osx/pop-tests-osx-Prefix.pch";
+				GCC_PREFIX_HEADER = "pop-tests-osx/pop-tests-OSX-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1271,7 +1271,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "pop-tests-osx/pop-tests-osx-Info.plist";
+				INFOPLIST_FILE = "pop-tests-osx/pop-tests-OSX-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "pop-tests-osx";
@@ -1307,7 +1307,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "pop-tests-osx/pop-tests-osx-Prefix.pch";
+				GCC_PREFIX_HEADER = "pop-tests-osx/pop-tests-OSX-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_SHADOW = NO;
@@ -1315,7 +1315,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "pop-tests-osx/pop-tests-osx-Info.plist";
+				INFOPLIST_FILE = "pop-tests-osx/pop-tests-OSX-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "pop-tests-osx";
 				SDKROOT = macosx;
@@ -1350,7 +1350,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "pop-tests-osx/pop-tests-osx-Prefix.pch";
+				GCC_PREFIX_HEADER = "pop-tests-osx/pop-tests-OSX-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_SHADOW = NO;
@@ -1358,7 +1358,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "pop-tests-osx/pop-tests-osx-Info.plist";
+				INFOPLIST_FILE = "pop-tests-osx/pop-tests-OSX-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "pop-tests-osx";
 				SDKROOT = macosx;
@@ -1393,7 +1393,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "pop-tests-osx/pop-tests-osx-Prefix.pch";
+				GCC_PREFIX_HEADER = "pop-tests-osx/pop-tests-OSX-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_SHADOW = NO;
@@ -1401,7 +1401,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "pop-tests-osx/pop-tests-osx-Info.plist";
+				INFOPLIST_FILE = "pop-tests-osx/pop-tests-OSX-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "pop-tests-osx";
 				SDKROOT = macosx;
