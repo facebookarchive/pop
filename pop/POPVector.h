@@ -327,6 +327,9 @@ namespace POP {
     // UIEdgeInsets support
     UIEdgeInsets ui_edge_insets() const;
     static Vector *new_ui_edge_insets(const UIEdgeInsets &i);
+#else
+    NSEdgeInsets ui_edge_insets() const;
+    static Vector *new_ui_edge_insets(const NSEdgeInsets &i);
 #endif
 
     // CGAffineTransform support

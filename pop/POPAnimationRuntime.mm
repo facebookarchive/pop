@@ -201,11 +201,13 @@ id POPBox(VectorConstRef vec, POPValueType type, bool force)
     case kPOPValueRect:
       return [NSValue valueWithCGRect:vec->cg_rect()];
       break;
-#if TARGET_OS_IPHONE
     case kPOPValueEdgeInsets:
+#if TARGET_OS_IPHONE
       return [NSValue valueWithUIEdgeInsets:vec->ui_edge_insets()];
-      break;
+#else
+      return [NSValue valueWithEdgeInsets:vec->ui_edge_insets()];
 #endif
+      break;
     case kPOPValueColor: {
       return (__bridge_transfer id)vec->cg_color();
       break;
@@ -234,11 +236,13 @@ static VectorRef vectorize(id value, POPValueType type)
     case kPOPValueRect:
       vec = Vector::new_cg_rect([value CGRectValue]);
       break;
-#if TARGET_OS_IPHONE
     case kPOPValueEdgeInsets:
+#if TARGET_OS_IPHONE
       vec = Vector::new_ui_edge_insets([value UIEdgeInsetsValue]);
-      break;
+#else
+      vec = Vector::new_ui_edge_insets([value edgeInsetsValue]);
 #endif
+      break;
     case kPOPValueAffineTransform:
       vec = Vector::new_cg_affine_transform([value CGAffineTransformValue]);
       break;
