@@ -206,7 +206,9 @@ namespace POP
 #else
 NSEdgeInsets Vector::ui_edge_insets() const
   {
-    return _count < 4 ? NSEdgeInsetsZero : NSEdgeInsetsMake(_values[0], _values[1], _values[2], _values[3]);
+    return _count < 4 ?
+		NSEdgeInsetsMake(0, 0, 0, 0): // NSEdgeInsetsZero :
+		NSEdgeInsetsMake(_values[0], _values[1], _values[2], _values[3]);
   }
 
   Vector *Vector::new_ui_edge_insets(const NSEdgeInsets &i)
