@@ -816,13 +816,15 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 
 - (void)removeAnimationForObject:(id)obj key:(NSString *)key
 {
-    NSString *reason = [NSString stringWithFormat:@"%c[%@ %s] should not be invoked (%s:%d)",
+#if 1    
+	NSString *reason = [NSString stringWithFormat:@"%c[%@ %s] should not be invoked (%s:%d)",
 		'-', self.class, sel_getName(_cmd), __FILE__, __LINE__];
     NSLog(@"%@", reason);
     [[NSException exceptionWithName:@"CEUnusedImplementation" reason:reason userInfo:nil] raise];
     exit(1);  // notreached, but needed to pacify the compiler
-
+#else
 	self.removeAnimation(obj, key);
+#endif
 }
 
 ////////////////////////////////////////////////////////////
