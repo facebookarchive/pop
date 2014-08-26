@@ -1215,6 +1215,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREFIX_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Prefix.pch";
 				INFOPLIST_FILE = "pop/pop-Info.plist";
+				INSTALL_PATH = "@rpath";
 				PRODUCT_NAME = pop;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 			};
@@ -1230,6 +1231,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREFIX_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Prefix.pch";
 				INFOPLIST_FILE = "pop/pop-Info.plist";
+				INSTALL_PATH = "@rpath";
 				PRODUCT_NAME = pop;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 			};
@@ -1245,6 +1247,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREFIX_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Prefix.pch";
 				INFOPLIST_FILE = "pop/pop-Info.plist";
+				INSTALL_PATH = "@rpath";
 				PRODUCT_NAME = pop;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 			};
@@ -1260,6 +1263,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PREFIX_HEADER = "$(PRODUCT_NAME)/$(PRODUCT_NAME)-Prefix.pch";
 				INFOPLIST_FILE = "pop/pop-Info.plist";
+				INSTALL_PATH = "@rpath";
 				PRODUCT_NAME = pop;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 			};
