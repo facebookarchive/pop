@@ -777,16 +777,27 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 // POPAnimationGroup
 @implementation POPAnimationGroup
 {
+	POPAnimationGroupCompletion _completionBlock;
 	NSMutableSet *_animations;
-	void (^_completionBlock)();
+	BOOL _didFinish;
 }
 ////////////////////////////////////////////////////////////
-@synthesize addAnimation, removeAnimation, completionBlock;
+@synthesize completionBlock=_completionBlock, addAnimation, removeAnimation;
 
 ////////////////////////////////////////////////////////////
 - (NSSet *)animations
 {
 	return _animations;
+}
+
+- (POPAnimationGroupCompletion)completionBlock
+{
+	return _completionBlock;
+}
+
+- (void)setCompletionBlock:(POPAnimationGroupCompletion)value
+{
+	_completionBlock = value;
 }
 
 ////////////////////////////////////////////////////////////
@@ -834,11 +845,12 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 	@synchronized(_animations)
 	{
 		[_animations removeObject:animation];
+		_didFinish &= finished;
 		count = _animations.count;
 	}
 	
 	if(!count && self.completionBlock)
-		self.completionBlock();
+		self.completionBlock(_didFinish);
 }
 
 ////////////////////////////////////////////////////////////
@@ -849,6 +861,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 		return NULL;
 
 	_animations = [NSMutableSet setWithCapacity:11];
+	_didFinish = YES;
 	return self;
 }
 @end
@@ -1011,7 +1024,7 @@ static POPAnimation *deleteDictEntryDoNotLock(POPAnimator *self, id __unsafe_unr
 	[self _scheduleProcessPendingList];
 
 	if(!numberOfAnimations && group.completionBlock)
-		group.completionBlock();
+		group.completionBlock(YES);
 }
 
 - (void)addAnimationsForObject:(id)obj withDictionary:(NSDictionary *)animationsDictionary

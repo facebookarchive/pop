@@ -298,17 +298,14 @@ NSString *NSStringFromTransform3D(CATransform3D transform)
 	TransformationMatrix::DecomposedType d;
 	matrix.decompose(d);
 
-	return [NSString stringWithFormat:@"\n\tscaleX: %.3f\t\tscaleY: %.3f\t\tscaleZ: %.3f\n"
-		@"\tskewXY: %.3f\t\tskewXZ: %.3f\t\tskewYZ: %.3f\n"
-		@"\trotateX: %.3f\t\trotateY: %.3f\t\trotateZ: %.3f\n"
-		@"\tquaternionX: %.3f\t\tquaternionY: %.3f\t\tquaternionZ: %.3f\t\tquaternionW: %.3f\n"
-		@"\ttranslateX: %.3f\t\ttranslateY: %.3f\t\ttranslateZ: %.3f\n"
-		@"\tperspectiveX: %.3f\t\tperspectiveY: %.3f\t\tperspectiveZ: %.3f\t\tperspectiveW: %.3f",
-		d.scaleX, d.scaleY, d.scaleZ,
-		d.skewXY, d.skewXZ, d.skewYZ,
-		d.rotateX, d.rotateY, d.rotateZ,
-		d.quaternionX, d.quaternionY, d.quaternionZ, d.quaternionW,
+	return [NSString stringWithFormat:@"translate(%.3f, %.3f, %.3f), scale(%.3f, %.3f, %.3f), "
+		@"rotate(%.3f, %.3f, %.3f), skew(%.3f, %.3f, %.3f), "
+		@"q(%.3f, %.3f, %.3f, %.3f), p(%.3f, %.3f, %.3f, %.3f)",
 		d.translateX, d.translateY, d.translateZ,
+		d.scaleX, d.scaleY, d.scaleZ,
+		d.rotateX, d.rotateY, d.rotateZ,
+		d.skewXY, d.skewXZ, d.skewYZ,
+		d.quaternionX, d.quaternionY, d.quaternionZ, d.quaternionW,
 		d.perspectiveX, d.perspectiveY, d.perspectiveZ, d.perspectiveW];
 }
 

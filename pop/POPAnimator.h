@@ -49,10 +49,12 @@
 ////////////////////////////////////////////////////////////
 @class POPAnimation, POPAnimator;
 
+typedef void (^POPAnimationGroupCompletion)(BOOL didFinish);
+
 ////////////////////////////////////////////////////////////
 // POPAnimationGroup
 @interface POPAnimationGroup : NSObject
-@property (nonatomic, copy) void (^completionBlock)();
+@property (nonatomic, copy) POPAnimationGroupCompletion completionBlock;
 @property (nonatomic, readonly) NSSet *animations;
 
 - (void)addAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key;
