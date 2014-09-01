@@ -295,7 +295,7 @@ extern "C" {
 NSString *NSStringFromTransform3D(CATransform3D transform)
 {
 	if(CATransform3DIsIdentity(transform))
-		return @"<identity>";
+		return @"none";
 	else if(CATransform3DIsAffine(transform))
 	{
 		CGAffineTransform t = CATransform3DGetAffineTransform(transform);
@@ -309,8 +309,8 @@ NSString *NSStringFromTransform3D(CATransform3D transform)
 	TransformationMatrix::DecomposedType d;
 	matrix.decompose(d);
 	
-	return [NSString stringWithFormat:@"translate(%.3f, %.3f, %.3f), scale(%.3f, %.3f, %.3f), "
-		@"rotate(%.3f, %.3f, %.3f), skew(%.3f, %.3f, %.3f), "
+	return [NSString stringWithFormat:@"translate3d(%.3f, %.3f, %.3f), scale3d(%.3f, %.3f, %.3f), "
+		@"rotate3d(%.3f, %.3f, %.3f), skew(%.3f, %.3f, %.3f), "
 		@"q(%.3f, %.3f, %.3f, %.3f), p(%.3f, %.3f, %.3f, %.3f)",
 		d.translateX, d.translateY, d.translateZ,
 		d.scaleX, d.scaleY, d.scaleZ,
