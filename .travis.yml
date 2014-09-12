@@ -1,7 +1,7 @@
 language: objective-c
 before_install:
   - brew update
-  - brew upgrade xctool
+  - brew reinstall xctool
   - gem update cocoapods
 xcode_workspace: pop.xcworkspace
 xcode_scheme: pop
