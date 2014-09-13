@@ -15,8 +15,11 @@
 
 #import <CoreGraphics/CoreGraphics.h>
 #import <objc/NSObjCRuntime.h>
+
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
+#else
+#import <AppKit/NSLayoutConstraint.h>
 #endif
 #import "POPMath.h"
 

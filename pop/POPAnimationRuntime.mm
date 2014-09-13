@@ -15,7 +15,12 @@
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-#endif
+#else
+@interface NSValue ()
++ (NSValue *)valueWithEdgeInsets:(NSEdgeInsets)insets;
+- (NSEdgeInsets)edgeInsetsValue;
+@end
+ #endif
 
 #import "POPVector.h"
 #import "POPAnimationRuntime.h"
