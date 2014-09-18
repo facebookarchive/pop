@@ -138,7 +138,7 @@ static void updateDisplayLink(POPAnimator *self)
 #endif
 }
 
-static void updateAnimatable(id obj, POPPropertyAnimationState *anim)
+static void updateAnimatable(id obj, POPPropertyAnimationState *anim, bool shouldAvoidExtraneousWrite = false)
 {
   // handle user-initiated stop or pause; hault animation
   if (!anim->active || anim->paused)
@@ -148,11 +148,26 @@ static void updateAnimatable(id obj, POPPropertyAnimationState *anim)
     pop_animatable_write_block write = anim->property.writeBlock;
     if (NULL == write)
       return;
-    
-    if (!anim->additive) {
-      
-      VectorRef currentVec = anim->currentValue();
 
+    // current animation value
+    VectorRef currentVec = anim->currentValue();
+
+    if (!anim->additive) {
+
+      // if avoiding extraneous writes and we have a read block defined
+      if (shouldAvoidExtraneousWrite) {
+
+        pop_animatable_read_block read = anim->property.readBlock;
+        if (read) {
+          // compare current animation value with object value
+          Vector4r currentValue = currentVec->vector4r();
+          Vector4r objectValue = read_values(read, obj, anim->valueCount);
+          if (objectValue == currentValue) {
+            return;
+          }
+        }
+      }
+      
       // update previous values; support animation convergence
       anim->previous2Vec = anim->previousVec;
       anim->previousVec = currentVec;
@@ -164,22 +179,28 @@ static void updateAnimatable(id obj, POPPropertyAnimationState *anim)
       }
     } else {
       pop_animatable_read_block read = anim->property.readBlock;
-      if (NULL == read)
+      NSCAssert(read, @"additive requires an animatable property readBlock");
+      if (NULL == read) {
         return;
-      
+      }
+
       // object value
       Vector4r objectValue = read_values(read, obj, anim->valueCount);
 
-      // current animation value
-      VectorRef currentVec = anim->currentValue();
+      // current value
       Vector4r currentValue = currentVec->vector4r();
-
+      
       // determine animation change
       if (anim->previousVec) {
         Vector4r previousValue = anim->previousVec->vector4r();
         currentValue -= previousValue;
       }
 
+      // avoid writing no change
+      if (shouldAvoidExtraneousWrite && currentValue == Vector4r::Zero()) {
+        return;
+      }
+      
       // add to object value
       currentValue += objectValue;
       
@@ -210,15 +231,17 @@ static void applyAnimationTime(id obj, POPAnimationState *state, CFTimeInterval 
   state->delegateApply();
 }
 
-static void applyAnimationProgress(id obj, POPAnimationState *state, CGFloat progress)
+static void applyAnimationToValue(id obj, POPAnimationState *state)
 {
   POPPropertyAnimationState *ps = dynamic_cast<POPPropertyAnimationState*>(state);
-  if (ps && !ps->advanceProgress(progress)) {
-    return;
-  }
 
   if (NULL != ps) {
-    updateAnimatable(obj, ps);
+    
+    // finalize progress
+    ps->finalizeProgress();
+    
+    // write to value, updating only if needed
+    updateAnimatable(obj, ps, true);
   }
   
   state->delegateApply();
@@ -459,7 +482,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
       FBLogAnimDebug(@"time:%f running:%@", time, item->animation);
       if (state->isDone()) {
         // set end value
-        applyAnimationProgress(obj, state, 1.0);
+        applyAnimationToValue(obj, state);
 
         state->repeatCount--;
         if (state->repeatForever || state->repeatCount > 0) {

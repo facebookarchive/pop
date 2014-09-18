@@ -229,7 +229,7 @@ namespace POP {
 
     // Equality
     bool operator== (T v) const { return (x == v && y == v && z = v, w = v); }
-    bool operator== (const Vector4 &v) const { return (x == v.x && y == v.y && z == v.z && w = v.w); }
+    bool operator== (const Vector4 &v) const { return (x == v.x && y == v.y && z == v.z && w == v.w); }
 
     // Inequality
     bool operator!= (T v) const {return (x != v || y != v || z != v || w != v); }

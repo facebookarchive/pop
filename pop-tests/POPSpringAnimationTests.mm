@@ -639,4 +639,25 @@ static BOOL _floatingPointEqual(CGFloat a, CGFloat b)
   STAssertEqualObjects(writeEvent.value, anim.toValue, @"unexpected last write event %@", writeEvent);
 }
 
+- (void)testEquivalentFromToValues
+{
+  POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPosition];
+  anim.fromValue = [NSValue valueWithCGPoint:CGPointZero];
+  anim.toValue = [NSValue valueWithCGPoint:CGPointZero];
+  anim.velocity = [NSValue valueWithCGPoint:CGPointMake(1000.0, 1000.0)];
+
+  // start tracer
+  POPAnimationTracer *tracer = anim.tracer;
+  [tracer start];
+
+  // run animation
+  CALayer *layer = [CALayer layer];
+  [layer pop_addAnimation:anim forKey:@""];
+  POPAnimatorRenderDuration(self.animator, self.beginTime, 3, 1.0/60.0);
+
+  // verify last write event value
+  POPAnimationValueEvent *writeEvent = [[tracer eventsWithType:kPOPAnimationEventPropertyWrite] lastObject];
+  STAssertEqualObjects(writeEvent.value, anim.toValue, @"unexpected last write event %@", writeEvent);
+}
+
 @end
