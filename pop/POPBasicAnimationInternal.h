@@ -39,11 +39,13 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
   CAMediaTimingFunction *timingFunction;
   double timingControlPoints[4];
   CFTimeInterval duration;
+  CFTimeInterval timeProgress;
 
   _POPBasicAnimationState(id __unsafe_unretained anim) : _POPPropertyAnimationState(anim),
   timingFunction(nil),
   timingControlPoints{0.},
-  duration(kPOPAnimationDurationDefault)
+  duration(kPOPAnimationDurationDefault),
+  timeProgress(0.)
   {
     type = kPOPAnimationBasic;
   }
@@ -52,7 +54,7 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
     if (_POPPropertyAnimationState::isDone()) {
       return true;
     }
-    return progress + kPOPProgressThreshold >= 1.;
+    return timeProgress + kPOPProgressThreshold >= 1.;
   }
 
   void updatedTimingFunction()
@@ -77,6 +79,9 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
         // cap local time to duration
         CFTimeInterval t = MIN(time - startTime, duration) / duration;
         p = POPTimingFunctionSolve(timingControlPoints, t, SOLVE_EPS(duration));
+        timeProgress = t;
+    } else {
+        timeProgress = 1.;
     }
 
     // interpolate and advance
