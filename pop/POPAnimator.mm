@@ -770,19 +770,18 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 // POPAnimationGroup ()
 @interface POPAnimationGroup ()
 @property (nonatomic, copy) void(^addAnimation)(POPAnimation *anim, id obj, NSString *key);
-@property (nonatomic, copy) void(^removeAnimation)(id obj, NSString *key);
 @end
 
 ////////////////////////////////////////////////////////////
 // POPAnimationGroup
 @implementation POPAnimationGroup
 {
-	POPAnimationGroupCompletion _completionBlock;
+	NSMutableSet *_completionBlocks;
 	NSMutableSet *_animations;
 	BOOL _didFinish;
 }
 ////////////////////////////////////////////////////////////
-@synthesize completionBlock=_completionBlock, addAnimation, removeAnimation;
+@synthesize addAnimation;
 
 ////////////////////////////////////////////////////////////
 - (NSSet *)animations
@@ -790,14 +789,10 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 	return _animations;
 }
 
-- (POPAnimationGroupCompletion)completionBlock
+- (void)addCompletionBlock:(POPAnimationGroupCompletion)value
 {
-	return _completionBlock;
-}
-
-- (void)setCompletionBlock:(POPAnimationGroupCompletion)value
-{
-	_completionBlock = value;
+	if(value)
+		[_completionBlocks addObject:[value copy]];
 }
 
 ////////////////////////////////////////////////////////////
@@ -825,20 +820,13 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 	}
 }
 
-- (void)removeAnimationForObject:(id)obj key:(NSString *)key
+////////////////////////////////////////////////////////////
+- (void)callCompletionBlocks:(BOOL)finished
 {
-#if 1    
-	NSString *reason = [NSString stringWithFormat:@"%c[%@ %s] should not be invoked (%s:%d)",
-		'-', self.class, sel_getName(_cmd), __FILE__, __LINE__];
-    NSLog(@"%@", reason);
-    [[NSException exceptionWithName:@"CEUnusedImplementation" reason:reason userInfo:nil] raise];
-    exit(1);  // notreached, but needed to pacify the compiler
-#else
-	self.removeAnimation(obj, key);
-#endif
+	for(POPAnimationGroupCompletion completionBlock in _completionBlocks)
+		completionBlock(_didFinish);
 }
 
-////////////////////////////////////////////////////////////
 - (void)pop_animation:(POPAnimation *)animation didFinish:(BOOL)finished
 {
 	NSUInteger count;
@@ -849,8 +837,11 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 		count = _animations.count;
 	}
 	
-	if(!count && self.completionBlock)
-		self.completionBlock(_didFinish);
+	if(count)
+		return;
+
+	for(POPAnimationGroupCompletion completionBlock in _completionBlocks)
+		completionBlock(_didFinish);
 }
 
 ////////////////////////////////////////////////////////////
@@ -860,6 +851,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 	if(!(self = [super init]))
 		return NULL;
 
+	_completionBlocks = [NSMutableSet setWithCapacity:1];
 	_animations = [NSMutableSet setWithCapacity:11];
 	_didFinish = YES;
 	return self;
@@ -968,46 +960,6 @@ static POPAnimation *deleteDictEntryDoNotLock(POPAnimator *self, id __unsafe_unr
 		POPAnimationGetState (anim)->reset (true);
 	};
 
-	group.removeAnimation = ^(id obj, NSString * key) {
-		POPAnimation *anim = deleteDictEntryDoNotLock (self, obj, key, YES);
-
-		if(nil == anim)
-			return;
-
-		// remove from list
-		POPAnimatorItemRef item;
-		for(auto iter = _list.begin (); iter != _list.end (); )
-		{
-			item = *iter;
-
-			if(anim == item->animation)
-			{
-				_list.erase (iter);
-				break;
-			}
-
-			iter++;
-		}
-
-		// remove from pending list
-		for(auto iter = _pendingList.begin (); iter != _pendingList.end (); )
-		{
-			item = *iter;
-
-			if(anim == item->animation)
-			{
-				_pendingList.erase (iter);
-				break;
-			}
-
-			iter++;
-		}
-
-		// stop animation and callout
-		POPAnimationState *state = POPAnimationGetState (anim);
-		state->stop (true, (!state->active && !state->paused));
-	};
-
 	// lock
 	OSSpinLockLock (&_lock);
 
@@ -1023,8 +975,8 @@ static POPAnimation *deleteDictEntryDoNotLock(POPAnimator *self, id __unsafe_unr
 	// schedule runloop processing of pending animations
 	[self _scheduleProcessPendingList];
 
-	if(!numberOfAnimations && group.completionBlock)
-		group.completionBlock(YES);
+	if(!numberOfAnimations)
+		[group callCompletionBlocks:YES];
 }
 
 - (void)addAnimationsForObject:(id)obj withDictionary:(NSDictionary *)animationsDictionary
