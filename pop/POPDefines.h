@@ -10,6 +10,8 @@
 #ifndef POP_POPDefines_h
 #define POP_POPDefines_h
 
+#import <Availability.h>
+
 #ifdef __cplusplus
 # define POP_EXTERN_C_BEGIN extern "C" {
 # define POP_EXTERN_C_END   }
@@ -25,5 +27,7 @@
 #else
 # define POP_NOTHROW
 #endif
+
+#define SCENEKIT_SDK_AVAILABLE defined(__IPHONE_8_0) || defined(__MAC_10_8)
 
 #endif
