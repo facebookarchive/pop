@@ -147,27 +147,19 @@ struct _POPPropertyAnimationState : _POPAnimationState
     dynamicsThreshold = property.threshold;
   }
 
-  bool advanceProgress(CGFloat p)
+  void finalizeProgress()
   {
-    bool advanced = progress != p;
-    if (advanced) {
-      progress = p;
-      NSUInteger count = valueCount;
-      VectorRef outVec(Vector::new_vector(count, NULL));
+    progress = 1.0;
+    NSUInteger count = valueCount;
+    VectorRef outVec(Vector::new_vector(count, NULL));
 
-      if (1.0 == progress) {
-        if (outVec && toVec) {
-          *outVec = *toVec;
-        }
-      } else {
-        POPInterpolateVector(count, vec_data(outVec), vec_data(fromVec), vec_data(toVec), progress);
-      }
-
-      currentVec = outVec;
-      clampCurrentValue();
-      delegateProgress();
+    if (outVec && toVec) {
+      *outVec = *toVec;
     }
-    return advanced;
+
+    currentVec = outVec;
+    clampCurrentValue();
+    delegateProgress();
   }
 
   void computeProgress() {

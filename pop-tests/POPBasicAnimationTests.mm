@@ -7,6 +7,7 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
+#define SENTEST_IGNORE_DEPRECATION_WARNING
 #import <SenTestingKit/SenTestingKit.h>
 
 #import <OCMock/OCMock.h>
@@ -21,6 +22,36 @@
 @end
 
 @implementation POPBasicAnimationTests
+
+- (void)testGreaterThanOneControlPointC1Y
+{
+  POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+  anim.fromValue = @0;
+  anim.toValue = @100;
+  anim.timingFunction = [CAMediaTimingFunction functionWithControlPoints:0.15f :1.5f :0.55f :1.0f];
+  anim.duration = 0.36;
+
+  POPAnimationTracer *tracer = anim.tracer;
+  [tracer start];
+
+  CALayer *layer = [CALayer layer];
+  [layer pop_addAnimation:anim forKey:nil];
+
+  // run animation
+  POPAnimatorRenderDuration(self.animator, self.beginTime, 3, 1.0/60.0);
+
+  // verify write count
+  NSArray *writeEvents = [tracer eventsWithType:kPOPAnimationEventPropertyWrite];
+  STAssertTrue(writeEvents.count > 10, @"expected more write events %@", tracer.allEvents);
+  
+  // verify last written value is equal to animation to value
+  id lastValue = [(POPAnimationValueEvent *)writeEvents.lastObject value];
+  STAssertEqualObjects(lastValue, anim.toValue, @"expected more write events %@", tracer.allEvents);
+  
+  // verify last written value is less than previous value
+  id prevLastValue = [(POPAnimationValueEvent *)writeEvents[writeEvents.count - 2] value];
+  STAssertTrue(NSOrderedDescending == [prevLastValue compare:lastValue], @"unexpected lastValue; prevLastValue:%@ events:%@", lastValue, prevLastValue, tracer.allEvents);
+}
 
 - (void)testColorInterpolation
 {

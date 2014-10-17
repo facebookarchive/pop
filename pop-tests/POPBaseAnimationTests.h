@@ -7,6 +7,7 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
+#define SENTEST_IGNORE_DEPRECATION_WARNING
 #import <SenTestingKit/SenTestingKit.h>
 #import "POPCGUtils.h"
 
