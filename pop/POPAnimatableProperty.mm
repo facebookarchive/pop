@@ -532,7 +532,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     0.01
   },
   
-#ifdef SCENEKIT_SDK_AVAILABLE
+#if SCENEKIT_SDK_AVAILABLE
 
   /* SceneKit */
 
@@ -810,7 +810,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
   },
   
 #endif
-  
+    
 #if TARGET_OS_IPHONE
 
   /* UIView */

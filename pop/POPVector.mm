@@ -254,7 +254,7 @@ namespace POP
 #if SCENEKIT_SDK_AVAILABLE
   SCNVector3 Vector::scn_vector3() const
   {
-    return _count < 3 ? SCNVector3Zero : SCNVector3Make(_values[0], _values[1], _values[2]);
+    return _count < 3 ? SCNVector3Make(0.0, 0.0, 0.0) : SCNVector3Make(_values[0], _values[1], _values[2]);
   }
   
   Vector *Vector::new_scn_vector3(const SCNVector3 &vec3)
@@ -268,7 +268,7 @@ namespace POP
   
   SCNVector4 Vector::scn_vector4() const
   {
-    return _count < 4 ? SCNVector4Zero : SCNVector4Make(_values[0], _values[1], _values[2], _values[3]);
+    return _count < 4 ? SCNVector4Make(0.0, 0.0, 0.0, 0.0) : SCNVector4Make(_values[0], _values[1], _values[2], _values[3]);
   }
   
   Vector *Vector::new_scn_vector4(const SCNVector4 &vec4)
