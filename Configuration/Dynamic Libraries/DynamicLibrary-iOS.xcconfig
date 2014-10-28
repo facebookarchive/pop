@@ -12,8 +12,10 @@
 // declare inlines as extern
 GCC_INLINES_ARE_PRIVATE_EXTERN = YES
 
-// Rename pop.framework to pop.embeddedframework for iOS.
-WRAPPER_EXTENSION = embeddedframework
+// Rename target name, executable, and bundle Info.plist location.
+// This is necessary so we can distinguish between OS X and iOS targets when adding embedded frameworks, and so we can keep the nice @import pop syntax as well.
+PRODUCT_NAME = pop
+INFOPLIST_FILE = pop-ios/Info.plist
 
-// Compiler Options
-OTHER_LDFLAGS = $(inherited) -weak_framework UIKit -weak_framework QuartzCore -weak_framework CoreGraphics -weak_framework CoreImage -weak_framework SceneKit
+// Compiler Options,
+OTHER_LDFLAGS = $(inherited) -weak_framework UIKit -weak_framework QuartzCore -weak_framework CoreGraphics -weak_framework CoreImage -weak_framework SceneKit -ObjC
