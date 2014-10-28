@@ -13,6 +13,10 @@
 #endif
 #import "POPDefines.h"
 
+#if SCENEKIT_SDK_AVAILABLE
+#import <SceneKit/SceneKit.h>
+#endif
+
 #if TARGET_OS_IPHONE
 @class UIColor;
 #endif
@@ -33,6 +37,18 @@ NS_INLINE CGRect values_to_rect(const CGFloat values[])
 {
   return CGRectMake(values[0], values[1], values[2], values[3]);
 }
+
+#if SCENEKIT_SDK_AVAILABLE
+NS_INLINE SCNVector3 values_to_vec3(const CGFloat values[])
+{
+  return SCNVector3Make(values[0], values[1], values[2]);
+}
+
+NS_INLINE SCNVector4 values_to_vec4(const CGFloat values[])
+{
+  return SCNVector4Make(values[0], values[1], values[2], values[3]);
+}
+#endif
 
 #if TARGET_OS_IPHONE
 
@@ -62,6 +78,23 @@ NS_INLINE void values_from_rect(CGFloat values[], CGRect r)
   values[2] = r.size.width;
   values[3] = r.size.height;
 }
+
+#if SCENEKIT_SDK_AVAILABLE
+NS_INLINE void values_from_vec3(CGFloat values[], SCNVector3 v)
+{
+  values[0] = v.x;
+  values[1] = v.y;
+  values[2] = v.z;
+}
+
+NS_INLINE void values_from_vec4(CGFloat values[], SCNVector4 v)
+{
+  values[0] = v.x;
+  values[1] = v.y;
+  values[2] = v.z;
+  values[3] = v.w;
+}
+#endif
 
 #if TARGET_OS_IPHONE
 

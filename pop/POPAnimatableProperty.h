@@ -188,4 +188,35 @@ extern NSString * const kPOPTabBarBarTintColor;
  */
 extern NSString * const kPOPLabelTextColor;
 
+/**
+ Common SceneKit property names.
+ */
+extern NSString * const kPOPSCNNodePosition;
+extern NSString * const kPOPSCNNodePositionX;
+extern NSString * const kPOPSCNNodePositionY;
+extern NSString * const kPOPSCNNodePositionZ;
+extern NSString * const kPOPSCNNodeTranslation;
+extern NSString * const kPOPSCNNodeTranslationX;
+extern NSString * const kPOPSCNNodeTranslationY;
+extern NSString * const kPOPSCNNodeTranslationZ;
+extern NSString * const kPOPSCNNodeRotation;
+extern NSString * const kPOPSCNNodeRotationX;
+extern NSString * const kPOPSCNNodeRotationY;
+extern NSString * const kPOPSCNNodeRotationZ;
+extern NSString * const kPOPSCNNodeRotationW;
+extern NSString * const kPOPSCNNodeEulerAngles;
+extern NSString * const kPOPSCNNodeEulerAnglesX;
+extern NSString * const kPOPSCNNodeEulerAnglesY;
+extern NSString * const kPOPSCNNodeEulerAnglesZ;
+extern NSString * const kPOPSCNNodeOrientation;
+extern NSString * const kPOPSCNNodeOrientationX;
+extern NSString * const kPOPSCNNodeOrientationY;
+extern NSString * const kPOPSCNNodeOrientationZ;
+extern NSString * const kPOPSCNNodeOrientationW;
+extern NSString * const kPOPSCNNodeScale;
+extern NSString * const kPOPSCNNodeScaleX;
+extern NSString * const kPOPSCNNodeScaleY;
+extern NSString * const kPOPSCNNodeScaleZ;
+extern NSString * const kPOPSCNNodeScaleXY;
+
 #endif

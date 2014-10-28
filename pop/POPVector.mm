@@ -177,7 +177,7 @@ namespace POP
   {
     return _count < 4 ? CGRectZero : CGRectMake(_values[0], _values[1], _values[2], _values[3]);
   }
-
+  
   Vector *Vector::new_cg_rect(const CGRect &r)
   {
     Vector *v = new Vector(4);
@@ -250,6 +250,37 @@ namespace POP
     POPCGColorGetRGBAComponents(color, rgba);
     return new_vector(4, rgba);
   }
+  
+#if SCENEKIT_SDK_AVAILABLE
+  SCNVector3 Vector::scn_vector3() const
+  {
+    return _count < 3 ? SCNVector3Make(0.0, 0.0, 0.0) : SCNVector3Make(_values[0], _values[1], _values[2]);
+  }
+  
+  Vector *Vector::new_scn_vector3(const SCNVector3 &vec3)
+  {
+    Vector *v = new Vector(3);
+    v->_values[0] = vec3.x;
+    v->_values[1] = vec3.y;
+    v->_values[2] = vec3.z;
+    return v;
+  }
+  
+  SCNVector4 Vector::scn_vector4() const
+  {
+    return _count < 4 ? SCNVector4Make(0.0, 0.0, 0.0, 0.0) : SCNVector4Make(_values[0], _values[1], _values[2], _values[3]);
+  }
+  
+  Vector *Vector::new_scn_vector4(const SCNVector4 &vec4)
+  {
+    Vector *v = new Vector(4);
+    v->_values[0] = vec4.x;
+    v->_values[1] = vec4.y;
+    v->_values[2] = vec4.z;
+    v->_values[3] = vec4.w;
+    return v;
+  }
+#endif
 
   void Vector::subRound(CGFloat sub)
   {
