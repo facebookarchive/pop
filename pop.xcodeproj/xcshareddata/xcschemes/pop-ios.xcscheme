@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0B6BE74719FFD3B900762101"
                BuildableName = "pop.framework"
-               BlueprintName = "pop-ios"
+               BlueprintName = "pop-embedded"
                ReferencedContainer = "container:pop.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -58,7 +58,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0B6BE74719FFD3B900762101"
             BuildableName = "pop.framework"
-            BlueprintName = "pop-ios"
+            BlueprintName = "pop-embedded"
             ReferencedContainer = "container:pop.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -77,7 +77,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0B6BE74719FFD3B900762101"
             BuildableName = "pop.framework"
-            BlueprintName = "pop-ios"
+            BlueprintName = "pop-embedded"
             ReferencedContainer = "container:pop.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -95,7 +95,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0B6BE74719FFD3B900762101"
             BuildableName = "pop.framework"
-            BlueprintName = "pop-ios"
+            BlueprintName = "pop-embedded"
             ReferencedContainer = "container:pop.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
