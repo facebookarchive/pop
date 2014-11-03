@@ -27,7 +27,7 @@ enum POPValueType
   kPOPValueRange,
   kPOPValueColor,
   kPOPValueSCNVector3,
-  kPOPValueSCNVector4
+  kPOPValueSCNVector4,
 };
 
 using namespace POP;

@@ -73,11 +73,13 @@
 #import <SceneKit/SceneKit.h>
 
 /**
-  Dirty hacks because iOS is stupid and decided to define both SCNVector3's and SCNVector4's objCType as "t". However @encode(SCNVector3) and @encode(SCNVector4) both return the proper definition ("{SCNVector3=fff}" and "{SCNVector4=ffff}" respectively)
+  Dirty hacks because iOS is weird and decided to define both SCNVector3's and SCNVector4's objCType as "t". However @encode(SCNVector3) and @encode(SCNVector4) both return the proper definition ("{SCNVector3=fff}" and "{SCNVector4=ffff}" respectively)
+ 
+  [[NSValue valueWithSCNVector3:SCNVector3Make(0.0, 0.0, 0.0)] objcType] returns "t", whereas it should return "{SCNVector3=fff}".
  
   *flips table*
  */
-@implementation NSValue (SceneKitFU)
+@implementation NSValue (SceneKitFixes)
 
 + (NSValue *)valueWithSCNVector3:(SCNVector3)vec3 {
   return [NSValue valueWithBytes:&vec3 objCType:@encode(SCNVector3)];
