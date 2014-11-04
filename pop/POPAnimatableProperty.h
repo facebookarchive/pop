@@ -23,7 +23,7 @@
  @return The animatable property with that name or nil if it does not exist.
  @discussion Common animatable properties are included by default. Use the provided constants to reference.
  */
-+ (id)propertyWithName:(NSString *)name;
++ (instancetype)propertyWithName:(NSString *)name;
 
 /**
  @abstract The designated initializer.
@@ -32,7 +32,7 @@
  @return The animatable property with name if it exists, otherwise a newly created instance configured by block.
  @discussion Custom properties should use reverse-DNS naming. A newly created instance is only mutable in the scope of block. Once constructed, a property becomes immutable.
  */
-+ (id)propertyWithName:(NSString *)name initializer:(void (^)(POPMutableAnimatableProperty *prop))block;
++ (instancetype)propertyWithName:(NSString *)name initializer:(void (^)(POPMutableAnimatableProperty *prop))block;
 
 /**
  @abstract The name of the property.

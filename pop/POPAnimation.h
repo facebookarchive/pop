@@ -157,6 +157,6 @@ When combined with the autoreverses property, a singular animation is effectivel
  @param key The key used to identify the animation.
  @returns The animation currently attached, or nil if no such animation exists.
  */
-- (id)pop_animationForKey:(NSString *)key;
+- (instancetype)pop_animationForKey:(NSString *)key;
 
 @end
