@@ -72,6 +72,7 @@ NSString * const kPOPShapeLayerStrokeStart = @"shapeLayer.strokeStart";
 NSString * const kPOPShapeLayerStrokeEnd = @"shapeLayer.strokeEnd";
 NSString * const kPOPShapeLayerStrokeColor = @"shapeLayer.strokeColor";
 NSString * const kPOPShapeLayerFillColor = @"shapeLayer.fillColor";
+NSString * const kPOPShapeLayerLineWidth = @"shapeLayer.lineWidth";
 
 // NSLayoutConstraint
 NSString * const kPOPLayoutConstraintConstant = @"layoutConstraint.constant";
@@ -522,6 +523,16 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     kPOPThresholdColor
   },
 
+  {kPOPShapeLayerLineWidth,
+    ^(CAShapeLayer *obj, CGFloat values[]) {
+        values[0] = obj.lineWidth;
+    },
+    ^(CAShapeLayer *obj, const CGFloat values[]) {
+        obj.lineWidth = values[0];
+    },
+    0.01
+  },
+
   {kPOPLayoutConstraintConstant,
     ^(NSLayoutConstraint *obj, CGFloat values[]) {
       values[0] = obj.constant;
@@ -531,7 +542,6 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     0.01
   },
-  
 #if SCENEKIT_SDK_AVAILABLE
 
   /* SceneKit */
