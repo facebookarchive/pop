@@ -1141,9 +1141,9 @@
 			buildSettings = {
 				GCC_PREFIX_HEADER = "pop/pop-Prefix.pch";
 				INFOPLIST_FILE = "pop/pop-Info.plist";
-				PRIVATE_HEADERS_FOLDER_PATH = include/POP/Private;
+				PRIVATE_HEADERS_FOLDER_PATH = include/pop/Private;
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = include/POP;
+				PUBLIC_HEADERS_FOLDER_PATH = include/pop;
 			};
 			name = GCOV;
 		};
@@ -1166,9 +1166,9 @@
 			buildSettings = {
 				GCC_PREFIX_HEADER = "pop/pop-Prefix.pch";
 				INFOPLIST_FILE = "pop/pop-Info.plist";
-				PRIVATE_HEADERS_FOLDER_PATH = include/POP/Private;
+				PRIVATE_HEADERS_FOLDER_PATH = include/pop/Private;
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = include/POP;
+				PUBLIC_HEADERS_FOLDER_PATH = include/pop;
 			};
 			name = Profile;
 		};
@@ -1205,9 +1205,9 @@
 			buildSettings = {
 				GCC_PREFIX_HEADER = "pop/pop-Prefix.pch";
 				INFOPLIST_FILE = "pop/pop-Info.plist";
-				PRIVATE_HEADERS_FOLDER_PATH = include/POP/Private;
+				PRIVATE_HEADERS_FOLDER_PATH = include/pop/Private;
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = include/POP;
+				PUBLIC_HEADERS_FOLDER_PATH = include/pop;
 			};
 			name = Debug;
 		};
@@ -1217,9 +1217,9 @@
 			buildSettings = {
 				GCC_PREFIX_HEADER = "pop/pop-Prefix.pch";
 				INFOPLIST_FILE = "pop/pop-Info.plist";
-				PRIVATE_HEADERS_FOLDER_PATH = include/POP/Private;
+				PRIVATE_HEADERS_FOLDER_PATH = include/pop/Private;
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = include/POP;
+				PUBLIC_HEADERS_FOLDER_PATH = include/pop;
 			};
 			name = Release;
 		};
