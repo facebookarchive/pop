@@ -1130,7 +1130,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				OBJROOT = "$(HOME)/Library/Developer/Xcode/DerivedData/Build/Intermediates";
+				OBJROOT = "$(SYMROOT)/Intermediates";
 				SYMROOT = "$(HOME)/Library/Developer/Xcode/DerivedData/Build";
 			};
 			name = GCOV;
@@ -1155,7 +1155,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				OBJROOT = "$(HOME)/Library/Developer/Xcode/DerivedData/Build/Intermediates";
+				OBJROOT = "$(SYMROOT)/Intermediates";
 				SYMROOT = "$(HOME)/Library/Developer/Xcode/DerivedData/Build";
 			};
 			name = Profile;
@@ -1180,7 +1180,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				OBJROOT = "$(HOME)/Library/Developer/Xcode/DerivedData/Build/Intermediates";
+				OBJROOT = "$(SYMROOT)/Intermediates";
 				ONLY_ACTIVE_ARCH = YES;
 				SYMROOT = "$(HOME)/Library/Developer/Xcode/DerivedData/Build";
 			};
@@ -1194,7 +1194,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				OBJROOT = "$(HOME)/Library/Developer/Xcode/DerivedData/Build/Intermediates";
+				OBJROOT = "$(SYMROOT)/Intermediates";
 				SYMROOT = "$(HOME)/Library/Developer/Xcode/DerivedData/Build";
 			};
 			name = Release;
