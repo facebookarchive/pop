@@ -867,7 +867,7 @@
 		EC19120F162FB53A00E0CC76 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0600;
+				LastTestingUpgradeCheck = 0610;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
@@ -1141,9 +1141,9 @@
 			buildSettings = {
 				GCC_PREFIX_HEADER = "pop/pop-Prefix.pch";
 				INFOPLIST_FILE = "pop/pop-Info.plist";
-				PRIVATE_HEADERS_FOLDER_PATH = include/pop/Private;
+				PRIVATE_HEADERS_FOLDER_PATH = include/$PRODUCT_NAME/Private;
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = include/pop;
+				PUBLIC_HEADERS_FOLDER_PATH = include/$PRODUCT_NAME;
 			};
 			name = GCOV;
 		};
@@ -1166,9 +1166,9 @@
 			buildSettings = {
 				GCC_PREFIX_HEADER = "pop/pop-Prefix.pch";
 				INFOPLIST_FILE = "pop/pop-Info.plist";
-				PRIVATE_HEADERS_FOLDER_PATH = include/pop/Private;
+				PRIVATE_HEADERS_FOLDER_PATH = include/$PRODUCT_NAME/Private;
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = include/pop;
+				PUBLIC_HEADERS_FOLDER_PATH = include/$PRODUCT_NAME;
 			};
 			name = Profile;
 		};
@@ -1205,9 +1205,9 @@
 			buildSettings = {
 				GCC_PREFIX_HEADER = "pop/pop-Prefix.pch";
 				INFOPLIST_FILE = "pop/pop-Info.plist";
-				PRIVATE_HEADERS_FOLDER_PATH = include/pop/Private;
+				PRIVATE_HEADERS_FOLDER_PATH = include/$PRODUCT_NAME/Private;
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = include/pop;
+				PUBLIC_HEADERS_FOLDER_PATH = include/$PRODUCT_NAME;
 			};
 			name = Debug;
 		};
@@ -1217,9 +1217,9 @@
 			buildSettings = {
 				GCC_PREFIX_HEADER = "pop/pop-Prefix.pch";
 				INFOPLIST_FILE = "pop/pop-Info.plist";
-				PRIVATE_HEADERS_FOLDER_PATH = include/pop/Private;
+				PRIVATE_HEADERS_FOLDER_PATH = include/$PRODUCT_NAME/Private;
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = include/pop;
+				PUBLIC_HEADERS_FOLDER_PATH = include/$PRODUCT_NAME;
 			};
 			name = Release;
 		};
