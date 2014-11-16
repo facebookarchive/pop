@@ -7,6 +7,17 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
+#import <Foundation/Foundation.h>
+
+////////////////////////////////////////////////////////////
+//! Project version number for NPUIKit.
+FOUNDATION_EXPORT double POPVersionNumber;
+
+//! Project version string for NPUIKit.
+FOUNDATION_EXPORT const unsigned char POPVersionString[];
+FOUNDATION_EXPORT NSString *POPVersion();
+
+////////////////////////////////////////////////////////////
 #ifndef POP_POP_H
 #define POP_POP_H
 
