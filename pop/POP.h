@@ -23,10 +23,12 @@ FOUNDATION_EXPORT NSString *POPVersion();
 
 #import <pop/POPAnimatableProperty.h>
 #import <pop/POPAnimation.h>
+#import <pop/POPAnimationPrivate.h>
 #import <pop/POPAnimationEvent.h>
 #import <pop/POPAnimationExtras.h>
 #import <pop/POPAnimationTracer.h>
 #import <pop/POPAnimator.h>
+#import <pop/POPAnimatorPrivate.h>
 #import <pop/POPBasicAnimation.h>
 #import <pop/POPCustomEasingAnimation.h>
 #import <pop/POPCustomAnimation.h>
@@ -35,6 +37,7 @@ FOUNDATION_EXPORT NSString *POPVersion();
 #import <pop/POPGeometry.h>
 #import <pop/POPPropertyAnimation.h>
 #import <pop/POPSpringAnimation.h>
+#import <pop/POPLayerExtras.h>
 
 
 #endif /* POP_POP_H */
