@@ -1497,7 +1497,6 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				OBJROOT = "$(SYMROOT)/Intermediates";
-				SYMROOT = "$(SYMROOT)";
 			};
 			name = GCOV;
 		};
@@ -1522,7 +1521,6 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				OBJROOT = "$(SYMROOT)/Intermediates";
-				SYMROOT = "$(SYMROOT)";
 			};
 			name = Profile;
 		};
@@ -1548,7 +1546,6 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				OBJROOT = "$(SYMROOT)/Intermediates";
 				ONLY_ACTIVE_ARCH = YES;
-				SYMROOT = "$(SYMROOT)";
 			};
 			name = Debug;
 		};
@@ -1561,7 +1558,6 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				OBJROOT = "$(SYMROOT)/Intermediates";
-				SYMROOT = "$(SYMROOT)";
 			};
 			name = Release;
 		};
