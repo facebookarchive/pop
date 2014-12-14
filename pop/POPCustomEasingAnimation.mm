@@ -22,7 +22,6 @@
 }
 
 #pragma mark - Properties
-
 - (CGFloat (^)(CGFloat t))easingFunction
 {
 	return ((POPCustomEasingAnimationState *)_state)->easingFunction;

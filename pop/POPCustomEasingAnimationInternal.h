@@ -18,6 +18,13 @@ struct _POPCustomEasingAnimationState : _POPBasicAnimationState
 			// cap local time to duration
 			CGFloat localTime = time - startTime;
 
+			// solve for normalized time, aka progresss [0, 1]
+			if (duration > 0.0f) {
+				timeProgress = MIN(time - startTime, duration) / duration;
+			} else {
+				timeProgress = 1;
+			}
+
 			CGFloat p = easingFunction(localTime);
 			if(isnan(p))
 				p = 0;
