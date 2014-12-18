@@ -296,28 +296,46 @@ NSString *NSStringFromTransform3D(CATransform3D transform)
 {
 	if(CATransform3DIsIdentity(transform))
 		return @"none";
-	else if(CATransform3DIsAffine(transform))
+
+	NSMutableArray *components = [NSMutableArray arrayWithCapacity:7];
+	if(CATransform3DIsAffine(transform))
 	{
 		CGAffineTransform t = CATransform3DGetAffineTransform(transform);
-		return [NSString stringWithFormat:@"translate(%.3f, %.3f), scale(%.3f, %.3f), rotate(%.3f)",// skew(%.3f, %.3f)",
-			t.tx, t.ty,
-			sqrtf(t.a * t.a + t.c * t.c), sqrtf(t.b * t.b + t.d * t.d),
-			atan2f(t.b, t.a)/*, t.c, t.b*/];
+		if(CGAffineTransformIsIdentity(t))
+			return @"none";
+
+		CGFloat sx = sqrtf(t.a * t.a + t.c * t.c);
+		CGFloat sy = sqrtf(t.b * t.b + t.d * t.d);
+		CGFloat r = atan2f(t.b, t.a);
+		if(t.tx || t.ty)
+			[components addObject:[NSString stringWithFormat:@"translate(%.3f, %.3f)", t.tx, t.ty]];
+		if(sx || sy)
+			[components addObject:[NSString stringWithFormat:@"scale(%.3f, %.3f)", sx, sy]];
+		if(r)
+			[components addObject:[NSString stringWithFormat:@"rotate(%.3f)", r]];
+		else if(t.c || t.b)
+			[components addObject:[NSString stringWithFormat:@"skew(%.3f, %.3f)", t.c, t.b]];
+	}
+	else
+	{
+		TransformationMatrix matrix(transform);
+		TransformationMatrix::DecomposedType d;
+		matrix.decompose(d);
+		if(d.translateX|| d.translateY || d.translateZ)
+			[components addObject:[NSString stringWithFormat:@"translate3d(%.3f, %.3f, %.3f)", d.translateX, d.translateY, d.translateZ]];
+		if(d.scaleX|| d.scaleY || d.scaleZ)
+			[components addObject:[NSString stringWithFormat:@"scale3d(%.3f, %.3f, %.3f)", d.scaleX, d.scaleY, d.scaleZ]];
+		if(d.rotateX|| d.rotateY || d.rotateZ)
+			[components addObject:[NSString stringWithFormat:@"rotate3d(%.3f, %.3f, %.3f)", d.rotateX, d.rotateY, d.rotateZ]];
+		if(d.skewXY|| d.skewXZ || d.skewYZ)
+			[components addObject:[NSString stringWithFormat:@"skew(%.3f, %.3f, %.3f)", d.skewXY, d.skewXZ, d.skewYZ]];
+		if(d.quaternionX || d.quaternionY || d.quaternionZ || d.quaternionW)
+			[components addObject:[NSString stringWithFormat:@"q(%.3f, %.3f, %.3f, %.3f)", d.quaternionX, d.quaternionY, d.quaternionZ, d.quaternionW]];
+		if(d.perspectiveX || d.perspectiveY || d.perspectiveZ || d.perspectiveW)
+			[components addObject:[NSString stringWithFormat:@"p(%.3f, %.3f, %.3f, %.3f)", d.perspectiveX, d.perspectiveY, d.perspectiveZ, d.perspectiveW]];
 	}
 
-	TransformationMatrix matrix(transform);
-	TransformationMatrix::DecomposedType d;
-	matrix.decompose(d);
-	
-	return [NSString stringWithFormat:@"translate3d(%.3f, %.3f, %.3f), scale3d(%.3f, %.3f, %.3f), "
-		@"rotate3d(%.3f, %.3f, %.3f), skew(%.3f, %.3f, %.3f), "
-		@"q(%.3f, %.3f, %.3f, %.3f), p(%.3f, %.3f, %.3f, %.3f)",
-		d.translateX, d.translateY, d.translateZ,
-		d.scaleX, d.scaleY, d.scaleZ,
-		d.rotateX, d.rotateY, d.rotateZ,
-		d.skewXY, d.skewXZ, d.skewYZ,
-		d.quaternionX, d.quaternionY, d.quaternionZ, d.quaternionW,
-		d.perspectiveX, d.perspectiveY, d.perspectiveZ, d.perspectiveW];
+	return [components componentsJoinedByString:@", "];
 }
 
 void DecomposeTransform3D(CATransform3D transform, double *buffer)
