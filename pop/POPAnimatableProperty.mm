@@ -13,6 +13,10 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#if SCENEKIT_SDK_AVAILABLE
+#import <SceneKit/SceneKit.h>
+#endif
+
 #import <pop/POPLayerExtras.h>
 
 #if TARGET_OS_IPHONE
@@ -68,6 +72,7 @@ NSString * const kPOPShapeLayerStrokeStart = @"shapeLayer.strokeStart";
 NSString * const kPOPShapeLayerStrokeEnd = @"shapeLayer.strokeEnd";
 NSString * const kPOPShapeLayerStrokeColor = @"shapeLayer.strokeColor";
 NSString * const kPOPShapeLayerFillColor = @"shapeLayer.fillColor";
+NSString * const kPOPShapeLayerLineWidth = @"shapeLayer.lineWidth";
 
 // NSLayoutConstraint
 NSString * const kPOPLayoutConstraintConstant = @"layoutConstraint.constant";
@@ -109,6 +114,35 @@ NSString * const kPOPTabBarBarTintColor = kPOPNavigationBarBarTintColor;
 
 //UILabel
 NSString * const kPOPLabelTextColor = @"label.textColor";
+
+//SceneKit
+NSString * const kPOPSCNNodePosition = @"scnode.position";
+NSString * const kPOPSCNNodePositionX = @"scnnode.position.x";
+NSString * const kPOPSCNNodePositionY = @"scnnode.position.y";
+NSString * const kPOPSCNNodePositionZ = @"scnnode.position.z";
+NSString * const kPOPSCNNodeTranslation = @"scnnode.translation";
+NSString * const kPOPSCNNodeTranslationX = @"scnnode.translation.x";
+NSString * const kPOPSCNNodeTranslationY = @"scnnode.translation.y";
+NSString * const kPOPSCNNodeTranslationZ = @"scnnode.translation.z";
+NSString * const kPOPSCNNodeRotation = @"scnnode.rotation";
+NSString * const kPOPSCNNodeRotationX = @"scnnode.rotation.x";
+NSString * const kPOPSCNNodeRotationY = @"scnnode.rotation.y";
+NSString * const kPOPSCNNodeRotationZ = @"scnnode.rotation.z";
+NSString * const kPOPSCNNodeRotationW = @"scnnode.rotation.w";
+NSString * const kPOPSCNNodeEulerAngles = @"scnnode.eulerAngles";
+NSString * const kPOPSCNNodeEulerAnglesX = @"scnnode.eulerAngles.x";
+NSString * const kPOPSCNNodeEulerAnglesY = @"scnnode.eulerAngles.y";
+NSString * const kPOPSCNNodeEulerAnglesZ = @"scnnode.eulerAngles.z";
+NSString * const kPOPSCNNodeOrientation = @"scnnode.orientation";
+NSString * const kPOPSCNNodeOrientationX = @"scnnode.orientation.x";
+NSString * const kPOPSCNNodeOrientationY = @"scnnode.orientation.y";
+NSString * const kPOPSCNNodeOrientationZ = @"scnnode.orientation.z";
+NSString * const kPOPSCNNodeOrientationW = @"scnnode.orientation.w";
+NSString * const kPOPSCNNodeScale = @"scnnode.scale";
+NSString * const kPOPSCNNodeScaleX = @"scnnode.scale.x";
+NSString * const kPOPSCNNodeScaleY = @"scnnode.scale.y";
+NSString * const kPOPSCNNodeScaleZ = @"scnnode.scale.z";
+NSString * const kPOPSCNNodeScaleXY = @"scnnode.scale.xy";
 
 /**
  State structure internal to static animatable property.
@@ -489,6 +523,16 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     kPOPThresholdColor
   },
 
+  {kPOPShapeLayerLineWidth,
+    ^(CAShapeLayer *obj, CGFloat values[]) {
+        values[0] = obj.lineWidth;
+    },
+    ^(CAShapeLayer *obj, const CGFloat values[]) {
+        obj.lineWidth = values[0];
+    },
+    0.01
+  },
+
   {kPOPLayoutConstraintConstant,
     ^(NSLayoutConstraint *obj, CGFloat values[]) {
       values[0] = obj.constant;
@@ -498,7 +542,285 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     0.01
   },
+#if SCENEKIT_SDK_AVAILABLE
 
+  /* SceneKit */
+
+  {kPOPSCNNodePosition,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values_from_vec3(values, obj.position);
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.position = values_to_vec3(values);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodePositionX,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.position.x;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.position = SCNVector3Make(values[0], obj.position.y, obj.position.z);
+    },
+    kPOPThresholdScale
+  },
+
+  {kPOPSCNNodePositionY,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.position.y;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.position = SCNVector3Make(obj.position.x, values[0], obj.position.z);
+    },
+    kPOPThresholdScale
+  },
+
+  {kPOPSCNNodePositionZ,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.position.z;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.position = SCNVector3Make(obj.position.x, obj.position.y, values[0]);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeTranslation,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.transform.m41;
+      values[1] = obj.transform.m42;
+      values[2] = obj.transform.m43;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.transform = SCNMatrix4MakeTranslation(values[0], values[1], values[2]);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeTranslationX,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.transform.m41;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.transform = SCNMatrix4MakeTranslation(values[0], obj.transform.m42, obj.transform.m43);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeTranslationY,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.transform.m42;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.transform = SCNMatrix4MakeTranslation(obj.transform.m41, values[0], obj.transform.m43);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeTranslationY,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.transform.m43;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.transform = SCNMatrix4MakeTranslation(obj.transform.m41, obj.transform.m42, values[0]);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeRotation,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values_from_vec4(values, obj.rotation);
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.rotation = values_to_vec4(values);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeRotationX,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.rotation.x;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.rotation = SCNVector4Make(1.0, obj.rotation.y, obj.rotation.z, values[0]);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeRotationY,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.rotation.y;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.rotation = SCNVector4Make(obj.rotation.x, 1.0, obj.rotation.z, values[0]);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeRotationZ,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.rotation.z;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.rotation = SCNVector4Make(obj.rotation.x, obj.rotation.y, 1.0, values[0]);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeRotationW,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.rotation.w;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.rotation = SCNVector4Make(obj.rotation.x, obj.rotation.y, obj.rotation.z, values[0]);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeEulerAngles,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values_from_vec3(values, obj.eulerAngles);
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.eulerAngles = values_to_vec3(values);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeEulerAnglesX,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.eulerAngles.x;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.eulerAngles = SCNVector3Make(values[0], obj.eulerAngles.y, obj.eulerAngles.z);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeEulerAnglesY,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.eulerAngles.y;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.eulerAngles = SCNVector3Make(obj.eulerAngles.x, values[0], obj.eulerAngles.z);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeEulerAnglesZ,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.eulerAngles.z;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.eulerAngles = SCNVector3Make(obj.eulerAngles.x, obj.eulerAngles.y, values[0]);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeOrientation,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values_from_vec4(values, obj.orientation);
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.orientation = values_to_vec4(values);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeOrientationX,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.orientation.x;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.orientation = SCNVector4Make(values[0], obj.orientation.y, obj.orientation.z, obj.orientation.w);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeOrientationY,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.orientation.y;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.orientation = SCNVector4Make(obj.orientation.x, values[0], obj.orientation.z, obj.orientation.w);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeOrientationZ,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.orientation.z;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.orientation = SCNVector4Make(obj.orientation.x, obj.orientation.y, values[0], obj.orientation.w);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeOrientationW,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.orientation.w;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.orientation = SCNVector4Make(obj.orientation.x, obj.orientation.y, obj.orientation.z, values[0]);
+    },
+    kPOPThresholdScale
+  },
+
+  {kPOPSCNNodeScale,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values_from_vec3(values, obj.scale);
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.scale = values_to_vec3(values);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeScaleX,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.scale.x;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.scale = SCNVector3Make(values[0], obj.scale.y, obj.scale.z);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeScaleY,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.scale.y;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.position = SCNVector3Make(obj.scale.x, values[0], obj.scale.z);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeScaleZ,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.scale.z;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.scale = SCNVector3Make(obj.scale.x, obj.scale.y, values[0]);
+    },
+    kPOPThresholdScale
+  },
+  
+  {kPOPSCNNodeScaleXY,
+    ^(SCNNode *obj, CGFloat values[]) {
+      values[0] = obj.scale.x;
+      values[1] = obj.scale.y;
+    },
+    ^(SCNNode *obj, const CGFloat values[]) {
+      obj.scale = SCNVector3Make(values[0], values[1], obj.scale.z);
+    },
+    kPOPThresholdScale
+  },
+  
+#endif
+    
 #if TARGET_OS_IPHONE
 
   /* UIView */

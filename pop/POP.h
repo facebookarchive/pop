@@ -28,9 +28,7 @@ FOUNDATION_EXPORT NSString *POPVersion();
 #import <pop/POPAnimationExtras.h>
 #import <pop/POPAnimationTracer.h>
 #import <pop/POPAnimator.h>
-#import <pop/POPAnimatorPrivate.h>
 #import <pop/POPBasicAnimation.h>
-#import <pop/POPCustomEasingAnimation.h>
 #import <pop/POPCustomAnimation.h>
 #import <pop/POPDecayAnimation.h>
 #import <pop/POPDefines.h>
@@ -38,6 +36,11 @@ FOUNDATION_EXPORT NSString *POPVersion();
 #import <pop/POPPropertyAnimation.h>
 #import <pop/POPSpringAnimation.h>
 #import <pop/POPLayerExtras.h>
+
+// Extra includes so iOS 8 Framework target doesn't complain about them not being in the umbrella header.
+#import <pop/POPAnimationPrivate.h>
+#import <pop/POPAnimatorPrivate.h>
+#import <pop/POPCustomEasingAnimation.h>
 
 
 #endif /* POP_POP_H */
