@@ -54,6 +54,7 @@ typedef void (^POPAnimationGroupCompletion)(BOOL didFinish);
 ////////////////////////////////////////////////////////////
 // POPAnimationGroup
 @interface POPAnimationGroup : NSObject
+- (void)setAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key;
 - (void)addAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key;
 - (void)addCompletionBlock:(POPAnimationGroupCompletion)value;
 @end
@@ -62,5 +63,6 @@ typedef void (^POPAnimationGroupCompletion)(BOOL didFinish);
 // POPAnimator (POPAnimationGroup)
 @interface POPAnimator (POPAnimationGroup)
 - (void)batchAddRemoveAnimations:(void (^)(POPAnimationGroup * group))block;
+- (void)setAnimationsForObject:(id)obj withDictionary:(NSDictionary *)animationsDictionary;
 - (void)addAnimationsForObject:(id)obj withDictionary:(NSDictionary *)animationsDictionary;
 @end

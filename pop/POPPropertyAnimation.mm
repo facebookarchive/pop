@@ -102,4 +102,16 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
     [s appendFormat:@"; progress = %f", __state->progress];
 }
 
+- (BOOL)updateExistingAnimation:(POPPropertyAnimation *)animation
+{
+	if([animation isKindOfClass:POPPropertyAnimation.class] &&
+		[animation.toValue isKindOfClass:self.toValue] &&
+		[animation.property.name isEqualToString:self.property.name])
+	{
+		animation.toValue = self.toValue;
+		return YES;
+	}
+
+	return NO;
+}
 @end

@@ -86,5 +86,4 @@ DEFINE_RW_PROPERTY_OBJ(POPBasicAnimationState, timingFunction, setTimingFunction
   if (__state->duration)
     [s appendFormat:@"; duration = %f", __state->duration];
 }
-
 @end

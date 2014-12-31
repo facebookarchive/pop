@@ -178,4 +178,8 @@ DEFINE_RW_PROPERTY(POPDecayAnimationState, deceleration, setDeceleration:, CGFlo
   }
 }
 
+- (BOOL)updateExistingAnimation:(POPPropertyAnimation *)animation
+{
+	return YES;
+}
 @end
