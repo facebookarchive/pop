@@ -21,6 +21,10 @@
 #import "POPBasicAnimationInternal.h"
 #import "POPDecayAnimation.h"
 
+#if !TARGET_OS_IPHONE
+#import <libkern/OSAtomic.h>
+#endif
+
 using namespace std;
 using namespace POP;
 
@@ -82,6 +86,7 @@ static BOOL _disableBackgroundThread = YES;
   CADisplayLink *_displayLink;
 #else
   CVDisplayLinkRef _displayLink;
+  int32_t _enqueuedRender;
 #endif
   POPAnimatorItemList _list;
   CFMutableDictionaryRef _dict;
@@ -106,9 +111,15 @@ static BOOL _disableBackgroundThread = YES;
 static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp *now, const CVTimeStamp *outputTime, CVOptionFlags flagsIn, CVOptionFlags *flagsOut, void *context)
 {
   if (_disableBackgroundThread) {
+    __unsafe_unretained POPAnimator *pa = (__bridge POPAnimator *)context;
+    int32_t* enqueuedRender = &pa->_enqueuedRender;
+    if (*enqueuedRender == 0) {
+      OSAtomicIncrement32(enqueuedRender);
       dispatch_async(dispatch_get_main_queue(), ^{
         [(__bridge POPAnimator*)context render];
+        OSAtomicDecrement32(enqueuedRender);
       });
+    }
   } else {
     [(__bridge POPAnimator*)context render];
   }
