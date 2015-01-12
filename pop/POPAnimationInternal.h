@@ -34,7 +34,10 @@ typedef struct
   bool reached;
 } POPProgressMarker;
 
+typedef void (^POPAnimationDidStartBlock)(POPAnimation *anim);
+typedef void (^POPAnimationDidReachToValueBlock)(POPAnimation *anim);
 typedef void (^POPAnimationCompletionBlock)(POPAnimation *anim, BOOL finished);
+typedef void (^POPAnimationDidApplyBlock)(POPAnimation *anim);
 
 @interface POPAnimation()
 - (instancetype)_init;
@@ -199,7 +202,10 @@ struct _POPAnimationState
   CFTimeInterval startTime;
   CFTimeInterval lastTime;
   id __weak delegate;
+  POPAnimationDidStartBlock animationDidStartBlock;
+  POPAnimationDidReachToValueBlock animationDidReachToValueBlock;
   POPAnimationCompletionBlock completionBlock;
+  POPAnimationDidApplyBlock animationDidApplyBlock;
   NSMutableDictionary *dict;
   POPAnimationTracer *tracer;
   CGFloat progress;
@@ -232,7 +238,10 @@ struct _POPAnimationState
   startTime(0),
   lastTime(0),
   delegate(nil),
+  animationDidStartBlock(nil),
+  animationDidReachToValueBlock(nil),
   completionBlock(nil),
+  animationDidApplyBlock(nil),
   dict(nil),
   tracer(nil),
   progress(0),
@@ -258,7 +267,10 @@ struct _POPAnimationState
     name = nil;
     dict = nil;
     tracer = nil;
+    animationDidStartBlock = NULL;
+    animationDidReachToValueBlock = NULL;
     completionBlock = NULL;
+    animationDidApplyBlock = NULL;
   }
   
   bool isCustom() {
@@ -364,6 +376,12 @@ struct _POPAnimationState
       ActionEnabler enabler;
       [delegate pop_animationDidStart:self];
     }
+
+    POPAnimationDidStartBlock block = animationDidStartBlock;
+    if (block != NULL) {
+      ActionEnabler enabler;
+      block(self);
+    }
     
     if (tracing) {
       [tracer didStart];
@@ -450,6 +468,12 @@ struct _POPAnimationState
     if (delegateDidApply) {
       ActionEnabler enabler;
       [delegate pop_animationDidApply:self];
+    }
+
+    POPAnimationDidApplyBlock block = animationDidApplyBlock;
+    if (block != NULL) {
+      ActionEnabler enabler;
+      block(self);
     }
   }
   
