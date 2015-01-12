@@ -288,6 +288,46 @@ using namespace POP;
   [delegate2 verify];
 }
 
+- (void)testAnimationDidStartBlock
+{
+  CALayer *layer1 = self.layer1;
+  [layer1 removeAllAnimations];
+
+  POPAnimation *anim = FBTestLinearPositionAnimation(self.beginTime);
+  id delegate = [OCMockObject niceMockForProtocol:@protocol(POPAnimationDelegate)];
+
+  // set animation did start block
+  anim.animationDidStartBlock = ^(POPAnimation *a) {
+    [delegate pop_animationDidStart:a];
+  };
+
+  [[delegate expect] pop_animationDidStart:anim];
+
+  [layer1 pop_addAnimation:anim forKey:@"key"];
+  POPAnimatorRenderTimes(self.animator, self.beginTime, @[@0.0, @1.0]);
+  [delegate verify];
+}
+
+- (void)testAnimationDidReachToValueBlock
+{
+  CALayer *layer1 = self.layer1;
+  [layer1 removeAllAnimations];
+
+  POPAnimation *anim = FBTestLinearPositionAnimation(self.beginTime);
+  id delegate = [OCMockObject niceMockForProtocol:@protocol(POPAnimationDelegate)];
+
+  // set animation did reach to value block
+  anim.animationDidReachToValueBlock = ^(POPAnimation *a) {
+    [delegate pop_animationDidReachToValue:a];
+  };
+
+  [[delegate expect] pop_animationDidReachToValue:anim];
+
+  [layer1 pop_addAnimation:anim forKey:@"key"];
+  POPAnimatorRenderTimes(self.animator, self.beginTime, @[@0.0, @1.0]);
+  [delegate verify];
+}
+
 - (void)testCompletionBlock
 {
   CALayer *layer1 = self.layer1;
@@ -317,6 +357,26 @@ using namespace POP;
 
   // test for finished completion
   [[delegate expect] pop_animationDidStop:anim finished:YES];
+
+  [layer1 pop_addAnimation:anim forKey:@"key"];
+  POPAnimatorRenderTimes(self.animator, self.beginTime, @[@0.0, @1.0]);
+  [delegate verify];
+}
+
+- (void)testAnimationDidApplyBlock
+{
+  CALayer *layer1 = self.layer1;
+  [layer1 removeAllAnimations];
+
+  POPAnimation *anim = FBTestLinearPositionAnimation(self.beginTime);
+  id delegate = [OCMockObject niceMockForProtocol:@protocol(POPAnimationDelegate)];
+
+  // set animation did apply block
+  anim.animationDidApplyBlock = ^(POPAnimation *a) {
+    [delegate pop_animationDidApply:a];
+  };
+
+  [[delegate expect] pop_animationDidApply:anim];
 
   [layer1 pop_addAnimation:anim forKey:@"key"];
   POPAnimatorRenderTimes(self.animator, self.beginTime, @[@0.0, @1.0]);
