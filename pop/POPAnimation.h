@@ -45,9 +45,24 @@
 @property (readonly, nonatomic) POPAnimationTracer *tracer;
 
 /**
+ @abstract Optional block called on animation start.
+ */
+@property (copy, nonatomic) void (^animationDidStartBlock)(POPAnimation *anim);
+
+/**
+ @abstract Optional block called when value meets or exceeds to value.
+ */
+@property (copy, nonatomic) void (^animationDidReachToValueBlock)(POPAnimation *anim);
+
+/**
  @abstract Optional block called on animation completion.
  */
 @property (copy, nonatomic) void (^completionBlock)(POPAnimation *anim, BOOL finished);
+
+/**
+ @abstract Optional block called each frame animation is applied.
+ */
+@property (copy, nonatomic) void (^animationDidApplyBlock)(POPAnimation *anim);
 
 /**
  @abstract Flag indicating whether animation should be removed on completion.

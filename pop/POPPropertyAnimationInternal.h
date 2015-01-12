@@ -231,6 +231,12 @@ struct _POPPropertyAnimationState : _POPAnimationState
       [delegate pop_animationDidReachToValue:self];
     }
 
+    POPAnimationDidReachToValueBlock block = animationDidReachToValueBlock;
+    if (block != NULL) {
+      ActionEnabler enabler;
+      block(self);
+    }
+
     if (tracing) {
       [tracer didReachToValue:POPBox(currentValue(), valueType, true)];
     }
