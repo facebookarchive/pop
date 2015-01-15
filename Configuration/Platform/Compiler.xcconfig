@@ -34,6 +34,3 @@ CLANG_ENABLE_OBJC_ARC = YES
 
 // Allow #import'ing code generated headers from DERIVED_FILE_DIR.
 HEADER_SEARCH_PATHS = $(inherited) $(DERIVED_FILE_DIR)
-
-// Weakly Link SceneKit
-OTHER_LDFLAGS = $(inherited) -weak_framework SceneKit

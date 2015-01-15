@@ -29,9 +29,9 @@
 #endif
 
 #if TARGET_OS_MAC
-  #define SCENEKIT_SDK_AVAILABLE defined(__MAC_10_10)
+  #define SCENEKIT_SDK_AVAILABLE defined(POP_USE_SCENEKIT)
 #elif TARGET_OS_IPHONE
-  #define SCENEKIT_SDK_AVAILABLE defined(__IPHONE_8_0)
+  #define SCENEKIT_SDK_AVAILABLE defined(POP_USE_SCENEKIT)
 #endif
 
 #endif
