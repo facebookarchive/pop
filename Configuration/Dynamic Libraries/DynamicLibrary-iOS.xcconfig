@@ -18,4 +18,4 @@ PRODUCT_NAME = pop
 INFOPLIST_FILE = pop-embedded/Info.plist
 
 // Compiler Options,
-OTHER_LDFLAGS = $(inherited) -weak_framework UIKit -weak_framework QuartzCore -weak_framework CoreGraphics -weak_framework CoreImage -weak_framework SceneKit -ObjC
+OTHER_LDFLAGS = $(inherited) -weak_framework UIKit -weak_framework QuartzCore -weak_framework CoreGraphics -weak_framework CoreImage -ObjC

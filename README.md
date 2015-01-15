@@ -162,6 +162,16 @@ pod install
 
 Assuming CocoaPods is installed, this will include the necessary OCMock dependency to the unit test targets.
 
+## SceneKit
+
+Due to SceneKit requiring iOS 8 and OS X 10.9, POP's SceneKit extensions aren't provided out of box. Unfortunately, [weakly linked frameworks](https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/WeakLinking.html) cannot be used due to issues mentioned in the [Xcode 6.1 Release Notes](https://developer.apple.com/library/ios/releasenotes/DeveloperTools/RN-Xcode/Chapters/xc6_release_notes.html).
+
+To remedy this, you can easily opt-in to use SceneKit! Simply add this to the Preprocessor Macros section of your Xcode Project: 
+
+```
+POP_USE_SCENEKIT=1
+```
+
 ## Resources
 
 A collection of links to external resources that may prove valuable:
