@@ -440,7 +440,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     // unlock
     OSSpinLockUnlock(&_lock);
   } else {
-    // copy list into vectory
+    // copy list into vector
     std::vector<POPAnimatorItemRef> vector{ std::begin(items), std::end(items) };
 
     // unlock
