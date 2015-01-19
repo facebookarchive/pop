@@ -7,15 +7,14 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#define SENTEST_IGNORE_DEPRECATION_WARNING
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "POPCGUtils.h"
 
 @class CALayer;
 @class POPAnimator;
 @class POPAnimatableProperty;
 
-@interface POPBaseAnimationTests : SenTestCase
+@interface POPBaseAnimationTests : XCTestCase
 
 // two layers for test use
 @property (strong, nonatomic) CALayer *layer1, *layer2;
@@ -49,5 +48,5 @@ extern BOOL POPAnimationEventsContainValue(NSArray *events, NSNumber *value);
   CGFloat v1[4], v2[4]; \
   POPCGColorGetRGBAComponents(c1, v1); \
   POPCGColorGetRGBAComponents(c2, v2); \
-  STAssertTrue(_EQLF_(v1[0], v2[0], 1e-6) && _EQLF_(v1[1], v2[1], 1e-6) && _EQLF_(v1[2], v2[2], 1e-6) && _EQLF_(v1[3], v2[3], 1e-6), @"not equal color:[r:%f g:%f b:%f a:%f] color:[r:%f g:%f b:%f a:%f]", v1[0], v1[1], v1[2], v1[3], v2[0], v2[1], v2[2], v2[3]); \
+  XCTAssertTrue(_EQLF_(v1[0], v2[0], 1e-6) && _EQLF_(v1[1], v2[1], 1e-6) && _EQLF_(v1[2], v2[2], 1e-6) && _EQLF_(v1[3], v2[3], 1e-6), @"not equal color:[r:%f g:%f b:%f a:%f] color:[r:%f g:%f b:%f a:%f]", v1[0], v1[1], v1[2], v1[3], v2[0], v2[1], v2[2], v2[3]); \
 }

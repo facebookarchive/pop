@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "EC7E319818C93D6500B38170"
-               BuildableName = "pop-tests-osx.octest"
+               BuildableName = "pop-tests-osx.xctest"
                BlueprintName = "pop-tests-osx"
                ReferencedContainer = "container:pop.xcodeproj">
             </BuildableReference>
@@ -49,6 +49,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "EC68857E18C7B60000C6194C"
+            BuildableName = "pop.framework"
+            BlueprintName = "pop-osx"
+            ReferencedContainer = "container:pop.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

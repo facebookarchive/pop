@@ -7,8 +7,7 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#define SENTEST_IGNORE_DEPRECATION_WARNING
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import <OCMock/OCMock.h>
 #import <pop/POPBasicAnimation.h>
@@ -42,15 +41,15 @@
 
   // verify write count
   NSArray *writeEvents = [tracer eventsWithType:kPOPAnimationEventPropertyWrite];
-  STAssertTrue(writeEvents.count > 10, @"expected more write events %@", tracer.allEvents);
+  XCTAssertTrue(writeEvents.count > 10, @"expected more write events %@", tracer.allEvents);
   
   // verify last written value is equal to animation to value
   id lastValue = [(POPAnimationValueEvent *)writeEvents.lastObject value];
-  STAssertEqualObjects(lastValue, anim.toValue, @"expected more write events %@", tracer.allEvents);
+  XCTAssertEqualObjects(lastValue, anim.toValue, @"expected more write events %@", tracer.allEvents);
   
   // verify last written value is less than previous value
   id prevLastValue = [(POPAnimationValueEvent *)writeEvents[writeEvents.count - 2] value];
-  STAssertTrue(NSOrderedDescending == [prevLastValue compare:lastValue], @"unexpected lastValue; prevLastValue:%@ events:%@", lastValue, prevLastValue, tracer.allEvents);
+  XCTAssertTrue(NSOrderedDescending == [prevLastValue compare:lastValue], @"unexpected lastValue; prevLastValue:%@ events:%@", prevLastValue, tracer.allEvents);
 }
 
 - (void)testColorInterpolation
@@ -76,7 +75,7 @@
 
   // verify write events
   NSArray *writeEvents = [tracer eventsWithType:kPOPAnimationEventPropertyWrite];
-  STAssertTrue(writeEvents.count > 5, @"expected more write events %@", tracer.allEvents);
+  XCTAssertTrue(writeEvents.count > 5, @"expected more write events %@", tracer.allEvents);
 
   // assert final value
   POPAssertColorEqual((__bridge CGColorRef)anim.toValue, layer.backgroundColor);
@@ -106,9 +105,9 @@
     
     // verify write events
     NSArray *writeEvents = [tracer eventsWithType:kPOPAnimationEventPropertyWrite];
-    STAssertTrue(writeEvents.count == 1, @"expected one write event %@", tracer.allEvents);
+    XCTAssertTrue(writeEvents.count == 1, @"expected one write event %@", tracer.allEvents);
     NSArray *stopEvents = [tracer eventsWithType:kPOPAnimationEventDidStop];
-    STAssertTrue(stopEvents.count == 1, @"expected one stop event %@", tracer.allEvents);
+    XCTAssertTrue(stopEvents.count == 1, @"expected one stop event %@", tracer.allEvents);
     
     // assert final value
     POPAssertColorEqual((__bridge CGColorRef)anim.toValue, layer.backgroundColor);
@@ -156,7 +155,7 @@
   UIEdgeInsets lastEdgeInsets = [lastEvent.value UIEdgeInsetsValue];
   
   // verify last insets are to insets
-  STAssertTrue(UIEdgeInsetsEqualToEdgeInsets(lastEdgeInsets, toEdgeInsets), @"unexpected last edge insets value: %@", lastEvent);
+  XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(lastEdgeInsets, toEdgeInsets), @"unexpected last edge insets value: %@", lastEvent);
 }
 #endif
 
