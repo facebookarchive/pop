@@ -11,15 +11,14 @@
 
 #import <OCMock/OCMock.h>
 
-#define SENTEST_IGNORE_DEPRECATION_WARNING
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import <pop/POP.h>
 #import <pop/POPAnimatorPrivate.h>
 
 #import "POPAnimationTestsExtras.h"
 
-@interface POPAnimationMRRTests : SenTestCase
+@interface POPAnimationMRRTests : XCTestCase
 {
   POPAnimator *_animator;
   CFTimeInterval _beginTime;
@@ -50,10 +49,10 @@
   @autoreleasepool {
     id delegate = [OCMockObject niceMockForProtocol:@protocol(POPAnimationDelegate)];
     anim.delegate = delegate;
-    STAssertNotNil(anim.delegate, @"delegate should not be nil");
+    XCTAssertNotNil(anim.delegate, @"delegate should not be nil");
   }
 
-  STAssertNil(anim.delegate, @"delegate should be nil");
+  XCTAssertNil(anim.delegate, @"delegate should be nil");
 }
 
 - (void)testAnimationCancellationOnAnimatableDeallocation
