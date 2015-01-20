@@ -7,8 +7,7 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#define SENTEST_IGNORE_DEPRECATION_WARNING
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import <OCMock/OCMock.h>
 #import <pop/POPCustomAnimation.h>
@@ -35,7 +34,7 @@ static const CGFloat epsilon = 0.0001f;
   POPCustomAnimation *anim = [POPCustomAnimation animationWithBlock:^BOOL(id target, POPCustomAnimation *animation) {
     if (0 != callbackCount) {
       // validate elapsed time
-      STAssertEqualsWithAccuracy(animation.elapsedTime, timeInterval, epsilon, @"expected elapsedTime:%f %@", timeInterval, animation);
+      XCTAssertEqualWithAccuracy(animation.elapsedTime, timeInterval, epsilon, @"expected elapsedTime:%f %@", timeInterval, animation);
     }
 
     // increment callback count
@@ -64,13 +63,13 @@ static const CGFloat epsilon = 0.0001f;
   [layer pop_addAnimation:anim forKey:key];
   
   POPAnimatorRenderDuration(self.animator, self.beginTime + 0.1, 5, 0.1);
-  STAssertTrue(callbackCount == 3, @"unexpected callbackCount:%d", callbackCount);
+  XCTAssertTrue(callbackCount == 3, @"unexpected callbackCount:%lu", (unsigned long)callbackCount);
   
   NSArray *startEvents = [tracer eventsWithType:kPOPAnimationEventDidStart];
-  STAssertTrue(1 == startEvents.count, @"unexpected startEvents count %@", startEvents);
+  XCTAssertTrue(1 == startEvents.count, @"unexpected startEvents count %@", startEvents);
   
   NSArray *stopEvents = [tracer eventsWithType:kPOPAnimationEventDidStop];
-  STAssertTrue(1 == stopEvents.count, @"unexpected stopEvents count %@", stopEvents);
+  XCTAssertTrue(1 == stopEvents.count, @"unexpected stopEvents count %@", stopEvents);
 
   [layer verify];
   [delegate verify];
@@ -87,10 +86,10 @@ static const CGFloat epsilon = 0.0001f;
   POPCustomAnimation *anim = [POPCustomAnimation animationWithBlock:^BOOL(id target, POPCustomAnimation *animation) {
     if (0 == callbackCount) {
       // validate elapsed time acruel
-      STAssertEqualsWithAccuracy(animation.elapsedTime, 0., epsilon, @"expected elapsedTime:%f %@", timeInterval, animation);
+      XCTAssertEqualWithAccuracy(animation.elapsedTime, 0., epsilon, @"expected elapsedTime:%f %@", timeInterval, animation);
     } else {
       // validate elapsed time acruel
-      STAssertEqualsWithAccuracy(animation.elapsedTime, timeInterval, epsilon, @"expected elapsedTime:%f %@", timeInterval, animation);
+      XCTAssertEqualWithAccuracy(animation.elapsedTime, timeInterval, epsilon, @"expected elapsedTime:%f %@", timeInterval, animation);
     }
     
     // increment callback count
@@ -123,13 +122,13 @@ static const CGFloat epsilon = 0.0001f;
   [layer pop_addAnimation:anim forKey:key];
   
   POPAnimatorRenderDuration(self.animator, self.beginTime + 0.1, 5, 0.1);
-  STAssertTrue(callbackCount == 3, @"unexpected callbackCount:%d", callbackCount);
+  XCTAssertTrue(callbackCount == 3, @"unexpected callbackCount:%lu", (unsigned long)callbackCount);
 
   NSArray *startEvents = [tracer eventsWithType:kPOPAnimationEventDidStart];
-  STAssertTrue(1 == startEvents.count, @"unexpected startEvents count %@", startEvents);
+  XCTAssertTrue(1 == startEvents.count, @"unexpected startEvents count %@", startEvents);
   
   NSArray *stopEvents = [tracer eventsWithType:kPOPAnimationEventDidStop];
-  STAssertTrue(1 == stopEvents.count, @"unexpected stopEvents count %@", stopEvents);
+  XCTAssertTrue(1 == stopEvents.count, @"unexpected stopEvents count %@", stopEvents);
   
   [layer verify];
   [delegate verify];
@@ -151,19 +150,19 @@ static const CGFloat epsilon = 0.0001f;
   [layer pop_addAnimation:anim forKey:key];
   
   // verify animation & key
-  STAssertTrue(anim == [layer pop_animationForKey:key], @"expected:%@ actual:%@", anim, [layer pop_animationForKey:key]);
-  STAssertTrue([[layer pop_animationKeys] containsObject:key], @"expected:%@ actual:%@", key, [layer pop_animationKeys]);
+  XCTAssertTrue(anim == [layer pop_animationForKey:key], @"expected:%@ actual:%@", anim, [layer pop_animationForKey:key]);
+  XCTAssertTrue([[layer pop_animationKeys] containsObject:key], @"expected:%@ actual:%@", key, [layer pop_animationKeys]);
   
   POPAnimatorRenderDuration(self.animator, self.beginTime, 1, 0.1);
 
-  STAssertEqualObjects(layer, blockTarget, @"expected:%@ actual:%@", layer, blockTarget);
+  XCTAssertEqualObjects(layer, blockTarget, @"expected:%@ actual:%@", layer, blockTarget);
   
   // remove animations
   [layer pop_removeAnimationForKey:key];
 
   // verify animation & key
-  STAssertFalse(anim == [layer pop_animationForKey:key], @"expected:%@ actual:%@", nil, [layer pop_animationForKey:key]);
-  STAssertFalse([[layer pop_animationKeys] containsObject:key], @"expected:%@ actual:%@", nil, [layer pop_animationKeys]);
+  XCTAssertFalse(anim == [layer pop_animationForKey:key], @"expected:%@ actual:%@", (id)nil, [layer pop_animationForKey:key]);
+  XCTAssertFalse([[layer pop_animationKeys] containsObject:key], @"expected:%@ actual:%@", (id)nil, [layer pop_animationKeys]);
 }
 
 @end

@@ -7,8 +7,7 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#define SENTEST_IGNORE_DEPRECATION_WARNING
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import <OCMock/OCMock.h>
 #import <QuartzCore/QuartzCore.h>
@@ -49,7 +48,7 @@ static NSString *animationKey = @"key";
   POPSpringAnimation *anim = [POPSpringAnimation animation];
   anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerPosition];
   anim.progressMarkers = markers;
-  STAssertEqualObjects(markers, anim.progressMarkers, @"%@ shoudl equal %@", markers, anim.progressMarkers);
+  XCTAssertEqualObjects(markers, anim.progressMarkers, @"%@ shoudl equal %@", markers, anim.progressMarkers);
 
   // delegate
   id delegate = [OCMockObject niceMockForProtocol:@protocol(POPAnimationDelegate)];
@@ -92,12 +91,12 @@ static NSString *animationKey = @"key";
 
   // finished
   POPAnimationValueEvent *stopEvent = [[tracer eventsWithType:kPOPAnimationEventDidStop] lastObject];
-  STAssertEqualObjects(stopEvent.value, @YES, @"unexpected stop event %@", stopEvent);
+  XCTAssertEqualObjects(stopEvent.value, @YES, @"unexpected stop event %@", stopEvent);
 
   // convergence threshold
   NSArray *writeEvents = [tracer eventsWithType:kPOPAnimationEventPropertyWrite];
   NSUInteger toValueFrameCount = POPAnimationCountLastEventValues(writeEvents, anim.toValue, anim.property.threshold);
-  STAssertTrue(toValueFrameCount < kPOPAnimationConvergenceMaxFrameCount, @"unexpected convergence; toValueFrameCount: %d", toValueFrameCount);
+  XCTAssertTrue(toValueFrameCount < kPOPAnimationConvergenceMaxFrameCount, @"unexpected convergence; toValueFrameCount: %lu", (unsigned long)toValueFrameCount);
 }
 
 - (void)testConvergenceRounded
@@ -120,12 +119,12 @@ static NSString *animationKey = @"key";
 
   // finished
   POPAnimationValueEvent *stopEvent = [[tracer eventsWithType:kPOPAnimationEventDidStop] lastObject];
-  STAssertEqualObjects(stopEvent.value, @YES, @"unexpected stop event %@", stopEvent);
+  XCTAssertEqualObjects(stopEvent.value, @YES, @"unexpected stop event %@", stopEvent);
 
   // convergence threshold
   NSArray *writeEvents = [tracer eventsWithType:kPOPAnimationEventPropertyWrite];
   NSUInteger toValueFrameCount = POPAnimationCountLastEventValues(writeEvents, anim.toValue);
-  STAssertTrue(toValueFrameCount < kPOPAnimationConvergenceMaxFrameCount, @"unexpected convergence; toValueFrameCount: %d", toValueFrameCount);
+  XCTAssertTrue(toValueFrameCount < kPOPAnimationConvergenceMaxFrameCount, @"unexpected convergence; toValueFrameCount: %lu", (unsigned long)toValueFrameCount);
 }
 
 - (void)testConvergenceClampedRounded
@@ -149,12 +148,12 @@ static NSString *animationKey = @"key";
 
   // finished
   POPAnimationValueEvent *stopEvent = [[tracer eventsWithType:kPOPAnimationEventDidStop] lastObject];
-  STAssertEqualObjects(stopEvent.value, @YES, @"unexpected stop event %@", stopEvent);
+  XCTAssertEqualObjects(stopEvent.value, @YES, @"unexpected stop event %@", stopEvent);
 
   // convergence threshold
   NSArray *writeEvents = [tracer eventsWithType:kPOPAnimationEventPropertyWrite];
   NSUInteger toValueFrameCount = POPAnimationCountLastEventValues(writeEvents, anim.toValue);
-  STAssertTrue(toValueFrameCount < kPOPAnimationConvergenceMaxFrameCount, @"unexpected convergence; toValueFrameCount: %d", toValueFrameCount);
+  XCTAssertTrue(toValueFrameCount < kPOPAnimationConvergenceMaxFrameCount, @"unexpected convergence; toValueFrameCount: %lu", (unsigned long)toValueFrameCount);
 }
 
 - (void)testRemovedOnCompletionNoStartStopBasics
@@ -192,11 +191,11 @@ static NSString *animationKey = @"key";
 
   // verify delegate
   [delegate verify];
-  STAssertTrue(completionBlock, @"completion block did not execute %@", allEvents);
-  STAssertTrue(completionBlockFinished, @"completion block did not finish %@", allEvents);
+  XCTAssertTrue(completionBlock, @"completion block did not execute %@", allEvents);
+  XCTAssertTrue(completionBlockFinished, @"completion block did not finish %@", allEvents);
 
   // assert animation has not been removed
-  STAssertTrue(anim == [layer pop_animationForKey:animationKey], @"expected animation on layer animations:%@", [layer pop_animationKeys]);
+  XCTAssertTrue(anim == [layer pop_animationForKey:animationKey], @"expected animation on layer animations:%@", [layer pop_animationKeys]);
 }
 
 - (void)testRemovedOnCompletionNoContinuations
@@ -251,9 +250,9 @@ static NSString *animationKey = @"key";
 
       // verify delegate
       [delegate verify];
-      STAssertTrue(1 == didReachEvents.count, @"unexpected didReachEvents %@", didReachEvents);
-      STAssertTrue(completionBlock, @"completion block did not execute %@", allEvents);
-      STAssertTrue(completionBlockFinished, @"completion block did not finish %@", allEvents);
+      XCTAssertTrue(1 == didReachEvents.count, @"unexpected didReachEvents %@", didReachEvents);
+      XCTAssertTrue(completionBlock, @"completion block did not execute %@", allEvents);
+      XCTAssertTrue(completionBlockFinished, @"completion block did not finish %@", allEvents);
     } else if (toValues.count - 1 == idx) {
       // continue stoped animation
       [tracer reset];
@@ -270,9 +269,9 @@ static NSString *animationKey = @"key";
 
       // verify delegate
       [delegate verify];
-      STAssertTrue(1 == didReachEvents.count, @"unexpected didReachEvents %@", didReachEvents);
-      STAssertTrue(completionBlock, @"completion block did not execute %@", allEvents);
-      STAssertTrue(completionBlockFinished, @"completion block did not finish %@", allEvents);
+      XCTAssertTrue(1 == didReachEvents.count, @"unexpected didReachEvents %@", didReachEvents);
+      XCTAssertTrue(completionBlock, @"completion block did not execute %@", allEvents);
+      XCTAssertTrue(completionBlockFinished, @"completion block did not finish %@", allEvents);
     } else {
       // continue stoped (idx = 1) or started animation
       if (1 == idx) {
@@ -293,13 +292,13 @@ static NSString *animationKey = @"key";
 
       // verify delegate
       [delegate verify];
-      STAssertTrue(1 == didReachEvents.count, @"unexpected didReachEvents %@", didReachEvents);
-      STAssertFalse(completionBlock, @"completion block did not execute %@ %@", anim, allEvents);
-      STAssertFalse(completionBlockFinished, @"completion block did not finish %@ %@", anim, allEvents);
+      XCTAssertTrue(1 == didReachEvents.count, @"unexpected didReachEvents %@", didReachEvents);
+      XCTAssertFalse(completionBlock, @"completion block did not execute %@ %@", anim, allEvents);
+      XCTAssertFalse(completionBlockFinished, @"completion block did not finish %@ %@", anim, allEvents);
     }
 
     // assert animation has not been removed
-    STAssertTrue(anim == [layer pop_animationForKey:animationKey], @"expected animation on layer animations:%@", [layer pop_animationKeys]);
+    XCTAssertTrue(anim == [layer pop_animationForKey:animationKey], @"expected animation on layer animations:%@", [layer pop_animationKeys]);
   }];
 }
 
@@ -333,7 +332,7 @@ static NSString *animationKey = @"key";
   // verify number values
   NSArray *writeEvents = [tracer eventsWithType:kPOPAnimationEventPropertyWrite];
   for (POPAnimationValueEvent *writeEvent in writeEvents) {
-    STAssertEqualObjects(writeEvent.value, [NSValue valueWithCGPoint:initialValue], @"unexpected write event:%@ anim:%@", writeEvent, anim);
+    XCTAssertEqualObjects(writeEvent.value, [NSValue valueWithCGPoint:initialValue], @"unexpected write event:%@ anim:%@", writeEvent, anim);
   }
 }
 
@@ -353,20 +352,20 @@ static NSString *animationKey = @"key";
   // add animation, but do not start
   [layer pop_addAnimation:anim forKey:animationKey];
   POPAnimatorRenderDuration(self.animator, self.beginTime, 0.2, 1.0/60.0);
-  STAssertNotNil(anim.fromValue, @"unexpected from value %@", anim);
-  STAssertNil(anim.toValue, @"unexpected to value %@", anim);
+  XCTAssertNotNil(anim.fromValue, @"unexpected from value %@", anim);
+  XCTAssertNil(anim.toValue, @"unexpected to value %@", anim);
 
   // start animation
   POPAnimatorRenderDuration(self.animator, self.beginTime + 0.2, 0.2, 1.0/60.0);
-  STAssertNotNil(anim.fromValue, @"unexpected from value %@", anim);
-  STAssertNotNil(anim.toValue, @"unexpected to value %@", anim);
+  XCTAssertNotNil(anim.fromValue, @"unexpected from value %@", anim);
+  XCTAssertNotNil(anim.toValue, @"unexpected to value %@", anim);
 
   // continue running animation
   anim.fromValue = nil;
   anim.toValue = @200.0;
   POPAnimatorRenderDuration(self.animator, self.beginTime + 0.4, 0.2, 1.0/60.0);
-  STAssertNotNil(anim.fromValue, @"unexpected from value %@", anim);
-  STAssertNotNil(anim.toValue, @"unexpected to value %@", anim);
+  XCTAssertNotNil(anim.fromValue, @"unexpected from value %@", anim);
+  XCTAssertNotNil(anim.toValue, @"unexpected to value %@", anim);
 }
 
 - (void)testLatentSpring
@@ -418,7 +417,7 @@ static NSString *animationKey = @"key";
   CGRect lastRect = [lastEvent.value CGRectValue];
 
   // verify last rect is to rect
-  STAssertTrue(CGRectEqualToRect(lastRect, toRect), @"unexpected last rect value: %@", lastEvent);
+  XCTAssertTrue(CGRectEqualToRect(lastRect, toRect), @"unexpected last rect value: %@", lastEvent);
 }
 
 #if TARGET_OS_IPHONE
@@ -465,7 +464,7 @@ static NSString *animationKey = @"key";
   UIEdgeInsets lastEdgeInsets = [lastEvent.value UIEdgeInsetsValue];
 
   // verify last insets are to insets
-  STAssertTrue(UIEdgeInsetsEqualToEdgeInsets(lastEdgeInsets, toEdgeInsets), @"unexpected last edge insets value: %@", lastEvent);
+  XCTAssertTrue(UIEdgeInsetsEqualToEdgeInsets(lastEdgeInsets, toEdgeInsets), @"unexpected last edge insets value: %@", lastEvent);
 }
 #endif
 
@@ -500,7 +499,7 @@ static NSString *animationKey = @"key";
   [delegate verify];
 
   // expect some interpolation
-  STAssertTrue(writeEvents.count > 1, @"unexpected write events %@", writeEvents);
+  XCTAssertTrue(writeEvents.count > 1, @"unexpected write events %@", writeEvents);
   POPAnimationValueEvent *lastEvent = [writeEvents lastObject];
 
   // verify last written color is to color
@@ -524,7 +523,7 @@ static BOOL _floatingPointEqual(CGFloat a, CGFloat b)
   CGFloat outBounciness, outSpeed;
   [POPSpringAnimation convertTension:tension friction:friction toBounciness:&outBounciness speed:&outSpeed];
 
-  STAssertTrue(_floatingPointEqual(sampleBounciness, outBounciness) && _floatingPointEqual(sampleSpeed, outSpeed), @"(bounciness, speed) conversion failed. Mapped (%f, %f) back to (%f, %f)", sampleBounciness, sampleSpeed, outBounciness, outSpeed);
+  XCTAssertTrue(_floatingPointEqual(sampleBounciness, outBounciness) && _floatingPointEqual(sampleSpeed, outSpeed), @"(bounciness, speed) conversion failed. Mapped (%f, %f) back to (%f, %f)", sampleBounciness, sampleSpeed, outBounciness, outSpeed);
 }
 
 - (void)testTensionFrictionToBouncinessSpeedConversion
@@ -538,7 +537,7 @@ static BOOL _floatingPointEqual(CGFloat a, CGFloat b)
   CGFloat outTension, outFriction, outMass;
   [POPSpringAnimation convertBounciness:bounciness speed:speed toTension:&outTension friction:&outFriction mass:&outMass];
 
-  STAssertTrue(_floatingPointEqual(sampleTension, outTension) && _floatingPointEqual(sampleFriction, outFriction), @"(tension, friction) conversion failed. Mapped (%f, %f) back to (%f, %f)", sampleTension, sampleFriction, outTension, outFriction);
+  XCTAssertTrue(_floatingPointEqual(sampleTension, outTension) && _floatingPointEqual(sampleFriction, outFriction), @"(tension, friction) conversion failed. Mapped (%f, %f) back to (%f, %f)", sampleTension, sampleFriction, outTension, outFriction);
 }
 
 - (void)testRemovedOnCompletionNoContinuationValues
@@ -558,7 +557,7 @@ static BOOL _floatingPointEqual(CGFloat a, CGFloat b)
   POPAnimatorRenderDuration(self.animator, self.beginTime, 3, 1.0/60.0);
 
   // assert reached to value
-  STAssertTrue(layer.position.x == [anim.toValue floatValue], @"unexpected value:%@ %@", layer, anim);
+  XCTAssertTrue(layer.position.x == [anim.toValue floatValue], @"unexpected value:%@ %@", layer, anim);
 
   // start tracer
   POPAnimationTracer *tracer = anim.tracer;
@@ -570,12 +569,12 @@ static BOOL _floatingPointEqual(CGFloat a, CGFloat b)
 
   // verify from 200 to 400
   NSArray *writeEvents = [tracer eventsWithType:kPOPAnimationEventPropertyWrite];
-  STAssertTrue(writeEvents.count > 5, @"unexpected frame count %@", writeEvents);
+  XCTAssertTrue(writeEvents.count > 5, @"unexpected frame count %@", writeEvents);
 
   CGFloat firstValue = [[(POPAnimationValueEvent *)[writeEvents firstObject] value] floatValue];
   CGFloat lastValue = [[(POPAnimationValueEvent *)[writeEvents lastObject] value] floatValue];
-  STAssertEqualsWithAccuracy(((CGFloat)[toValues[0] floatValue]), firstValue, 10, @"unexpected first value %@", writeEvents);
-  STAssertEqualsWithAccuracy(((CGFloat)[toValues[1] floatValue]), lastValue, 10, @"unexpected last value %@", writeEvents);
+  XCTAssertEqualWithAccuracy(((CGFloat)[toValues[0] floatValue]), firstValue, 10, @"unexpected first value %@", writeEvents);
+  XCTAssertEqualWithAccuracy(((CGFloat)[toValues[1] floatValue]), lastValue, 10, @"unexpected last value %@", writeEvents);
 }
 
 - (void)testNilColor
@@ -600,7 +599,7 @@ static BOOL _floatingPointEqual(CGFloat a, CGFloat b)
 
   // verify valid from color exists
   CGColorRef fromColor = (__bridge CGColorRef)anim.fromValue;
-  STAssertTrue(fromColor, @"unexpected value %p", fromColor);
+  XCTAssertTrue(fromColor, @"unexpected value %p", fromColor);
 
   // verify from color clear
 #if TARGET_OS_IPHONE
@@ -637,7 +636,7 @@ static BOOL _floatingPointEqual(CGFloat a, CGFloat b)
 
   // verify last write event value
   POPAnimationValueEvent *writeEvent = [[tracer eventsWithType:kPOPAnimationEventPropertyWrite] lastObject];
-  STAssertEqualObjects(writeEvent.value, anim.toValue, @"unexpected last write event %@", writeEvent);
+  XCTAssertEqualObjects(writeEvent.value, anim.toValue, @"unexpected last write event %@", writeEvent);
 }
 
 - (void)testEquivalentFromToValues
@@ -658,7 +657,7 @@ static BOOL _floatingPointEqual(CGFloat a, CGFloat b)
 
   // verify last write event value
   POPAnimationValueEvent *writeEvent = [[tracer eventsWithType:kPOPAnimationEventPropertyWrite] lastObject];
-  STAssertEqualObjects(writeEvent.value, anim.toValue, @"unexpected last write event %@", writeEvent);
+  XCTAssertEqualObjects(writeEvent.value, anim.toValue, @"unexpected last write event %@", writeEvent);
 }
 
 @end

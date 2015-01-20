@@ -7,8 +7,7 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#define SENTEST_IGNORE_DEPRECATION_WARNING
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import <pop/POPAnimatableProperty.h>
 
@@ -20,11 +19,11 @@ static void assertPropertyEqual(id self, POPAnimatableProperty *prop1, POPAnimat
   for (NSString *property in properties) {
     id value = [prop1 valueForKey:property];
     id valueCopy = [prop2 valueForKey:property];
-    STAssertEqualObjects(value, valueCopy, @"unexpected inequality; value:%@ copy:%@", value, valueCopy);
+    XCTAssertEqualObjects(value, valueCopy, @"unexpected inequality; value:%@ copy:%@", value, valueCopy);
   }
 }
 
-@interface POPAnimatablePropertyTests : SenTestCase
+@interface POPAnimatablePropertyTests : XCTestCase
 @end
 
 @implementation POPAnimatablePropertyTests
@@ -74,7 +73,7 @@ static void assertPropertyEqual(id self, POPAnimatableProperty *prop1, POPAnimat
 
   for (NSString *name in names) {
     POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithName:name];
-    STAssertNotNil(prop, @"animatable property %@ should exist", name);
+    XCTAssertNotNil(prop, @"animatable property %@ should exist", name);
   }
 }
 
@@ -85,23 +84,23 @@ static void assertPropertyEqual(id self, POPAnimatableProperty *prop1, POPAnimat
   POPAnimatableProperty *prop;
 
   prop = [POPAnimatableProperty propertyWithName:name];
-  STAssertNil(prop, @"animatable property %@ should not exist", name);
+  XCTAssertNil(prop, @"animatable property %@ should not exist", name);
 
   prop = [POPAnimatableProperty propertyWithName:name initializer:^(POPMutableAnimatableProperty *p){
     p.threshold = threshold;
   }];
-  STAssertNotNil(prop, @"animatable property %@ should exist", name);
-  STAssertEqualsWithAccuracy(threshold, prop.threshold, epsilon, @"property threshold %f should equal %f", prop.threshold, threshold);
+  XCTAssertNotNil(prop, @"animatable property %@ should exist", name);
+  XCTAssertEqualWithAccuracy(threshold, prop.threshold, epsilon, @"property threshold %f should equal %f", prop.threshold, threshold);
 }
 
 - (void)testClassCluster
 {
   POPAnimatableProperty *instance1 = [[POPAnimatableProperty alloc] init];
   POPAnimatableProperty *instance2 = [[POPAnimatableProperty alloc] init];
-  STAssertTrue(instance1 == instance2, @"instance1:%@ instance2:%@", instance1, instance2);
+  XCTAssertTrue(instance1 == instance2, @"instance1:%@ instance2:%@", instance1, instance2);
 
   for (NSString *property in properties) {
-    STAssertNoThrow([instance1 valueForKey:property], @"exception on %@", property);
+    XCTAssertNoThrow([instance1 valueForKey:property], @"exception on %@", property);
   }
 }
 

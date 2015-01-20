@@ -11,8 +11,7 @@
 
 #import <OCMock/OCMock.h>
 
-#define SENTEST_IGNORE_DEPRECATION_WARNING
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #import <pop/POP.h>
 #import <pop/POPAnimatorPrivate.h>
@@ -87,7 +86,7 @@
   CGRect lastRect = [lastEvent.value CGRectValue];
   
   // verify last rect is to rect
-  STAssertTrue(CGRectEqualToRect(lastRect, toRect), @"unexpected last rect value: %@", lastEvent);
+  XCTAssertTrue(CGRectEqualToRect(lastRect, toRect), @"unexpected last rect value: %@", lastEvent);
 }
 
 @end
