@@ -12,7 +12,7 @@ Pop is available on [CocoaPods](http://cocoapods.org). Just add the following to
 pod 'pop', '~> 1.0'
 ```
 
-Bugs are first fixed and master and only then made available via a release. If you tend to live on the bleeding edge, you can use Pop master with the following:
+Bugs are first fixed in master and then made available via a designated release. If you tend to live on the bleeding edge, you can use Pop from master with the following Podfile entry:
 
 ```ruby
 pod 'pop', :git => 'https://github.com/facebook/pop.git'
