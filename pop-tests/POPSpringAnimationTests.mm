@@ -64,7 +64,7 @@ static NSString *animationKey = @"key";
 
   // expect position to be called
   CGPoint position = CGPointMake(100, 100);
-  [(CALayer *)[[layer stub] andReturnValue:OCMOCK_VALUE(position)] position];
+  position = [(CALayer *)[[layer stub] andReturnValue:OCMOCK_VALUE(position)] position];
   [layer pop_addAnimation:anim forKey:@"key"];
 
   POPAnimatorRenderTimes(self.animator, self.beginTime, @[@0.0, @0.1, @0.2]);
@@ -509,7 +509,7 @@ static NSString *animationKey = @"key";
 static BOOL _floatingPointEqual(CGFloat a, CGFloat b)
 {
   CGFloat epsilon = 0.0001;
-  return fabsf(a - b) < epsilon;
+  return std::abs(a - b) < epsilon;
 }
 
 - (void)testBouncinessSpeedToTensionFrictionConversion
