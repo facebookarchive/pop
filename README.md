@@ -12,6 +12,12 @@ Pop is available on [CocoaPods](http://cocoapods.org). Just add the following to
 pod 'pop', '~> 1.0'
 ```
 
+Bugs are first fixed and master and only then made available via a release. If you tend to live on the bleeding edge, you can use Pop master with the following:
+
+```ruby
+pod 'pop', :git => 'https://github.com/facebook/pop.git'
+```
+
 ## Non-CocoaPods Installation
 
 ### iOS 8 Embedded Framework
