@@ -117,7 +117,6 @@ extern NSString * const kPOPLayerShadowColor;
 extern NSString * const kPOPLayerShadowOffset;
 extern NSString * const kPOPLayerShadowOpacity;
 extern NSString * const kPOPLayerShadowRadius;
-extern NSString * const kPOPShapeLayerLineWidth;
 
 /**
  Common CAShapeLayer property names.
@@ -126,6 +125,7 @@ extern NSString * const kPOPShapeLayerStrokeStart;
 extern NSString * const kPOPShapeLayerStrokeEnd;
 extern NSString * const kPOPShapeLayerStrokeColor;
 extern NSString * const kPOPShapeLayerFillColor;
+extern NSString * const kPOPShapeLayerLineWidth;
 
 /**
  Common NSLayoutConstraint property names.
