@@ -43,6 +43,10 @@ using namespace POP;
 #define FBLogAnimInfo(...)
 #endif
 
+#if !TARGET_OS_IPHONE
+static const uint64_t kDisplayTimerFrequency = 50ull; // Hz
+#endif
+
 class POPAnimatorItem
 {
 public:
@@ -86,6 +90,8 @@ static BOOL _disableBackgroundThread = YES;
   CADisplayLink *_displayLink;
 #else
   CVDisplayLinkRef _displayLink;
+  dispatch_source_t _displayTimer;
+  BOOL _displayTimerRunning;
   int32_t _enqueuedRender;
 #endif
   POPAnimatorItemList _list;
@@ -138,12 +144,25 @@ static void updateDisplayLink(POPAnimator *self)
     self->_displayLink.paused = paused;
   }
 #else
-  if (paused == CVDisplayLinkIsRunning(self->_displayLink)) {
-    FBLogAnimInfo(paused ? @"pausing display link" : @"unpausing display link");
-    if (paused) {
-      CVDisplayLinkStop(self->_displayLink);
-    } else {
-      CVDisplayLinkStart(self->_displayLink);
+  if (NULL != self->_displayLink) {
+    if (paused == CVDisplayLinkIsRunning(self->_displayLink)) {
+      FBLogAnimInfo(paused ? @"pausing display link" : @"unpausing display link");
+      if (paused) {
+        CVDisplayLinkStop(self->_displayLink);
+      } else {
+        CVDisplayLinkStart(self->_displayLink);
+      }
+    }
+  } else {
+    if (paused == self->_displayTimerRunning) {
+      FBLogAnimInfo(paused ? @"pausing display timer" : @"unpausing display timer");
+      if (paused) {
+        self->_displayTimerRunning = NO;
+        dispatch_suspend(self->_displayTimer);
+      } else {
+        self->_displayTimerRunning = YES;
+        dispatch_resume(self->_displayTimer);
+      }
     }
   }
 #endif
@@ -347,8 +366,25 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   _displayLink.paused = YES;
   [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
 #else
-  CVDisplayLinkCreateWithActiveCGDisplays(&_displayLink);
-  CVDisplayLinkSetOutputCallback(_displayLink, displayLinkCallback, (__bridge void *)self);
+  CVReturn ret = CVDisplayLinkCreateWithActiveCGDisplays(&_displayLink);
+  if (kCVReturnSuccess != ret) {
+    ret = CVDisplayLinkCreateWithCGDisplay(CGMainDisplayID(), &_displayLink);
+  }
+  if (kCVReturnSuccess == ret) {
+    CVDisplayLinkSetOutputCallback(_displayLink, displayLinkCallback, (__bridge void *)self);
+  } else {
+    FBLogAnimInfo(@"cannot create display link: ret=%ld, falling back to display timer at %llu Hz", (long)ret, kDisplayTimerFrequency);
+    _displayTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0));
+    NSAssert(nil != _displayTimer, @"Cannot create display timer");
+    dispatch_source_set_timer(_displayTimer, DISPATCH_TIME_NOW, NSEC_PER_SEC / kDisplayTimerFrequency, 0);
+    __weak POPAnimator *weakSelf = self;
+    dispatch_source_set_event_handler(_displayTimer, ^{
+      __strong POPAnimator *strongSelf = weakSelf;
+      if (__builtin_expect(nil != strongSelf, 1)) {
+        (void) displayLinkCallback(NULL, NULL, NULL, 0, NULL, (__bridge void *)strongSelf);
+      }
+    });
+  }
 #endif
 
   _dict = POPDictionaryCreateMutableWeakPointerToStrongObject(5);
@@ -362,8 +398,14 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 #if TARGET_OS_IPHONE
   [_displayLink invalidate];
 #else
-  CVDisplayLinkStop(_displayLink);
-  CVDisplayLinkRelease(_displayLink);
+  if (_displayLink != NULL) {
+    CVDisplayLinkStop(_displayLink);
+    CVDisplayLinkRelease(_displayLink);
+  }
+  if (_displayTimer != NULL) {
+    dispatch_source_cancel(_displayTimer);
+    dispatch_release(_displayTimer);
+  }
 #endif
   [self _clearPendingListObserver];
 }
