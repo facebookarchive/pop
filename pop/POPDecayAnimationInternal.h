@@ -81,7 +81,7 @@ struct _POPDecayAnimationState : _POPPropertyAnimationState
     duration = MAX(MAX(MAX(log(fabs(vx)) / d, log(fabs(vy)) / d), log(fabs(vz)) / d), log(fabs(vw)) / d);
 
     // ensure velocity threshold is exceeded
-    if (isnan(duration) || duration < 0) {
+    if (std::isnan(duration) || duration < 0) {
       duration = 0;
     }
   }
@@ -130,7 +130,7 @@ struct _POPDecayAnimationState : _POPPropertyAnimationState
     duration = MAX(MAX(MAX(log(fabs(vx)) / d, log(fabs(vy)) / d), log(fabs(vz)) / d), log(fabs(vw)) / d);
 
     // ensure velocity threshold is exceeded
-    if (isnan(duration) || duration < 0) {
+    if (std::isnan(duration) || duration < 0) {
       duration = 0;
     } else {
       // compute to value
