@@ -252,7 +252,11 @@ static VectorRef vectorize(id value, POPValueType type)
   switch (type) {
     case kPOPValueInteger:
     case kPOPValueFloat:
+#if CGFLOAT_IS_DOUBLE
+      vec = Vector::new_cg_float([value doubleValue]);
+#else
       vec = Vector::new_cg_float([value floatValue]);
+#endif
       break;
     case kPOPValuePoint:
       vec = Vector::new_cg_point([value CGPointValue]);
