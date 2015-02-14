@@ -8,17 +8,16 @@
  */
 
 #import <CoreGraphics/CoreGraphics.h>
+#import "POPDefines.h"
+
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
+#else
+#import <AppKit/AppKit.h>
 #endif
-#import "POPDefines.h"
 
 #if SCENEKIT_SDK_AVAILABLE
 #import <SceneKit/SceneKit.h>
-#endif
-
-#if TARGET_OS_IPHONE
-@class UIColor;
 #endif
 
 POP_EXTERN_C_BEGIN
@@ -134,6 +133,18 @@ extern void POPUIColorGetRGBAComponents(UIColor *color, CGFloat components[]);
  Takes RGBA components and returns a UIColor.
  */
 extern UIColor *POPUIColorRGBACreate(const CGFloat components[]) NS_RETURNS_RETAINED;
+
+#else
+
+/**
+Takes a NSColor and converts it into RGBA components, if necessary.
+*/
+extern void POPNSColorGetRGBAComponents(NSColor *color, CGFloat components[]);
+
+/**
+Takes RGBA components and returns a NSColor.
+*/
+extern NSColor *POPNSColorRGBACreate(const CGFloat components[]) NS_RETURNS_RETAINED;
 
 #endif
 

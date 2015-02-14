@@ -132,7 +132,6 @@ extern NSString * const kPOPShapeLayerLineWidth;
  */
 extern NSString * const kPOPLayoutConstraintConstant;
 
-
 #if TARGET_OS_IPHONE
 
 /**
@@ -188,6 +187,29 @@ extern NSString * const kPOPTabBarBarTintColor;
  Common UILabel property names.
  */
 extern NSString * const kPOPLabelTextColor;
+
+#else
+
+/**
+ Common NSView property names.
+ */
+extern NSString * const kPOPViewFrame;
+extern NSString * const kPOPViewBounds;
+extern NSString * const kPOPViewAlphaValue;
+extern NSString * const kPOPViewFrameRotation;
+extern NSString * const kPOPViewFrameCenterRotation;
+extern NSString * const kPOPViewBoundsRotation;
+
+/**
+ Common NSWindow property names.
+ */
+extern NSString * const kPOPWindowFrame;
+extern NSString * const kPOPWindowAlphaValue;
+extern NSString * const kPOPWindowBackgroundColor;
+
+#endif
+
+#if SCENEKIT_SDK_AVAILABLE
 
 /**
  Common SceneKit property names.
