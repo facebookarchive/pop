@@ -9,10 +9,36 @@
 
 #import "POPCGUtils.h"
 
-#if TARGET_OS_IPHONE
-#import <UIKit/UIColor.h>
-#else
-#import <AppKit/NSColor.h>
+#if defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED < 1080
+
+@interface NSColor (CGColor)
+@property (nonatomic, readonly) CGColorRef CGColor;
+
++ (NSColor *)colorWithCGColor:(CGColorRef)color;
+
+@end
+
+@implementation NSColor (CGColor)
+
+- (CGColorRef)CGColor
+{
+  const NSInteger numberOfComponents = [self numberOfComponents];
+  CGFloat components[numberOfComponents];
+  CGColorSpaceRef colorSpace = [[self colorSpace] CGColorSpace];
+
+  [self getComponents:(CGFloat *)&components];
+
+  return CGColorCreate(colorSpace, components);
+}
+
++ (NSColor *)colorWithCGColor:(CGColorRef)CGColor
+{
+  if (CGColor == NULL) return nil;
+  return [NSColor colorWithCIColor:[CIColor colorWithCGColor:CGColor]];
+}
+
+@end
+
 #endif
 
 void POPCGColorGetRGBAComponents(CGColorRef color, CGFloat components[])
@@ -88,6 +114,21 @@ UIColor *POPUIColorRGBACreate(const CGFloat components[])
 {
   CGColorRef colorRef = POPCGColorRGBACreate(components);
   UIColor *color = [[UIColor alloc] initWithCGColor:colorRef];
+  CGColorRelease(colorRef);
+  return color;
+}
+
+#else
+
+void POPNSColorGetRGBAComponents(NSColor *color, CGFloat components[])
+{
+  return POPCGColorGetRGBAComponents(color.CGColor, components);
+}
+
+NSColor *POPNSColorRGBACreate(const CGFloat components[])
+{
+  CGColorRef colorRef = POPCGColorRGBACreate(components);
+  NSColor *color = [NSColor colorWithCGColor:colorRef];
   CGColorRelease(colorRef);
   return color;
 }

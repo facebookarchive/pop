@@ -68,6 +68,16 @@ static void assertPropertyEqual(id self, POPAnimatableProperty *prop1, POPAnimat
                      kPOPCollectionViewContentSize,
                      kPOPCollectionViewContentSize,
                      kPOPLabelTextColor
+#else
+                     kPOPViewFrame,
+                     kPOPViewBounds,
+                     kPOPViewAlphaValue,
+                     kPOPViewFrameRotation,
+                     kPOPViewFrameCenterRotation,
+                     kPOPViewBoundsRotation,
+                     kPOPWindowFrame,
+                     kPOPWindowAlphaValue,
+                     kPOPWindowBackgroundColor
 #endif
                      ];
 
