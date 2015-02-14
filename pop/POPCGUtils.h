@@ -137,13 +137,13 @@ extern UIColor *POPUIColorRGBACreate(const CGFloat components[]) NS_RETURNS_RETA
 #else
 
 /**
-Takes a NSColor and converts it into RGBA components, if necessary.
-*/
+ Takes a NSColor and converts it into RGBA components, if necessary.
+ */
 extern void POPNSColorGetRGBAComponents(NSColor *color, CGFloat components[]);
 
 /**
-Takes RGBA components and returns a NSColor.
-*/
+ Takes RGBA components and returns a NSColor.
+ */
 extern NSColor *POPNSColorRGBACreate(const CGFloat components[]) NS_RETURNS_RETAINED;
 
 #endif
