@@ -41,7 +41,7 @@ CFMutableDictionaryRef POPDictionaryCreateMutableWeakPointerToWeakPointer(NSUInt
 
   // weak, pointer keys
   kcb.retain = NULL;
-  kcb.retain = NULL;
+  kcb.release = NULL;
   kcb.equal = pointerEqual;
   kcb.hash = pointerHash;
 
