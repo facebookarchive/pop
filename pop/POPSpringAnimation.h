@@ -36,13 +36,13 @@
 
 /**
  @abstract The effective bounciness.
- @discussion Use in conjunction with 'springSpeed' to change animation effect. Values are converted into corresponding dynamics constants. Defined as a value in the range [0, 20]. Defaults to 4.
+ @discussion Use in conjunction with 'springSpeed' to change animation effect. Values are converted into corresponding dynamics constants. Higher values increase spring movement range resulting in more oscillations and springiness. Defined as a value in the range [0, 20]. Defaults to 4.
  */
 @property (assign, nonatomic) CGFloat springBounciness;
 
 /**
  @abstract The effective speed.
- @discussion Use in conjunction with 'springBounciness' to change animation effect. Values are converted into corresponding dynamics constants. Defined as a value in the range [0, 20]. Defaults to 12.
+ @discussion Use in conjunction with 'springBounciness' to change animation effect. Values are converted into corresponding dynamics constants. Higher values increase the dampening power of the spring resulting in a faster initial velocity and more rapid bounce slowdown. Defined as a value in the range [0, 20]. Defaults to 12.
  */
 @property (assign, nonatomic) CGFloat springSpeed;
 
