@@ -27,6 +27,11 @@
  */
 @property (weak, nonatomic) id<POPAnimatorDelegate> delegate;
 
+/**
+ Retrieves the nominal refresh period of a display link. Returns zero if unavailable.
+ */
+@property (readonly, nonatomic) CFTimeInterval refreshPeriod;
+
 @end
 
 /**

@@ -767,6 +767,21 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   return animation;
 }
 
+- (CFTimeInterval)refreshPeriod
+{
+#if TARGET_OS_IPHONE
+  return self->_displayLink.duration;
+#else
+  if (NULL != self->_displayLink) {
+    CVTime period = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(self->_displayLink);
+    if (period.flags & kCVTimeIsIndefinite)
+      return 0;
+    return ((CFTimeInterval)period.timeValue / (CFTimeInterval)period.timeScale);
+  }
+  return (1.0 / (CFTimeInterval)kDisplayTimerFrequency);
+#endif
+}
+
 - (CFTimeInterval)_currentRenderTime
 {
   CFTimeInterval time = CACurrentMediaTime();
