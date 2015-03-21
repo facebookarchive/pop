@@ -44,7 +44,7 @@ using namespace POP;
 #endif
 
 #if !TARGET_OS_IPHONE
-static const uint64_t kDisplayTimerFrequency = 50ull; // Hz
+static const uint64_t kDisplayTimerFrequency = 60ull; // Hz
 #endif
 
 class POPAnimatorItem
