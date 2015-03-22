@@ -6,5 +6,5 @@ before_install:
 xcode_workspace: pop.xcworkspace
 xcode_scheme: pop
 xcode_sdk:
-  - iphonesimulator7.0
-  - iphonesimulator7.1
+  - iphonesimulator
+  - iphonesimulator8.1
