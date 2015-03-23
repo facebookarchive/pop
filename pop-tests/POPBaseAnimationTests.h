@@ -7,9 +7,11 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <XCTest/XCTest.h>
-#import "POPCGUtils.h"
 #import <cmath>
+
+#import <XCTest/XCTest.h>
+
+#import "POPCGUtils.h"
 
 @class CALayer;
 @class POPAnimator;

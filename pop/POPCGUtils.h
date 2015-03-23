@@ -8,7 +8,6 @@
  */
 
 #import <CoreGraphics/CoreGraphics.h>
-#import "POPDefines.h"
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
@@ -19,6 +18,8 @@
 #if SCENEKIT_SDK_AVAILABLE
 #import <SceneKit/SceneKit.h>
 #endif
+
+#import "POPDefines.h"
 
 POP_EXTERN_C_BEGIN
 

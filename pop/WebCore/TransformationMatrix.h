@@ -27,7 +27,9 @@
 #define TransformationMatrix_h
 
 #include <string.h> //for memcpy
+
 #include <CoreGraphics/CGAffineTransform.h>
+
 #include <QuartzCore/QuartzCore.h>
 
 namespace WebCore {

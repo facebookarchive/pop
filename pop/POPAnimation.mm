@@ -7,15 +7,15 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
+#import "POPAnimationExtras.h"
 #import "POPAnimationInternal.h"
-#import "POPAnimationTracerInternal.h"
 
 #import <objc/runtime.h>
 
-#import "POPAnimationExtras.h"
-#import "POPAnimationRuntime.h"
-#import "POPAnimatorPrivate.h"
 #import "POPAction.h"
+#import "POPAnimationRuntime.h"
+#import "POPAnimationTracerInternal.h"
+#import "POPAnimatorPrivate.h"
 
 using namespace POP;
 

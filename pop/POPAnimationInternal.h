@@ -7,13 +7,14 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
+#import "POPAnimation.h"
+
 #import <QuartzCore/CAMediaTimingFunction.h>
 
-#import "POPAnimation.h"
+#import "POPAction.h"
 #import "POPAnimationRuntime.h"
 #import "POPAnimationTracerInternal.h"
 #import "POPSpringSolver.h"
-#import "POPAction.h"
 
 using namespace POP;
 

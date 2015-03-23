@@ -8,7 +8,10 @@
  */
 
 #import <CoreGraphics/CoreGraphics.h>
+
 #import <Foundation/NSObject.h>
+
+#import <pop/POPDefines.h>
 
 @class POPMutableAnimatableProperty;
 
