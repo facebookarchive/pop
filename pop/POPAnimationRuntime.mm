@@ -17,10 +17,10 @@
 #import <UIKit/UIKit.h>
 #endif
 
-#import "POPVector.h"
-#import "POPAnimationRuntime.h"
 #import "POPCGUtils.h"
+#import "POPDefines.h"
 #import "POPGeometry.h"
+#import "POPVector.h"
 
 static Boolean pointerEqual(const void *ptr1, const void *ptr2) {
   return ptr1 == ptr2;

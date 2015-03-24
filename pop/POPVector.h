@@ -13,18 +13,21 @@
 #include <iostream>
 #include <vector>
 
-#import <CoreGraphics/CoreGraphics.h>
 #import <objc/NSObjCRuntime.h>
-#if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
-#endif
 
-#import "POPMath.h"
+#import <CoreGraphics/CoreGraphics.h>
+
 #import "POPDefines.h"
 
 #if SCENEKIT_SDK_AVAILABLE
 #import <SceneKit/SceneKit.h>
 #endif
+
+#if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
+#endif
+
+#import "POPMath.h"
 
 namespace POP {
 

@@ -8,12 +8,13 @@
  */
 
 #import "POPAnimatableProperty.h"
-#import "POPCGUtils.h"
-#import "POPAnimationRuntime.h"
 
 #import <QuartzCore/QuartzCore.h>
 
-#import <pop/POPLayerExtras.h>
+#import "POPAnimationRuntime.h"
+#import "POPCGUtils.h"
+#import "POPDefines.h"
+#import "POPLayerExtras.h"
 
 // common threshold definitions
 static CGFloat const kPOPThresholdColor = 0.01;

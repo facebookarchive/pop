@@ -8,9 +8,10 @@
  */
 
 #import "POPDecayAnimation.h"
-#import "POPPropertyAnimationInternal.h"
 
 #import <cmath>
+
+#import "POPPropertyAnimationInternal.h"
 
 // minimal velocity factor before decay animation is considered complete, in units / s
 static CGFloat kPOPAnimationDecayMinimalVelocityFactor = 5.;
