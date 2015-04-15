@@ -283,7 +283,6 @@ POPAnimationState *POPAnimationGetState(POPAnimation *a)
   POPAnimation *copy = [[[self class] allocWithZone:zone] init];
   
   if (copy) {
-    
     copy.name = self.name;
     copy.beginTime = self.beginTime;
     copy.delegate = self.delegate;

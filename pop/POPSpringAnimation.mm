@@ -172,7 +172,6 @@ FB_PROPERTY_GET(POPSpringAnimationState, springBounciness, CGFloat);
   POPSpringAnimation *copy = [super copyWithZone:zone];
   
   if (copy) {
-    
     id velocity = POPBox(__state->originalVelocityVec, __state->valueType);
     
     // If velocity never gets set, then POPBox will return nil, messing up __state->valueCount.

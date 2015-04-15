@@ -191,7 +191,6 @@ DEFINE_RW_PROPERTY(POPDecayAnimationState, deceleration, setDeceleration:, CGFlo
   POPDecayAnimation *copy = [super copyWithZone:zone];
   
   if (copy) {
-    
     // Set the velocity to the animation's original velocity, not its current.
     copy.velocity = self.originalVelocity;
     copy.deceleration = self.deceleration;

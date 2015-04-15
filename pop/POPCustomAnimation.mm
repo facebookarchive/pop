@@ -66,7 +66,6 @@
   POPCustomAnimation *copy = [super copyWithZone:zone];
   
   if (copy) {
-  
     copy.animate = self.animate;
   }
   

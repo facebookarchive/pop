@@ -96,7 +96,6 @@ DEFINE_RW_PROPERTY_OBJ(POPBasicAnimationState, timingFunction, setTimingFunction
   POPBasicAnimation *copy = [super copyWithZone:zone];
   
   if (copy) {
-    
     copy.duration = self.duration;
     copy.timingFunction = self.timingFunction; // not a 'copy', but timing functions are publicly immutable.
   }

@@ -111,7 +111,6 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
   POPPropertyAnimation *copy = [super copyWithZone:zone];
   
   if (copy) {
-    
     copy.property = [self.property copyWithZone:zone];
     copy.fromValue = self.fromValue;
     copy.toValue = self.toValue;
