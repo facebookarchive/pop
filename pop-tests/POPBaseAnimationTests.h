@@ -16,6 +16,8 @@
 @class CALayer;
 @class POPAnimator;
 @class POPAnimatableProperty;
+@class POPAnimation;
+@class POPPropertyAnimation;
 
 @interface POPBaseAnimationTests : XCTestCase
 
@@ -30,6 +32,9 @@
 
 // radius animatable property
 @property (strong, nonatomic) POPAnimatableProperty *radiusProperty;
+
+- (void)testCopyingSucceedsForConcreteAnimation:(POPAnimation *)anim;
+- (void)testCopyingSucceedsForConcretePropertyAnimation:(POPPropertyAnimation *)anim;
 
 @end
 
@@ -53,3 +58,6 @@ extern BOOL POPAnimationEventsContainValue(NSArray *events, NSNumber *value);
   POPCGColorGetRGBAComponents(c2, v2); \
   XCTAssertTrue(_EQL_(v1[0], v2[0], 1e-6) && _EQL_(v1[1], v2[1], 1e-6) && _EQL_(v1[2], v2[2], 1e-6) && _EQL_(v1[3], v2[3], 1e-6), @"not equal color:[r:%f g:%f b:%f a:%f] color:[r:%f g:%f b:%f a:%f]", v1[0], v1[1], v1[2], v1[3], v2[0], v2[1], v2[2], v2[3]); \
 }
+
+extern void configureConcreteAnimation(POPAnimation *anim);
+extern void configureConcretePropertyAnimation(POPPropertyAnimation *anim);

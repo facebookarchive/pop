@@ -63,8 +63,10 @@
 {
   POPPropertyAnimationState *s = __state;
   VectorRef vec = POPUnbox(aValue, s->valueType, s->valueCount, YES);
+  VectorRef origVec = POPUnbox(aValue, s->valueType, s->valueCount, YES);
   if (!vec_equal(vec, s->velocityVec)) {
     s->velocityVec = vec;
+    s->originalVelocityVec = origVec;
 
     if (s->tracing) {
       [s->tracer updateVelocity:aValue];
@@ -159,6 +161,27 @@ FB_PROPERTY_GET(POPSpringAnimationState, springBounciness, CGFloat);
       [s appendFormat:@"; bounciness = %f; speed = %f", __state->springBounciness, __state->springSpeed];
     }
   }
+}
+
+@end
+
+@implementation POPSpringAnimation (NSCopying)
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+  
+  POPSpringAnimation *copy = [super copyWithZone:zone];
+  
+  if (copy) {
+    
+    copy.velocity = POPBox(__state->originalVelocityVec, __state->valueType);
+    copy.springBounciness = self.springBounciness;
+    copy.springSpeed = self.springSpeed;
+    copy.dynamicsTension = self.dynamicsTension;
+    copy.dynamicsFriction = self.dynamicsFriction;
+    copy.dynamicsMass = self.dynamicsMass;
+  }
+  
+  return copy;
 }
 
 @end

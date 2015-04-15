@@ -983,7 +983,7 @@
 		EC19120F162FB53A00E0CC76 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0510;
+				LastTestingUpgradeCheck = 0630;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {

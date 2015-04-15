@@ -175,3 +175,14 @@ When combined with the autoreverses property, a singular animation is effectivel
 - (id)pop_animationForKey:(NSString *)key;
 
 @end
+
+/**
+ *  This implementation of NSCopying does not do any copying of animation's state, but only configuration.
+ *  i.e. you cannot copy an animation and expect to apply it to a view and have the copied animation pick up where the original left off.
+ *  Two common uses of copying animations:
+ *  * you need to apply the same animation to multiple different views.
+ *  * you need to absolutely ensure that the the caller of your function cannot mutate the animation once it's been passed in.
+ */
+@interface POPAnimation (NSCopying) <NSCopying>
+
+@end
