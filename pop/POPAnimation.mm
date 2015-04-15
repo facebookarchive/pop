@@ -270,3 +270,34 @@ POPAnimationState *POPAnimationGetState(POPAnimation *a)
 }
 
 @end
+
+@implementation POPAnimation (NSCopying)
+
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+  /*
+   * Must use [self class] instead of POPAnimation so that subclasses can call this via super.
+   * Even though POPAnimation and POPPropertyAnimation throw exceptions on init,
+   * it's safe to call it since you can only copy objects that have been successfully created.
+   */
+  POPAnimation *copy = [[[self class] allocWithZone:zone] init];
+  
+  if (copy) {
+    copy.name = self.name;
+    copy.beginTime = self.beginTime;
+    copy.delegate = self.delegate;
+    copy.animationDidStartBlock = self.animationDidStartBlock;
+    copy.animationDidReachToValueBlock = self.animationDidReachToValueBlock;
+    copy.completionBlock = self.completionBlock;
+    copy.animationDidApplyBlock = self.animationDidApplyBlock;
+    copy.removedOnCompletion = self.removedOnCompletion;
+    
+    copy.autoreverses = self.autoreverses;
+    copy.repeatCount = self.repeatCount;
+    copy.repeatForever = self.repeatForever;
+  }
+    
+  return copy;
+}
+
+@end

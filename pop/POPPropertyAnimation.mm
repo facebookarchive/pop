@@ -103,3 +103,23 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
 }
 
 @end
+
+@implementation POPPropertyAnimation (NSCopying)
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+  
+  POPPropertyAnimation *copy = [super copyWithZone:zone];
+  
+  if (copy) {
+    copy.property = [self.property copyWithZone:zone];
+    copy.fromValue = self.fromValue;
+    copy.toValue = self.toValue;
+    copy.roundingFactor = self.roundingFactor;
+    copy.clampMode = self.clampMode;
+    copy.additive = self.additive;
+  }
+  
+  return copy;
+}
+
+@end

@@ -526,4 +526,19 @@ static const CGFloat epsilon = 0.0001f;
   XCTAssertTrue(p2 > [anim.fromValue floatValue] && p2 > p1, @"unexpected to value %@", anim);
 }
 
+- (void)testNSCopyingSupportPOPDecayAnimation
+{
+  POPDecayAnimation *anim = [POPDecayAnimation animationWithPropertyNamed:@"test_prop_name"];
+  
+  configureConcretePropertyAnimation(anim);
+  
+  anim.velocity = @(1.8888);
+  anim.deceleration = -9.8;
+  
+  POPDecayAnimation *copy = [anim copy];
+  
+  XCTAssertEqualObjects(copy.velocity, anim.velocity, @"expected equality; value1:%@ value2:%@", copy.velocity, anim.velocity);
+  XCTAssertEqual(copy.deceleration, anim.deceleration, @"expected equality; value1:%@ value2:%@", @(copy.deceleration), @(anim.deceleration));
+}
+
 @end
