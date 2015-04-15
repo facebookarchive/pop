@@ -275,38 +275,30 @@ POPAnimationState *POPAnimationGetState(POPAnimation *a)
 
 - (instancetype)copyWithZone:(NSZone *)zone
 {
-  POPAnimation *copy = nil;
+  /*
+   * Must use [self class] instead of POPAnimation so that subclasses can call this via super.
+   * Even though POPAnimation and POPPropertyAnimation throw exceptions on init,
+   * it's safe to call it since you can only copy objects that have been successfully created.
+   */
+  POPAnimation *copy = [[[self class] allocWithZone:zone] init];
   
-  // Must use [self class] instead of POPAnimation so that subclasses can call this via super.
-  // Since POPAnimation and POPPropertyAnimation are (semi-)concrete, wrap initialization in a try-catch.
-  // If regular initialization fails, use _init.
-  
-  @try {
-    copy = [[[self class] allocWithZone:zone] init];
-  }
-  @catch (NSException *exception) {
-    copy = [[[self class] allocWithZone:zone] _init];
-  }
-  @finally {
+  if (copy) {
     
-    if (copy) {
-      
-      copy.name = self.name;
-      copy.beginTime = self.beginTime;
-      copy.delegate = self.delegate;
-      copy.animationDidStartBlock = self.animationDidStartBlock;
-      copy.animationDidReachToValueBlock = self.animationDidReachToValueBlock;
-      copy.completionBlock = self.completionBlock;
-      copy.animationDidApplyBlock = self.animationDidApplyBlock;
-      copy.removedOnCompletion = self.removedOnCompletion;
-      
-      copy.autoreverses = self.autoreverses;
-      copy.repeatCount = self.repeatCount;
-      copy.repeatForever = self.repeatForever;
-    }
+    copy.name = self.name;
+    copy.beginTime = self.beginTime;
+    copy.delegate = self.delegate;
+    copy.animationDidStartBlock = self.animationDidStartBlock;
+    copy.animationDidReachToValueBlock = self.animationDidReachToValueBlock;
+    copy.completionBlock = self.completionBlock;
+    copy.animationDidApplyBlock = self.animationDidApplyBlock;
+    copy.removedOnCompletion = self.removedOnCompletion;
     
-    return copy;
+    copy.autoreverses = self.autoreverses;
+    copy.repeatCount = self.repeatCount;
+    copy.repeatForever = self.repeatForever;
   }
+    
+  return copy;
 }
 
 @end

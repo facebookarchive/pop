@@ -872,22 +872,6 @@ using namespace POP;
   XCTAssertTrue(layerValues[0] == toValues[0] && layerValues[1] == toValues[1] && layerValues[2] == toValues[2] && layerValues[3] == toValues[3], @"unexpected last color: [r:%f g:%f b:%f a:%f]", layerValues[0], layerValues[1], layerValues[2], layerValues[3]);
 }
 
-- (void)testNSCopyingSupportPOPAnimation
-{
-  POPAnimation *anim = [[POPAnimation alloc] _init];
-  
-  configureConcreteAnimation(anim);
-  [self testCopyingSucceedsForConcreteAnimation:anim];
-}
-
-- (void)testNSCopyingSupportPOPPropertyAnimation
-{
-  POPPropertyAnimation *anim = [[POPPropertyAnimation alloc] _init];
-  
-  configureConcretePropertyAnimation(anim);
-  [self testCopyingSucceedsForConcretePropertyAnimation:anim];
-}
-
 - (void)testNSCopyingSupportPOPBasicAnimation
 {
   POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:@"test_property_name"];
