@@ -15,11 +15,11 @@
 #import <AppKit/AppKit.h>
 #endif
 
+#import "POPDefines.h"
+
 #if SCENEKIT_SDK_AVAILABLE
 #import <SceneKit/SceneKit.h>
 #endif
-
-#import "POPDefines.h"
 
 POP_EXTERN_C_BEGIN
 
