@@ -11,7 +11,7 @@
 #import "POPAnimationPrivate.h"
 
 #if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
+#import "UIKit/UIKit.h"
 #endif
 
 #if TARGET_IPHONE_SIMULATOR

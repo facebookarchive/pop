@@ -9,7 +9,7 @@
 
 #import "POPDecayAnimation.h"
 
-#import <cmath>
+#import "cmath>
 
 #import "POPPropertyAnimationInternal.h"
 

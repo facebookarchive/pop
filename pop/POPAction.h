@@ -10,9 +10,9 @@
 #ifndef POPACTION_H
 #define POPACTION_H
 
-#import <QuartzCore/CATransaction.h>
+#import "QuartzCore/CATransaction.h"
 
-#import <pop/POPDefines.h>
+#import "POPDefines.h"
 
 #ifdef __cplusplus
 

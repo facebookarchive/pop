@@ -7,9 +7,9 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <objc/runtime.h>
+#import "objc/runtime.h"
 
-#import <Foundation/Foundation.h>
+#import "Foundation/Foundation.h"
 
 #import "POPVector.h"
 

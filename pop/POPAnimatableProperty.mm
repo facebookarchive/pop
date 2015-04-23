@@ -9,7 +9,7 @@
 
 #import "POPAnimatableProperty.h"
 
-#import <QuartzCore/QuartzCore.h>
+#import "QuartzCore/QuartzCore.h"
 
 #import "POPAnimationRuntime.h"
 #import "POPCGUtils.h"

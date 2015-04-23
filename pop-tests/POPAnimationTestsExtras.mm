@@ -9,8 +9,8 @@
 
 #import "POPAnimationTestsExtras.h"
 
-#import <pop/POP.h>
-#import <pop/POPAnimatorPrivate.h>
+#import "POP.h"
+#import "POPAnimatorPrivate.h"
 
 void POPAnimatorRenderTime(POPAnimator *animator, CFTimeInterval beginTime, CFTimeInterval time)
 {

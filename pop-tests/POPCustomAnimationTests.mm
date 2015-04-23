@@ -7,11 +7,11 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <OCMock/OCMock.h>
+#import "OCMock/OCMock.h"
 
-#import <XCTest/XCTest.h>
+#import "XCTest/XCTest.h"
 
-#import <pop/POPCustomAnimation.h>
+#import "POPCustomAnimation.h"
 
 #import "POPAnimatable.h"
 #import "POPAnimationTestsExtras.h"

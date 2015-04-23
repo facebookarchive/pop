@@ -70,7 +70,7 @@
 #import "POPDefines.h"
 
 #if SCENEKIT_SDK_AVAILABLE
-#import <SceneKit/SceneKit.h>
+#import "SceneKit/SceneKit.h"
 
 /**
   Dirty hacks because iOS is weird and decided to define both SCNVector3's and SCNVector4's objCType as "t". However @encode(SCNVector3) and @encode(SCNVector4) both return the proper definition ("{SCNVector3=fff}" and "{SCNVector4=ffff}" respectively)

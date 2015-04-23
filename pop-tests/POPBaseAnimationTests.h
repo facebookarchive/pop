@@ -7,9 +7,9 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <cmath>
+#import "cmath>
 
-#import <XCTest/XCTest.h>
+#import "XCTest/XCTest.h"
 
 #import "POPCGUtils.h"
 

@@ -10,7 +10,7 @@
 #import "POPDecayAnimationInternal.h"
 
 #if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
+#import "UIKit/UIKit.h"
 #endif
 
 const POPValueType supportedVelocityTypes[6] = { kPOPValuePoint, kPOPValueInteger, kPOPValueFloat, kPOPValueRect, kPOPValueSize, kPOPValueEdgeInsets };

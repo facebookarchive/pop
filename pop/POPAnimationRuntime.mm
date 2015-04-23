@@ -9,12 +9,12 @@
 
 #import "POPAnimationRuntime.h"
 
-#import <objc/objc.h>
+#import "objc/objc.h"
 
-#import <QuartzCore/QuartzCore.h>
+#import "QuartzCore/QuartzCore.h"
 
 #if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
+#import "UIKit/UIKit.h"
 #endif
 
 #import "POPCGUtils.h"

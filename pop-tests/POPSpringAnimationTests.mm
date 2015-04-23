@@ -7,17 +7,17 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <OCMock/OCMock.h>
+#import "OCMock/OCMock.h"
 
-#import <QuartzCore/QuartzCore.h>
+#import "QuartzCore/QuartzCore.h"
 
-#import <XCTest/XCTest.h>
+#import "XCTest/XCTest.h"
 
-#import <pop/POPAnimation.h>
-#import <pop/POPAnimationPrivate.h>
-#import <pop/POPAnimator.h>
-#import <pop/POPAnimatorPrivate.h>
-#import <pop/POPAnimationExtras.h>
+#import "POPAnimation.h"
+#import "POPAnimationPrivate.h"
+#import "POPAnimator.h"
+#import "POPAnimatorPrivate.h"
+#import "POPAnimationExtras.h"
 
 #import "POPAnimatable.h"
 #import "POPAnimationInternal.h"

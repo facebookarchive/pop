@@ -37,7 +37,7 @@ Alternatively, you can add the project to your workspace and adopt the provided 
 Pop adopts the Core Animation explicit animation programming model. Use by including the following import:
 
 ```objective-c
-#import <pop/POP.h>
+#import "pop/POP.h"
 ```
 
 or if you're using the embedded framework:

@@ -7,9 +7,9 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <XCTest/XCTest.h>
+#import "XCTest/XCTest.h"
 
-#import <pop/POPAnimatableProperty.h>
+#import "POPAnimatableProperty.h"
 
 static const CGFloat epsilon = 0.0001f;
 static NSArray *properties = @[@"name", @"readBlock", @"writeBlock", @"threshold"];

@@ -7,10 +7,10 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <Foundation/Foundation.h>
+#import "Foundation/Foundation.h"
 
 #if TARGET_OS_IPHONE
-#import <UIKit/UIGeometry.h>
+#import "UIKit/UIGeometry.h"
 #endif
 
 #if !TARGET_OS_IPHONE
