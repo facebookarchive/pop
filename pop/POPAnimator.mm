@@ -10,16 +10,16 @@
 #import "POPAnimator.h"
 #import "POPAnimatorPrivate.h"
 
-#import <list>
-#import <vector>
+#import "list>
+#import "vector>
 
 #if !TARGET_OS_IPHONE
-#import <libkern/OSAtomic.h>
+#import "libkern/OSAtomic.h"
 #endif
 
-#import <objc/objc-auto.h>
+#import "objc/objc-auto.h"
 
-#import <QuartzCore/QuartzCore.h>
+#import "QuartzCore/QuartzCore.h"
 
 #import "POPAnimation.h"
 #import "POPAnimationExtras.h"

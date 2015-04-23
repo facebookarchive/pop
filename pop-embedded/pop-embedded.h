@@ -7,7 +7,7 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <UIKit/UIKit.h>
+#import "UIKit/UIKit.h"
 
 //! Project version number for pop-ios.
 FOUNDATION_EXPORT double pop_iosVersionNumber;
@@ -15,6 +15,6 @@ FOUNDATION_EXPORT double pop_iosVersionNumber;
 //! Project version string for pop-ios.
 FOUNDATION_EXPORT const unsigned char pop_iosVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <pop_ios/PublicHeader.h>
+// In this header, you should import all the public headers of your framework using statements like #import "pop_ios/PublicHeader.h"
 
 

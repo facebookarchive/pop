@@ -7,11 +7,11 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <CoreGraphics/CoreGraphics.h>
+#import "CoreGraphics/CoreGraphics.h"
 
-#import <Foundation/Foundation.h>
+#import "Foundation/Foundation.h"
 
-#import <QuartzCore/QuartzCore.h>
+#import "QuartzCore/QuartzCore.h"
 
 @interface POPAnimatable : NSObject
 

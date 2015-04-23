@@ -10,7 +10,7 @@
 #import "POPAnimationExtras.h"
 #import "POPAnimationInternal.h"
 
-#import <objc/runtime.h>
+#import "objc/runtime.h"
 
 #import "POPAction.h"
 #import "POPAnimationRuntime.h"

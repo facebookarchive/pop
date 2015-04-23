@@ -7,18 +7,18 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <CoreGraphics/CoreGraphics.h>
+#import "CoreGraphics/CoreGraphics.h"
 
 #if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
+#import "UIKit/UIKit.h"
 #else
-#import <AppKit/AppKit.h>
+#import "AppKit/AppKit.h"
 #endif
 
 #import "POPDefines.h"
 
 #if SCENEKIT_SDK_AVAILABLE
-#import <SceneKit/SceneKit.h>
+#import "SceneKit/SceneKit.h"
 #endif
 
 POP_EXTERN_C_BEGIN

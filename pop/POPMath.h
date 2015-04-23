@@ -7,9 +7,9 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <Foundation/Foundation.h>
+#import "Foundation/Foundation.h"
 
-#import <CoreGraphics/CoreGraphics.h>
+#import "CoreGraphics/CoreGraphics.h"
 
 #import "POPDefines.h"
 #import "POPVector.h"
