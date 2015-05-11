@@ -82,7 +82,6 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
 
 - (BOOL)isLayerAnimation
 {
-  
   // This is a small hack - since layer animations take place on properties in the layer itself,
   // there shouldn't be dot notation to access the layer's property.
   return ([self.property.name rangeOfString:@"."].location == NSNotFound);
