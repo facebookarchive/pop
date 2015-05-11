@@ -62,4 +62,10 @@ typedef NS_OPTIONS(NSUInteger, POPAnimationClampFlags)
  */
 @property (assign, nonatomic, getter = isAdditive) BOOL additive;
 
+/**
+ @abstract Quick method to check whether this animation should be added to a view or layer.
+ @returns YES if this animation should be added to a layer and NO if it should be added to a view or other object.
+ */
+- (BOOL)isLayerAnimation;
+
 @end
