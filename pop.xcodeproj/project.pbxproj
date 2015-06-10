@@ -113,7 +113,6 @@
 		EC70AC4718CCF4FC0067018C /* POPVector.h in Headers */ = {isa = PBXBuildFile; fileRef = EC70AC4318CCF4FC0067018C /* POPVector.h */; };
 		EC72875518E13348006EEE54 /* POPCustomAnimationTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC72875418E13348006EEE54 /* POPCustomAnimationTests.mm */; };
 		EC72875618E13348006EEE54 /* POPCustomAnimationTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC72875418E13348006EEE54 /* POPCustomAnimationTests.mm */; };
-		EC7E319A18C93D6500B38170 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC19122A162FB53A00E0CC76 /* SenTestingKit.framework */; };
 		EC7E31A018C93D6500B38170 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC7E319E18C93D6500B38170 /* InfoPlist.strings */; };
 		EC7E31AB18C9419000B38170 /* POPAnimatable.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC99974A17568DAD00A73F49 /* POPAnimatable.mm */; };
 		EC7E31AC18C9419200B38170 /* POPBaseAnimationTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC6F55A4175E6641008D995D /* POPBaseAnimationTests.mm */; };
@@ -182,7 +181,6 @@
 		ECDA0CCF18C92C3E00D14897 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5A887162FBD6200F7F15C /* QuartzCore.framework */; };
 		ECDA0CD018C92C4C00D14897 /* libpop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC191218162FB53A00E0CC76 /* libpop.a */; };
 		ECDA0CD118C92D3900D14897 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5A89D162FBD9B00F7F15C /* CoreGraphics.framework */; };
-		ECF01ED418C92B7F009E0AD1 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC19122A162FB53A00E0CC76 /* SenTestingKit.framework */; };
 		ECF01ED518C92B7F009E0AD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC19121B162FB53A00E0CC76 /* Foundation.framework */; };
 		ECF01ED618C92B7F009E0AD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEED93D18C91ACF00DD95F2 /* UIKit.framework */; };
 /* End PBXBuildFile section */
@@ -248,7 +246,6 @@
 		EC191218162FB53A00E0CC76 /* libpop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC19121B162FB53A00E0CC76 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EC19121F162FB53A00E0CC76 /* pop-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "pop-Prefix.pch"; path = "../pop/pop-Prefix.pch"; sourceTree = "<group>"; };
-		EC19122A162FB53A00E0CC76 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		EC19122C162FB53A00E0CC76 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		EC191239162FB53A00E0CC76 /* POPAnimationTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = POPAnimationTests.mm; sourceTree = "<group>"; };
 		EC191288162FB5B700E0CC76 /* POPAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPAnimation.h; sourceTree = "<group>"; };
@@ -408,7 +405,6 @@
 			files = (
 				EC7E31B518C9422F00B38170 /* pop.framework in Frameworks */,
 				EC7E31B418C9422600B38170 /* QuartzCore.framework in Frameworks */,
-				EC7E319A18C93D6500B38170 /* SenTestingKit.framework in Frameworks */,
 				ADE1BB0636F940EC8EA7EE57 /* libPods-pop-tests-osx.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,7 +416,6 @@
 				ECDA0CD118C92D3900D14897 /* CoreGraphics.framework in Frameworks */,
 				ECDA0CD018C92C4C00D14897 /* libpop.a in Frameworks */,
 				ECDA0CCF18C92C3E00D14897 /* QuartzCore.framework in Frameworks */,
-				ECF01ED418C92B7F009E0AD1 /* SenTestingKit.framework in Frameworks */,
 				ECF01ED618C92B7F009E0AD1 /* UIKit.framework in Frameworks */,
 				ECF01ED518C92B7F009E0AD1 /* Foundation.framework in Frameworks */,
 				BFD8EB4ECB184EF99C22123A /* libPods-pop-tests.a in Frameworks */,
@@ -525,7 +520,6 @@
 				ECC5A88F162FBD7600F7F15C /* libOCMock.a */,
 				ECC5A887162FBD6200F7F15C /* QuartzCore.framework */,
 				EC19121B162FB53A00E0CC76 /* Foundation.framework */,
-				EC19122A162FB53A00E0CC76 /* SenTestingKit.framework */,
 				EC19122C162FB53A00E0CC76 /* UIKit.framework */,
 				E5D894724A104C729754ABCA /* libGLog.a */,
 				B551F115E86E4C7CA0D92E78 /* libDoubleConversion.a */,
@@ -983,7 +977,7 @@
 		EC19120F162FB53A00E0CC76 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0630;
+				LastTestingUpgradeCheck = 0700;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
