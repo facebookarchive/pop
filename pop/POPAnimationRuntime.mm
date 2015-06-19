@@ -305,7 +305,7 @@ VectorRef POPUnbox(id value, POPValueType &animationType, NSUInteger &count, boo
 
   // handle unknown types
   if (kPOPValueUnknown == valueType) {
-    NSString *valueDesc = kPOPValueUnknown != valueType ? POPValueTypeToString(valueType) : [[value class] description];
+    NSString *valueDesc = [[value class] description];
     [NSException raise:@"Unsuported value" format:@"Animating %@ values is not supported", valueDesc];
   }
 
