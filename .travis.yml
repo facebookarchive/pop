@@ -3,8 +3,11 @@ before_install:
   - brew update
   - brew reinstall xctool
   - gem update cocoapods
+  - gem install slather
 xcode_workspace: pop.xcworkspace
 xcode_scheme: pop
 xcode_sdk:
   - iphonesimulator
   - iphonesimulator8.1
+after_success:
+  - slather
