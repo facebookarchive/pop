@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0610"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0B6BE74719FFD3B900762101"
+               BlueprintIdentifier = "EC68857E18C7B60000C6194C"
                BuildableName = "pop.framework"
-               BlueprintName = "pop-embedded"
-               ReferencedContainer = "container:pop.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0B6BE75119FFD3B900762101"
-               BuildableName = "pop-iosTests.xctest"
-               BlueprintName = "pop-iosTests"
+               BlueprintName = "pop-osx-framework"
                ReferencedContainer = "container:pop.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,22 +32,13 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0B6BE75119FFD3B900762101"
-               BuildableName = "pop-iosTests.xctest"
-               BlueprintName = "pop-iosTests"
+               BlueprintIdentifier = "EC7E319818C93D6500B38170"
+               BuildableName = "pop-tests.xctest"
+               BlueprintName = "pop-tests-osx"
                ReferencedContainer = "container:pop.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0B6BE74719FFD3B900762101"
-            BuildableName = "pop.framework"
-            BlueprintName = "pop-embedded"
-            ReferencedContainer = "container:pop.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -75,9 +52,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0B6BE74719FFD3B900762101"
+            BlueprintIdentifier = "EC68857E18C7B60000C6194C"
             BuildableName = "pop.framework"
-            BlueprintName = "pop-embedded"
+            BlueprintName = "pop-osx-framework"
             ReferencedContainer = "container:pop.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -90,15 +67,6 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0B6BE74719FFD3B900762101"
-            BuildableName = "pop.framework"
-            BlueprintName = "pop-embedded"
-            ReferencedContainer = "container:pop.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

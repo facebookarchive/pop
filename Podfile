@@ -1,23 +1,21 @@
-platform :ios, '7.0'
+platform :ios, '6.0'
 
-target :'pop-tests', :exclusive => true do
+target :'pop-tests-ios', :exclusive => true do
   pod 'OCMock', '~> 2.2'
 end
 
 target :'pop-tests-osx', :exclusive => true do
-  platform :osx, '10.9'
+  platform :osx, '10.8'
   pod 'OCMock', '~> 2.2'
 end
 
 # Add XCTests to generated xcconfigs
 post_install do
   pop_test_xcconfigs = [
-    "./Pods/Target Support Files/Pods-pop-tests/Pods-pop-tests.debug.xcconfig",
-    "./Pods/Target Support Files/Pods-pop-tests/Pods-pop-tests.gcov.xcconfig",
-    "./Pods/Target Support Files/Pods-pop-tests/Pods-pop-tests.profile.xcconfig",
-    "./Pods/Target Support Files/Pods-pop-tests/Pods-pop-tests.release.xcconfig",
+    "./Pods/Target Support Files/Pods-pop-tests-ios/Pods-pop-tests-ios.debug.xcconfig",
+    "./Pods/Target Support Files/Pods-pop-tests-ios/Pods-pop-tests-ios.profile.xcconfig",
+    "./Pods/Target Support Files/Pods-pop-tests-ios/Pods-pop-tests-ios.release.xcconfig",
     "./Pods/Target Support Files/Pods-pop-tests-osx/Pods-pop-tests-osx.debug.xcconfig",
-    "./Pods/Target Support Files/Pods-pop-tests-osx/Pods-pop-tests-osx.gcov.xcconfig",
     "./Pods/Target Support Files/Pods-pop-tests-osx/Pods-pop-tests-osx.profile.xcconfig",
     "./Pods/Target Support Files/Pods-pop-tests-osx/Pods-pop-tests-osx.release.xcconfig",
   ]
