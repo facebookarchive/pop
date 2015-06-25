@@ -4,7 +4,7 @@ before_install:
   - brew reinstall xctool
   - gem update cocoapods
 xcode_workspace: pop.xcworkspace
-xcode_scheme: pop
+xcode_scheme: pop-ios-static
 xcode_sdk:
   - iphonesimulator
   - iphonesimulator8.1
