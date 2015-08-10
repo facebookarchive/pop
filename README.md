@@ -184,9 +184,6 @@ A collection of links to external resources that may prove valuable:
 
 * [AGGeometryKit+POP - Animating Quadrilaterals with Pop](https://github.com/hfossli/aggeometrykit-pop)
 * [Apple – Core Animation Programming Guide](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html)
-* [Codeplease – Bridging the gesture to animation gap](http://codeplease.io/playing-with-pop-ii/)
-* [Codeplease – Playing with Pop (iii)](http://codeplease.io/playing-with-pop-iii/)
-* [Codeplease – Adding a custom animatable property](http://codeplease.io/playing-with-pop-v/)
 * [iOS Development Tips – UIScrollView-like deceleration with Pop](http://iosdevtips.co/post/84571595353/replicating-uiscrollviews-deceleration-with-facebook)
 * [Pop Playground – Repository of Pop animation examples](https://github.com/callmeed/pop-playground)
 * [Pop Playground 2 – Playing with Facebook's framework](http://victorbaro.com/2014/05/pop-playground-playing-with-facebooks-framework/)
