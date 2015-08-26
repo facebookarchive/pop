@@ -224,6 +224,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04C0670F1B8D577C00ED0525 /* Framework-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Framework-iOS.xcconfig"; path = "Configuration/Frameworks/Framework-iOS.xcconfig"; sourceTree = SOURCE_ROOT; };
 		0B6BE74819FFD3B900762101 /* pop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = pop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B6BE7E619FFD98100762101 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		1818936D1B3B74DE002C4A59 /* pop-ios-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "pop-ios-Info.plist"; path = "pop/pop-ios-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -393,6 +394,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04C0670E1B8D574F00ED0525 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				04C0670F1B8D577C00ED0525 /* Framework-iOS.xcconfig */,
+			);
+			name = Frameworks;
+			path = "Static Libraries";
+			sourceTree = "<group>";
+		};
 		4372557D5165714123EC6D70 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -605,6 +615,7 @@
 				ECC1DB0D18CA291B008C7DEA /* Platform */,
 				ECC1DB1118CA291B008C7DEA /* Projects */,
 				ECC1DB1918CA291B008C7DEA /* Static Libraries */,
+				04C0670E1B8D574F00ED0525 /* Frameworks */,
 				ECC1DB1C18CA291B008C7DEA /* Tests */,
 			);
 			path = Configuration;
@@ -1123,6 +1134,7 @@
 /* Begin XCBuildConfiguration section */
 		0B6BE75C19FFD3B900762101 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework-iOS.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -1138,6 +1150,7 @@
 		};
 		0B6BE75E19FFD3B900762101 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework-iOS.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -1153,6 +1166,7 @@
 		};
 		0B6BE75F19FFD3B900762101 /* Profile */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework-iOS.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
