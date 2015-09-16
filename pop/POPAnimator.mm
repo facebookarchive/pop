@@ -746,7 +746,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   OSSpinLockLock(&_lock);
 
   // get keys
-  NSArray *keys = [(__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj) allKeys];
+  NSArray *keys = [(__bridge NSDictionary*)CFDictionaryGetValue(_dict, (__bridge void *)obj) allKeys];
 
   // unlock
   OSSpinLockUnlock(&_lock);
