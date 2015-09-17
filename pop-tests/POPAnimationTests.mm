@@ -888,4 +888,20 @@ using namespace POP;
   XCTAssertEqualObjects(copy.timingFunction, anim.timingFunction, @"expected equality; value1:%@ value2:%@", copy.timingFunction, anim.timingFunction);
 }
 
+- (void)testNSCopyingSupportPOPBasicAnimationWithKeyPath
+{
+  POPBasicAnimation *anim = [POPBasicAnimation animationWithKeyPath:@"contentOffset"];
+  
+  configureConcretePropertyAnimation(anim);
+  [self testCopyingSucceedsForConcretePropertyAnimation:anim];
+  
+  anim.duration = 1.8;
+  anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+  
+  POPBasicAnimation *copy = [anim copy];
+  
+  XCTAssertEqual(copy.duration, anim.duration, @"expected equality; value1:%@ value2:%@", @(copy.duration), @(anim.duration));
+  XCTAssertEqualObjects(copy.timingFunction, anim.timingFunction, @"expected equality; value1:%@ value2:%@", copy.timingFunction, anim.timingFunction);
+}
+
 @end
