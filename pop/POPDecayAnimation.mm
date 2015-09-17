@@ -34,6 +34,13 @@ const POPValueType supportedVelocityTypes[7] = { kPOPValuePoint, kPOPValueIntege
   return anim;
 }
 
++ (instancetype)animationWithKeyPath:(NSString*)keyPath
+{
+  POPDecayAnimation *anim = [self animation];
+  anim.keyPath = keyPath;
+  return anim;
+}
+
 - (id)init
 {
   return [self _init];

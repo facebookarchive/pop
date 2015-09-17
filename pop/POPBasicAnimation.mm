@@ -28,6 +28,13 @@
   return anim;
 }
 
++ (instancetype)animationWithKeyPath:(NSString*)keyPath
+{
+  POPBasicAnimation *anim = [self animation];
+  anim.keyPath = keyPath;
+  return anim;
+}
+
 - (void)_initState
 {
   _state = new POPBasicAnimationState(self);

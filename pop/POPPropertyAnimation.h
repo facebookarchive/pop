@@ -33,6 +33,11 @@ typedef NS_OPTIONS(NSUInteger, POPAnimationClampFlags)
 @property (strong, nonatomic) POPAnimatableProperty *property;
 
 /**
+ @abstract The keyPath to animate.
+ */
+@property (copy, nonatomic, readonly) NSString *keyPath;
+
+/**
  @abstract The value to animate from.
  @discussion The value type should match the property. If unspecified, the value is initialized to the object's current value on animation start.
  */
