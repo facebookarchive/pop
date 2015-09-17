@@ -25,6 +25,7 @@
 #import "POPAnimationExtras.h"
 #import "POPBasicAnimationInternal.h"
 #import "POPDecayAnimation.h"
+#import "POPAnimatablePropertyInternal.h"
 
 using namespace std;
 using namespace POP;
@@ -562,7 +563,43 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   if (!key) {
     key = [[NSUUID UUID] UUIDString];
   }
-
+  
+  // support for default property
+  if ( [anim isKindOfClass:[POPPropertyAnimation class]] ) {
+    POPPropertyAnimation* propAnim = (POPPropertyAnimation*)anim;
+    if ( propAnim.keyPath.length ) {
+      
+      // support animationPropertyFor<keyPath>
+      NSMutableString *propertyName = [NSMutableString string];
+      NSArray *parts = [propAnim.keyPath componentsSeparatedByString:@"."];
+      for ( NSString* part in parts )
+      {
+        NSString* partValue = [part stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[part substringToIndex:1] capitalizedString]];
+        [propertyName appendString:partValue];
+      }
+      
+      NSString *methodName = [@"animationPropertyFor" stringByAppendingString:propertyName];
+      SEL selector = NSSelectorFromString(methodName);
+      if ( [obj respondsToSelector:selector] )
+      {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        propAnim.property = [obj performSelector:selector];
+#pragma clang diagnostic pop
+      }
+      
+      // support for automatic properties
+      if ( !propAnim.property )
+      {
+        id  val = [obj valueForKeyPath:propAnim.keyPath];
+        if ( val ) {
+          POPValueType  valueType = POPSelectValueType( val, kPOPAnimatableSupportTypes, POP_ARRAY_COUNT(kPOPAnimatableSupportTypes) );
+          propAnim.property = [POPAnimatableProperty propertyWithName:[NSString stringWithFormat:@"%p:%@", obj, propAnim.keyPath] keyPath:propAnim.keyPath valueType:valueType];
+        }
+      }
+    }
+  }
+  
   // lock
   OSSpinLockLock(&_lock);
 

@@ -15,6 +15,8 @@
 #import <AppKit/AppKit.h>
 #endif
 
+#import <GLKit/GLKit.h>
+
 #import "POPDefines.h"
 
 #if SCENEKIT_SDK_AVAILABLE
@@ -49,6 +51,16 @@ NS_INLINE SCNVector4 values_to_vec4(const CGFloat values[])
   return SCNVector4Make(values[0], values[1], values[2], values[3]);
 }
 #endif
+
+NS_INLINE GLKVector3 values_to_glkvec3(const CGFloat values[])
+{
+  return GLKVector3Make(values[0], values[1], values[2]);
+}
+
+NS_INLINE GLKQuaternion values_to_glkquternion(const CGFloat values[])
+{
+  return GLKQuaternionMake(values[0], values[1], values[2], values[3]);
+}
 
 #if TARGET_OS_IPHONE
 
@@ -95,6 +107,21 @@ NS_INLINE void values_from_vec4(CGFloat values[], SCNVector4 v)
   values[3] = v.w;
 }
 #endif
+
+NS_INLINE void values_from_glkvec3(CGFloat values[], GLKVector3 v)
+{
+  values[0] = v.v[0];
+  values[1] = v.v[1];
+  values[2] = v.v[2];
+}
+
+NS_INLINE void values_from_glkquaternion(CGFloat values[], GLKQuaternion v)
+{
+  values[0] = v.q[0];
+  values[1] = v.q[1];
+  values[2] = v.q[2];
+  values[3] = v.q[3];
+}
 
 #if TARGET_OS_IPHONE
 

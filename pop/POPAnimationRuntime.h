@@ -28,6 +28,8 @@ enum POPValueType
   kPOPValueColor,
   kPOPValueSCNVector3,
   kPOPValueSCNVector4,
+  kPOPValueGLKVector3,
+  kPOPValueGLKQuaternion
 };
 
 using namespace POP;
@@ -45,12 +47,12 @@ extern POPValueType POPSelectValueType(id obj, const POPValueType *types, size_t
 /**
  Array of all value types.
  */
-extern const POPValueType kPOPAnimatableAllTypes[12];
+extern const POPValueType kPOPAnimatableAllTypes[14];
 
 /**
  Array of all value types supported for animation.
  */
-extern const POPValueType kPOPAnimatableSupportTypes[10];
+extern const POPValueType kPOPAnimatableSupportTypes[12];
 
 /**
  Returns a string description of a value type.

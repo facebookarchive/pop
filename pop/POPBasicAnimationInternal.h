@@ -29,6 +29,25 @@ static void interpolate(POPValueType valueType, NSUInteger count, const CGFloat 
     case kPOPValueColor:
       POPInterpolateVector(count, outVec, fromVec, toVec, p);
       break;
+    case kPOPValueGLKVector3: {
+      GLKVector3 from = GLKVector3Make(fromVec[0], fromVec[1], fromVec[2]);
+      GLKVector3 to = GLKVector3Make(toVec[0], toVec[1], toVec[2]);
+      GLKVector3 result = GLKVector3Lerp( from, to, p );
+      outVec[0] = result.v[0];
+      outVec[1] = result.v[1];
+      outVec[2] = result.v[2];
+    }
+      break;
+    case kPOPValueGLKQuaternion: {
+      GLKQuaternion from = GLKQuaternionMake(fromVec[0], fromVec[1], fromVec[2], fromVec[3]);
+      GLKQuaternion to = GLKQuaternionMake(toVec[0], toVec[1], toVec[2], toVec[3]);
+      GLKQuaternion result = GLKQuaternionSlerp( from, to, p );
+      outVec[0] = result.q[0];
+      outVec[1] = result.q[1];
+      outVec[2] = result.q[2];
+      outVec[3] = result.q[3];
+    }
+      break;
     default:
       NSCAssert(false, @"unhandled type %d", valueType);
       break;
