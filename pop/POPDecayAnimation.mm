@@ -13,7 +13,7 @@
 #import <UIKit/UIKit.h>
 #endif
 
-const POPValueType supportedVelocityTypes[6] = { kPOPValuePoint, kPOPValueInteger, kPOPValueFloat, kPOPValueRect, kPOPValueSize, kPOPValueEdgeInsets };
+const POPValueType supportedVelocityTypes[7] = { kPOPValuePoint, kPOPValueInteger, kPOPValueFloat, kPOPValueRect, kPOPValueSize, kPOPValueEdgeInsets, kPOPValueGLKVector3 };
 
 @implementation POPDecayAnimation
 
@@ -109,8 +109,11 @@ DEFINE_RW_PROPERTY(POPDecayAnimationState, deceleration, setDeceleration:, CGFlo
     UIEdgeInsets negativeOriginalVelocityInsets = UIEdgeInsetsMake(-originalVelocityInsets.top, -originalVelocityInsets.left, -originalVelocityInsets.bottom, -originalVelocityInsets.right);
     reversedVelocity = [NSValue valueWithUIEdgeInsets:negativeOriginalVelocityInsets];
 #endif
+  } else if ( velocityType == kPOPValueGLKVector3 ) {
+    GLKVector3 originalVelocityVector3 = [self.originalVelocity GLKVector3Value];
+    GLKVector3 negativeOriginalVelocityVector3 = GLKVector3MultiplyScalar(originalVelocityVector3,-1.0);
+    reversedVelocity = [NSValue valueWithGLKVector3:negativeOriginalVelocityVector3];
   }
-
   return reversedVelocity;
 }
 

@@ -16,6 +16,7 @@
 #import <objc/NSObjCRuntime.h>
 
 #import <CoreGraphics/CoreGraphics.h>
+#import <GLKit/GLKit.h>
 
 #import "POPDefines.h"
 
@@ -356,6 +357,14 @@ namespace POP {
     static Vector *new_scn_vector4(const SCNVector4 &vec4);
 #endif
 
+    // GLKVector3 support
+    GLKVector3 glk_vector3() const;
+    static Vector *new_glk_vector3(const GLKVector3 &v);
+    
+    // GLKQuaternion support
+    GLKQuaternion glk_quaternion() const;
+    static Vector *new_glk_quaternion(const GLKQuaternion &q);
+    
     // operator overloads
     CGFloat &operator[](size_t i) const {
       NSCAssert(size() > i, @"unexpected vector size:%lu", (unsigned long)size());
