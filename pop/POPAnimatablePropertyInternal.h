@@ -16,7 +16,7 @@
  @param keyPath The keyPath of the property.
  @param valueType The type of objC value of the property.
  @return The animatable property for that keyPath or nil if it can't be created.
- @discussion Common animatable properties are included by default. Use the provided constants to reference.
+ @discussion Used by animations created with keyPaths.
  */
 + (id)propertyWithName:(NSString*)name keyPath:(NSString*)keyPath valueType:(POPValueType)valueType;
 
