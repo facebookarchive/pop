@@ -198,6 +198,8 @@
 		FA9A1CAB1BAA51F00050046A /* POPAnimatablePropertyInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9A1CA91BAA51F00050046A /* POPAnimatablePropertyInternal.h */; settings = {ASSET_TAGS = (); }; };
 		FA9A1CAC1BAA51F00050046A /* POPAnimatablePropertyInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9A1CA91BAA51F00050046A /* POPAnimatablePropertyInternal.h */; settings = {ASSET_TAGS = (); }; };
 		FA9A1CAD1BAA51F00050046A /* POPAnimatablePropertyInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9A1CA91BAA51F00050046A /* POPAnimatablePropertyInternal.h */; settings = {ASSET_TAGS = (); }; };
+		FA9A1CB51BAB043E0050046A /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9A1C9E1BAA408E0050046A /* GLKit.framework */; };
+		FA9A1CB61BAB04460050046A /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9A1CA11BAA409A0050046A /* GLKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -384,6 +386,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA9A1CB61BAB04460050046A /* GLKit.framework in Frameworks */,
 				EC7E31B518C9422F00B38170 /* pop.framework in Frameworks */,
 				EC7E31B418C9422600B38170 /* QuartzCore.framework in Frameworks */,
 				ADE1BB0636F940EC8EA7EE57 /* libPods-pop-tests-osx.a in Frameworks */,
@@ -394,6 +397,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA9A1CB51BAB043E0050046A /* GLKit.framework in Frameworks */,
 				ECDA0CD118C92D3900D14897 /* CoreGraphics.framework in Frameworks */,
 				ECDA0CD018C92C4C00D14897 /* libpop.a in Frameworks */,
 				ECDA0CCF18C92C3E00D14897 /* QuartzCore.framework in Frameworks */,

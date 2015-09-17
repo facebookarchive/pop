@@ -1325,6 +1325,7 @@ static POPAnimatableProperty *placeholder = nil;
         
       case kPOPValueEdgeInsets:
       {
+#if TARGET_OS_IPHONE
         readBlock = ^(id obj, CGFloat values[]) {
           UIEdgeInsets ei = [[obj valueForKeyPath:keyPath] UIEdgeInsetsValue];
           values[0] = ei.top;
@@ -1336,6 +1337,7 @@ static POPAnimatableProperty *placeholder = nil;
           UIEdgeInsets ei = UIEdgeInsetsMake(values[0], values[1], values[2], values[3]);
           [obj setValue:[NSValue valueWithUIEdgeInsets:ei] forKeyPath:keyPath];
         };
+#endif
       }
         break;
         

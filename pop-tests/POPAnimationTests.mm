@@ -110,10 +110,10 @@ using namespace POP;
   anim.roundingFactor = 1.0;
 
   id layer = [OCMockObject niceMockForClass:[CALayer class]];
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.25).cg_point()];
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.5).cg_point()];
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.75).cg_point()];
-  [[layer expect] setPosition:[anim.toValue CGPointValue]];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.25).cg_point()];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.5).cg_point()];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.75).cg_point()];
+  [(CALayer*)[layer expect] setPosition:[anim.toValue CGPointValue]];
 
   [layer pop_addAnimation:anim forKey:@"key"];
   POPAnimatorRenderDuration(self.animator, self.beginTime, 1, 0.25);
@@ -401,8 +401,8 @@ using namespace POP;
 
   id layer = [OCMockObject niceMockForClass:[CALayer class]];
 
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([fromValue CGPointValue]), Vector2r([toValue CGPointValue]), testProgress).cg_point()];
-  [[layer expect] setPosition:[toValue CGPointValue]];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([fromValue CGPointValue]), Vector2r([toValue CGPointValue]), testProgress).cg_point()];
+  [(CALayer*)[layer expect] setPosition:[toValue CGPointValue]];
 
   [layer pop_addAnimation:anim forKey:@"key"];
 
@@ -418,8 +418,8 @@ using namespace POP;
 
   layer = [OCMockObject niceMockForClass:[CALayer class]];
   
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([fromValue CGPointValue]), Vector2r([toValue CGPointValue]), testProgress).cg_point()];
-  [[layer expect] setPosition:[toValue CGPointValue]];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([fromValue CGPointValue]), Vector2r([toValue CGPointValue]), testProgress).cg_point()];
+  [(CALayer*)[layer expect] setPosition:[toValue CGPointValue]];
 
   [layer pop_addAnimation:anim forKey:@"key"];
 
@@ -754,10 +754,10 @@ using namespace POP;
   anim.roundingFactor = 1.0;
   
   id layer = [OCMockObject niceMockForClass:[CALayer class]];
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.25).cg_point()];
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.5).cg_point()];
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.75).cg_point()];
-  [[layer expect] setPosition:[anim.toValue CGPointValue]];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.25).cg_point()];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.5).cg_point()];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.75).cg_point()];
+  [(CALayer*)[layer expect] setPosition:[anim.toValue CGPointValue]];
   
   // verify nil key can be added, same as CA
   [layer pop_addAnimation:anim forKey:nil];
