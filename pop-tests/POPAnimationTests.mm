@@ -26,6 +26,55 @@
 
 using namespace POP;
 
+@interface POPRandomPropertyGivingObject : NSObject
+
+@property (nonatomic,assign) NSInteger number;
+@property (nonatomic,assign) NSInteger secondNumber;
+
+@end
+
+@implementation POPRandomPropertyGivingObject
+
+@synthesize number, secondNumber;
+
+- (POPAnimatableProperty*)animationPropertyForNumber
+{
+  return [POPAnimatableProperty propertyWithName:@"com.pop.tests.number" initializer:^(POPMutableAnimatableProperty *prop) {
+    prop.readBlock = ^(POPRandomPropertyGivingObject* obj, CGFloat values[]) {
+      values[0] = obj.number;
+    };
+    prop.writeBlock = ^(POPRandomPropertyGivingObject* obj, const CGFloat values[]) {
+      obj.number = values[0];
+    };
+    prop.threshold = 1.0;
+  }];
+}
+
+- (void)setValue:(id)value forKeyPath:(NSString *)keyPath
+{
+  if ( [keyPath isEqualToString:@"number"] ) {
+    self.number = [value integerValue];
+  } else if ( [keyPath isEqualToString:@"secondNumber"] ) {
+    self.secondNumber = [value integerValue];
+  } else {
+    [super setValue:value forKeyPath:keyPath];
+  }
+}
+
+- (id)valueForKeyPath:(NSString *)keyPath
+{
+  if ( [keyPath isEqualToString:@"number"] ) {
+    return @(self.number);
+  } else if ( [keyPath isEqualToString:@"secondNumber"] ) {
+    return @(self.secondNumber);
+  } else {
+    return [super valueForKeyPath:keyPath];
+  }
+  return nil;
+}
+
+@end
+
 @interface POPAnimation (TestExtensions)
 @property (strong, nonatomic) NSString *sampleKey;
 @end
@@ -902,6 +951,58 @@ using namespace POP;
   
   XCTAssertEqual(copy.duration, anim.duration, @"expected equality; value1:%@ value2:%@", @(copy.duration), @(anim.duration));
   XCTAssertEqualObjects(copy.timingFunction, anim.timingFunction, @"expected equality; value1:%@ value2:%@", copy.timingFunction, anim.timingFunction);
+}
+
+- (void)testAutomatedAnimatedPropertyInBasicAnimation
+{
+  CALayer* layer = [CALayer layer];
+  POPBasicAnimation *anim = [POPBasicAnimation animationWithKeyPath:@"position"];
+  [layer pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNotNil( anim.property, @"expected non-nil property for keyPath:%@", anim.keyPath );
+  
+  anim = [POPBasicAnimation animationWithKeyPath:@"nonExistingKeyPath"];
+  [layer pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNil( anim.property, @"expected nil property for keyPath:%@ (%@)", anim.keyPath, anim.property );
+}
+
+- (void)testAutomatedAnimatedPropertyInSpringAnimation
+{
+  CALayer* layer = [CALayer layer];
+  POPSpringAnimation *anim = [POPSpringAnimation animationWithKeyPath:@"position"];
+  [layer pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNotNil( anim.property, @"expected non-nil property for keyPath:%@", anim.keyPath );
+  
+  anim = [POPSpringAnimation animationWithKeyPath:@"nonExistingKeyPath"];
+  [layer pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNil( anim.property, @"expected nil property for keyPath:%@ (%@)", anim.keyPath, anim.property );
+}
+
+- (void)testAutomatedAnimatedPropertyInDecayAnimation
+{
+  CALayer* layer = [CALayer layer];
+  POPDecayAnimation *anim = [POPDecayAnimation animationWithKeyPath:@"position"];
+  [layer pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNotNil( anim.property, @"expected non-nil property for keyPath:%@", anim.keyPath );
+  
+  anim = [POPDecayAnimation animationWithKeyPath:@"nonExistingKeyPath"];
+  [layer pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNil( anim.property, @"expected nil property for keyPath:%@ (%@)", anim.keyPath, anim.property );
+}
+
+- (void)testAutomatedUserDefinedAnimatedProperty
+{
+  POPRandomPropertyGivingObject* object = [[POPRandomPropertyGivingObject alloc] init];
+  POPBasicAnimation *anim = [POPBasicAnimation animationWithKeyPath:@"number"];
+  [object pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNotNil( anim.property, @"expected non-nil property for keyPath:%@", anim.keyPath );
+}
+
+- (void)testAutomatedKeyValueDefinedAnimatedProperty
+{
+  POPRandomPropertyGivingObject* object = [[POPRandomPropertyGivingObject alloc] init];
+  POPBasicAnimation *anim = [POPBasicAnimation animationWithKeyPath:@"secondNumber"];
+  [object pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNotNil( anim.property, @"expected non-nil property for keyPath:%@", anim.keyPath );
 }
 
 @end
