@@ -592,8 +592,10 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
       if ( !propAnim.property )
       {
         id  val = [obj valueForKeyPath:propAnim.keyPath];
-        POPValueType  valueType = POPSelectValueType( val, kPOPAnimatableSupportTypes, POP_ARRAY_COUNT(kPOPAnimatableSupportTypes) );
-        propAnim.property = [POPAnimatableProperty propertyWithName:[NSString stringWithFormat:@"%p:%@", obj, propAnim.keyPath] keyPath:propAnim.keyPath valueType:valueType];
+        if ( val ) {
+          POPValueType  valueType = POPSelectValueType( val, kPOPAnimatableSupportTypes, POP_ARRAY_COUNT(kPOPAnimatableSupportTypes) );
+          propAnim.property = [POPAnimatableProperty propertyWithName:[NSString stringWithFormat:@"%p:%@", obj, propAnim.keyPath] keyPath:propAnim.keyPath valueType:valueType];
+        }
       }
     }
   }
