@@ -37,6 +37,10 @@
 {
   switch (type) {
     case kPOPValueInteger:
+      NSInteger itg;
+      [invocation getArgument:&itg atIndex:index];
+      return @(itg);
+      break;
     case kPOPValueFloat:
       CGFloat flt;
       [invocation getArgument:&flt atIndex:index];

@@ -54,7 +54,6 @@
   // add all the animations if needed
   if ( !_addedAnimations )
   {
-    NSLog( @"[%@:%p] _advance", NSStringFromClass(self.class), self );
     _addedAnimations = YES;
     
     NSMutableArray* keys = [NSMutableArray array];
@@ -76,8 +75,6 @@
       animsLeft++;
   }
 
-  NSLog( @"   [%@:%p] animations left: %ld", NSStringFromClass(self.class), self, animsLeft );
-  
   return animsLeft > 0;
 }
 

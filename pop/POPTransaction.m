@@ -246,12 +246,6 @@
     {
       anim.duration = [[self valueForKey:kPOPTransactionAnimationDuration] doubleValue];
       anim.timingFunction = [self valueForKey:kPOPTransactionAnimationTimingFunction];
-      anim.animationDidApplyBlock = ^(POPAnimation* a) {
-        NSLog( @"grouped transaction animationDidApplyBlock" );
-      };
-      anim.completionBlock = ^(POPAnimation* a, BOOL finisto) {
-        NSLog( @"grouped transaction completionBlock" );
-      };
     }
     
     [obj pop_addAnimation:group forKey:[[NSUUID UUID] UUIDString]];

@@ -12,18 +12,10 @@
 #import "POPAnimationPrivate.h"
 #import "UnitBezier.h"
 
-#define MIX(a, b, f) ((a) + (f) * ((b) - (a)))
-static inline CGFloat _doMix( CGFloat a, CGFloat b, CGFloat f )
-{
-  CGFloat val = ((a) + (f) * ((b) - (a)));
-  return val;
-}
-
 void POPInterpolateVector(NSUInteger count, CGFloat *dst, const CGFloat *from, const CGFloat *to, CGFloat f)
 {
   for (NSUInteger idx = 0; idx < count; idx++) {
-    //dst[idx] = MIX(from[idx], to[idx], f);
-    dst[idx] = _doMix(from[idx], to[idx], f);
+    dst[idx] = MIX(from[idx], to[idx], f);
   }
 }
 

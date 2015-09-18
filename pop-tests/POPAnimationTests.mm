@@ -1052,19 +1052,11 @@ using namespace POP;
   [POPTransaction setAnimationDuration:10];
   
   obj.pop_animator.secondNumber = 10;
-  
-  [POPTransaction setCompletionBlock:^() {
-    
-    NSLog( @"%@", obj );
-    
-    NSLog( @"completion" );
-  }];
-  
-  NSLog( @"start" );
+
   [POPTransaction commit];
   
   POPAnimatorRenderDuration(self.animator, self.beginTime, 20, 0.01);
-  NSLog( @"done" );
+
   XCTAssertTrue(obj.secondNumber == 10, @"expect 10 but got %ld", (long)obj.secondNumber );
 }
 
