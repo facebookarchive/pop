@@ -192,6 +192,12 @@
 		ECDA0CD118C92D3900D14897 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5A89D162FBD9B00F7F15C /* CoreGraphics.framework */; };
 		ECF01ED518C92B7F009E0AD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC19121B162FB53A00E0CC76 /* Foundation.framework */; };
 		ECF01ED618C92B7F009E0AD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEED93D18C91ACF00DD95F2 /* UIKit.framework */; };
+		FAAEA3EF1BAB6C09005069B1 /* POPGroupAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = FAAEA3ED1BAB6C09005069B1 /* POPGroupAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FAAEA3F01BAB6C09005069B1 /* POPGroupAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = FAAEA3ED1BAB6C09005069B1 /* POPGroupAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FAAEA3F11BAB6C09005069B1 /* POPGroupAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = FAAEA3ED1BAB6C09005069B1 /* POPGroupAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FAAEA3F21BAB6C09005069B1 /* POPGroupAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAAEA3EE1BAB6C09005069B1 /* POPGroupAnimation.mm */; settings = {ASSET_TAGS = (); }; };
+		FAAEA3F31BAB6C09005069B1 /* POPGroupAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAAEA3EE1BAB6C09005069B1 /* POPGroupAnimation.mm */; settings = {ASSET_TAGS = (); }; };
+		FAAEA3F41BAB6C09005069B1 /* POPGroupAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAAEA3EE1BAB6C09005069B1 /* POPGroupAnimation.mm */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -330,6 +336,8 @@
 		ECD80F1018CFD2EF00AE4303 /* POPGeometry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = POPGeometry.mm; sourceTree = "<group>"; };
 		ECEED93D18C91ACF00DD95F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ECF01ED318C92B7F009E0AD1 /* pop-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pop-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAAEA3ED1BAB6C09005069B1 /* POPGroupAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPGroupAnimation.h; sourceTree = "<group>"; };
+		FAAEA3EE1BAB6C09005069B1 /* POPGroupAnimation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = POPGroupAnimation.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -544,6 +552,8 @@
 				EC8F015318FFBD5600DF8905 /* POPBasicAnimationInternal.h */,
 				5E17BB1E17457345009842B6 /* POPCustomAnimation.h */,
 				5E17BB1F17457345009842B6 /* POPCustomAnimation.mm */,
+				FAAEA3ED1BAB6C09005069B1 /* POPGroupAnimation.h */,
+				FAAEA3EE1BAB6C09005069B1 /* POPGroupAnimation.mm */,
 				EC8F015A18FFBE8C00DF8905 /* POPDecayAnimation.h */,
 				EC8F015B18FFBE8C00DF8905 /* POPDecayAnimation.mm */,
 				EC8F016018FFBE9D00DF8905 /* POPDecayAnimationInternal.h */,
@@ -685,6 +695,7 @@
 				0B6BE76A19FFD41100762101 /* POPAnimationEvent.h in Headers */,
 				0B6BE76919FFD40700762101 /* POP.h in Headers */,
 				0B6BE76819FFD3FF00762101 /* POPAnimationTracer.h in Headers */,
+				FAAEA3F01BAB6C09005069B1 /* POPGroupAnimation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,6 +708,7 @@
 				EC191295162FB5EC00E0CC76 /* POPAnimation.h in Headers */,
 				EC191297162FB5EC00E0CC76 /* POPAnimator.h in Headers */,
 				EC35DB2D18EE3E820023E077 /* POPAnimationTracerInternal.h in Headers */,
+				FAAEA3EF1BAB6C09005069B1 /* POPGroupAnimation.h in Headers */,
 				EC191299162FB5EC00E0CC76 /* POPAnimatableProperty.h in Headers */,
 				EC8F014F18FFBD3E00DF8905 /* POPBasicAnimation.h in Headers */,
 				EC8F014018FFBBD300DF8905 /* POPPropertyAnimation.h in Headers */,
@@ -737,6 +749,7 @@
 				EC6885D118C7BD8500C6194C /* TransformationMatrix.h in Headers */,
 				EC6885B718C7BD2600C6194C /* POPAnimationEventInternal.h in Headers */,
 				EC35DB2E18EE3E820023E077 /* POPAnimationTracerInternal.h in Headers */,
+				FAAEA3F11BAB6C09005069B1 /* POPGroupAnimation.h in Headers */,
 				EC6885C818C7BD5F00C6194C /* POPLayerExtras.h in Headers */,
 				EC8F015018FFBD3E00DF8905 /* POPBasicAnimation.h in Headers */,
 				EC8F014118FFBBD300DF8905 /* POPPropertyAnimation.h in Headers */,
@@ -1021,6 +1034,7 @@
 				0B6BE7DC19FFD92700762101 /* POPAnimator.mm in Sources */,
 				0B6BE7DD19FFD92700762101 /* POPCGUtils.mm in Sources */,
 				0B6BE7DE19FFD92700762101 /* POPGeometry.mm in Sources */,
+				FAAEA3F31BAB6C09005069B1 /* POPGroupAnimation.mm in Sources */,
 				0B6BE7DF19FFD92700762101 /* POPLayerExtras.mm in Sources */,
 				0B6BE7E019FFD92800762101 /* POPMath.mm in Sources */,
 				0B6BE7E119FFD92800762101 /* POPVector.mm in Sources */,
@@ -1046,6 +1060,7 @@
 				EC35DB2B18EE3E820023E077 /* POPAnimationTracer.mm in Sources */,
 				5E17BB2117457345009842B6 /* POPCustomAnimation.mm in Sources */,
 				EC67007418D3D89F00F7387F /* POPCGUtils.mm in Sources */,
+				FAAEA3F21BAB6C09005069B1 /* POPGroupAnimation.mm in Sources */,
 				ECD80F1318CFD2EF00AE4303 /* POPGeometry.mm in Sources */,
 				EC8F015E18FFBE8C00DF8905 /* POPDecayAnimation.mm in Sources */,
 				EC9997561756A0C300A73F49 /* POPAnimationEvent.mm in Sources */,
@@ -1071,6 +1086,7 @@
 				EC35DB2C18EE3E820023E077 /* POPAnimationTracer.mm in Sources */,
 				EC67007518D3D89F00F7387F /* POPCGUtils.mm in Sources */,
 				ECD80F1418CFD2EF00AE4303 /* POPGeometry.mm in Sources */,
+				FAAEA3F41BAB6C09005069B1 /* POPGroupAnimation.mm in Sources */,
 				EC6885C918C7BD6300C6194C /* POPLayerExtras.mm in Sources */,
 				EC8F015F18FFBE8C00DF8905 /* POPDecayAnimation.mm in Sources */,
 				EC6885B918C7BD3000C6194C /* POPAnimationExtras.mm in Sources */,

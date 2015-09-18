@@ -712,6 +712,20 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   return keys;
 }
 
+- (NSArray*)animationsForObject:(id)obj
+{
+  // lock
+  OSSpinLockLock(&_lock);
+  
+  // lookup animation
+  NSDictionary *keyAnimationsDict = (__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj);
+  NSArray* animations = keyAnimationsDict.allValues;
+
+  // unlock
+  OSSpinLockUnlock(&_lock);
+  return animations;
+}
+
 - (id)animationForObject:(id)obj key:(NSString *)key
 {
   // lock
