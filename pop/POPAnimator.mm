@@ -556,6 +556,32 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   return observers;
 }
 
+- (POPAnimatableProperty*)customAnimatablePropertyForObject:(id)obj keyPath:(NSString*)keyPath
+{
+  POPAnimatableProperty* property = nil;
+  
+  // support animationPropertyFor<keyPath>
+  NSMutableString *propertyName = [NSMutableString string];
+  NSArray *parts = [keyPath componentsSeparatedByString:@"."];
+  for ( NSString* part in parts )
+  {
+    NSString* partValue = [part stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[part substringToIndex:1] capitalizedString]];
+    [propertyName appendString:partValue];
+  }
+  
+  NSString *methodName = [@"animationPropertyFor" stringByAppendingString:propertyName];
+  SEL selector = NSSelectorFromString(methodName);
+  if ( [obj respondsToSelector:selector] )
+  {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    property = [obj performSelector:selector];
+#pragma clang diagnostic pop
+  }
+  
+  return property;
+}
+
 - (void)addAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key
 {
   if (!anim || !obj) {
@@ -573,23 +599,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     if ( propAnim.keyPath.length ) {
       
       // support animationPropertyFor<keyPath>
-      NSMutableString *propertyName = [NSMutableString string];
-      NSArray *parts = [propAnim.keyPath componentsSeparatedByString:@"."];
-      for ( NSString* part in parts )
-      {
-        NSString* partValue = [part stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[part substringToIndex:1] capitalizedString]];
-        [propertyName appendString:partValue];
-      }
-      
-      NSString *methodName = [@"animationPropertyFor" stringByAppendingString:propertyName];
-      SEL selector = NSSelectorFromString(methodName);
-      if ( [obj respondsToSelector:selector] )
-      {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        propAnim.property = [obj performSelector:selector];
-#pragma clang diagnostic pop
-      }
+      propAnim.property = [self customAnimatablePropertyForObject:obj keyPath:propAnim.keyPath];
       
       // support for automatic properties
       if ( !propAnim.property )

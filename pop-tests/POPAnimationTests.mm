@@ -1040,11 +1040,16 @@ using namespace POP;
   POPAnimatorRenderDuration(self.animator, self.beginTime, 5, 0.01);
 }
 
-- (void)testProxyAnimator
+- (void)testImplicitAnimations
 {
   CALayer* layer = [CALayer layer];
+  layer.cornerRadius = 0;
+  XCTAssertTrue(layer.cornerRadius == 0, @"expect 0 but got %f", layer.cornerRadius );
+  
   layer.pop_animator.borderWidth = 10;
   POPAnimatorRenderDuration(self.animator, self.beginTime, 5, 0.01);
+  
+  XCTAssertTrue(layer.cornerRadius == 0, @"expect 10 but got %f", layer.cornerRadius );
 }
 
 @end

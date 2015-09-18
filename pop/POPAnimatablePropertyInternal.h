@@ -7,6 +7,7 @@
 //
 
 #import "POPAnimatableProperty.h"
+#import "POPAnimationRuntime.h"
 
 @interface POPAnimatableProperty ()
 
