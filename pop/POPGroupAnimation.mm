@@ -10,30 +10,20 @@
 #import "POPAnimationInternal.h"
 #import "POPAnimatorPrivate.h"
 
-@interface POPGroupAnimation ()
-
-@property (copy, nonatomic) void (^userAnimationDidStartBlock)(POPAnimation *anim);
-
-@end
-
 @implementation POPGroupAnimation {
   NSArray*      _animations;
   NSArray*      _animationKeys;
   BOOL          _addedAnimations;
 }
 
-@synthesize userAnimationDidStartBlock;
-
 + (instancetype)animation
 {
-  POPGroupAnimation* anim = [[[self class] alloc] _init];
-  return anim;
+  return [[[self class] alloc] _init];
 }
 
 - (void)setAnimations:(NSArray *)animations
 {
-  if ( _addedAnimations )
-    return;
+  NSAssert( _addedAnimations == NO, @"cannot change the animations in an ongoing group animation");
   _animations = [animations copy];
 }
 
