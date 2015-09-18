@@ -1006,4 +1006,45 @@ using namespace POP;
   XCTAssertNotNil( anim.property, @"expected non-nil property for keyPath:%@", anim.keyPath );
 }
 
+- (void)testGroupAnimation
+{
+  CALayer* layer = [CALayer layer];
+  
+  __block NSInteger testValue = 0;
+  
+  POPGroupAnimation* group = [POPGroupAnimation animation];
+  group.animationDidStartBlock = ^(POPAnimation* anim) {
+    XCTAssertEqual(testValue, 0, @"expected 0 but got %ld", (long)testValue);
+    testValue++;
+  };
+  
+  POPBasicAnimation* test = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerBorderWidth];
+  test.toValue = @(5);
+  test.animationDidStartBlock = ^(POPAnimation* anim) {
+    XCTAssertEqual(testValue, 1, @"expected 1 but got %ld", (long)testValue);
+    testValue++;
+  };
+  test.completionBlock = ^(POPAnimation* anim, BOOL finished) {
+    XCTAssertEqual(testValue, 2, @"expected 2 but got %ld", (long)testValue);
+    testValue++;
+  };
+  
+  group.animations = @[ test ];
+  
+  group.completionBlock = ^(POPAnimation* anim, BOOL finished) {
+    XCTAssertEqual(testValue, 3, @"expected 3 but got %ld", (long)testValue);
+    testValue++;
+  };
+  [layer pop_addAnimation:group forKey:@"group"];
+
+  POPAnimatorRenderDuration(self.animator, self.beginTime, 5, 0.01);
+}
+
+- (void)testProxyAnimator
+{
+  CALayer* layer = [CALayer layer];
+  layer.pop_animator.borderWidth = 10;
+  POPAnimatorRenderDuration(self.animator, self.beginTime, 5, 0.01);
+}
+
 @end
