@@ -923,4 +923,11 @@ using namespace POP;
   POPAnimatorRenderDuration(self.animator, self.beginTime, 5, 0.01);
 }
 
+- (void)testProxyAnimator
+{
+  CALayer* layer = [CALayer layer];
+  layer.pop_animator.borderWidth = 10;
+  POPAnimatorRenderDuration(self.animator, self.beginTime, 5, 0.01);
+}
+
 @end

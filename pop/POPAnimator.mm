@@ -25,6 +25,7 @@
 #import "POPAnimationExtras.h"
 #import "POPBasicAnimationInternal.h"
 #import "POPDecayAnimation.h"
+#import "POPAnimationProxy.h"
 
 using namespace std;
 using namespace POP;
@@ -100,6 +101,7 @@ static BOOL _disableBackgroundThread = YES;
   CFTimeInterval _beginTime;
   OSSpinLock _lock;
   BOOL _disableDisplayLink;
+  NSMapTable* _proxyAnimatorMap;
 }
 @end
 
@@ -353,6 +355,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 #endif
 
   _dict = POPDictionaryCreateMutableWeakPointerToStrongObject(5);
+  _proxyAnimatorMap = [NSMapTable weakToWeakObjectsMapTable];
   _lock = OS_SPINLOCK_INIT;
 
   return self;
@@ -724,6 +727,24 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   // unlock
   OSSpinLockUnlock(&_lock);
   return animations;
+}
+
+- (id)animationProxyForObject:(id)obj
+{
+  // lock
+  OSSpinLockLock(&_lock);
+  
+  // lookup animation
+  POPAnimationProxy *proxy = [_proxyAnimatorMap objectForKey:obj];
+  if ( !proxy )
+  {
+    proxy = [[POPAnimationProxy alloc] initWithObject:obj];
+    [_proxyAnimatorMap setObject:proxy forKey:obj];
+  }
+  
+  // unlock
+  OSSpinLockUnlock(&_lock);
+  return proxy;
 }
 
 - (id)animationForObject:(id)obj key:(NSString *)key

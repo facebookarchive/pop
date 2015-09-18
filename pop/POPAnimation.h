@@ -176,6 +176,13 @@ When combined with the autoreverses property, a singular animation is effectivel
 
 @end
 
+
+@interface NSObject (POPImplicitAnimations)
+
+- (instancetype)pop_animator;
+
+@end
+
 /**
  *  This implementation of NSCopying does not do any copying of animation's state, but only configuration.
  *  i.e. you cannot copy an animation and expect to apply it to a view and have the copied animation pick up where the original left off.

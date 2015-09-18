@@ -55,6 +55,7 @@
 - (NSArray *)animationKeysForObject:(id)obj;
 - (POPAnimation *)animationForObject:(id)obj key:(NSString *)key;
 - (NSArray*)animationsForObject:(id)obj;
+- (id)animationProxyForObject:(id)obj;
 
 /**
  @abstract Add an animator observer. Observer will be notified of each subsequent animator advance until removal.

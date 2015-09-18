@@ -242,6 +242,15 @@ POPAnimationState *POPAnimationGetState(POPAnimation *a)
 
 @end
 
+@implementation NSObject (POPImplicitAnimations)
+
+- (instancetype)pop_animator
+{
+  return [[POPAnimator sharedAnimator] animationProxyForObject:self];
+}
+
+@end
+
 @implementation NSProxy (POP)
 
 - (void)pop_addAnimation:(POPAnimation *)anim forKey:(NSString *)key

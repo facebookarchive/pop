@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F2FE0AAE95F0B87896F2BEE0B176D4FC32D691A3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "69A53C4FBC76B4ED86A5BBB603999E6FEB49586C" : 0,
+    "7587B3E54A6D3F30B396ACFBEDD34B63443E3187" : 0,
+    "F2FE0AAE95F0B87896F2BEE0B176D4FC32D691A3" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "788D9421-6750-461B-A5D8-27E847FF7C31",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "69A53C4FBC76B4ED86A5BBB603999E6FEB49586C" : "..\/..\/..\/..",
+    "7587B3E54A6D3F30B396ACFBEDD34B63443E3187" : "..\/..\/..\/..\/..\/..\/..",
+    "F2FE0AAE95F0B87896F2BEE0B176D4FC32D691A3" : "pop\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "pop",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "pop.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/naftaly\/RenderKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "69A53C4FBC76B4ED86A5BBB603999E6FEB49586C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/naftaly\/Surface.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7587B3E54A6D3F30B396ACFBEDD34B63443E3187"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/naftaly\/pop.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F2FE0AAE95F0B87896F2BEE0B176D4FC32D691A3"
+    }
+  ]
+}
