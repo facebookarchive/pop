@@ -27,6 +27,55 @@
 
 using namespace POP;
 
+@interface POPRandomPropertyGivingObject : NSObject
+
+@property (nonatomic,assign) NSInteger number;
+@property (nonatomic,assign) NSInteger secondNumber;
+
+@end
+
+@implementation POPRandomPropertyGivingObject
+
+@synthesize number, secondNumber;
+
+- (POPAnimatableProperty*)animationPropertyForNumber
+{
+  return [POPAnimatableProperty propertyWithName:@"com.pop.tests.number" initializer:^(POPMutableAnimatableProperty *prop) {
+    prop.readBlock = ^(POPRandomPropertyGivingObject* obj, CGFloat values[]) {
+      values[0] = obj.number;
+    };
+    prop.writeBlock = ^(POPRandomPropertyGivingObject* obj, const CGFloat values[]) {
+      obj.number = values[0];
+    };
+    prop.threshold = 1.0;
+  }];
+}
+
+- (void)setValue:(id)value forKeyPath:(NSString *)keyPath
+{
+  if ( [keyPath isEqualToString:@"number"] ) {
+    self.number = [value integerValue];
+  } else if ( [keyPath isEqualToString:@"secondNumber"] ) {
+    self.secondNumber = [value integerValue];
+  } else {
+    [super setValue:value forKeyPath:keyPath];
+  }
+}
+
+- (id)valueForKeyPath:(NSString *)keyPath
+{
+  if ( [keyPath isEqualToString:@"number"] ) {
+    return @(self.number);
+  } else if ( [keyPath isEqualToString:@"secondNumber"] ) {
+    return @(self.secondNumber);
+  } else {
+    return [super valueForKeyPath:keyPath];
+  }
+  return nil;
+}
+
+@end
+
 @interface POPAnimation (TestExtensions)
 @property (strong, nonatomic) NSString *sampleKey;
 @end
@@ -111,10 +160,10 @@ using namespace POP;
   anim.roundingFactor = 1.0;
 
   id layer = [OCMockObject niceMockForClass:[CALayer class]];
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.25).cg_point()];
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.5).cg_point()];
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.75).cg_point()];
-  [[layer expect] setPosition:[anim.toValue CGPointValue]];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.25).cg_point()];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.5).cg_point()];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.75).cg_point()];
+  [(CALayer*)[layer expect] setPosition:[anim.toValue CGPointValue]];
 
   [layer pop_addAnimation:anim forKey:@"key"];
   POPAnimatorRenderDuration(self.animator, self.beginTime, 1, 0.25);
@@ -402,8 +451,8 @@ using namespace POP;
 
   id layer = [OCMockObject niceMockForClass:[CALayer class]];
 
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([fromValue CGPointValue]), Vector2r([toValue CGPointValue]), testProgress).cg_point()];
-  [[layer expect] setPosition:[toValue CGPointValue]];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([fromValue CGPointValue]), Vector2r([toValue CGPointValue]), testProgress).cg_point()];
+  [(CALayer*)[layer expect] setPosition:[toValue CGPointValue]];
 
   [layer pop_addAnimation:anim forKey:@"key"];
 
@@ -419,8 +468,8 @@ using namespace POP;
 
   layer = [OCMockObject niceMockForClass:[CALayer class]];
   
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([fromValue CGPointValue]), Vector2r([toValue CGPointValue]), testProgress).cg_point()];
-  [[layer expect] setPosition:[toValue CGPointValue]];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([fromValue CGPointValue]), Vector2r([toValue CGPointValue]), testProgress).cg_point()];
+  [(CALayer*)[layer expect] setPosition:[toValue CGPointValue]];
 
   [layer pop_addAnimation:anim forKey:@"key"];
 
@@ -755,10 +804,10 @@ using namespace POP;
   anim.roundingFactor = 1.0;
   
   id layer = [OCMockObject niceMockForClass:[CALayer class]];
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.25).cg_point()];
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.5).cg_point()];
-  [[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.75).cg_point()];
-  [[layer expect] setPosition:[anim.toValue CGPointValue]];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.25).cg_point()];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.5).cg_point()];
+  [(CALayer*)[layer expect] setPosition:FBTestInterpolateLinear(Vector2r([anim.fromValue CGPointValue]), Vector2r([anim.toValue CGPointValue]), 0.75).cg_point()];
+  [(CALayer*)[layer expect] setPosition:[anim.toValue CGPointValue]];
   
   // verify nil key can be added, same as CA
   [layer pop_addAnimation:anim forKey:nil];
@@ -889,45 +938,72 @@ using namespace POP;
   XCTAssertEqualObjects(copy.timingFunction, anim.timingFunction, @"expected equality; value1:%@ value2:%@", copy.timingFunction, anim.timingFunction);
 }
 
-- (void)testGroupAnimation
+- (void)testNSCopyingSupportPOPBasicAnimationWithKeyPath
 {
-  CALayer* layer = [CALayer layer];
+  POPBasicAnimation *anim = [POPBasicAnimation animationWithKeyPath:@"contentOffset"];
   
-  __block NSInteger testValue = 0;
+  configureConcretePropertyAnimation(anim);
+  [self testCopyingSucceedsForConcretePropertyAnimation:anim];
   
-  POPGroupAnimation* group = [POPGroupAnimation animation];
-  group.animationDidStartBlock = ^(POPAnimation* anim) {
-    XCTAssertEqual(testValue, 0, @"expected 0 but got %ld", (long)testValue);
-    testValue++;
-  };
+  anim.duration = 1.8;
+  anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
   
-  POPBasicAnimation* test = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerBorderWidth];
-  test.toValue = @(5);
-  test.animationDidStartBlock = ^(POPAnimation* anim) {
-    XCTAssertEqual(testValue, 1, @"expected 1 but got %ld", (long)testValue);
-    testValue++;
-  };
-  test.completionBlock = ^(POPAnimation* anim, BOOL finished) {
-    XCTAssertEqual(testValue, 2, @"expected 2 but got %ld", (long)testValue);
-    testValue++;
-  };
+  POPBasicAnimation *copy = [anim copy];
   
-  group.animations = @[ test ];
-  
-  group.completionBlock = ^(POPAnimation* anim, BOOL finished) {
-    XCTAssertEqual(testValue, 3, @"expected 3 but got %ld", (long)testValue);
-    testValue++;
-  };
-  [layer pop_addAnimation:group forKey:@"group"];
-
-  POPAnimatorRenderDuration(self.animator, self.beginTime, 5, 0.01);
+  XCTAssertEqual(copy.duration, anim.duration, @"expected equality; value1:%@ value2:%@", @(copy.duration), @(anim.duration));
+  XCTAssertEqualObjects(copy.timingFunction, anim.timingFunction, @"expected equality; value1:%@ value2:%@", copy.timingFunction, anim.timingFunction);
 }
 
-- (void)testProxyAnimator
+- (void)testAutomatedAnimatedPropertyInBasicAnimation
 {
   CALayer* layer = [CALayer layer];
-  layer.pop_animator.borderWidth = 10;
-  POPAnimatorRenderDuration(self.animator, self.beginTime, 5, 0.01);
+  POPBasicAnimation *anim = [POPBasicAnimation animationWithKeyPath:@"position"];
+  [layer pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNotNil( anim.property, @"expected non-nil property for keyPath:%@", anim.keyPath );
+  
+  anim = [POPBasicAnimation animationWithKeyPath:@"nonExistingKeyPath"];
+  [layer pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNil( anim.property, @"expected nil property for keyPath:%@ (%@)", anim.keyPath, anim.property );
+}
+
+- (void)testAutomatedAnimatedPropertyInSpringAnimation
+{
+  CALayer* layer = [CALayer layer];
+  POPSpringAnimation *anim = [POPSpringAnimation animationWithKeyPath:@"position"];
+  [layer pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNotNil( anim.property, @"expected non-nil property for keyPath:%@", anim.keyPath );
+  
+  anim = [POPSpringAnimation animationWithKeyPath:@"nonExistingKeyPath"];
+  [layer pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNil( anim.property, @"expected nil property for keyPath:%@ (%@)", anim.keyPath, anim.property );
+}
+
+- (void)testAutomatedAnimatedPropertyInDecayAnimation
+{
+  CALayer* layer = [CALayer layer];
+  POPDecayAnimation *anim = [POPDecayAnimation animationWithKeyPath:@"position"];
+  [layer pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNotNil( anim.property, @"expected non-nil property for keyPath:%@", anim.keyPath );
+  
+  anim = [POPDecayAnimation animationWithKeyPath:@"nonExistingKeyPath"];
+  [layer pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNil( anim.property, @"expected nil property for keyPath:%@ (%@)", anim.keyPath, anim.property );
+}
+
+- (void)testAutomatedUserDefinedAnimatedProperty
+{
+  POPRandomPropertyGivingObject* object = [[POPRandomPropertyGivingObject alloc] init];
+  POPBasicAnimation *anim = [POPBasicAnimation animationWithKeyPath:@"number"];
+  [object pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNotNil( anim.property, @"expected non-nil property for keyPath:%@", anim.keyPath );
+}
+
+- (void)testAutomatedKeyValueDefinedAnimatedProperty
+{
+  POPRandomPropertyGivingObject* object = [[POPRandomPropertyGivingObject alloc] init];
+  POPBasicAnimation *anim = [POPBasicAnimation animationWithKeyPath:@"secondNumber"];
+  [object pop_addAnimation:anim forKey:@"test"];
+  XCTAssertNotNil( anim.property, @"expected non-nil property for keyPath:%@", anim.keyPath );
 }
 
 @end

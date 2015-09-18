@@ -13,6 +13,8 @@
 #import <UIKit/UIGeometry.h>
 #endif
 
+#import <GLKit/GLKit.h>
+
 #if !TARGET_OS_IPHONE
 
 /** NSValue extensions to support animatable types. */
@@ -71,3 +73,28 @@
 @end
 
 #endif
+
+/** NSValue extensions to support animatable types for GLKit. */
+@interface NSValue (POPGLKit)
+
+/**
+ @abstract Creates an NSValue given a GLKVector3.
+ */
++ (NSValue *)valueWithGLKVector3:(GLKVector3)vector;
+
+/**
+ @abstract Creates an NSValue given a GLKQuaternion.
+ */
++ (NSValue *)valueWithGLKQuaternion:(GLKQuaternion)quaternion;
+
+/**
+ @abstract Returns the underlying CFRange value.
+ */
+- (GLKVector3)GLKVector3Value;
+
+/**
+ @abstract Returns the underlying CFRange value.
+ */
+- (GLKQuaternion)GLKQuaternionValue;
+
+@end

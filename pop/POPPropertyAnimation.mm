@@ -11,6 +11,8 @@
 
 @implementation POPPropertyAnimation
 
+@synthesize keyPath;
+
 #pragma mark - Lifecycle
 
 #undef __state
@@ -117,6 +119,7 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
     copy.roundingFactor = self.roundingFactor;
     copy.clampMode = self.clampMode;
     copy.additive = self.additive;
+    copy.keyPath = [self.keyPath copyWithZone:zone];
   }
   
   return copy;

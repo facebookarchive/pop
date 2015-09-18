@@ -28,6 +28,13 @@
   return anim;
 }
 
++ (instancetype)animationWithKeyPath:(NSString*)keyPath
+{
+  POPSpringAnimation *anim = [self animation];
+  anim.keyPath = keyPath;
+  return anim;
+}
+
 - (void)_initState
 {
   _state = new POPSpringAnimationState(self);

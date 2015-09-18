@@ -15,6 +15,8 @@
 #import "POPCGUtils.h"
 #import "POPDefines.h"
 #import "POPLayerExtras.h"
+#import "POPGeometry.h"
+#import "POPAnimatablePropertyInternal.h"
 
 // common threshold definitions
 static CGFloat const kPOPThresholdColor = 0.01;
@@ -1239,6 +1241,146 @@ static POPAnimatableProperty *placeholder = nil;
 + (id)propertyWithName:(NSString *)aName
 {
   return [self propertyWithName:aName initializer:NULL];
+}
+
++ (id)propertyWithName:(NSString*)name keyPath:(NSString*)keyPath valueType:(POPValueType)valueType
+{
+  return [self propertyWithName:name initializer:^(POPMutableAnimatableProperty *prop) {
+    
+    void(^readBlock)(id obj, CGFloat values[]) = NULL;
+    void(^writeBlock)(id obj, const CGFloat values[]) = NULL;
+    CGFloat threshold = 0.01;
+    
+    switch (valueType)
+    {
+      case kPOPValueInteger:
+      {
+        readBlock = ^(id obj, CGFloat values[]) {
+          id res = [obj valueForKeyPath:keyPath];
+          values[0] = [res integerValue];
+        };
+        writeBlock = ^(id obj, const CGFloat values[]) {
+          NSInteger val = values[0];
+          [obj setValue:@(val) forKeyPath:keyPath];
+        };
+      }
+        break;
+        
+      case kPOPValueFloat:
+      {
+        readBlock = ^(id obj, CGFloat values[]) {
+          id res = [obj valueForKeyPath:keyPath];
+          values[0] = [res floatValue];
+        };
+        writeBlock = ^(id obj, const CGFloat values[]) {
+          CGFloat val = values[0];
+          [obj setValue:@(val) forKeyPath:keyPath];
+        };
+      }
+        break;
+        
+      case kPOPValuePoint:
+      {
+        readBlock = ^(id obj, CGFloat values[]) {
+          CGPoint pt = [[obj valueForKeyPath:keyPath] CGPointValue];
+          values[0] = pt.x;
+          values[1] = pt.y;
+        };
+        writeBlock = ^(id obj, const CGFloat values[]) {
+          CGPoint pt = CGPointMake( values[0], values[1] );
+          [obj setValue:[NSValue valueWithCGPoint:pt] forKeyPath:keyPath];
+        };
+      }
+        break;
+        
+      case kPOPValueSize:
+      {
+        readBlock = ^(id obj, CGFloat values[]) {
+          CGSize size = [[obj valueForKeyPath:keyPath] CGSizeValue];
+          values[0] = size.width;
+          values[1] = size.height;
+        };
+        writeBlock = ^(id obj, const CGFloat values[]) {
+          CGSize size = CGSizeMake( values[0], values[1] );
+          [obj setValue:[NSValue valueWithCGSize:size] forKeyPath:keyPath];
+        };
+      }
+        break;
+        
+      case kPOPValueRect:
+      {
+        readBlock = ^(id obj, CGFloat values[]) {
+          CGRect rect = [[obj valueForKeyPath:keyPath] CGRectValue];
+          values[0] = rect.origin.x;
+          values[1] = rect.origin.y;
+          values[2] = rect.size.width;
+          values[3] = rect.size.height;
+        };
+        writeBlock = ^(id obj, const CGFloat values[]) {
+          CGRect rect = CGRectMake(values[0], values[1], values[2], values[3]);
+          [obj setValue:[NSValue valueWithCGRect:rect] forKeyPath:keyPath];
+        };
+      }
+        break;
+        
+      case kPOPValueEdgeInsets:
+      {
+#if TARGET_OS_IPHONE
+        readBlock = ^(id obj, CGFloat values[]) {
+          UIEdgeInsets ei = [[obj valueForKeyPath:keyPath] UIEdgeInsetsValue];
+          values[0] = ei.top;
+          values[1] = ei.left;
+          values[2] = ei.bottom;
+          values[3] = ei.right;
+        };
+        writeBlock = ^(id obj, const CGFloat values[]) {
+          UIEdgeInsets ei = UIEdgeInsetsMake(values[0], values[1], values[2], values[3]);
+          [obj setValue:[NSValue valueWithUIEdgeInsets:ei] forKeyPath:keyPath];
+        };
+#endif
+      }
+        break;
+        
+      case kPOPValueGLKVector3:
+      {
+        readBlock = ^(id obj, CGFloat values[]) {
+          GLKVector3 v = [[obj valueForKeyPath:keyPath] GLKVector3Value];
+          values[0] = v.v[0];
+          values[1] = v.v[1];
+          values[2] = v.v[2];
+        };
+        writeBlock = ^(id obj, const CGFloat values[]) {
+          GLKVector3 v = GLKVector3Make(values[0], values[1], values[2] );
+          [obj setValue:[NSValue valueWithGLKVector3:v] forKeyPath:keyPath];
+        };
+      }
+        break;
+        
+      case kPOPValueGLKQuaternion:
+      {
+        readBlock = ^(id obj, CGFloat values[]) {
+          GLKQuaternion q = [[obj valueForKeyPath:keyPath] GLKQuaternionValue];
+          values[0] = q.q[0];
+          values[1] = q.q[1];
+          values[2] = q.q[2];
+          values[3] = q.q[3];
+        };
+        writeBlock = ^(id obj, const CGFloat values[]) {
+          GLKQuaternion q = GLKQuaternionMake(values[0], values[1], values[2], values[3]);
+          [obj setValue:[NSValue valueWithGLKQuaternion:q] forKeyPath:keyPath];
+        };
+      }
+        break;
+        
+      default:
+        break;
+    }
+    
+    prop.readBlock = readBlock;
+    prop.writeBlock = writeBlock;
+    prop.threshold = threshold;
+    
+  }];
 }
 
 + (id)propertyWithName:(NSString *)aName initializer:(void (^)(POPMutableAnimatableProperty *prop))aBlock
