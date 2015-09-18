@@ -21,6 +21,13 @@
   return [[[self class] alloc] _init];
 }
 
+- (void)addAnimation:(POPAnimation*)animation
+{
+  NSMutableArray* anims = [_animations mutableCopy];
+  [anims addObject:animation];
+  [self setAnimations:anims];
+}
+
 - (void)setAnimations:(NSArray *)animations
 {
   NSAssert( _addedAnimations == NO, @"cannot change the animations in an ongoing group animation");
@@ -37,6 +44,7 @@
   self = [super _init];
   if (nil != self) {
     _state->type = kPOPAnimationGroup;
+    _animations = @[];
   }
   return self;
 }
@@ -46,6 +54,7 @@
   // add all the animations if needed
   if ( !_addedAnimations )
   {
+    NSLog( @"[%@:%p] _advance", NSStringFromClass(self.class), self );
     _addedAnimations = YES;
     
     NSMutableArray* keys = [NSMutableArray array];
@@ -67,6 +76,8 @@
       animsLeft++;
   }
 
+  NSLog( @"   [%@:%p] animations left: %ld", NSStringFromClass(self.class), self, animsLeft );
+  
   return animsLeft > 0;
 }
 

@@ -8,6 +8,8 @@
 
 #import <pop/POPAnimation.h>
 
+@class POPAnimation;
+
 /**
  @abstract POPGroupAnimation is a concrete animation subclass for grouped animations.
  */
@@ -24,5 +26,7 @@
  @abstract The array of POPAnimtions to run in this group.
  */
 @property (nonatomic,copy) NSArray* animations;
+
+- (void)addAnimation:(POPAnimation*)animation;
 
 @end

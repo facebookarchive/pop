@@ -10,6 +10,7 @@
 #import "POPAnimatablePropertyInternal.h"
 #import "POPBasicAnimation.h"
 #import "POPAnimatorPrivate.h"
+#import "POPTransactionInternal.h"
 
 @interface POPAnimationProxy ()
 
@@ -105,36 +106,39 @@
 
 - (void)forwardInvocation:(NSInvocation *)invocation
 {
-  // on forward, we get the selector from the invocation nad figure out what it is that is being animated
-  // if we find it, we find/add/update an animation for it
-  NSString* methodName = NSStringFromSelector(invocation.selector);
-  NSMethodSignature* signature = [invocation methodSignature];
-  if ( signature.numberOfArguments == 3 && methodName.length > 3 && [methodName hasPrefix:@"set"] )
+  if ( [[POPTransactionManager sharedManager] canAddAnimationForObject:self.object] && ![POPTransaction disableActions] )
   {
-    // get the value type that is being set
-    const char* type = [signature getArgumentTypeAtIndex:2];
-    POPValueType valueType = POPSelectValueType(type, kPOPAnimatableSupportTypes, POP_ARRAY_COUNT(kPOPAnimatableSupportTypes));
-    id value = [self _argumentValueFromInvocation:invocation atIndex:2 forValueType:valueType];
-    if ( value ) {
-      // get the property name without the leading 'set' and the trailling ':'
-      NSString* propertyName = [methodName substringWithRange:NSMakeRange(3, methodName.length-4)];
-      propertyName = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[propertyName substringWithRange:NSMakeRange(0, 1)] lowercaseString]];
-      
-      POPAnimatableProperty* property = nil;
-      // check for a custom property
-      property = [[POPAnimator sharedAnimator] customAnimatablePropertyForObject:self.object keyPath:propertyName];
-      if ( !property ) {
-        // try and get a built in property
-        property = [POPAnimatableProperty propertyWithName:[NSString stringWithFormat:@"%p:%@", self.object, propertyName] keyPath:propertyName valueType:valueType];
-      }
-      
-      // execute it if it exists
-      if ( property )
-      {
-        POPBasicAnimation* anim = [POPBasicAnimation animationWithKeyPath:propertyName];
-        anim.toValue = value;
-        [self.object pop_addAnimation:anim forKey:[[NSUUID UUID] UUIDString]];
-        return;
+    // on forward, we get the selector from the invocation nad figure out what it is that is being animated
+    // if we find it, we find/add/update an animation for it
+    NSString* methodName = NSStringFromSelector(invocation.selector);
+    NSMethodSignature* signature = [invocation methodSignature];
+    if ( signature.numberOfArguments == 3 && methodName.length > 3 && [methodName hasPrefix:@"set"] )
+    {
+      // get the value type that is being set
+      const char* type = [signature getArgumentTypeAtIndex:2];
+      POPValueType valueType = POPSelectValueType(type, kPOPAnimatableSupportTypes, POP_ARRAY_COUNT(kPOPAnimatableSupportTypes));
+      id value = [self _argumentValueFromInvocation:invocation atIndex:2 forValueType:valueType];
+      if ( value ) {
+        // get the property name without the leading 'set' and the trailling ':'
+        NSString* propertyName = [methodName substringWithRange:NSMakeRange(3, methodName.length-4)];
+        propertyName = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[propertyName substringWithRange:NSMakeRange(0, 1)] lowercaseString]];
+        
+        POPAnimatableProperty* property = nil;
+        // check for a custom property
+        property = [[POPAnimator sharedAnimator] customAnimatablePropertyForObject:self.object keyPath:propertyName];
+        if ( !property ) {
+          // try and get a built in property
+          property = [POPAnimatableProperty propertyWithName:[NSString stringWithFormat:@"%p:%@", self.object, propertyName] keyPath:propertyName valueType:valueType];
+        }
+        
+        // execute it if it exists
+        if ( property )
+        {
+          POPBasicAnimation* anim = [POPBasicAnimation animationWithKeyPath:propertyName];
+          anim.toValue = value;
+          [[POPTransactionManager sharedManager] addAnimation:anim forObject:self.object];
+          return;
+        }
       }
     }
   }

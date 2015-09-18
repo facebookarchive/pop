@@ -24,6 +24,7 @@
 #import "POPCGUtils.h"
 #import "POPAnimationInternal.h"
 #import "POPGroupAnimation.h"
+#import "POPTransaction.h"
 
 using namespace POP;
 
@@ -1042,14 +1043,29 @@ using namespace POP;
 
 - (void)testImplicitAnimations
 {
-  CALayer* layer = [CALayer layer];
-  layer.cornerRadius = 0;
-  XCTAssertTrue(layer.cornerRadius == 0, @"expect 0 but got %f", layer.cornerRadius );
+  POPRandomPropertyGivingObject* obj = [[POPRandomPropertyGivingObject alloc] init];
+  obj.secondNumber = 0;
+
+  XCTAssertTrue(obj.secondNumber == 0, @"expect 0 but got %ld", (long)obj.secondNumber );
   
-  layer.pop_animator.borderWidth = 10;
-  POPAnimatorRenderDuration(self.animator, self.beginTime, 5, 0.01);
+  [POPTransaction begin];
+  [POPTransaction setAnimationDuration:10];
   
-  XCTAssertTrue(layer.cornerRadius == 0, @"expect 10 but got %f", layer.cornerRadius );
+  obj.pop_animator.secondNumber = 10;
+  
+  [POPTransaction setCompletionBlock:^() {
+    
+    NSLog( @"%@", obj );
+    
+    NSLog( @"completion" );
+  }];
+  
+  NSLog( @"start" );
+  [POPTransaction commit];
+  
+  POPAnimatorRenderDuration(self.animator, self.beginTime, 20, 0.01);
+  NSLog( @"done" );
+  XCTAssertTrue(obj.secondNumber == 10, @"expect 10 but got %ld", (long)obj.secondNumber );
 }
 
 @end

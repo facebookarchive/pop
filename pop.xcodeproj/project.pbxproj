@@ -192,6 +192,9 @@
 		ECDA0CD118C92D3900D14897 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5A89D162FBD9B00F7F15C /* CoreGraphics.framework */; };
 		ECF01ED518C92B7F009E0AD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC19121B162FB53A00E0CC76 /* Foundation.framework */; };
 		ECF01ED618C92B7F009E0AD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEED93D18C91ACF00DD95F2 /* UIKit.framework */; };
+		FA51CB7A1BACB152004DDD3D /* POPTransactionInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA51CB781BACB152004DDD3D /* POPTransactionInternal.h */; settings = {ASSET_TAGS = (); }; };
+		FA51CB7B1BACB152004DDD3D /* POPTransactionInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA51CB781BACB152004DDD3D /* POPTransactionInternal.h */; settings = {ASSET_TAGS = (); }; };
+		FA51CB7C1BACB152004DDD3D /* POPTransactionInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA51CB781BACB152004DDD3D /* POPTransactionInternal.h */; settings = {ASSET_TAGS = (); }; };
 		FA53068C1BAC7EC500776F5B /* POPAnimationProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = FA53068A1BAC7EC500776F5B /* POPAnimationProxy.h */; settings = {ASSET_TAGS = (); }; };
 		FA53068D1BAC7EC500776F5B /* POPAnimationProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = FA53068A1BAC7EC500776F5B /* POPAnimationProxy.h */; settings = {ASSET_TAGS = (); }; };
 		FA53068E1BAC7EC500776F5B /* POPAnimationProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = FA53068A1BAC7EC500776F5B /* POPAnimationProxy.h */; settings = {ASSET_TAGS = (); }; };
@@ -356,6 +359,7 @@
 		ECD80F1018CFD2EF00AE4303 /* POPGeometry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = POPGeometry.mm; sourceTree = "<group>"; };
 		ECEED93D18C91ACF00DD95F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ECF01ED318C92B7F009E0AD1 /* pop-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pop-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA51CB781BACB152004DDD3D /* POPTransactionInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPTransactionInternal.h; sourceTree = "<group>"; };
 		FA53068A1BAC7EC500776F5B /* POPAnimationProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPAnimationProxy.h; sourceTree = "<group>"; };
 		FA53068B1BAC7EC500776F5B /* POPAnimationProxy.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = POPAnimationProxy.mm; sourceTree = "<group>"; };
 		FA5306B71BACA2BE00776F5B /* POPTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPTransaction.h; sourceTree = "<group>"; };
@@ -621,6 +625,7 @@
 		EC8F017318FFC4CB00DF8905 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				FA51CB781BACB152004DDD3D /* POPTransactionInternal.h */,
 				FA5306B71BACA2BE00776F5B /* POPTransaction.h */,
 				FA5306B81BACA2BE00776F5B /* POPTransaction.m */,
 				FA53068A1BAC7EC500776F5B /* POPAnimationProxy.h */,
@@ -731,6 +736,7 @@
 				FA53068D1BAC7EC500776F5B /* POPAnimationProxy.h in Headers */,
 				FA9A1CAC1BAA51F00050046A /* POPAnimatablePropertyInternal.h in Headers */,
 				0B6BE76E19FFD43800762101 /* POPCustomAnimation.h in Headers */,
+				FA51CB7B1BACB152004DDD3D /* POPTransactionInternal.h in Headers */,
 				0B6BE76D19FFD42700762101 /* POPAnimationExtras.h in Headers */,
 				0B6BE76C19FFD41D00762101 /* POPDecayAnimation.h in Headers */,
 				0B6BE76B19FFD41500762101 /* POPDefines.h in Headers */,
@@ -759,6 +765,7 @@
 				FA9A1CAB1BAA51F00050046A /* POPAnimatablePropertyInternal.h in Headers */,
 				EC191296162FB5EC00E0CC76 /* POPAnimationInternal.h in Headers */,
 				EC191298162FB5EC00E0CC76 /* POPAnimatorPrivate.h in Headers */,
+				FA51CB7A1BACB152004DDD3D /* POPTransactionInternal.h in Headers */,
 				ECCBC57217D96DBD00C69976 /* FloatConversion.h in Headers */,
 				EC94B07D17D95CAA003CE2C8 /* POPLayerExtras.h in Headers */,
 				EC8F016818FFBEB500DF8905 /* POPSpringAnimation.h in Headers */,
@@ -803,6 +810,7 @@
 				FA9A1CAD1BAA51F00050046A /* POPAnimatablePropertyInternal.h in Headers */,
 				EC6885BB18C7BD3700C6194C /* POPMath.h in Headers */,
 				EC6885C418C7BD5100C6194C /* POPAnimatorPrivate.h in Headers */,
+				FA51CB7C1BACB152004DDD3D /* POPTransactionInternal.h in Headers */,
 				EC6885C518C7BD5500C6194C /* POPCustomAnimation.h in Headers */,
 				EC6885CA18C7BD6500C6194C /* FloatConversion.h in Headers */,
 				EC8F016918FFBEB500DF8905 /* POPSpringAnimation.h in Headers */,
