@@ -7,6 +7,7 @@
 //
 
 #import "POPTransaction.h"
+#import "POPAnimation.h"
 
 @class POPBasicAnimation;
 
@@ -19,3 +20,11 @@
 
 @end
 
+@interface POPTransaction ()
+
++ (void)setAnimationDelay:(CFTimeInterval)delay;
++ (CFTimeInterval)animationDelay;
+
++ (void)setAnimationOptions:(POPAnimationOptions)options;
+
+@end

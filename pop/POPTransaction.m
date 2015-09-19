@@ -15,8 +15,20 @@
 #import <QuartzCore/QuartzCore.h>
 
 #if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
 #import <libkern/OSAtomic.h>
 #endif
+
+NSString * const kPOPTransactionAnimationDuration = @"kPOPTransactionAnimationDuration";
+NSString * const kPOPTransactionDisableActions = @"kPOPTransactionDisableActions";
+NSString * const kPOPTransactionAnimationTimingFunction = @"kPOPTransactionAnimationTimingFunction";
+NSString * const kPOPTransactionCompletionBlock = @"kPOPTransactionCompletionBlock";
+NSString * const kPOPTransactionAnimationDelay = @"kPOPTransactionAnimationDelay";
+
+// from options
+NSString * const kPOPTransactionAllowsUserInteraction = @"kPOPTransactionAllowsUserInteraction";
+NSString * const kPOPTransactionAnimationRepeat = @"kPOPTransactionAnimationRepeat";
+NSString * const kPOPTransactionAnimationAutoreverse = @"kPOPTransactionAnimationAutoreverse";
 
 @interface POPTransaction () {
   NSMapTable* _objectAnimationGroupMap;
@@ -26,6 +38,7 @@
 
 @property (nonatomic,strong) NSMutableDictionary* transactionData;
 
+- (void)setAnimationOptions:(POPAnimationOptions)options;
 - (void)addAnimation:(POPBasicAnimation*)anim forObject:(id)obj;
 - (void)commit;
 
@@ -148,7 +161,14 @@
   [[self currentTransaction] setValue:value forKey:key];
 }
 
+- (void)setAnimationOptions:(POPAnimationOptions)options
+{
+  [[self currentTransaction] setAnimationOptions:options];
+}
+
 @end
+
+#define OPTION_ON(options,o) ( ( options & o ) == o )
 
 @implementation POPTransaction
 
@@ -161,8 +181,32 @@
   _lock = [[NSRecursiveLock alloc] init];
   self.transactionData = [NSMutableDictionary dictionary];
   [self setValue:@(0.4) forKey:kPOPTransactionAnimationDuration];
-  [self setValue:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear] forKey:kPOPTransactionAnimationTimingFunction];
+  [self setValue:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault] forKey:kPOPTransactionAnimationTimingFunction];
   return self;
+}
+
+- (CAMediaTimingFunction*)_timingFunctionFromAnimationOptions:(POPAnimationOptions)options
+{
+  NSString* functionName = kCAMediaTimingFunctionDefault;
+  
+  if ( OPTION_ON(options, POPAnimationOptionCurveEaseInOut) )
+    functionName = kCAMediaTimingFunctionEaseInEaseOut;
+  else if ( OPTION_ON(options, POPAnimationOptionCurveEaseIn) )
+    functionName = kCAMediaTimingFunctionEaseIn;
+  else if ( OPTION_ON(options, POPAnimationOptionCurveEaseOut) )
+    functionName = kCAMediaTimingFunctionEaseOut;
+  else if ( OPTION_ON(options, POPAnimationOptionCurveLinear) )
+    functionName = kCAMediaTimingFunctionLinear;
+  
+  return [CAMediaTimingFunction functionWithName:functionName];
+}
+
+- (void)setAnimationOptions:(POPAnimationOptions)options
+{
+  [self setValue:@( OPTION_ON(options,POPAnimationOptionAllowUserInteraction) ) forKey:kPOPTransactionAllowsUserInteraction];
+  [self setValue:@( OPTION_ON(options,POPAnimationOptionRepeat) ) forKey:kPOPTransactionAnimationRepeat];
+  [self setValue:@( OPTION_ON(options,POPAnimationOptionAutoreverse) ) forKey:kPOPTransactionAnimationAutoreverse];
+  [self setValue:[self _timingFunctionFromAnimationOptions:options] forKey:kPOPTransactionAnimationTimingFunction];
 }
 
 - (void)addAnimation:(POPBasicAnimation*)anim forObject:(id)obj
@@ -181,7 +225,7 @@
   [_lock unlock];
 }
 
-- (void)_deleteAnimationGroupAndSendCompletionIfNeeded:(POPAnimation*)group
+- (void)_deleteAnimationGroupAndSendCompletionIfNeeded:(POPAnimation*)group reestablishUserInteraction:(BOOL)reestablishUserInteraction
 {
   void(^completion)(void) = nil;
   BOOL sendCompletion = NO;
@@ -210,6 +254,12 @@
   [[self class] unlock];
   
   if ( sendCompletion ) {
+    
+#if defined(POP_ALLOW_UIAPPLICATION_ACCESS)
+    if ( reestablishUserInteraction )
+      [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+#endif
+    
     if ( [NSThread isMainThread] )
       completion();
     else
@@ -232,14 +282,9 @@
   {
     POPGroupAnimation* group = [_objectAnimationGroupMap objectForKey:obj];
     
-    __weak POPTransaction* weakMe = self;
-    group.completionBlock = ^(POPAnimation* anim, BOOL finished) {
-
-      POPTransaction* me = weakMe;
-      if ( finished )
-        [me _deleteAnimationGroupAndSendCompletionIfNeeded:anim];
-      
-    };
+    group.beginTime = [[self valueForKey:kPOPTransactionAnimationDelay] doubleValue];
+    group.repeatForever = [[self valueForKey:kPOPTransactionAnimationRepeat] boolValue];
+    group.autoreverses = [[self valueForKey:kPOPTransactionAnimationAutoreverse] boolValue];
     
     // update all anims to use the current transactions info
     for ( POPBasicAnimation* anim in group.animations )
@@ -248,6 +293,30 @@
       anim.timingFunction = [self valueForKey:kPOPTransactionAnimationTimingFunction];
     }
     
+    BOOL  allowUserInteraction = YES;
+    
+#if defined(POP_ALLOW_UIAPPLICATION_ACCESS)
+    allowUserInteraction = [self valueForKey:kPOPTransactionAllowsUserInteraction];
+#endif
+    
+    __weak POPTransaction* weakMe = self;
+    group.animationDidStartBlock = ^(POPAnimation* anim) {
+      
+#if defined(POP_ALLOW_UIAPPLICATION_ACCESS)
+      if ( !allowUserInteraction )
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+#endif
+        
+    };
+    
+    group.completionBlock = ^(POPAnimation* anim, BOOL finished) {
+
+      POPTransaction* me = weakMe;
+      if ( finished )
+        [me _deleteAnimationGroupAndSendCompletionIfNeeded:anim reestablishUserInteraction:!allowUserInteraction];
+      
+    };
+
     [obj pop_addAnimation:group forKey:[[NSUUID UUID] UUIDString]];
   }
   
@@ -341,9 +410,20 @@
   [[POPTransactionManager sharedManager] setValue:block forKey:kPOPTransactionCompletionBlock];
 }
 
++ (void)setAnimationDelay:(CFTimeInterval)delay
+{
+  [[POPTransactionManager sharedManager] setValue:@(delay) forKey:kPOPTransactionAnimationDelay];
+}
+
++ (CFTimeInterval)animationDelay
+{
+  return [[[POPTransactionManager sharedManager] valueForKey:kPOPTransactionAnimationDelay] doubleValue];
+}
+
++ (void)setAnimationOptions:(POPAnimationOptions)options
+{
+  [[POPTransactionManager sharedManager] setAnimationOptions:options];
+}
+
 @end
 
-NSString * const kPOPTransactionAnimationDuration = @"kPOPTransactionAnimationDuration";
-NSString * const kPOPTransactionDisableActions = @"kPOPTransactionDisableActions";
-NSString * const kPOPTransactionAnimationTimingFunction = @"kPOPTransactionAnimationTimingFunction";
-NSString * const kPOPTransactionCompletionBlock = @"kPOPTransactionCompletionBlock";

@@ -176,10 +176,22 @@ When combined with the autoreverses property, a singular animation is effectivel
 
 @end
 
+typedef NS_OPTIONS(NSUInteger, POPAnimationOptions) {
+  POPAnimationOptionAllowUserInteraction      = 1 <<  1, // turn on user interaction while animating
+  POPAnimationOptionRepeat                    = 1 <<  2, // repeat animation indefinitely
+  POPAnimationOptionAutoreverse               = 1 <<  3, // if repeat, run animation back and forth
+  
+  POPAnimationOptionCurveEaseInOut            = 0 << 16, // default
+  POPAnimationOptionCurveEaseIn               = 1 << 16,
+  POPAnimationOptionCurveEaseOut              = 2 << 16,
+  POPAnimationOptionCurveLinear               = 3 << 16,
+};
 
 @interface NSObject (POPImplicitAnimations)
 
 - (instancetype)pop_animator;
+
++ (void)pop_animateWithDuration:(CFTimeInterval)duration delay:(CFTimeInterval)delay options:(POPAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion;
 
 @end
 
