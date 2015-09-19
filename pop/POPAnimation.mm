@@ -269,6 +269,16 @@ POPAnimationState *POPAnimationGetState(POPAnimation *a)
   [POPTransaction commit];
 }
 
++ (void)pop_animateWithDuration:(CFTimeInterval)duration animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion
+{
+  [self pop_animateWithDuration:duration delay:0 options:0 animations:animations completion:completion];
+}
+
++ (void)pop_animateWithDuration:(CFTimeInterval)duration animations:(void (^)(void))animations
+{
+  [self pop_animateWithDuration:duration animations:animations completion:nil];
+}
+
 @end
 
 @implementation NSProxy (POP)
