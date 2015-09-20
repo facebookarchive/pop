@@ -27,6 +27,7 @@
 #import "POPDecayAnimation.h"
 #import "POPAnimationProxy.h"
 #import "POPAnimatablePropertyInternal.h"
+#import "POPGroupAnimation.h"
 
 using namespace std;
 using namespace POP;
@@ -741,6 +742,11 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 
   // stop animation and callout
   POPAnimationState *state = POPAnimationGetState(anim);
+  if ( state->type == kPOPAnimationGroup ) {
+    NSArray* subkeys = [(POPGroupAnimation*)anim animationKeys];
+    for ( NSString* subKey in subkeys )
+      [self removeAnimationForObject:obj key:subKey cleanupDict:YES];
+  }
   state->stop(true, (!state->active && !state->paused));
 }
 

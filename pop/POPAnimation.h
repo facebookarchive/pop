@@ -192,9 +192,7 @@ typedef NS_OPTIONS(NSUInteger, POPAnimationOptions) {
 - (instancetype)pop_animator;
 
 + (void)pop_animateWithDuration:(CFTimeInterval)duration delay:(CFTimeInterval)delay options:(POPAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion;
-
 + (void)pop_animateWithDuration:(CFTimeInterval)duration animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion;
-
 + (void)pop_animateWithDuration:(CFTimeInterval)duration animations:(void (^)(void))animations;
 
 @end

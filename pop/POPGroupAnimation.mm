@@ -39,6 +39,11 @@
   return [_animations copy];
 }
 
+- (NSArray*)animationKeys
+{
+  return [_animationKeys copy];
+}
+
 - (id)_init
 {
   self = [super _init];

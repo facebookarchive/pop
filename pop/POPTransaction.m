@@ -203,10 +203,12 @@ NSString * const kPOPTransactionAnimationAutoreverse = @"kPOPTransactionAnimatio
 
 - (void)setAnimationOptions:(POPAnimationOptions)options
 {
+  [_lock lock];
   [self setValue:@( OPTION_ON(options,POPAnimationOptionAllowUserInteraction) ) forKey:kPOPTransactionAllowsUserInteraction];
   [self setValue:@( OPTION_ON(options,POPAnimationOptionRepeat) ) forKey:kPOPTransactionAnimationRepeat];
   [self setValue:@( OPTION_ON(options,POPAnimationOptionAutoreverse) ) forKey:kPOPTransactionAnimationAutoreverse];
   [self setValue:[self _timingFunctionFromAnimationOptions:options] forKey:kPOPTransactionAnimationTimingFunction];
+  [_lock unlock];
 }
 
 - (void)addAnimation:(POPBasicAnimation*)anim forObject:(id)obj
