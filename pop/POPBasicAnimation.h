@@ -29,6 +29,13 @@
 + (instancetype)animationWithPropertyNamed:(NSString *)name;
 
 /**
+ @abstract Convenience initializer that returns an animation with animatable property for the keyPath.
+ @param keyPath The keyPath of the animatable property.
+ @returns An instance of a basic animation configured with specified animatable property for the keyPath.
+ */
++ (instancetype)animationWithKeyPath:(NSString*)keyPath;
+
+/**
  @abstract Convenience constructor.
  @returns Returns a basic animation with kCAMediaTimingFunctionDefault timing function.
  */

@@ -29,6 +29,13 @@
 + (instancetype)animationWithPropertyNamed:(NSString *)name;
 
 /**
+ @abstract Convenience initializer that returns an animation with animatable property for the keyPath.
+ @param keyPath The keyPath of the animatable property.
+ @returns An instance of a spring animation configured with specified animatable property for the keyPath.
+ */
++ (instancetype)animationWithKeyPath:(NSString*)keyPath;
+
+/**
  @abstract The current velocity value.
  @discussion Set before animation start to account for initial velocity. Expressed in change of value units per second.
  */

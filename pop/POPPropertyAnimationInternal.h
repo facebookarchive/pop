@@ -354,6 +354,6 @@ struct _POPPropertyAnimationState : _POPAnimationState
 typedef struct _POPPropertyAnimationState POPPropertyAnimationState;
 
 @interface POPPropertyAnimation ()
-
+@property (copy, nonatomic) NSString *keyPath;
 @end
 

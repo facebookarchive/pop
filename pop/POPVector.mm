@@ -283,7 +283,37 @@ namespace POP
     return v;
   }
 #endif
-
+  
+  GLKVector3 Vector::glk_vector3() const
+  {
+    return _count < 3 ? GLKVector3Make(0.0,0.0,0.0) : GLKVector3Make(_values[0], _values[1], _values[2]);
+  }
+  
+  Vector * Vector::new_glk_vector3(const GLKVector3 &p)
+  {
+    Vector *v = new Vector(3);
+    v->_values[0] = p.v[0];
+    v->_values[1] = p.v[1];
+    v->_values[2] = p.v[2];
+    return v;
+  }
+  
+  // GLKQuaternion support
+  GLKQuaternion Vector::glk_quaternion() const
+  {
+    return _count < 4 ? GLKQuaternionMake(0.0, 0.0, 0.0, 0.0) : GLKQuaternionMake(_values[0], _values[1], _values[2], _values[3]);
+  }
+  
+  Vector * Vector::new_glk_quaternion(const GLKQuaternion &p)
+  {
+    Vector *v = new Vector(4);
+    v->_values[0] = p.q[0];
+    v->_values[1] = p.q[1];
+    v->_values[2] = p.q[2];
+    v->_values[3] = p.q[3];
+    return v;
+  }
+  
   void Vector::subRound(CGFloat sub)
   {
     for (NSUInteger idx = 0; idx < _count; idx++) {

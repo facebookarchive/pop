@@ -25,6 +25,10 @@
 #import "POPAnimationExtras.h"
 #import "POPBasicAnimationInternal.h"
 #import "POPDecayAnimation.h"
+#import "POPAnimationProxy.h"
+#import "POPAnimatablePropertyInternal.h"
+#import "POPGroupAnimation.h"
+#import "POPGroupAnimationInternal.h"
 
 using namespace std;
 using namespace POP;
@@ -100,6 +104,7 @@ static BOOL _disableBackgroundThread = YES;
   CFTimeInterval _beginTime;
   OSSpinLock _lock;
   BOOL _disableDisplayLink;
+  NSMapTable* _proxyAnimatorMap;
 }
 @end
 
@@ -353,6 +358,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 #endif
 
   _dict = POPDictionaryCreateMutableWeakPointerToStrongObject(5);
+  _proxyAnimatorMap = [NSMapTable weakToWeakObjectsMapTable];
   _lock = OS_SPINLOCK_INIT;
 
   return self;
@@ -552,6 +558,32 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   return observers;
 }
 
+- (POPAnimatableProperty*)customAnimatablePropertyForObject:(id)obj keyPath:(NSString*)keyPath
+{
+  POPAnimatableProperty* property = nil;
+  
+  // support animationPropertyFor<keyPath>
+  NSMutableString *propertyName = [NSMutableString string];
+  NSArray *parts = [keyPath componentsSeparatedByString:@"."];
+  for ( NSString* part in parts )
+  {
+    NSString* partValue = [part stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[part substringToIndex:1] capitalizedString]];
+    [propertyName appendString:partValue];
+  }
+  
+  NSString *methodName = [@"animationPropertyFor" stringByAppendingString:propertyName];
+  SEL selector = NSSelectorFromString(methodName);
+  if ( [obj respondsToSelector:selector] )
+  {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    property = [obj performSelector:selector];
+#pragma clang diagnostic pop
+  }
+  
+  return property;
+}
+
 - (void)addAnimation:(POPAnimation *)anim forObject:(id)obj key:(NSString *)key
 {
   if (!anim || !obj) {
@@ -562,7 +594,27 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   if (!key) {
     key = [[NSUUID UUID] UUIDString];
   }
-
+  
+  // support for default property
+  if ( [anim isKindOfClass:[POPPropertyAnimation class]] ) {
+    POPPropertyAnimation* propAnim = (POPPropertyAnimation*)anim;
+    if ( propAnim.keyPath.length ) {
+      
+      // support animationPropertyFor<keyPath>
+      propAnim.property = [self customAnimatablePropertyForObject:obj keyPath:propAnim.keyPath];
+      
+      // support for automatic properties
+      if ( !propAnim.property )
+      {
+        id  val = [obj valueForKeyPath:propAnim.keyPath];
+        if ( val ) {
+          POPValueType  valueType = POPSelectValueType( val, kPOPAnimatableSupportTypes, POP_ARRAY_COUNT(kPOPAnimatableSupportTypes) );
+          propAnim.property = [POPAnimatableProperty propertyWithName:[NSString stringWithFormat:@"%p:%@", obj, propAnim.keyPath] keyPath:propAnim.keyPath valueType:valueType];
+        }
+      }
+    }
+  }
+  
   // lock
   OSSpinLockLock(&_lock);
 
@@ -691,6 +743,11 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 
   // stop animation and callout
   POPAnimationState *state = POPAnimationGetState(anim);
+  if ( state->type == kPOPAnimationGroup ) {
+    NSArray* subkeys = [(POPGroupAnimation*)anim animationKeys];
+    for ( NSString* subKey in subkeys )
+      [self removeAnimationForObject:obj key:subKey cleanupDict:YES];
+  }
   state->stop(true, (!state->active && !state->paused));
 }
 
@@ -710,6 +767,38 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   // unlock
   OSSpinLockUnlock(&_lock);
   return keys;
+}
+
+- (NSArray*)animationsForObject:(id)obj
+{
+  // lock
+  OSSpinLockLock(&_lock);
+  
+  // lookup animation
+  NSDictionary *keyAnimationsDict = (__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj);
+  NSArray* animations = keyAnimationsDict.allValues;
+
+  // unlock
+  OSSpinLockUnlock(&_lock);
+  return animations;
+}
+
+- (id)animationProxyForObject:(id)obj
+{
+  // lock
+  OSSpinLockLock(&_lock);
+  
+  // lookup animation
+  POPAnimationProxy *proxy = [_proxyAnimatorMap objectForKey:obj];
+  if ( !proxy )
+  {
+    proxy = [[POPAnimationProxy alloc] initWithObject:obj];
+    [_proxyAnimatorMap setObject:proxy forKey:obj];
+  }
+  
+  // unlock
+  OSSpinLockUnlock(&_lock);
+  return proxy;
 }
 
 - (id)animationForObject:(id)obj key:(NSString *)key

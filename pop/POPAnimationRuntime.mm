@@ -12,6 +12,7 @@
 #import <objc/objc.h>
 
 #import <QuartzCore/QuartzCore.h>
+#import <GLKit/GLKit.h>
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
@@ -136,6 +137,12 @@ static bool FBCompareTypeEncoding(const char *objctype, POPValueType type)
 #else
       return false;
 #endif
+    
+    case kPOPValueGLKVector3:
+      return (strcmp(objctype, @encode(GLKVector3)) == 0);
+      
+    case kPOPValueGLKQuaternion:
+      return (strcmp(objctype, @encode(GLKQuaternion)) == 0);
       
     default:
       return false;
@@ -163,9 +170,9 @@ POPValueType POPSelectValueType(id obj, const POPValueType *types, size_t length
   return kPOPValueUnknown;
 }
 
-const POPValueType kPOPAnimatableAllTypes[12] = {kPOPValueInteger, kPOPValueFloat, kPOPValuePoint, kPOPValueSize, kPOPValueRect, kPOPValueEdgeInsets, kPOPValueAffineTransform, kPOPValueTransform, kPOPValueRange, kPOPValueColor, kPOPValueSCNVector3, kPOPValueSCNVector4};
+const POPValueType kPOPAnimatableAllTypes[14] = {kPOPValueInteger, kPOPValueFloat, kPOPValuePoint, kPOPValueSize, kPOPValueRect, kPOPValueEdgeInsets, kPOPValueAffineTransform, kPOPValueTransform, kPOPValueRange, kPOPValueColor, kPOPValueSCNVector3, kPOPValueSCNVector4, kPOPValueGLKVector3, kPOPValueGLKQuaternion};
 
-const POPValueType kPOPAnimatableSupportTypes[10] = {kPOPValueInteger, kPOPValueFloat, kPOPValuePoint, kPOPValueSize, kPOPValueRect, kPOPValueEdgeInsets, kPOPValueColor, kPOPValueSCNVector3, kPOPValueSCNVector4};
+const POPValueType kPOPAnimatableSupportTypes[12] = {kPOPValueInteger, kPOPValueFloat, kPOPValuePoint, kPOPValueSize, kPOPValueRect, kPOPValueEdgeInsets, kPOPValueColor, kPOPValueSCNVector3, kPOPValueSCNVector4, kPOPValueGLKVector3, kPOPValueGLKQuaternion};
 
 NSString *POPValueTypeToString(POPValueType t)
 {
@@ -196,6 +203,10 @@ NSString *POPValueTypeToString(POPValueType t)
       return @"SCNVector3";
     case kPOPValueSCNVector4:
       return @"SCNVector4";
+    case kPOPValueGLKVector3:
+      return @"GLKVector3";
+    case kPOPValueGLKQuaternion:
+      return @"GLKQuaternion";
     default:
       return nil;
   }
@@ -239,6 +250,15 @@ id POPBox(VectorConstRef vec, POPValueType type, bool force)
       break;
     }
 #endif
+    case kPOPValueGLKVector3: {
+      return [NSValue valueWithGLKVector3:vec->glk_vector3()];
+      break;
+    }
+      
+    case kPOPValueGLKQuaternion: {
+      return [NSValue valueWithGLKQuaternion:vec->glk_quaternion()];
+      break;
+    }
     default:
       return force ? [NSValue valueWithCGPoint:vec->cg_point()] : nil;
       break;
@@ -286,6 +306,13 @@ static VectorRef vectorize(id value, POPValueType type)
       vec = Vector::new_scn_vector4([value SCNVector4Value]);
       break;
 #endif
+    case kPOPValueGLKVector3:
+      vec = Vector::new_glk_vector3([value GLKVector3Value]);
+      break;
+      
+    case kPOPValueGLKQuaternion:
+      vec = Vector::new_glk_quaternion([value GLKQuaternionValue]);
+      break;
     default:
       break;
   }

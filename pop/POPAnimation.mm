@@ -16,6 +16,8 @@
 #import "POPAnimationRuntime.h"
 #import "POPAnimationTracerInternal.h"
 #import "POPAnimatorPrivate.h"
+#import "POPTransaction.h"
+#import "POPTransactionInternal.h"
 
 using namespace POP;
 
@@ -238,6 +240,43 @@ POPAnimationState *POPAnimationGetState(POPAnimation *a)
 - (id)pop_animationForKey:(NSString *)key
 {
   return [[POPAnimator sharedAnimator] animationForObject:self key:key];
+}
+
+@end
+
+@implementation NSObject (POPShorthandAnimations)
+
+- (instancetype)pop_animator
+{
+  return [[POPAnimator sharedAnimator] animationProxyForObject:self];
+}
+
++ (void)pop_animateWithDuration:(CFTimeInterval)duration delay:(CFTimeInterval)delay options:(POPAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion
+{
+  [POPTransaction begin];
+  
+  [POPTransaction setAnimationDuration:duration];
+  [POPTransaction setAnimationDelay:delay];
+  [POPTransaction setAnimationOptions:options];
+  [POPTransaction setCompletionBlock:^{
+    if ( completion )
+      completion(YES);
+  }];
+  
+  if ( animations )
+    animations();
+
+  [POPTransaction commit];
+}
+
++ (void)pop_animateWithDuration:(CFTimeInterval)duration animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion
+{
+  [self pop_animateWithDuration:duration delay:0 options:0 animations:animations completion:completion];
+}
+
++ (void)pop_animateWithDuration:(CFTimeInterval)duration animations:(void (^)(void))animations
+{
+  [self pop_animateWithDuration:duration animations:animations completion:nil];
 }
 
 @end

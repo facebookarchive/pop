@@ -33,6 +33,12 @@ typedef NS_OPTIONS(NSUInteger, POPAnimationClampFlags)
 @property (strong, nonatomic) POPAnimatableProperty *property;
 
 /**
+ @abstract The keyPath to animate.
+ @discussion Once added to an object, property will automagically be filled based on the keyPath. Objects that use this animation must respond to setValue:forKeyPath: and valueForKeyPath: in order for the magic to work. If your object has a method named animationPropertyFor<keyPath> which returns a POPAnimatableProperty, then that method will be called to fill in .property.
+ */
+@property (copy, nonatomic, readonly) NSString *keyPath;
+
+/**
  @abstract The value to animate from.
  @discussion The value type should match the property. If unspecified, the value is initialized to the object's current value on animation start.
  */

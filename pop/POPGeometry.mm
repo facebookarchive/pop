@@ -66,6 +66,30 @@
 
 #endif
 
+@implementation NSValue (POPGLKit)
+
++ (NSValue *)valueWithGLKVector3:(GLKVector3)vector {
+  return [NSValue valueWithBytes:&vector objCType:@encode(GLKVector3)];
+}
+
++ (NSValue *)valueWithGLKQuaternion:(GLKQuaternion)quaternion {
+  return [NSValue valueWithBytes:&quaternion objCType:@encode(GLKQuaternion)];
+}
+
+- (GLKVector3)GLKVector3Value {
+  GLKVector3 result;
+  [self getValue:&result];
+  return result;
+}
+
+- (GLKQuaternion)GLKQuaternionValue {
+  GLKQuaternion result;
+  [self getValue:&result];
+  return result;
+}
+
+@end
+
 #if TARGET_OS_IPHONE
 #import "POPDefines.h"
 

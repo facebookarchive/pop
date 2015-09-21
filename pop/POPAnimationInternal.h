@@ -27,6 +27,7 @@ enum POPAnimationType
   kPOPAnimationDecay,
   kPOPAnimationBasic,
   kPOPAnimationCustom,
+  kPOPAnimationGroup,
 };
 
 typedef struct
@@ -229,7 +230,8 @@ struct _POPAnimationState
   bool autoreverses:1;
   bool repeatForever:1;
   bool customFinished:1;
-
+  bool groupFinished:1;
+  
   _POPAnimationState(id __unsafe_unretained anim) :
   self(anim),
   type((POPAnimationType)0),
@@ -261,7 +263,8 @@ struct _POPAnimationState
   userSpecifiedDynamics(false),
   autoreverses(false),
   repeatForever(false),
-  customFinished(false) {}
+  customFinished(false),
+  groupFinished(false) {}
   
   virtual ~_POPAnimationState()
   {
@@ -276,6 +279,10 @@ struct _POPAnimationState
   
   bool isCustom() {
     return kPOPAnimationCustom == type;
+  }
+  
+  bool isGroup() {
+    return kPOPAnimationGroup == type;
   }
   
   bool isStarted() {
@@ -413,7 +420,9 @@ struct _POPAnimationState
     if (isCustom()) {
       return customFinished;
     }
-    
+    if ( isGroup() ) {
+      return groupFinished;
+    }
     return false;
   }
   
@@ -436,6 +445,11 @@ struct _POPAnimationState
       }
       case kPOPAnimationCustom: {
         customFinished = [self _advance:obj currentTime:time elapsedTime:dt] ? false : true;
+        advanced = true;
+        break;
+      }
+      case kPOPAnimationGroup: {
+        groupFinished = [self _advance:obj currentTime:time elapsedTime:dt] ? false : true;
         advanced = true;
         break;
       }

@@ -9,6 +9,7 @@
 
 #import <pop/POPAnimator.h>
 
+@class POPAnimatableProperty;
 @class POPAnimation;
 
 @protocol POPAnimatorObserving <NSObject>
@@ -54,6 +55,13 @@
 - (void)removeAnimationForObject:(id)obj key:(NSString *)key;
 - (NSArray *)animationKeysForObject:(id)obj;
 - (POPAnimation *)animationForObject:(id)obj key:(NSString *)key;
+- (NSArray*)animationsForObject:(id)obj;
+- (id)animationProxyForObject:(id)obj;
+
+/**
+ Find an animatable property based on animationPropertyFor<keyPath>
+ */
+- (POPAnimatableProperty*)customAnimatablePropertyForObject:(id)obj keyPath:(NSString*)keyPath;
 
 /**
  @abstract Add an animator observer. Observer will be notified of each subsequent animator advance until removal.

@@ -82,6 +82,7 @@
   XCTAssertEqual(copy.roundingFactor, anim.roundingFactor, @"expected equality; value1:%@ value2:%@", @(copy.roundingFactor), @(anim.roundingFactor));
   XCTAssertEqual(copy.clampMode, anim.clampMode, @"expected equality; value1:%@ value2:%@", @(copy.clampMode), @(anim.clampMode));
   XCTAssertEqual(copy.additive, anim.additive, @"expected equality; value1:%@ value2:%@", @(copy.additive), @(anim.additive));
+  XCTAssertEqualObjects(copy.keyPath, anim.keyPath, @"expected equality; value1:%@ value2:%@", copy.keyPath, anim.keyPath);
 }
 
 @end

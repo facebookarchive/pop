@@ -163,7 +163,7 @@ When combined with the autoreverses property, a singular animation is effectivel
 
 /**
  @abstract Returns an array containing the keys of all animations currently attached to the receiver.
- @param The order of keys reflects the order in which animations will be applied.
+ @discussion The order of keys reflects the order in which animations will be applied.
  */
 - (NSArray *)pop_animationKeys;
 
@@ -173,6 +173,34 @@ When combined with the autoreverses property, a singular animation is effectivel
  @returns The animation currently attached, or nil if no such animation exists.
  */
 - (id)pop_animationForKey:(NSString *)key;
+
+@end
+
+typedef NS_OPTIONS(NSUInteger, POPAnimationOptions) {
+  POPAnimationOptionAllowUserInteraction      = 1 <<  1, // turn on user interaction while animating
+  POPAnimationOptionRepeat                    = 1 <<  2, // repeat animation indefinitely
+  POPAnimationOptionAutoreverse               = 1 <<  3, // if repeat, run animation back and forth
+  
+  POPAnimationOptionCurveEaseInOut            = 0 << 16, // default
+  POPAnimationOptionCurveEaseIn               = 1 << 16,
+  POPAnimationOptionCurveEaseOut              = 2 << 16,
+  POPAnimationOptionCurveLinear               = 3 << 16,
+};
+
+@interface NSObject (POPShorthandAnimations)
+
+/**
+ @abstract Returns a proxy of the obect that can be used for implicit or explicit animations.
+ @returns A new proxy animator for this object or one that already exists if animations are already available. This proxy uses the same animation finding mechanism as animations created with the keyValue initializers. Also known as "shorthand" animations.
+ */
+- (instancetype)pop_animator;
+
+/**
+ @abstract Shorthand for wrapping up a bunch of animations within a transaction.
+ */
++ (void)pop_animateWithDuration:(CFTimeInterval)duration delay:(CFTimeInterval)delay options:(POPAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion;
++ (void)pop_animateWithDuration:(CFTimeInterval)duration animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion;
++ (void)pop_animateWithDuration:(CFTimeInterval)duration animations:(void (^)(void))animations;
 
 @end
 
