@@ -9,14 +9,15 @@
 #import "POPTransaction.h"
 #import "POPAnimation.h"
 
-@class POPBasicAnimation;
+@class POPPropertyAnimation;
 
 @interface POPTransactionManager : NSObject
 
 + (instancetype)sharedManager;
 
 - (BOOL)canAddAnimationForObject:(id)obj;
-- (void)addAnimation:(POPBasicAnimation*)animation forObject:(id)obj;
+- (void)addAnimation:(POPPropertyAnimation*)animation forObject:(id)obj;
+- (POPPropertyAnimation*)animationForObject:(id)obj keyPath:(NSString*)keyPath;
 
 @end
 

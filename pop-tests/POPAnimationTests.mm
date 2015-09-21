@@ -1060,6 +1060,26 @@ using namespace POP;
   XCTAssertTrue(obj.secondNumber == 10, @"expect 10 but got %ld", (long)obj.secondNumber );
 }
 
+- (void)testImplicitAnimationValueChange
+{
+  POPRandomPropertyGivingObject* obj = [[POPRandomPropertyGivingObject alloc] init];
+  obj.secondNumber = 0;
+  
+  XCTAssertTrue(obj.secondNumber == 0, @"expect 0 but got %ld", (long)obj.secondNumber );
+  
+  [POPTransaction begin];
+  [POPTransaction setAnimationDuration:10];
+  
+  obj.pop_animator.secondNumber = 10;
+  obj.pop_animator.secondNumber = 20;
+  
+  [POPTransaction commit];
+  
+  POPAnimatorRenderDuration(self.animator, self.beginTime, 20, 0.01);
+  
+  XCTAssertTrue(obj.secondNumber == 20, @"expect 20 but got %ld", (long)obj.secondNumber );
+}
+
 - (void)testObjectImplicitAnimations
 {
   POPRandomPropertyGivingObject* obj = [[POPRandomPropertyGivingObject alloc] init];

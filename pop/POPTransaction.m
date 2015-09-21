@@ -40,8 +40,9 @@ NSString * const kPOPTransactionAnimationAutoreverse = @"kPOPTransactionAnimatio
 @property (nonatomic,strong) NSMutableDictionary* transactionData;
 
 - (void)setAnimationOptions:(POPAnimationOptions)options;
-- (void)addAnimation:(POPBasicAnimation*)anim forObject:(id)obj;
+- (void)addAnimation:(POPPropertyAnimation*)anim forObject:(id)obj;
 - (void)commit;
+- (POPPropertyAnimation*)animationForObject:(id)obj keyPath:(NSString*)keyPath;
 
 @end
 
@@ -79,7 +80,12 @@ NSString * const kPOPTransactionAnimationAutoreverse = @"kPOPTransactionAnimatio
   return [self currentTransaction] != nil;
 }
 
-- (void)addAnimation:(POPBasicAnimation*)animation forObject:(id)obj
+- (POPPropertyAnimation*)animationForObject:(id)obj keyPath:(NSString*)keyPath
+{
+  return [[self currentTransaction] animationForObject:obj keyPath:keyPath];
+}
+
+- (void)addAnimation:(POPPropertyAnimation*)animation forObject:(id)obj
 {
   [[self currentTransaction] addAnimation:animation forObject:obj];
 }
@@ -212,7 +218,32 @@ NSString * const kPOPTransactionAnimationAutoreverse = @"kPOPTransactionAnimatio
   [_lock unlock];
 }
 
-- (void)addAnimation:(POPBasicAnimation*)anim forObject:(id)obj
+- (POPPropertyAnimation*)animationForObject:(id)obj keyPath:(NSString*)keyPath
+{
+  POPPropertyAnimation* anim = nil;
+  
+  [_lock lock];
+  
+  POPGroupAnimation* group = [_objectAnimationGroupMap objectForKey:obj];
+  if ( group )
+  {
+    for ( POPAnimation* a in group.animations )
+    {
+      if ( [a isKindOfClass:[POPPropertyAnimation class]] ) {
+        if ( [((POPPropertyAnimation*)a).keyPath isEqualToString:keyPath] ) {
+          anim = (POPPropertyAnimation*)a;
+          break;
+        }
+      }
+    }
+  }
+  
+  [_lock unlock];
+  
+  return anim;
+}
+
+- (void)addAnimation:(POPPropertyAnimation*)anim forObject:(id)obj
 {
   [_lock lock];
   
