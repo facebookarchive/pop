@@ -28,6 +28,7 @@
 #import "POPAnimationProxy.h"
 #import "POPAnimatablePropertyInternal.h"
 #import "POPGroupAnimation.h"
+#import "POPGroupAnimationInternal.h"
 
 using namespace std;
 using namespace POP;

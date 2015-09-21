@@ -9,6 +9,7 @@
 #import "POPGroupAnimation.h"
 #import "POPAnimationInternal.h"
 #import "POPAnimatorPrivate.h"
+#import "POPGroupAnimationInternal.h"
 
 @implementation POPGroupAnimation {
   NSArray*      _animations;

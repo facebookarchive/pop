@@ -11,6 +11,7 @@
 #import "POPGroupAnimation.h"
 #import "POPAnimation.h"
 #import "POPBasicAnimation.h"
+#import "POPGroupAnimationInternal.h"
 
 #import <QuartzCore/QuartzCore.h>
 

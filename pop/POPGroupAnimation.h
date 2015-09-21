@@ -23,15 +23,8 @@
 + (instancetype)animation;
 
 /**
- @abstract The array of POPAnimtions to run in this group.
+ @abstract The array of POPAnimations to run in this group.
  */
 @property (nonatomic,copy) NSArray* animations;
-
-/**
- @abstract The array of keys for the animations running in this group.
- */
-@property (nonatomic,copy,readonly) NSArray* animationKeys;
-
-- (void)addAnimation:(POPAnimation*)animation;
 
 @end
