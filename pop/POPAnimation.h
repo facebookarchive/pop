@@ -163,7 +163,7 @@ When combined with the autoreverses property, a singular animation is effectivel
 
 /**
  @abstract Returns an array containing the keys of all animations currently attached to the receiver.
- @param The order of keys reflects the order in which animations will be applied.
+ @discussion The order of keys reflects the order in which animations will be applied.
  */
 - (NSArray *)pop_animationKeys;
 
@@ -189,8 +189,15 @@ typedef NS_OPTIONS(NSUInteger, POPAnimationOptions) {
 
 @interface NSObject (POPImplicitAnimations)
 
+/**
+ @abstract Returns a proxy of the obect that can be used for implicit animations.
+ @returns A new proxy animator for this object or one that already exists if animations are already available. This proxy uses the same animation finding mechanism as animations created with the keyValue initializers. Implicit animations only work within a transaction or using the shorthand methods below ( pop_animateWith... ).
+ */
 - (instancetype)pop_animator;
 
+/**
+ @abstract Shorthand for wrapping up a bunch of animations within a transaction.
+ */
 + (void)pop_animateWithDuration:(CFTimeInterval)duration delay:(CFTimeInterval)delay options:(POPAnimationOptions)options animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion;
 + (void)pop_animateWithDuration:(CFTimeInterval)duration animations:(void (^)(void))animations completion:(void (^)(BOOL finished))completion;
 + (void)pop_animateWithDuration:(CFTimeInterval)duration animations:(void (^)(void))animations;
