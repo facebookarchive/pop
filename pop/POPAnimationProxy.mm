@@ -28,8 +28,27 @@
   return self;
 }
 
+
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
 {
+  
+  Method method = class_getInstanceMethod( [self.object class], selector );
+  unsigned int numArgs = method_getNumberOfArguments(method);
+  if ( numArgs == 3 ) {
+    
+    char type[25] = {0};
+    method_getArgumentType(method, 2, type, 25);
+    if ( strstr(type, "GLKVector3") != NULL ) {
+      NSString* typeString = [NSString stringWithFormat:@"%s%s%s%s", @encode(void), "@", ":", @encode(GLKVector3)];
+      NSMethodSignature* sig = [NSMethodSignature signatureWithObjCTypes:typeString.UTF8String];
+      return sig;
+    } else if ( strstr(type, "GLKQuaternion") != NULL ) {
+      NSString* typeString = [NSString stringWithFormat:@"%s%s%s%s", @encode(void), "@", ":", @encode(GLKQuaternion)];
+      NSMethodSignature* sig = [NSMethodSignature signatureWithObjCTypes:typeString.UTF8String];
+      return sig;
+    }
+  }
+  
   return [self.object methodSignatureForSelector:selector];
 }
 
