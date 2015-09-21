@@ -115,9 +115,9 @@
     }
       
     case kPOPValueGLKQuaternion: {
-      GLKVector3 glkVec3;
-      [invocation getArgument:&glkVec3 atIndex:index];
-      return [NSValue valueWithGLKVector3:glkVec3];
+      GLKQuaternion glkQuat;
+      [invocation getArgument:&glkQuat atIndex:index];
+      return [NSValue valueWithGLKQuaternion:glkQuat];
       break;
     }
     default:
