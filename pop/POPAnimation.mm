@@ -244,7 +244,7 @@ POPAnimationState *POPAnimationGetState(POPAnimation *a)
 
 @end
 
-@implementation NSObject (POPImplicitAnimations)
+@implementation NSObject (POPShorthandAnimations)
 
 - (instancetype)pop_animator
 {

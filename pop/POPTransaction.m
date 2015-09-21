@@ -254,6 +254,16 @@ NSString * const kPOPTransactionAnimationAutoreverse = @"kPOPTransactionAnimatio
     [_objectAnimationGroupMap setObject:group forKey:obj];
   }
 
+  // update animation with current values
+  anim.beginTime = [[self valueForKey:kPOPTransactionAnimationDelay] doubleValue];
+  anim.repeatForever = [[self valueForKey:kPOPTransactionAnimationRepeat] boolValue];
+  anim.autoreverses = [[self valueForKey:kPOPTransactionAnimationAutoreverse] boolValue];
+  if ( [anim isKindOfClass:[POPBasicAnimation class]] ) {
+    ((POPBasicAnimation*)anim).duration = [[self valueForKey:kPOPTransactionAnimationDuration] doubleValue];
+    ((POPBasicAnimation*)anim).timingFunction = [self valueForKey:kPOPTransactionAnimationTimingFunction];
+  }
+  
+  // add animation to group
   [group addAnimation:anim];
   
   [_lock unlock];
@@ -315,18 +325,7 @@ NSString * const kPOPTransactionAnimationAutoreverse = @"kPOPTransactionAnimatio
   for ( id obj in objects )
   {
     POPGroupAnimation* group = [_objectAnimationGroupMap objectForKey:obj];
-    
-    group.beginTime = [[self valueForKey:kPOPTransactionAnimationDelay] doubleValue];
-    group.repeatForever = [[self valueForKey:kPOPTransactionAnimationRepeat] boolValue];
-    group.autoreverses = [[self valueForKey:kPOPTransactionAnimationAutoreverse] boolValue];
-    
-    // update all anims to use the current transactions info
-    for ( POPBasicAnimation* anim in group.animations )
-    {
-      anim.duration = [[self valueForKey:kPOPTransactionAnimationDuration] doubleValue];
-      anim.timingFunction = [self valueForKey:kPOPTransactionAnimationTimingFunction];
-    }
-    
+
     BOOL  allowUserInteraction = YES;
     
 #if defined(POP_ALLOW_UIAPPLICATION_ACCESS)

@@ -25,7 +25,9 @@
 
 + (void)setAnimationDelay:(CFTimeInterval)delay;
 + (CFTimeInterval)animationDelay;
-
 + (void)setAnimationOptions:(POPAnimationOptions)options;
+
++ (void)lock;
++ (void)unlock;
 
 @end

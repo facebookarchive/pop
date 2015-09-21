@@ -201,9 +201,9 @@
 		FA53068F1BAC7EC500776F5B /* POPAnimationProxy.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA53068B1BAC7EC500776F5B /* POPAnimationProxy.mm */; settings = {ASSET_TAGS = (); }; };
 		FA5306901BAC7EC500776F5B /* POPAnimationProxy.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA53068B1BAC7EC500776F5B /* POPAnimationProxy.mm */; settings = {ASSET_TAGS = (); }; };
 		FA5306911BAC7EC500776F5B /* POPAnimationProxy.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA53068B1BAC7EC500776F5B /* POPAnimationProxy.mm */; settings = {ASSET_TAGS = (); }; };
-		FA5306B91BACA2BE00776F5B /* POPTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = FA5306B71BACA2BE00776F5B /* POPTransaction.h */; settings = {ASSET_TAGS = (); }; };
-		FA5306BA1BACA2BE00776F5B /* POPTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = FA5306B71BACA2BE00776F5B /* POPTransaction.h */; settings = {ASSET_TAGS = (); }; };
-		FA5306BB1BACA2BE00776F5B /* POPTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = FA5306B71BACA2BE00776F5B /* POPTransaction.h */; settings = {ASSET_TAGS = (); }; };
+		FA5306B91BACA2BE00776F5B /* POPTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = FA5306B71BACA2BE00776F5B /* POPTransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA5306BA1BACA2BE00776F5B /* POPTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = FA5306B71BACA2BE00776F5B /* POPTransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA5306BB1BACA2BE00776F5B /* POPTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = FA5306B71BACA2BE00776F5B /* POPTransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA5306BC1BACA2BE00776F5B /* POPTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5306B81BACA2BE00776F5B /* POPTransaction.m */; settings = {ASSET_TAGS = (); }; };
 		FA5306BD1BACA2BE00776F5B /* POPTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5306B81BACA2BE00776F5B /* POPTransaction.m */; settings = {ASSET_TAGS = (); }; };
 		FA5306BE1BACA2BE00776F5B /* POPTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5306B81BACA2BE00776F5B /* POPTransaction.m */; settings = {ASSET_TAGS = (); }; };

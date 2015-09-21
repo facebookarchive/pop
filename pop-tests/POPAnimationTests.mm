@@ -1097,4 +1097,13 @@ using namespace POP;
   XCTAssertTrue(obj.secondNumber == 10, @"expect 10 but got %ld", (long)obj.secondNumber );
 }
 
+- (void)testObjectExplicitAnimations
+{
+  POPRandomPropertyGivingObject* obj = [[POPRandomPropertyGivingObject alloc] init];
+  obj.secondNumber = 0;
+  XCTAssertTrue(obj.secondNumber == 0, @"expect 0 but got %ld", (long)obj.secondNumber );
+  obj.pop_animator.secondNumber = 10;
+  XCTAssertTrue(obj.secondNumber == 10, @"expect 10 but got %ld", (long)obj.secondNumber );
+}
+
 @end

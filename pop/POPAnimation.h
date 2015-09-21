@@ -187,11 +187,11 @@ typedef NS_OPTIONS(NSUInteger, POPAnimationOptions) {
   POPAnimationOptionCurveLinear               = 3 << 16,
 };
 
-@interface NSObject (POPImplicitAnimations)
+@interface NSObject (POPShorthandAnimations)
 
 /**
- @abstract Returns a proxy of the obect that can be used for implicit animations.
- @returns A new proxy animator for this object or one that already exists if animations are already available. This proxy uses the same animation finding mechanism as animations created with the keyValue initializers. Implicit animations only work within a transaction or using the shorthand methods below ( pop_animateWith... ).
+ @abstract Returns a proxy of the obect that can be used for implicit or explicit animations.
+ @returns A new proxy animator for this object or one that already exists if animations are already available. This proxy uses the same animation finding mechanism as animations created with the keyValue initializers. Also known as "shorthand" animations.
  */
 - (instancetype)pop_animator;
 
