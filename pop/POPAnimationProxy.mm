@@ -36,8 +36,8 @@
   unsigned int numArgs = method_getNumberOfArguments(method);
   if ( numArgs == 3 ) {
     
-    char type[25] = {0};
-    method_getArgumentType(method, 2, type, 25);
+    char type[256] = {0};
+    method_getArgumentType(method, 2, type, 256);
     if ( strstr(type, "GLKVector3") != NULL ) {
       NSString* typeString = [NSString stringWithFormat:@"%s%s%s%s", @encode(void), "@", ":", @encode(GLKVector3)];
       NSMethodSignature* sig = [NSMethodSignature signatureWithObjCTypes:typeString.UTF8String];
