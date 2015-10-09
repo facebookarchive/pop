@@ -17,4 +17,5 @@ Pod::Spec.new do |spec|
   }
   spec.ios.deployment_target = '6.0'
   spec.osx.deployment_target = '10.7'
+  spec.tvos.deployment_target = '9.0'
 end
