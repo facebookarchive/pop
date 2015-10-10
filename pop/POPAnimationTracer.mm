@@ -32,18 +32,19 @@ static POPAnimationEvent *create_event(POPAnimationTracer *self, POPAnimationEve
     : self->_animationState->lastTime;
 
   POPAnimationEvent *event;
+  __strong POPAnimation* animation = self->_animation;
 
   if (!value) {
     event = [[POPAnimationEvent alloc] initWithType:type time:time];
   } else {
     event = [[POPAnimationValueEvent alloc] initWithType:type time:time value:value];
     if (self->_animationHasVelocity) {
-      [(POPAnimationValueEvent *)event setVelocity:[(POPSpringAnimation *)self->_animation velocity]];
+      [(POPAnimationValueEvent *)event setVelocity:[(POPSpringAnimation *)animation velocity]];
     }
   }
 
   if (recordAnimation) {
-    event.animationDescription = [self->_animation description];
+    event.animationDescription = [animation description];
   }
 
   return event;
