@@ -64,9 +64,23 @@
             return @(itg);
             break;
         case kPOPValueFloat:
-            CGFloat flt;
-            [invocation getArgument:&flt atIndex:index];
-            return @(flt);
+        {
+            const char* ctype = [invocation.methodSignature getArgumentTypeAtIndex:index];
+            if ( strcmp(ctype, "d") == 0 )
+            {
+                double flt;
+                [invocation getArgument:&flt atIndex:index];
+                return @(flt);
+            }
+            else if ( strcmp(ctype, "f") == 0 )
+            {
+                float flt;
+                [invocation getArgument:&flt atIndex:index];
+                return @(flt);
+            }
+
+            return @(0);
+        }
             break;
         case kPOPValuePoint:
             CGPoint point;
