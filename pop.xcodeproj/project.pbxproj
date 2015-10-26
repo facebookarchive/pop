@@ -192,38 +192,38 @@
 		ECDA0CD118C92D3900D14897 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5A89D162FBD9B00F7F15C /* CoreGraphics.framework */; };
 		ECF01ED518C92B7F009E0AD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC19121B162FB53A00E0CC76 /* Foundation.framework */; };
 		ECF01ED618C92B7F009E0AD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECEED93D18C91ACF00DD95F2 /* UIKit.framework */; };
-		FA51CB7A1BACB152004DDD3D /* POPTransactionInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA51CB781BACB152004DDD3D /* POPTransactionInternal.h */; settings = {ASSET_TAGS = (); }; };
-		FA51CB7B1BACB152004DDD3D /* POPTransactionInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA51CB781BACB152004DDD3D /* POPTransactionInternal.h */; settings = {ASSET_TAGS = (); }; };
-		FA51CB7C1BACB152004DDD3D /* POPTransactionInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA51CB781BACB152004DDD3D /* POPTransactionInternal.h */; settings = {ASSET_TAGS = (); }; };
-		FA53068C1BAC7EC500776F5B /* POPAnimationProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = FA53068A1BAC7EC500776F5B /* POPAnimationProxy.h */; settings = {ASSET_TAGS = (); }; };
-		FA53068D1BAC7EC500776F5B /* POPAnimationProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = FA53068A1BAC7EC500776F5B /* POPAnimationProxy.h */; settings = {ASSET_TAGS = (); }; };
-		FA53068E1BAC7EC500776F5B /* POPAnimationProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = FA53068A1BAC7EC500776F5B /* POPAnimationProxy.h */; settings = {ASSET_TAGS = (); }; };
-		FA53068F1BAC7EC500776F5B /* POPAnimationProxy.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA53068B1BAC7EC500776F5B /* POPAnimationProxy.mm */; settings = {ASSET_TAGS = (); }; };
-		FA5306901BAC7EC500776F5B /* POPAnimationProxy.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA53068B1BAC7EC500776F5B /* POPAnimationProxy.mm */; settings = {ASSET_TAGS = (); }; };
-		FA5306911BAC7EC500776F5B /* POPAnimationProxy.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA53068B1BAC7EC500776F5B /* POPAnimationProxy.mm */; settings = {ASSET_TAGS = (); }; };
+		FA51CB7A1BACB152004DDD3D /* POPTransactionInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA51CB781BACB152004DDD3D /* POPTransactionInternal.h */; };
+		FA51CB7B1BACB152004DDD3D /* POPTransactionInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA51CB781BACB152004DDD3D /* POPTransactionInternal.h */; };
+		FA51CB7C1BACB152004DDD3D /* POPTransactionInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA51CB781BACB152004DDD3D /* POPTransactionInternal.h */; };
+		FA53068C1BAC7EC500776F5B /* POPAnimationProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = FA53068A1BAC7EC500776F5B /* POPAnimationProxy.h */; };
+		FA53068D1BAC7EC500776F5B /* POPAnimationProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = FA53068A1BAC7EC500776F5B /* POPAnimationProxy.h */; };
+		FA53068E1BAC7EC500776F5B /* POPAnimationProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = FA53068A1BAC7EC500776F5B /* POPAnimationProxy.h */; };
+		FA53068F1BAC7EC500776F5B /* POPAnimationProxy.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA53068B1BAC7EC500776F5B /* POPAnimationProxy.mm */; };
+		FA5306901BAC7EC500776F5B /* POPAnimationProxy.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA53068B1BAC7EC500776F5B /* POPAnimationProxy.mm */; };
+		FA5306911BAC7EC500776F5B /* POPAnimationProxy.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA53068B1BAC7EC500776F5B /* POPAnimationProxy.mm */; };
 		FA5306B91BACA2BE00776F5B /* POPTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = FA5306B71BACA2BE00776F5B /* POPTransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA5306BA1BACA2BE00776F5B /* POPTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = FA5306B71BACA2BE00776F5B /* POPTransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA5306BB1BACA2BE00776F5B /* POPTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = FA5306B71BACA2BE00776F5B /* POPTransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FA5306BC1BACA2BE00776F5B /* POPTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5306B81BACA2BE00776F5B /* POPTransaction.m */; settings = {ASSET_TAGS = (); }; };
-		FA5306BD1BACA2BE00776F5B /* POPTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5306B81BACA2BE00776F5B /* POPTransaction.m */; settings = {ASSET_TAGS = (); }; };
-		FA5306BE1BACA2BE00776F5B /* POPTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5306B81BACA2BE00776F5B /* POPTransaction.m */; settings = {ASSET_TAGS = (); }; };
-		FA731A7E1BB0432D00C7B3C4 /* POPGroupAnimationInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA731A7C1BB0432D00C7B3C4 /* POPGroupAnimationInternal.h */; settings = {ASSET_TAGS = (); }; };
-		FA731A7F1BB0432D00C7B3C4 /* POPGroupAnimationInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA731A7C1BB0432D00C7B3C4 /* POPGroupAnimationInternal.h */; settings = {ASSET_TAGS = (); }; };
-		FA731A801BB0432D00C7B3C4 /* POPGroupAnimationInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA731A7C1BB0432D00C7B3C4 /* POPGroupAnimationInternal.h */; settings = {ASSET_TAGS = (); }; };
+		FA5306BC1BACA2BE00776F5B /* POPTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5306B81BACA2BE00776F5B /* POPTransaction.m */; };
+		FA5306BD1BACA2BE00776F5B /* POPTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5306B81BACA2BE00776F5B /* POPTransaction.m */; };
+		FA5306BE1BACA2BE00776F5B /* POPTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = FA5306B81BACA2BE00776F5B /* POPTransaction.m */; };
+		FA731A7E1BB0432D00C7B3C4 /* POPGroupAnimationInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA731A7C1BB0432D00C7B3C4 /* POPGroupAnimationInternal.h */; };
+		FA731A7F1BB0432D00C7B3C4 /* POPGroupAnimationInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA731A7C1BB0432D00C7B3C4 /* POPGroupAnimationInternal.h */; };
+		FA731A801BB0432D00C7B3C4 /* POPGroupAnimationInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA731A7C1BB0432D00C7B3C4 /* POPGroupAnimationInternal.h */; };
 		FA9A1C9F1BAA408E0050046A /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9A1C9E1BAA408E0050046A /* GLKit.framework */; };
 		FA9A1CA01BAA40940050046A /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9A1C9E1BAA408E0050046A /* GLKit.framework */; };
 		FA9A1CA21BAA409A0050046A /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9A1CA11BAA409A0050046A /* GLKit.framework */; };
-		FA9A1CAB1BAA51F00050046A /* POPAnimatablePropertyInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9A1CA91BAA51F00050046A /* POPAnimatablePropertyInternal.h */; settings = {ASSET_TAGS = (); }; };
-		FA9A1CAC1BAA51F00050046A /* POPAnimatablePropertyInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9A1CA91BAA51F00050046A /* POPAnimatablePropertyInternal.h */; settings = {ASSET_TAGS = (); }; };
-		FA9A1CAD1BAA51F00050046A /* POPAnimatablePropertyInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9A1CA91BAA51F00050046A /* POPAnimatablePropertyInternal.h */; settings = {ASSET_TAGS = (); }; };
+		FA9A1CAB1BAA51F00050046A /* POPAnimatablePropertyInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9A1CA91BAA51F00050046A /* POPAnimatablePropertyInternal.h */; };
+		FA9A1CAC1BAA51F00050046A /* POPAnimatablePropertyInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9A1CA91BAA51F00050046A /* POPAnimatablePropertyInternal.h */; };
+		FA9A1CAD1BAA51F00050046A /* POPAnimatablePropertyInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = FA9A1CA91BAA51F00050046A /* POPAnimatablePropertyInternal.h */; };
 		FA9A1CB51BAB043E0050046A /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9A1C9E1BAA408E0050046A /* GLKit.framework */; };
 		FA9A1CB61BAB04460050046A /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9A1CA11BAA409A0050046A /* GLKit.framework */; };
 		FAAEA3EF1BAB6C09005069B1 /* POPGroupAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = FAAEA3ED1BAB6C09005069B1 /* POPGroupAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FAAEA3F01BAB6C09005069B1 /* POPGroupAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = FAAEA3ED1BAB6C09005069B1 /* POPGroupAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FAAEA3F11BAB6C09005069B1 /* POPGroupAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = FAAEA3ED1BAB6C09005069B1 /* POPGroupAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FAAEA3F21BAB6C09005069B1 /* POPGroupAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAAEA3EE1BAB6C09005069B1 /* POPGroupAnimation.mm */; settings = {ASSET_TAGS = (); }; };
-		FAAEA3F31BAB6C09005069B1 /* POPGroupAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAAEA3EE1BAB6C09005069B1 /* POPGroupAnimation.mm */; settings = {ASSET_TAGS = (); }; };
-		FAAEA3F41BAB6C09005069B1 /* POPGroupAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAAEA3EE1BAB6C09005069B1 /* POPGroupAnimation.mm */; settings = {ASSET_TAGS = (); }; };
+		FAAEA3F21BAB6C09005069B1 /* POPGroupAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAAEA3EE1BAB6C09005069B1 /* POPGroupAnimation.mm */; };
+		FAAEA3F31BAB6C09005069B1 /* POPGroupAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAAEA3EE1BAB6C09005069B1 /* POPGroupAnimation.mm */; };
+		FAAEA3F41BAB6C09005069B1 /* POPGroupAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAAEA3EE1BAB6C09005069B1 /* POPGroupAnimation.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -949,7 +949,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					0B6BE74719FFD3B900762101 = {
