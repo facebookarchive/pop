@@ -404,7 +404,10 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   }
   if (_displayTimer != NULL) {
     dispatch_source_cancel(_displayTimer);
+#if !OS_OBJECT_USE_OBJC
     dispatch_release(_displayTimer);
+#endif
+    _displayTimer = NULL;
   }
 #endif
   [self _clearPendingListObserver];
