@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0640"
+   LastUpgradeVersion = "0710"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0B6BE74719FFD3B900762101"
+               BlueprintIdentifier = "0755AE4E1BEA15950094AB41"
                BuildableName = "pop.framework"
-               BlueprintName = "pop-ios-framework"
+               BlueprintName = "pop-tvos-framework"
                ReferencedContainer = "container:pop.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ECF01ED218C92B7F009E0AD1"
+               BlueprintIdentifier = "0755AE8B1BEA19580094AB41"
                BuildableName = "pop-tests.xctest"
-               BlueprintName = "pop-tests-ios"
+               BlueprintName = "pop-tests-tvos"
                ReferencedContainer = "container:pop.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -42,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0B6BE74719FFD3B900762101"
+            BlueprintIdentifier = "0755AE4E1BEA15950094AB41"
             BuildableName = "pop.framework"
-            BlueprintName = "pop-ios-framework"
+            BlueprintName = "pop-tvos-framework"
             ReferencedContainer = "container:pop.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0B6BE74719FFD3B900762101"
+            BlueprintIdentifier = "0755AE4E1BEA15950094AB41"
             BuildableName = "pop.framework"
-            BlueprintName = "pop-ios-framework"
+            BlueprintName = "pop-tvos-framework"
             ReferencedContainer = "container:pop.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0B6BE74719FFD3B900762101"
+            BlueprintIdentifier = "0755AE4E1BEA15950094AB41"
             BuildableName = "pop.framework"
-            BlueprintName = "pop-ios-framework"
+            BlueprintName = "pop-tvos-framework"
             ReferencedContainer = "container:pop.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
