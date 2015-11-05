@@ -1,6 +1,6 @@
 ![pop](https://github.com/facebook/pop/blob/master/Images/pop.gif?raw=true)
 
-Pop is an extensible animation engine for iOS and OS X. In addition to basic static animations, it supports spring and decay dynamic animations, making it useful for building realistic, physics-based interactions. The API allows quick integration with existing Objective-C codebases and enables the animation of any property on any object. It's a mature and well-tested framework that drives all the animations and transitions in [Paper](http://www.facebook.com/paper).
+Pop is an extensible animation engine for iOS, tvOS, and OS X. In addition to basic static animations, it supports spring and decay dynamic animations, making it useful for building realistic, physics-based interactions. The API allows quick integration with existing Objective-C codebases and enables the animation of any property on any object. It's a mature and well-tested framework that drives all the animations and transitions in [Paper](http://www.facebook.com/paper).
 
 [![Build Status](https://travis-ci.org/facebook/pop.svg)](https://travis-ci.org/facebook/pop)
 
@@ -23,7 +23,7 @@ pod 'pop', :git => 'https://github.com/facebook/pop.git'
 ### iOS 8 Embedded Framework
 By adding the project to your project and adding pop.embedded framework to the Embedded Binaries section on the General tab of your app's target, you can set up pop in seconds! This also enables `@import pop` syntax with header modules.
 
-**Note**: because of some awkward limitations with Xcode, embedded binaries must share the same name as the module and must have `.framework` as an extension. This means that you'll see two pop.frameworks when adding embedded binaries (one for OS X, and one for iOS). You'll need to be sure to add the iOS one, and since this list is populated in order of targets, it's safe to assume it's the second one. You can verify the correct one was chosen by checking the path next to the framework listed: `Debug-iphoneos`.
+**Note**: because of some awkward limitations with Xcode, embedded binaries must share the same name as the module and must have `.framework` as an extension. This means that you'll see three pop.frameworks when adding embedded binaries (one for OS X, one for tvOS, and one for iOS). You'll need to be sure to add the iOS one, and since this list is populated in order of targets, it's safe to assume it's the second one. You can verify the correct one was chosen by checking the path next to the framework listed: `Debug-iphoneos`. The same principle applies on tvOS but instead of `Debug-iphoneos` look for `Debug-appletvos`.
 
 ![Embedded Binaries](Images/EmbeddedBinaries.png?raw=true)
 
