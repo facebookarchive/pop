@@ -88,6 +88,7 @@ NSString * const kPOPScrollViewContentOffset = @"scrollView.contentOffset";
 NSString * const kPOPScrollViewContentSize = @"scrollView.contentSize";
 NSString * const kPOPScrollViewZoomScale = @"scrollView.zoomScale";
 NSString * const kPOPScrollViewContentInset = @"scrollView.contentInset";
+NSString * const kPOPScrollViewScrollIndicatorInsets = @"scrollView.scrollIndicatorInsets";
 
 // UITableView
 NSString * const kPOPTableViewContentOffset = kPOPScrollViewContentOffset;
@@ -693,6 +694,19 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     ^(UIScrollView *obj, const CGFloat values[]) {
       obj.contentInset = values_to_edge_insets(values);
+    },
+    kPOPThresholdPoint
+  },
+
+  {kPOPScrollViewScrollIndicatorInsets,
+    ^(UIScrollView *obj, CGFloat values[]) {
+      values[0] = obj.scrollIndicatorInsets.top;
+      values[1] = obj.scrollIndicatorInsets.left;
+      values[2] = obj.scrollIndicatorInsets.bottom;
+      values[3] = obj.scrollIndicatorInsets.right;
+    },
+    ^(UIScrollView *obj, const CGFloat values[]) {
+      obj.scrollIndicatorInsets = values_to_edge_insets(values);
     },
     kPOPThresholdPoint
   },
