@@ -136,6 +136,9 @@ static CVReturn displayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeSt
 // call while holding lock
 static void updateDisplayLink(POPAnimator *self)
 {
+    if ( !self->_displayLink )
+        return;
+    
   BOOL paused = (0 == self->_observers.count && self->_list.empty()) || self->_disableDisplayLink;
 
 #if TARGET_OS_IPHONE
@@ -326,7 +329,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   static POPAnimator* _animator = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    _animator = [[POPAnimator alloc] init];
+    _animator = [[POPAnimator alloc] initWithoutDisplayLink];
   });
   return _animator;
 }
@@ -342,6 +345,18 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 }
 
 #pragma mark - Lifecycle
+
+- (id)initWithoutDisplayLink
+{
+    self = [super init];
+    if (nil == self) return nil;
+
+    _dict = POPDictionaryCreateMutableWeakPointerToStrongObject(5);
+    _proxyAnimatorMap = [NSMapTable weakToWeakObjectsMapTable];
+    _lock = OS_SPINLOCK_INIT;
+    
+    return self;
+}
 
 - (id)init
 {
@@ -844,6 +859,13 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 
 - (void)render
 {
+    OSSpinLockLock(&_lock);
+    BOOL paused = (0 == self->_observers.count && self->_list.empty()) || self->_disableDisplayLink;
+    OSSpinLockUnlock(&_lock);
+    
+    if ( paused )
+        return;
+    
   CFTimeInterval time = [self _currentRenderTime];
   [self renderTime:time];
 }

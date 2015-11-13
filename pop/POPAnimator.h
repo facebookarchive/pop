@@ -27,6 +27,8 @@
  */
 @property (weak, nonatomic) id<POPAnimatorDelegate> delegate;
 
+- (void)render;
+
 @end
 
 /**
