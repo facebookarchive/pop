@@ -18,18 +18,16 @@ Bugs are first fixed in master and then made available via a designated release.
 pod 'pop', :git => 'https://github.com/facebook/pop.git'
 ```
 
-## Non-CocoaPods Installation
-
-### iOS 8 Embedded Framework
+### Framework (without CocoaPods)
 By adding the project to your project and adding pop.embedded framework to the Embedded Binaries section on the General tab of your app's target, you can set up pop in seconds! This also enables `@import pop` syntax with header modules.
 
-**Note**: because of some awkward limitations with Xcode, embedded binaries must share the same name as the module and must have `.framework` as an extension. This means that you'll see three pop.frameworks when adding embedded binaries (one for OS X, one for tvOS, and one for iOS). You'll need to be sure to add the iOS one, and since this list is populated in order of targets, it's safe to assume it's the second one. You can verify the correct one was chosen by checking the path next to the framework listed: `Debug-iphoneos`. The same principle applies on tvOS but instead of `Debug-iphoneos` look for `Debug-appletvos`.
+**Note**: because of some awkward limitations with Xcode, embedded binaries must share the same name as the module and must have `.framework` as an extension. This means that you'll see three pop.frameworks when adding embedded binaries (one for OS X, one for tvOS, and one for iOS). You'll need to be sure to add the right one; they appear identically in the list but note the list is populated in order of targets. You can verify the correct one was chosen by checking the path next to the framework listed, in the format `<configuration>-<platform>` (e.g. `Debug-iphoneos`).
 
 ![Embedded Binaries](Images/EmbeddedBinaries.png?raw=true)
 
-**Note 2**: this method does not currently play nicely with workspaces. For some unknown reason, Xcode simply rejects adding pop.framework as an embedded binary when pop.xcodeproj is placed in the workspace. This only works when pop.xcodeproj is added as a subproject to the current target's project.
+**Note 2**: this method does not currently play nicely with workspaces. Since targets can only depend on and embed products from other targets in the same project, it only works when pop.xcodeproj is added as a subproject to the current target's project. Otherwise, you'll need to manually set the build ordering in the scheme and copy in the product.
 
-### Advanced
+### Static Library (without CocoaPods)
 Alternatively, you can add the project to your workspace and adopt the provided configuration files or manually copy the files under the pop subdirectory into your project. If installing manually, ensure the C++ standard library is also linked by including `-lc++` to your project linker flags.
 
 ## Usage
