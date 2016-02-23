@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		DDCC6C5F1C7C5D0E009F1582 /* pop-fat */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = DDCC6C631C7C5D0E009F1582 /* Build configuration list for PBXAggregateTarget "pop-fat" */;
+			buildPhases = (
+				DDCC6C6A1C7C5D1A009F1582 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "pop-fat";
+			productName = "pop-fat";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		0755AE591BEA15A80094AB41 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0755AE581BEA15A80094AB41 /* CoreImage.framework */; };
 		0755AE5B1BEA15B30094AB41 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0755AE5A1BEA15B30094AB41 /* UIKit.framework */; };
@@ -1076,6 +1090,9 @@
 					0B6BE74719FFD3B900762101 = {
 						CreatedOnToolsVersion = 6.1;
 					};
+					DDCC6C5F1C7C5D0E009F1582 = {
+						CreatedOnToolsVersion = 7.2;
+					};
 					EC7E319818C93D6500B38170 = {
 						TestTargetID = EC68857E18C7B60000C6194C;
 					};
@@ -1103,6 +1120,7 @@
 				ECF01ED218C92B7F009E0AD1 /* pop-tests-ios */,
 				EC7E319818C93D6500B38170 /* pop-tests-osx */,
 				0755AE8B1BEA19580094AB41 /* pop-tests-tvos */,
+				DDCC6C5F1C7C5D0E009F1582 /* pop-fat */,
 			);
 		};
 /* End PBXProject section */
@@ -1273,6 +1291,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pop-tests-osx/Pods-pop-tests-osx-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		DDCC6C6A1C7C5D1A009F1582 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "### Build ###\n\n#iOS\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator -target pop-ios-framework -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator\n\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos -target pop-ios-framework -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos\n\n#TV OS\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk appletvsimulator -target pop-tvos-framework -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-appletvsimulator\n\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk appletvos -target pop-tvos-framework -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-appletvos\n\n### LIPO ###\n\n#Delete existing build\n\nrm -rf ${BUILD_DIR}/${CONFIGURATION}-iphone\nrm -rf ${BUILD_DIR}/${CONFIGURATION}-appletv\n\n# Create Folders\n\nmkdir -p ${BUILD_DIR}/${CONFIGURATION}-iphone\nmkdir -p ${BUILD_DIR}/${CONFIGURATION}-appletv\n\n# Copy a bundle to each folder\n\ncp -r ${BUILD_DIR}/${CONFIGURATION}-iphoneos/pop.framework ${BUILD_DIR}/${CONFIGURATION}-iphone/pop.framework\ncp -r ${BUILD_DIR}/${CONFIGURATION}-appletvos/pop.framework ${BUILD_DIR}/${CONFIGURATION}-appletv/pop.framework\n\n# Delete binary\n\nrm ${BUILD_DIR}/${CONFIGURATION}-iphone/pop.framework/pop\nrm ${BUILD_DIR}/${CONFIGURATION}-appletv/pop.framework/pop\n\n# Delete code signature directory\n\nrm -r ${BUILD_DIR}/${CONFIGURATION}-iphone/pop.framework/_CodeSignature\nrm -r ${BUILD_DIR}/${CONFIGURATION}-appletv/pop.framework/_CodeSignature\n\n# Combine libs\n\nlipo ${BUILD_DIR}/${CONFIGURATION}-iphoneos/pop.framework/pop ${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/pop.framework/pop -create -output ${BUILD_DIR}/${CONFIGURATION}-iphone/pop.framework/pop\n\nlipo ${BUILD_DIR}/${CONFIGURATION}-appletvos/pop.framework/pop ${BUILD_DIR}/${CONFIGURATION}-appletvsimulator/pop.framework/pop -create -output ${BUILD_DIR}/${CONFIGURATION}-appletv/pop.framework/pop";
 		};
 		E2C9066E4ADCF915CECA3F7C /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1798,6 +1829,27 @@
 			};
 			name = Profile;
 		};
+		DDCC6C601C7C5D0E009F1582 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DDCC6C611C7C5D0E009F1582 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		DDCC6C621C7C5D0E009F1582 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Profile;
+		};
 		EC19123B162FB53A00E0CC76 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ECC1DB1218CA291B008C7DEA /* Project-Debug.xcconfig */;
@@ -2014,6 +2066,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		DDCC6C631C7C5D0E009F1582 /* Build configuration list for PBXAggregateTarget "pop-fat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDCC6C601C7C5D0E009F1582 /* Debug */,
+				DDCC6C611C7C5D0E009F1582 /* Release */,
+				DDCC6C621C7C5D0E009F1582 /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		EC191212162FB53A00E0CC76 /* Build configuration list for PBXProject "pop" */ = {
 			isa = XCConfigurationList;
