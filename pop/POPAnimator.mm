@@ -152,7 +152,7 @@ static void updateDisplayLink(POPAnimator *self)
 
 static void updateAnimatable(id obj, POPPropertyAnimationState *anim, bool shouldAvoidExtraneousWrite = false)
 {
-  // handle user-initiated stop or pause; hault animation
+  // handle user-initiated stop or pause; halt animation
   if (!anim->active || anim->paused)
     return;
 

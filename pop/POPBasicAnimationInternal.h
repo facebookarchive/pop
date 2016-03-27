@@ -74,7 +74,7 @@ struct _POPBasicAnimationState : _POPPropertyAnimationState
       ((POPBasicAnimation *)self).timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
     }
 
-    // solve for normalized time, aka progresss [0, 1]
+    // solve for normalized time, aka progress [0, 1]
     CGFloat p = 1.0f;
     if (duration > 0.0f) {
         // cap local time to duration
