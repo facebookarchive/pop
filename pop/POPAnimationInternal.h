@@ -495,7 +495,7 @@ typedef struct _POPAnimationState POPAnimationState;
 
 @end
 
-// NSProxy extensions, for testing pursposes
+// NSProxy extensions, for testing purposes
 @interface NSProxy (POP)
 - (void)pop_addAnimation:(POPAnimation *)anim forKey:(NSString *)key;
 - (void)pop_removeAllAnimations;

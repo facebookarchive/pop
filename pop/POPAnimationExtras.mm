@@ -15,7 +15,7 @@
 #endif
 
 #if TARGET_IPHONE_SIMULATOR
-UIKIT_EXTERN float UIAnimationDragCoefficient(); // UIKit private drag coeffient, use judiciously
+UIKIT_EXTERN float UIAnimationDragCoefficient(); // UIKit private drag coefficient, use judiciously
 #endif
 
 #import "POPMath.h"
