@@ -24,3 +24,8 @@ script:
     pod lib lint pop.podspec
     pod lib lint --use-libraries pop.podspec
   fi
+after_success:
+- |
+  if [ "$TEST_TYPE" = "iOS" ]; then
+    bash <(curl -s https://codecov.io/bash)
+  fi
