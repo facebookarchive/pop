@@ -1,10 +1,39 @@
+branches:
+  only:
+    - master
 language: objective-c
-before_install:
-  - brew update
-  - brew reinstall xctool
-  - gem update cocoapods
-xcode_workspace: pop.xcworkspace
-xcode_scheme: pop-ios-static
-xcode_sdk:
-  - iphonesimulator
-  - iphonesimulator8.1
+os: osx
+osx_image: xcode7.3
+env:
+  matrix:
+    - TEST_TYPE=iOS
+    - TEST_TYPE=OSX
+    - TEST_TYPE=tvOS
+    - TEST_TYPE=CocoaPods
+install:
+- |
+  if [ "$TEST_TYPE" = iOS ] || [ "$TEST_TYPE" = OSX ] || [ "$TEST_TYPE" = tvOS ]; then
+    gem install xcpretty -N --no-ri --no-rdoc
+    gem install cocoapods --quiet --no-ri --no-rdoc
+    pod install
+  fi
+script:
+- |
+  if [ "$TEST_TYPE" = iOS ]; then
+    set -o pipefail
+    xcodebuild -workspace pop.xcworkspace -scheme pop-ios-framework -sdk iphonesimulator build test GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+  elif [ "$TEST_TYPE" = OSX ]; then
+    set -o pipefail
+    xcodebuild -workspace pop.xcworkspace -scheme pop-osx-framework -sdk macosx build test GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+  elif [ "$TEST_TYPE" = tvOS ]; then
+    set -o pipefail
+    xcodebuild -workspace pop.xcworkspace -scheme pop-tvos-framework -sdk appletvsimulator build test GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+  elif [ "$TEST_TYPE" = CocoaPods ]; then
+    pod lib lint pop.podspec
+    pod lib lint --use-libraries pop.podspec
+  fi
+after_success:
+- |
+  if [ "$TEST_TYPE" = iOS ] || [ "$TEST_TYPE" = OSX ] || [ "$TEST_TYPE" = tvOS ]; then
+    bash <(curl -s https://codecov.io/bash)
+  fi
