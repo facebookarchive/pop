@@ -389,7 +389,9 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     CVDisplayLinkSetOutputCallback(_displayLink, displayLinkCallback, (__bridge void *)self);
   } else {
     FBLogAnimInfo(@"cannot create display link: ret=%ld, falling back to display timer at %llu Hz", (long)ret, _displayTimerFrequency);
-    _displayTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0));
+    // Thanks to Apple, on older OSes DISPATCH_TIMER_STRICT is not supported and dispatch_source_create failed if we use it.
+    unsigned long mask = (NSFoundationVersionNumber >= NSFoundationVersionNumber10_9) ? DISPATCH_TIMER_STRICT : 0;
+    _displayTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, mask, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0));
     NSAssert(nil != _displayTimer, @"Cannot create display timer");
     dispatch_source_set_timer(_displayTimer, DISPATCH_TIME_NOW, NSEC_PER_SEC / _displayTimerFrequency, 0);
     __weak POPAnimator *weakSelf = self;
