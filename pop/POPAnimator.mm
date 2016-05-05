@@ -82,7 +82,10 @@ typedef std::list<POPAnimatorItemRef> POPAnimatorItemList;
 typedef POPAnimatorItemList::iterator POPAnimatorItemListIterator;
 typedef POPAnimatorItemList::const_iterator POPAnimatorItemListConstIterator;
 
+#if !TARGET_OS_IPHONE
 static BOOL _disableBackgroundThread = YES;
+static uint64_t _displayTimerFrequency = kDisplayTimerFrequency;
+#endif
 
 @interface POPAnimator ()
 {
@@ -344,6 +347,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   return _animator;
 }
 
+#if !TARGET_OS_IPHONE
 + (BOOL)disableBackgroundThread
 {
   return _disableBackgroundThread;
@@ -353,6 +357,17 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 {
   _disableBackgroundThread = flag;
 }
+
++ (uint64_t)displayTimerFrequency
+{
+  return _displayTimerFrequency;
+}
+
++ (void)setDisplayTimerFrequency:(uint64_t)frequency
+{
+  _displayTimerFrequency = frequency;
+}
+#endif
 
 #pragma mark - Lifecycle
 
@@ -373,10 +388,10 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   if (kCVReturnSuccess == ret) {
     CVDisplayLinkSetOutputCallback(_displayLink, displayLinkCallback, (__bridge void *)self);
   } else {
-    FBLogAnimInfo(@"cannot create display link: ret=%ld, falling back to display timer at %llu Hz", (long)ret, kDisplayTimerFrequency);
+    FBLogAnimInfo(@"cannot create display link: ret=%ld, falling back to display timer at %llu Hz", (long)ret, _displayTimerFrequency);
     _displayTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0));
     NSAssert(nil != _displayTimer, @"Cannot create display timer");
-    dispatch_source_set_timer(_displayTimer, DISPATCH_TIME_NOW, NSEC_PER_SEC / kDisplayTimerFrequency, 0);
+    dispatch_source_set_timer(_displayTimer, DISPATCH_TIME_NOW, NSEC_PER_SEC / _displayTimerFrequency, 0);
     __weak POPAnimator *weakSelf = self;
     dispatch_source_set_event_handler(_displayTimer, ^{
       __strong POPAnimator *strongSelf = weakSelf;
@@ -782,7 +797,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     }
     return ((CFTimeInterval)period.timeValue / (CFTimeInterval)period.timeScale);
   }
-  return (1.0 / (CFTimeInterval)kDisplayTimerFrequency);
+  return (1.0 / (CFTimeInterval)_displayTimerFrequency);
 #endif
 }
 
