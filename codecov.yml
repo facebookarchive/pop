@@ -1,0 +1,10 @@
+coverage:
+  ignore:
+    - pop-tests/*
+  status:
+    patch: false
+    changes: false
+    project:
+      default:
+        target: 50
+comment: false
