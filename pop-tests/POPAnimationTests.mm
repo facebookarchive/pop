@@ -22,6 +22,7 @@
 #import "POPAnimationTestsExtras.h"
 #import "POPBaseAnimationTests.h"
 #import "POPCGUtils.h"
+#import "POPAnimationInternal.h"
 
 using namespace POP;
 
@@ -869,6 +870,22 @@ using namespace POP;
 
   // assert equality
   XCTAssertTrue(layerValues[0] == toValues[0] && layerValues[1] == toValues[1] && layerValues[2] == toValues[2] && layerValues[3] == toValues[3], @"unexpected last color: [r:%f g:%f b:%f a:%f]", layerValues[0], layerValues[1], layerValues[2], layerValues[3]);
+}
+
+- (void)testNSCopyingSupportPOPBasicAnimation
+{
+  POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:@"test_property_name"];
+  
+  configureConcretePropertyAnimation(anim);
+  [self testCopyingSucceedsForConcretePropertyAnimation:anim];
+  
+  anim.duration = 1.8;
+  anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+  
+  POPBasicAnimation *copy = [anim copy];
+  
+  XCTAssertEqual(copy.duration, anim.duration, @"expected equality; value1:%@ value2:%@", @(copy.duration), @(anim.duration));
+  XCTAssertEqualObjects(copy.timingFunction, anim.timingFunction, @"expected equality; value1:%@ value2:%@", copy.timingFunction, anim.timingFunction);
 }
 
 @end

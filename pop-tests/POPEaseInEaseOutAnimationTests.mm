@@ -7,9 +7,9 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <QuartzCore/QuartzCore.h>
-
 #import <OCMock/OCMock.h>
+
+#import <QuartzCore/QuartzCore.h>
 
 #import <XCTest/XCTest.h>
 

@@ -7,10 +7,11 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import <XCTest/XCTest.h>
-
 #import <OCMock/OCMock.h>
+
 #import <QuartzCore/QuartzCore.h>
+
+#import <XCTest/XCTest.h>
 
 #import <pop/POPAnimation.h>
 #import <pop/POPAnimationPrivate.h>
@@ -658,6 +659,29 @@ static BOOL _floatingPointEqual(CGFloat a, CGFloat b)
   // verify last write event value
   POPAnimationValueEvent *writeEvent = [[tracer eventsWithType:kPOPAnimationEventPropertyWrite] lastObject];
   XCTAssertEqualObjects(writeEvent.value, anim.toValue, @"unexpected last write event %@", writeEvent);
+}
+
+- (void)testNSCopyingSupportPOPSpringAnimation
+{
+  POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:@"asdf_asdf_asdf"];
+  
+  configureConcretePropertyAnimation(anim);
+  
+  anim.velocity = @(4321);
+  anim.springBounciness = 11.1;
+  anim.springSpeed = 12;
+  anim.dynamicsTension = 0.83;
+  anim.dynamicsFriction = 0.97;
+  anim.dynamicsMass = 100;
+  
+  POPSpringAnimation *copy = [anim copy];
+  
+  XCTAssertEqualObjects(copy.velocity, anim.velocity, @"expected equality; value1:%@ value2:%@", copy.velocity, anim.velocity);
+  XCTAssertEqual(copy.springBounciness, anim.springBounciness, @"expected equality; value1:%@ value2:%@", @(copy.springBounciness), @(anim.springBounciness));
+  XCTAssertEqual(copy.springSpeed, anim.springSpeed, @"expected equality; value1:%@ value2:%@", @(copy.springSpeed), @(anim.springSpeed));
+  XCTAssertEqual(copy.dynamicsTension, anim.dynamicsTension, @"expected equality; value1:%@ value2:%@", @(copy.dynamicsTension), @(anim.dynamicsTension));
+  XCTAssertEqual(copy.dynamicsFriction, anim.dynamicsFriction, @"expected equality; value1:%@ value2:%@", @(copy.dynamicsFriction), @(anim.dynamicsFriction));
+  XCTAssertEqual(copy.dynamicsMass, anim.dynamicsMass, @"expected equality; value1:%@ value2:%@", @(copy.dynamicsMass), @(anim.dynamicsMass));
 }
 
 @end

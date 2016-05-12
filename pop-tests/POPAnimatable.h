@@ -8,7 +8,9 @@
  */
 
 #import <CoreGraphics/CoreGraphics.h>
+
 #import <Foundation/Foundation.h>
+
 #import <QuartzCore/QuartzCore.h>
 
 @interface POPAnimatable : NSObject

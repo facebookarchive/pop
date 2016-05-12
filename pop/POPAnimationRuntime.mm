@@ -17,10 +17,10 @@
 #import <UIKit/UIKit.h>
 #endif
 
-#import "POPVector.h"
-#import "POPAnimationRuntime.h"
 #import "POPCGUtils.h"
+#import "POPDefines.h"
 #import "POPGeometry.h"
+#import "POPVector.h"
 
 static Boolean pointerEqual(const void *ptr1, const void *ptr2) {
   return ptr1 == ptr2;
@@ -36,7 +36,7 @@ CFMutableDictionaryRef POPDictionaryCreateMutableWeakPointerToWeakPointer(NSUInt
 
   // weak, pointer keys
   kcb.retain = NULL;
-  kcb.retain = NULL;
+  kcb.release = NULL;
   kcb.equal = pointerEqual;
   kcb.hash = pointerHash;
 
@@ -305,7 +305,7 @@ VectorRef POPUnbox(id value, POPValueType &animationType, NSUInteger &count, boo
 
   // handle unknown types
   if (kPOPValueUnknown == valueType) {
-    NSString *valueDesc = kPOPValueUnknown != valueType ? POPValueTypeToString(valueType) : [[value class] description];
+    NSString *valueDesc = [[value class] description];
     [NSException raise:@"Unsuported value" format:@"Animating %@ values is not supported", valueDesc];
   }
 

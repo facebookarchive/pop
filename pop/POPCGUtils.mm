@@ -9,42 +9,34 @@
 
 #import "POPCGUtils.h"
 
-#if TARGET_OS_IPHONE
-#import <UIKit/UIColor.h>
-#else
-#import <AppKit/NSColor.h>
-#endif
+#import <objc/runtime.h>
 
 void POPCGColorGetRGBAComponents(CGColorRef color, CGFloat components[])
 {
-  if (!color) {
-#if TARGET_OS_IPHONE
-    color = [UIColor clearColor].CGColor;
-#else
-    color = [NSColor clearColor].CGColor;
-#endif
-  }
-  
-  const CGFloat *colors = CGColorGetComponents(color);
-  size_t count = CGColorGetNumberOfComponents(color);
-  
-  if (4 == count) {
-    // RGB colorspace
-    components[0] = colors[0];
-    components[1] = colors[1];
-    components[2] = colors[2];
-    components[3] = colors[3];
-  } else if (2 == count) {
-    // Grey colorspace
-    components[0] = components[1] = components[2] = colors[0];
-    components[3] = colors[1];
+  if (color) {
+    const CGFloat *colors = CGColorGetComponents(color);
+    size_t count = CGColorGetNumberOfComponents(color);
+
+    if (4 == count) {
+      // RGB colorspace
+      components[0] = colors[0];
+      components[1] = colors[1];
+      components[2] = colors[2];
+      components[3] = colors[3];
+    } else if (2 == count) {
+      // Grey colorspace
+      components[0] = components[1] = components[2] = colors[0];
+      components[3] = colors[1];
+    } else {
+      // Use CI to convert
+      CIColor *ciColor = [CIColor colorWithCGColor:color];
+      components[0] = ciColor.red;
+      components[1] = ciColor.green;
+      components[2] = ciColor.blue;
+      components[3] = ciColor.alpha;
+    }
   } else {
-    // Use CI to convert
-    CIColor *ciColor = [CIColor colorWithCGColor:color];
-    components[0] = ciColor.red;
-    components[1] = ciColor.green;
-    components[2] = ciColor.blue;
-    components[3] = ciColor.alpha;
+    memset(components, 0, 4 * sizeof(components[0]));
   }
 }
 
@@ -71,7 +63,44 @@ CGColorRef POPCGColorWithColor(id color)
   }
 #else
   else if ([color isKindOfClass:[NSColor class]]) {
-    return [color CGColor];
+    // -[NSColor CGColor] is only supported since OSX 10.8+
+    if ([color respondsToSelector:@selector(CGColor)]) {
+      return [color CGColor];
+    }
+
+    /*
+     * Otherwise create a CGColorRef manually.
+     *
+     * The original accessor is (or would be) declared as:
+     *   @property(readonly) CGColorRef CGColor;
+     *   - (CGColorRef)CGColor NS_RETURNS_INNER_POINTER CF_RETURNS_NOT_RETAINED;
+     *
+     * (Please note that OSX' accessor is atomic, while iOS' isn't.)
+     *
+     * The access to the NSColor object must thus be synchronized
+     * and the CGColorRef be stored as an associated object,
+     * to return a reference which doesn't need to be released manually.
+     */
+    @synchronized(color) {
+      static const void* key = &key;
+
+      CGColorRef colorRef = (__bridge CGColorRef)objc_getAssociatedObject(color, key);
+
+      if (!colorRef) {
+        size_t numberOfComponents = [color numberOfComponents];
+        CGFloat components[numberOfComponents];
+        CGColorSpaceRef colorSpace = [[color colorSpace] CGColorSpace];
+
+        [color getComponents:components];
+
+        colorRef = CGColorCreate(colorSpace, components);
+
+        objc_setAssociatedObject(color, key, (__bridge id)colorRef, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        CGColorRelease(colorRef);
+      }
+
+      return colorRef;
+    }
   }
 #endif
   return nil;
@@ -81,7 +110,7 @@ CGColorRef POPCGColorWithColor(id color)
 
 void POPUIColorGetRGBAComponents(UIColor *color, CGFloat components[])
 {
-  return POPCGColorGetRGBAComponents(color.CGColor, components);
+  return POPCGColorGetRGBAComponents(POPCGColorWithColor(color), components);
 }
 
 UIColor *POPUIColorRGBACreate(const CGFloat components[])
@@ -89,6 +118,31 @@ UIColor *POPUIColorRGBACreate(const CGFloat components[])
   CGColorRef colorRef = POPCGColorRGBACreate(components);
   UIColor *color = [[UIColor alloc] initWithCGColor:colorRef];
   CGColorRelease(colorRef);
+  return color;
+}
+
+#else
+
+void POPNSColorGetRGBAComponents(NSColor *color, CGFloat components[])
+{
+  return POPCGColorGetRGBAComponents(POPCGColorWithColor(color), components);
+}
+
+NSColor *POPNSColorRGBACreate(const CGFloat components[])
+{
+  CGColorRef colorRef = POPCGColorRGBACreate(components);
+  NSColor *color = nil;
+
+  if (colorRef) {
+    if ([NSColor respondsToSelector:@selector(colorWithCGColor:)]) {
+      color = [NSColor colorWithCGColor:colorRef];
+    } else {
+      color = [NSColor colorWithCIColor:[CIColor colorWithCGColor:colorRef]];
+    }
+
+    CGColorRelease(colorRef);
+  }
+
   return color;
 }
 

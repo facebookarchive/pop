@@ -8,17 +8,17 @@
  */
 
 #import "POPAnimationExtras.h"
-
 #import "POPAnimationPrivate.h"
-#import "POPMath.h"
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #endif
 
 #if TARGET_IPHONE_SIMULATOR
-UIKIT_EXTERN CGFloat UIAnimationDragCoefficient(); // UIKit private drag coeffient, use judiciously
+UIKIT_EXTERN float UIAnimationDragCoefficient(); // UIKit private drag coefficient, use judiciously
 #endif
+
+#import "POPMath.h"
 
 CGFloat POPAnimationDragCoefficient()
 {

@@ -32,5 +32,8 @@ CLANG_CXX_LIBRARY = libc++
 // Enable ARC
 CLANG_ENABLE_OBJC_ARC = YES
 
+// Explicitly enable Clang modules
+CLANG_ENABLE_MODULES=YES
+
 // Allow #import'ing code generated headers from DERIVED_FILE_DIR.
 HEADER_SEARCH_PATHS = $(inherited) $(DERIVED_FILE_DIR)

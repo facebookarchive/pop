@@ -14,7 +14,7 @@
 @interface POPAnimationTracer (Internal)
 
 /**
- @abstract Designated initalizer. Pass the animation being traced.
+ @abstract Designated initializer. Pass the animation being traced.
  */
 - (instancetype)initWithAnimation:(POPAnimation *)anAnim;
 

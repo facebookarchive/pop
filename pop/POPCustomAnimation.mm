@@ -7,8 +7,9 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-#import "POPCustomAnimation.h"
 #import "POPAnimationInternal.h"
+
+#import "POPCustomAnimation.h"
 
 @interface POPCustomAnimation ()
 @property (nonatomic, copy) POPCustomAnimationBlock animate;
@@ -51,6 +52,24 @@
 - (void)_appendDescription:(NSMutableString *)s debug:(BOOL)debug
 {
   [s appendFormat:@"; elapsedTime = %f; currentTime = %f;", _elapsedTime, _currentTime];
+}
+
+@end
+
+/**
+ *  Note that only the animate block is copied, but not the current/elapsed times
+ */
+@implementation POPCustomAnimation (NSCopying)
+
+- (instancetype)copyWithZone:(NSZone *)zone {
+  
+  POPCustomAnimation *copy = [super copyWithZone:zone];
+  
+  if (copy) {
+    copy.animate = self.animate;
+  }
+  
+  return copy;
 }
 
 @end

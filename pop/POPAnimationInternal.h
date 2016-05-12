@@ -7,13 +7,14 @@
  of patent rights can be found in the PATENTS file in the same directory.
  */
 
+#import "POPAnimation.h"
+
 #import <QuartzCore/CAMediaTimingFunction.h>
 
-#import "POPAnimation.h"
+#import "POPAction.h"
 #import "POPAnimationRuntime.h"
 #import "POPAnimationTracerInternal.h"
 #import "POPSpringSolver.h"
-#import "POPAction.h"
 
 using namespace POP;
 
@@ -494,7 +495,7 @@ typedef struct _POPAnimationState POPAnimationState;
 
 @end
 
-// NSProxy extensions, for testing pursposes
+// NSProxy extensions, for testing purposes
 @interface NSProxy (POP)
 - (void)pop_addAnimation:(POPAnimation *)anim forKey:(NSString *)key;
 - (void)pop_removeAllAnimations;
