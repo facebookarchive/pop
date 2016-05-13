@@ -372,7 +372,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 
 #pragma mark - Lifecycle
 
-- (id)init
+- (instancetype)init
 {
   self = [super init];
   if (nil == self) return nil;
@@ -410,6 +410,29 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 
   return self;
 }
+
+#if !TARGET_OS_IPHONE
+- (instancetype)initWithDisplayID:(CGDirectDisplayID)displayID
+{
+  if (kCGNullDirectDisplay == displayID) {
+    return [self init];
+  }
+  
+  self = [super init];
+  if (nil == self) return nil;
+  
+  CVReturn ret = CVDisplayLinkCreateWithCGDisplay(displayID, &_displayLink);
+  if (kCVReturnSuccess != ret) {
+    return nil;
+  }
+  CVDisplayLinkSetOutputCallback(_displayLink, displayLinkCallback, (__bridge void *)self);
+  
+  _dict = POPDictionaryCreateMutableWeakPointerToStrongObject(5);
+  _lock = OS_SPINLOCK_INIT;
+  
+  return self;
+}
+#endif
 
 - (void)dealloc
 {
