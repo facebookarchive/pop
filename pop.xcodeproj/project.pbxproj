@@ -290,7 +290,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		04C0670F1B8D577C00ED0525 /* Framework-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Framework-iOS.xcconfig"; path = "Configuration/Frameworks/Framework-iOS.xcconfig"; sourceTree = SOURCE_ROOT; };
+		04C0670F1B8D577C00ED0525 /* Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Framework.xcconfig; path = Configuration/Frameworks/Framework.xcconfig; sourceTree = SOURCE_ROOT; };
 		0648E9DF7DFD7360DDB00E86 /* libPods-Tests-pop-tests-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests-pop-tests-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0755AE4F1BEA15950094AB41 /* pop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = pop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0755AE531BEA15950094AB41 /* pop-tvos-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "pop-tvos-Info.plist"; path = "pop-tvos-framework/pop-tvos-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -394,20 +394,16 @@
 		EC9997571756A17B00A73F49 /* POPAnimationEventInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPAnimationEventInternal.h; sourceTree = "<group>"; };
 		ECA0D5BF18D8196A003720DF /* UnitBezier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnitBezier.h; path = WebCore/UnitBezier.h; sourceTree = "<group>"; };
 		ECA94D0B18ECAE82002E4CEB /* POP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POP.h; path = pop/POP.h; sourceTree = SOURCE_ROOT; };
-		ECC1DB0B18CA291B008C7DEA /* Base-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Base-iOS.xcconfig"; sourceTree = "<group>"; };
-		ECC1DB0C18CA291B008C7DEA /* Base-OSX.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Base-OSX.xcconfig"; sourceTree = "<group>"; };
-		ECC1DB0E18CA291B008C7DEA /* Compiler.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Compiler.xcconfig; sourceTree = "<group>"; };
+		ECC1DB0B18CA291B008C7DEA /* Compiler.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Compiler.xcconfig; sourceTree = "<group>"; };
 		ECC1DB0F18CA291B008C7DEA /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iOS.xcconfig; sourceTree = "<group>"; };
 		ECC1DB1018CA291B008C7DEA /* OSX.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = OSX.xcconfig; sourceTree = "<group>"; };
 		ECC1DB1218CA291B008C7DEA /* Project-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Debug.xcconfig"; sourceTree = "<group>"; };
 		ECC1DB1618CA291B008C7DEA /* Project-Profile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Profile.xcconfig"; sourceTree = "<group>"; };
 		ECC1DB1718CA291B008C7DEA /* Project-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Release.xcconfig"; sourceTree = "<group>"; };
 		ECC1DB1818CA291B008C7DEA /* Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
-		ECC1DB1A18CA291B008C7DEA /* StaticLibrary-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "StaticLibrary-iOS.xcconfig"; sourceTree = "<group>"; };
-		ECC1DB1B18CA291B008C7DEA /* StaticLibrary-OSX.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "StaticLibrary-OSX.xcconfig"; sourceTree = "<group>"; };
+		ECC1DB1A18CA291B008C7DEA /* StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = StaticLibrary.xcconfig; sourceTree = "<group>"; };
 		ECC1DB1D18CA291B008C7DEA /* ApplicationTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ApplicationTests.xcconfig; sourceTree = "<group>"; };
-		ECC1DB1E18CA291B008C7DEA /* LogicTests-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "LogicTests-iOS.xcconfig"; sourceTree = "<group>"; };
-		ECC1DB1F18CA291B008C7DEA /* LogicTests-OSX.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "LogicTests-OSX.xcconfig"; sourceTree = "<group>"; };
+		ECC1DB1E18CA291B008C7DEA /* LogicTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = LogicTests.xcconfig; sourceTree = "<group>"; };
 		ECC5A887162FBD6200F7F15C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ECC5A89D162FBD9B00F7F15C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		ECCBC57117D96DBD00C69976 /* FloatConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FloatConversion.h; path = WebCore/FloatConversion.h; sourceTree = "<group>"; };
@@ -509,7 +505,7 @@
 		04C0670E1B8D574F00ED0525 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				04C0670F1B8D577C00ED0525 /* Framework-iOS.xcconfig */,
+				04C0670F1B8D577C00ED0525 /* Framework.xcconfig */,
 			);
 			name = Frameworks;
 			path = "Static Libraries";
@@ -757,8 +753,7 @@
 		ECC1DB0718CA291B008C7DEA /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				ECC1DB0B18CA291B008C7DEA /* Base-iOS.xcconfig */,
-				ECC1DB0C18CA291B008C7DEA /* Base-OSX.xcconfig */,
+				ECC1DB0B18CA291B008C7DEA /* Compiler.xcconfig */,
 				ECC1DB0D18CA291B008C7DEA /* Platform */,
 				ECC1DB1118CA291B008C7DEA /* Projects */,
 				ECC1DB1918CA291B008C7DEA /* Static Libraries */,
@@ -771,7 +766,6 @@
 		ECC1DB0D18CA291B008C7DEA /* Platform */ = {
 			isa = PBXGroup;
 			children = (
-				ECC1DB0E18CA291B008C7DEA /* Compiler.xcconfig */,
 				ECC1DB0F18CA291B008C7DEA /* iOS.xcconfig */,
 				ECC1DB1018CA291B008C7DEA /* OSX.xcconfig */,
 			);
@@ -792,8 +786,7 @@
 		ECC1DB1918CA291B008C7DEA /* Static Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				ECC1DB1A18CA291B008C7DEA /* StaticLibrary-iOS.xcconfig */,
-				ECC1DB1B18CA291B008C7DEA /* StaticLibrary-OSX.xcconfig */,
+				ECC1DB1A18CA291B008C7DEA /* StaticLibrary.xcconfig */,
 			);
 			path = "Static Libraries";
 			sourceTree = "<group>";
@@ -802,8 +795,7 @@
 			isa = PBXGroup;
 			children = (
 				ECC1DB1D18CA291B008C7DEA /* ApplicationTests.xcconfig */,
-				ECC1DB1E18CA291B008C7DEA /* LogicTests-iOS.xcconfig */,
-				ECC1DB1F18CA291B008C7DEA /* LogicTests-OSX.xcconfig */,
+				ECC1DB1E18CA291B008C7DEA /* LogicTests.xcconfig */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1084,7 +1076,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					0755AE4E1BEA15950094AB41 = {
@@ -1491,144 +1483,52 @@
 /* Begin XCBuildConfiguration section */
 		0755AE541BEA15950094AB41 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/pop/pop-tvos-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "$(SRCROOT)/pop/module.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.pop;
-				PRODUCT_MODULE_NAME = pop;
 				PRODUCT_NAME = pop;
 				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
 		0755AE551BEA15950094AB41 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/pop/pop-tvos-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "$(SRCROOT)/pop/module.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.pop;
-				PRODUCT_MODULE_NAME = pop;
 				PRODUCT_NAME = pop;
 				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
 		0755AE561BEA15950094AB41 /* Profile */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/pop/pop-tvos-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "$(SRCROOT)/pop/module.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.pop;
-				PRODUCT_MODULE_NAME = pop;
 				PRODUCT_NAME = pop;
 				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Profile;
 		};
@@ -1741,55 +1641,52 @@
 		};
 		0B6BE75C19FFD3B900762101 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework-iOS.xcconfig */;
+			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/pop/pop-ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "$(SRCROOT)/pop/module.modulemap";
+				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.pop;
 				PRODUCT_NAME = pop;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		0B6BE75E19FFD3B900762101 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework-iOS.xcconfig */;
+			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/pop/pop-ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "$(SRCROOT)/pop/module.modulemap";
+				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.pop;
 				PRODUCT_NAME = pop;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 		0B6BE75F19FFD3B900762101 /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework-iOS.xcconfig */;
+			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/pop/pop-ios-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "$(SRCROOT)/pop/module.modulemap";
+				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.pop;
 				PRODUCT_NAME = pop;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Profile;
 		};
@@ -1797,24 +1694,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ECC1DB1618CA291B008C7DEA /* Project-Profile.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				SKIP_INSTALL = YES;
 			};
 			name = Profile;
 		};
 		A2BDDD3E185A687F00838797 /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECC1DB1A18CA291B008C7DEA /* StaticLibrary-iOS.xcconfig */;
+			baseConfigurationReference = ECC1DB1A18CA291B008C7DEA /* StaticLibrary.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				INFOPLIST_FILE = "pop/pop-Info.plist";
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = ../Headers/POP;
+				SDKROOT = iphoneos;
 			};
 			name = Profile;
 		};
@@ -1822,14 +1714,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ECC1DB1218CA291B008C7DEA /* Project-Debug.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -1837,80 +1724,71 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ECC1DB1718CA291B008C7DEA /* Project-Release.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
 		EC19123E162FB53A00E0CC76 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECC1DB1A18CA291B008C7DEA /* StaticLibrary-iOS.xcconfig */;
+			baseConfigurationReference = ECC1DB1A18CA291B008C7DEA /* StaticLibrary.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				INFOPLIST_FILE = "pop/pop-Info.plist";
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = ../Headers/POP;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
 		EC19123F162FB53A00E0CC76 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECC1DB1A18CA291B008C7DEA /* StaticLibrary-iOS.xcconfig */;
+			baseConfigurationReference = ECC1DB1A18CA291B008C7DEA /* StaticLibrary.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				INFOPLIST_FILE = "pop/pop-Info.plist";
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = ../Headers/POP;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
 		EC6885A418C7B60100C6194C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECC1DB1B18CA291B008C7DEA /* StaticLibrary-OSX.xcconfig */;
+			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
 				INFOPLIST_FILE = "$(SRCROOT)/pop/pop-osx-Info.plist";
 				INSTALL_PATH = "@rpath";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.pop;
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
 		EC6885A618C7B60100C6194C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECC1DB1B18CA291B008C7DEA /* StaticLibrary-OSX.xcconfig */;
+			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
 				INFOPLIST_FILE = "$(SRCROOT)/pop/pop-osx-Info.plist";
 				INSTALL_PATH = "@rpath";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.pop;
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		EC6885A718C7B60100C6194C /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECC1DB1B18CA291B008C7DEA /* StaticLibrary-OSX.xcconfig */;
+			baseConfigurationReference = 04C0670F1B8D577C00ED0525 /* Framework.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
 				INFOPLIST_FILE = "$(SRCROOT)/pop/pop-osx-Info.plist";
 				INSTALL_PATH = "@rpath";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.pop;
 				PRODUCT_NAME = pop;
-				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				SDKROOT = macosx;
 			};
 			name = Profile;
 		};

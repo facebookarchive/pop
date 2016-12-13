@@ -7,17 +7,8 @@
 // of patent rights can be found in the PATENTS file in the same directory.
 // 
 
-#include "../Base-OSX.xcconfig"
+#include "../Compiler.xcconfig"
 
 // Deployment
 DSTROOT = /tmp/$(TARGET_NAME)
 SKIP_INSTALL = YES
-
-// Linking
-OTHER_LDFLAGS = -framework XCTest -all_load -lc++
-
-// Packaging
-WRAPPER_EXTENSION = xctest
-
-// Search Paths
-FRAMEWORK_SEARCH_PATHS = $(PLATFORM_DIR)/Developer/Library/Frameworks $(DEVELOPER_FRAMEWORKS_DIR)

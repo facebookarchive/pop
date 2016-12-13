@@ -7,21 +7,15 @@
 // of patent rights can be found in the PATENTS file in the same directory.
 // 
 
-#include "../Base-OSX.xcconfig"
+#include "../Compiler.xcconfig"
 
 // Deployment
 DSTROOT = /tmp/$(TARGET_NAME)
 INSTALL_PATH = $(SYMROOT)/Headers
 SKIP_INSTALL = YES
 
-// Packaging: Put headers in $(SYMROOT) instead of $(CONFIGURATION_BUILD_DIR)
-// so header paths across projects don't depend on all projects having an
-// identical configuration name.
-//
-// Note: PUBLIC_HEADERS_FOLDER_PATH is directly appended to $(CONFIGURATION_BUILD_DIR),
-// so the path is relative to that.
-
-PUBLIC_HEADERS_FOLDER_PATH = ../Headers/$(TARGET_NAME)
-
 // declare inlines as extern
 GCC_INLINES_ARE_PRIVATE_EXTERN = YES
+
+// Use PRODUCT_NAME instead of TARGET_NAME to support multiple targets for different platforms
+PUBLIC_HEADERS_FOLDER_PATH = include/$(PRODUCT_NAME)

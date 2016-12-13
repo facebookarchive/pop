@@ -7,12 +7,9 @@
 // of patent rights can be found in the PATENTS file in the same directory.
 // 
 
-// OS X Platform
+// macOS Platform
 SDKROOT = macosx
-SUPPORTED_PLATFORMS = macosx
+MACOSX_DEPLOYMENT_TARGET = 10.6
 
 // Standard Architectures
 ARCHS = $(ARCHS_STANDARD)
-
-// Limit to OS X 64-bit (x86_64)
-VALID_ARCHS = x86_64

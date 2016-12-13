@@ -9,6 +9,9 @@
 
 #include "Project.xcconfig"
 
+// Architectures
+ONLY_ACTIVE_ARCH = YES
+
 // Code Generation
 GCC_OPTIMIZATION_LEVEL = 0
 
@@ -23,3 +26,6 @@ COPY_PHASE_STRIP = NO
 
 // Default to dwarf
 DEBUG_INFORMATION_FORMAT = dwarf
+
+// Testing
+ENABLE_TESTABILITY = YES
