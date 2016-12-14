@@ -290,7 +290,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		04C0670F1B8D577C00ED0525 /* Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Framework.xcconfig; path = Configuration/Frameworks/Framework.xcconfig; sourceTree = SOURCE_ROOT; };
+		04C0670F1B8D577C00ED0525 /* Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Framework.xcconfig; path = Framework.xcconfig; sourceTree = "<group>"; };
 		0648E9DF7DFD7360DDB00E86 /* libPods-Tests-pop-tests-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests-pop-tests-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0755AE4F1BEA15950094AB41 /* pop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = pop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0755AE531BEA15950094AB41 /* pop-tvos-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "pop-tvos-Info.plist"; path = "pop-tvos-framework/pop-tvos-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -395,15 +395,13 @@
 		ECA0D5BF18D8196A003720DF /* UnitBezier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnitBezier.h; path = WebCore/UnitBezier.h; sourceTree = "<group>"; };
 		ECA94D0B18ECAE82002E4CEB /* POP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = POP.h; path = pop/POP.h; sourceTree = SOURCE_ROOT; };
 		ECC1DB0B18CA291B008C7DEA /* Compiler.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Compiler.xcconfig; sourceTree = "<group>"; };
-		ECC1DB0F18CA291B008C7DEA /* iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = iOS.xcconfig; sourceTree = "<group>"; };
-		ECC1DB1018CA291B008C7DEA /* OSX.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = OSX.xcconfig; sourceTree = "<group>"; };
 		ECC1DB1218CA291B008C7DEA /* Project-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Debug.xcconfig"; sourceTree = "<group>"; };
 		ECC1DB1618CA291B008C7DEA /* Project-Profile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Profile.xcconfig"; sourceTree = "<group>"; };
 		ECC1DB1718CA291B008C7DEA /* Project-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Release.xcconfig"; sourceTree = "<group>"; };
 		ECC1DB1818CA291B008C7DEA /* Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
 		ECC1DB1A18CA291B008C7DEA /* StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = StaticLibrary.xcconfig; sourceTree = "<group>"; };
-		ECC1DB1D18CA291B008C7DEA /* ApplicationTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ApplicationTests.xcconfig; sourceTree = "<group>"; };
-		ECC1DB1E18CA291B008C7DEA /* LogicTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = LogicTests.xcconfig; sourceTree = "<group>"; };
+		ECC1DB1D18CA291B008C7DEA /* ApplicationTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = ApplicationTests.xcconfig; path = ApplicationTests.xcconfig; sourceTree = "<group>"; };
+		ECC1DB1E18CA291B008C7DEA /* LogicTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = LogicTests.xcconfig; path = LogicTests.xcconfig; sourceTree = "<group>"; };
 		ECC5A887162FBD6200F7F15C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ECC5A89D162FBD9B00F7F15C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		ECCBC57117D96DBD00C69976 /* FloatConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FloatConversion.h; path = WebCore/FloatConversion.h; sourceTree = "<group>"; };
@@ -502,15 +500,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04C0670E1B8D574F00ED0525 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				04C0670F1B8D577C00ED0525 /* Framework.xcconfig */,
-			);
-			name = Frameworks;
-			path = "Static Libraries";
-			sourceTree = "<group>";
-		};
 		0755AE641BEA16170094AB41 /* Supporting Files (tvOS) */ = {
 			isa = PBXGroup;
 			children = (
@@ -754,25 +743,13 @@
 			isa = PBXGroup;
 			children = (
 				ECC1DB0B18CA291B008C7DEA /* Compiler.xcconfig */,
-				ECC1DB0D18CA291B008C7DEA /* Platform */,
-				ECC1DB1118CA291B008C7DEA /* Projects */,
-				ECC1DB1918CA291B008C7DEA /* Static Libraries */,
-				04C0670E1B8D574F00ED0525 /* Frameworks */,
-				ECC1DB1C18CA291B008C7DEA /* Tests */,
+				ECC1DB1118CA291B008C7DEA /* Project */,
+				ECC1DB1918CA291B008C7DEA /* Product */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
 		};
-		ECC1DB0D18CA291B008C7DEA /* Platform */ = {
-			isa = PBXGroup;
-			children = (
-				ECC1DB0F18CA291B008C7DEA /* iOS.xcconfig */,
-				ECC1DB1018CA291B008C7DEA /* OSX.xcconfig */,
-			);
-			path = Platform;
-			sourceTree = "<group>";
-		};
-		ECC1DB1118CA291B008C7DEA /* Projects */ = {
+		ECC1DB1118CA291B008C7DEA /* Project */ = {
 			isa = PBXGroup;
 			children = (
 				ECC1DB1218CA291B008C7DEA /* Project-Debug.xcconfig */,
@@ -780,24 +757,20 @@
 				ECC1DB1718CA291B008C7DEA /* Project-Release.xcconfig */,
 				ECC1DB1818CA291B008C7DEA /* Project.xcconfig */,
 			);
-			path = Projects;
+			name = Project;
+			path = Project;
 			sourceTree = "<group>";
 		};
-		ECC1DB1918CA291B008C7DEA /* Static Libraries */ = {
+		ECC1DB1918CA291B008C7DEA /* Product */ = {
 			isa = PBXGroup;
 			children = (
 				ECC1DB1A18CA291B008C7DEA /* StaticLibrary.xcconfig */,
-			);
-			path = "Static Libraries";
-			sourceTree = "<group>";
-		};
-		ECC1DB1C18CA291B008C7DEA /* Tests */ = {
-			isa = PBXGroup;
-			children = (
+				04C0670F1B8D577C00ED0525 /* Framework.xcconfig */,
 				ECC1DB1D18CA291B008C7DEA /* ApplicationTests.xcconfig */,
 				ECC1DB1E18CA291B008C7DEA /* LogicTests.xcconfig */,
 			);
-			path = Tests;
+			name = Product;
+			path = Product;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1694,9 +1667,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ECC1DB1618CA291B008C7DEA /* Project-Profile.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
 			};
 			name = Profile;
 		};
@@ -1714,9 +1684,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ECC1DB1218CA291B008C7DEA /* Project-Debug.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
 			};
 			name = Debug;
 		};
@@ -1724,9 +1691,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ECC1DB1718CA291B008C7DEA /* Project-Release.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
 			};
 			name = Release;
 		};
