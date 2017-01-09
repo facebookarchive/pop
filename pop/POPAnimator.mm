@@ -107,7 +107,7 @@ static uint64_t _displayTimerFrequency = kDisplayTimerFrequency;
   CFTimeInterval _slowMotionLastTime;
   CFTimeInterval _slowMotionAccumulator;
   CFTimeInterval _beginTime;
-  OSSpinLock _lock;
+  pthread_mutex_t _lock;
   BOOL _disableDisplayLink;
 }
 @end
@@ -286,7 +286,7 @@ static POPAnimation *deleteDictEntry(POPAnimator *self, id __unsafe_unretained o
   POPAnimation *anim = nil;
 
   // lock
-  OSSpinLockLock(&self->_lock);
+  pthread_mutex_lock(&self->_lock);
 
   NSMutableDictionary *keyAnimationsDict = (__bridge id)CFDictionaryGetValue(self->_dict, (__bridge void *)obj);
   if (keyAnimationsDict) {
@@ -305,7 +305,7 @@ static POPAnimation *deleteDictEntry(POPAnimator *self, id __unsafe_unretained o
   }
 
   // unlock
-  OSSpinLockUnlock(&self->_lock);
+  pthread_mutex_unlock(&self->_lock);
   return anim;
 }
 
@@ -322,7 +322,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 
   if (shouldRemove) {
     // lock
-    OSSpinLockLock(&self->_lock);
+    pthread_mutex_lock(&self->_lock);
 
     // find item in list
     // may have already been removed on animationDidStop:
@@ -334,7 +334,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     }
 
     // unlock
-    OSSpinLockUnlock(&self->_lock);
+    pthread_mutex_unlock(&self->_lock);
   }
 }
 
@@ -406,7 +406,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 #endif
 
   _dict = POPDictionaryCreateMutableWeakPointerToStrongObject(5);
-  _lock = OS_SPINLOCK_INIT;
+  pthread_mutex_init(&_lock, NULL);
 
   return self;
 }
@@ -428,7 +428,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   CVDisplayLinkSetOutputCallback(_displayLink, displayLinkCallback, (__bridge void *)self);
   
   _dict = POPDictionaryCreateMutableWeakPointerToStrongObject(5);
-  _lock = OS_SPINLOCK_INIT;
+  pthread_mutex_init(&_lock, NULL);
   
   return self;
 }
@@ -452,6 +452,8 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   }
 #endif
   [self _clearPendingListObserver];
+  
+  pthread_mutex_destroy(&_lock);
 }
 
 #pragma mark - Utility
@@ -463,14 +465,14 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   [self _renderTime:(0 != _beginTime) ? _beginTime : time items:_pendingList];
 
   // lock
-  OSSpinLockLock(&_lock);
+  pthread_mutex_lock(&_lock);
 
   // clear list and observer
   _pendingList.clear();
   [self _clearPendingListObserver];
 
   // unlock
-  OSSpinLockUnlock(&_lock);
+  pthread_mutex_unlock(&_lock);
 }
 
 - (void)_clearPendingListObserver
@@ -489,7 +491,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   static const CFIndex POPAnimationApplyRunLoopOrder = CATransactionCommitRunLoopOrder - 1;
 
   // lock
-  OSSpinLockLock(&_lock);
+  pthread_mutex_lock(&_lock);
 
   if (!_pendingListObserver) {
     __weak POPAnimator *weakSelf = self;
@@ -504,7 +506,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   }
 
   // unlock
-  OSSpinLockUnlock(&_lock);
+  pthread_mutex_unlock(&_lock);
 }
 
 - (void)_renderTime:(CFTimeInterval)time items:(std::list<POPAnimatorItemRef>)items
@@ -518,19 +520,19 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   [delegate animatorWillAnimate:self];
 
   // lock
-  OSSpinLockLock(&_lock);
+  pthread_mutex_lock(&_lock);
 
   // count active animations
   const NSUInteger count = items.size();
   if (0 == count) {
     // unlock
-    OSSpinLockUnlock(&_lock);
+    pthread_mutex_unlock(&_lock);
   } else {
     // copy list into vector
     std::vector<POPAnimatorItemRef> vector{ items.begin(), items.end() };
 
     // unlock
-    OSSpinLockUnlock(&_lock);
+    pthread_mutex_unlock(&_lock);
 
     for (auto item : vector) {
       [self _renderTime:time item:item];
@@ -543,13 +545,13 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   }
 
   // lock
-  OSSpinLockLock(&_lock);
+  pthread_mutex_lock(&_lock);
 
   // update display link
   updateDisplayLink(self);
 
   // unlock
-  OSSpinLockUnlock(&_lock);
+  pthread_mutex_unlock(&_lock);
 
   // notify delegate and commit
   [delegate animatorDidAnimate:self];
@@ -627,13 +629,13 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 - (NSArray *)observers
 {
   // lock
-  OSSpinLockLock(&_lock);
+  pthread_mutex_lock(&_lock);
 
   // get observers
   NSArray *observers = 0 != _observers.count ? [_observers copy] : nil;
 
   // unlock
-  OSSpinLockUnlock(&_lock);
+  pthread_mutex_unlock(&_lock);
   return observers;
 }
 
@@ -649,7 +651,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   }
 
   // lock
-  OSSpinLockLock(&_lock);
+  pthread_mutex_lock(&_lock);
 
   // get key, animation dict associated with object
   NSMutableDictionary *keyAnimationDict = (__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj);
@@ -663,7 +665,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
     POPAnimation *existingAnim = keyAnimationDict[key];
     if (existingAnim) {
       // unlock
-      OSSpinLockUnlock(&_lock);
+      pthread_mutex_unlock(&_lock);
 
       if (existingAnim == anim) {
         return;
@@ -671,7 +673,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
       [self removeAnimationForObject:obj key:key cleanupDict:NO];
         
       // lock
-      OSSpinLockLock(&_lock);
+      pthread_mutex_lock(&_lock);
     }
   }
   keyAnimationDict[key] = anim;
@@ -690,7 +692,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   updateDisplayLink(self);
 
   // unlock
-  OSSpinLockUnlock(&_lock);
+  pthread_mutex_unlock(&_lock);
 
   // schedule runloop processing of pending animations
   [self _scheduleProcessPendingList];
@@ -699,13 +701,13 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 - (void)removeAllAnimationsForObject:(id)obj
 {
   // lock
-  OSSpinLockLock(&_lock);
+  pthread_mutex_lock(&_lock);
 
   NSArray *animations = [(__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj) allValues];
   CFDictionaryRemoveValue(_dict, (__bridge void *)obj);
 
   // unlock
-  OSSpinLockUnlock(&_lock);
+  pthread_mutex_unlock(&_lock);
 
   if (0 == animations.count) {
     return;
@@ -717,7 +719,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   }
 
   // lock
-  OSSpinLockLock(&_lock);
+  pthread_mutex_lock(&_lock);
 
   POPAnimatorItemRef item;
   for (auto iter = _list.begin(); iter != _list.end();) {
@@ -730,7 +732,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   }
 
   // unlock
-  OSSpinLockUnlock(&_lock);
+  pthread_mutex_unlock(&_lock);
 
   for (POPAnimation *anim in animations) {
     POPAnimationState *state = POPAnimationGetState(anim);
@@ -746,7 +748,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   }
 
   // lock
-  OSSpinLockLock(&_lock);
+  pthread_mutex_lock(&_lock);
 
   // remove from list
   POPAnimatorItemRef item;
@@ -772,7 +774,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   }
 
   // unlock
-  OSSpinLockUnlock(&_lock);
+  pthread_mutex_unlock(&_lock);
 
   // stop animation and callout
   POPAnimationState *state = POPAnimationGetState(anim);
@@ -787,27 +789,27 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
 - (NSArray *)animationKeysForObject:(id)obj
 {
   // lock
-  OSSpinLockLock(&_lock);
+  pthread_mutex_lock(&_lock);
 
   // get keys
   NSArray *keys = [(__bridge NSDictionary *)CFDictionaryGetValue(_dict, (__bridge void *)obj) allKeys];
 
   // unlock
-  OSSpinLockUnlock(&_lock);
+  pthread_mutex_unlock(&_lock);
   return keys;
 }
 
 - (id)animationForObject:(id)obj key:(NSString *)key
 {
   // lock
-  OSSpinLockLock(&_lock);
+  pthread_mutex_lock(&_lock);
 
   // lookup animation
   NSDictionary *keyAnimationsDict = (__bridge id)CFDictionaryGetValue(_dict, (__bridge void *)obj);
   POPAnimation *animation = keyAnimationsDict[key];
 
   // unlock
-  OSSpinLockUnlock(&_lock);
+  pthread_mutex_unlock(&_lock);
   return animation;
 }
 
@@ -873,7 +875,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   }
 
   // lock
-  OSSpinLockLock(&_lock);
+  pthread_mutex_lock(&_lock);
 
   if (!_observers) {
     // use ordered collection for deterministic callout
@@ -884,7 +886,7 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   updateDisplayLink(self);
 
   // unlock
-  OSSpinLockUnlock(&_lock);
+  pthread_mutex_unlock(&_lock);
 }
 
 - (void)removeObserver:(id<POPAnimatorObserving>)observer
@@ -895,13 +897,13 @@ static void stopAndCleanup(POPAnimator *self, POPAnimatorItemRef item, bool shou
   }
 
   // lock
-  OSSpinLockLock(&_lock);
+  pthread_mutex_lock(&_lock);
 
   [_observers removeObject:observer];
   updateDisplayLink(self);
 
   // unlock
-  OSSpinLockUnlock(&_lock);
+  pthread_mutex_unlock(&_lock);
 }
 
 @end
