@@ -104,6 +104,11 @@ When combined with the autoreverses property, a singular animation is effectivel
  */
 @property (assign, nonatomic) BOOL repeatForever;
 
+/**
+ @abstract The current progress of an animation.
+ */
+@property (nonatomic, readonly) CGFloat currentProgress;
+
 @end
 
 /**

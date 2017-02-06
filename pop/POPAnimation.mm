@@ -117,6 +117,11 @@ using namespace POP;
   }
 }
 
+- (CGFloat)currentProgress
+{
+    return _state->progress;
+}
+
 FB_PROPERTY_GET(POPAnimationState, type, POPAnimationType);
 DEFINE_RW_PROPERTY_OBJ_COPY(POPAnimationState, animationDidStartBlock, setAnimationDidStartBlock:, POPAnimationDidStartBlock);
 DEFINE_RW_PROPERTY_OBJ_COPY(POPAnimationState, animationDidReachToValueBlock, setAnimationDidReachToValueBlock:, POPAnimationDidReachToValueBlock);
