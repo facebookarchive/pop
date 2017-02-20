@@ -35,7 +35,7 @@ struct _POPSpringAnimationState : _POPPropertyAnimationState
   bool hasConverged()
   {
     NSUInteger count = valueCount;
-    if (shouldRound()) {
+    if (!shouldRound()) {
       return vec_equal(previous2Vec, previousVec) && vec_equal(previousVec, toVec);
     } else {
       if (!previousVec || !previous2Vec)
