@@ -80,6 +80,13 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
   return POPBox(__state->currentValue(), __state->valueType);
 }
 
+- (BOOL)isLayerAnimation
+{
+  // This is a small hack - since layer animations take place on properties in the layer itself,
+  // there shouldn't be dot notation to access the layer's property.
+  return ([self.property.name rangeOfString:@"."].location == NSNotFound);
+}
+
 #pragma mark - Utility
 
 - (void)_appendDescription:(NSMutableString *)s debug:(BOOL)debug
