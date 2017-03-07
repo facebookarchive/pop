@@ -9,8 +9,10 @@
 
 #import <objc/runtime.h>
 
+#import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
+#import "POPAnimatablePropertyTypes.h"
 #import "POPVector.h"
 
 enum POPValueType
@@ -78,15 +80,9 @@ extern id POPBox(VectorConstRef vec, POPValueType type, bool force = false);
 extern VectorRef POPUnbox(id value, POPValueType &type, NSUInteger &count, bool validate);
 
 /**
- Read/write block typedefs for convenience.
- */
-typedef void(^pop_animatable_read_block)(id obj, CGFloat *value);
-typedef void(^pop_animatable_write_block)(id obj, const CGFloat *value);
-
-/**
  Read object value and return a Vector4r.
  */
-NS_INLINE Vector4r read_values(pop_animatable_read_block read, id obj, size_t count)
+NS_INLINE Vector4r read_values(POPAnimatablePropertyReadBlock read, id obj, size_t count)
 {
   Vector4r vec = Vector4r::Zero();
   if (0 == count)

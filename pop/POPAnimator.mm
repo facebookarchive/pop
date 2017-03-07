@@ -179,7 +179,7 @@ static void updateAnimatable(id obj, POPPropertyAnimationState *anim, bool shoul
     return;
 
   if (anim->hasValue()) {
-    pop_animatable_write_block write = anim->property.writeBlock;
+    POPAnimatablePropertyWriteBlock write = anim->property.writeBlock;
     if (NULL == write)
       return;
 
@@ -191,7 +191,7 @@ static void updateAnimatable(id obj, POPPropertyAnimationState *anim, bool shoul
       // if avoiding extraneous writes and we have a read block defined
       if (shouldAvoidExtraneousWrite) {
 
-        pop_animatable_read_block read = anim->property.readBlock;
+        POPAnimatablePropertyReadBlock read = anim->property.readBlock;
         if (read) {
           // compare current animation value with object value
           Vector4r currentValue = currentVec->vector4r();
@@ -212,7 +212,7 @@ static void updateAnimatable(id obj, POPPropertyAnimationState *anim, bool shoul
         [anim->tracer writePropertyValue:POPBox(currentVec, anim->valueType, true)];
       }
     } else {
-      pop_animatable_read_block read = anim->property.readBlock;
+      POPAnimatablePropertyReadBlock read = anim->property.readBlock;
       NSCAssert(read, @"additive requires an animatable property readBlock");
       if (NULL == read) {
         return;
