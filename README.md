@@ -1,6 +1,6 @@
 ![pop](https://github.com/facebook/pop/blob/master/Images/pop.gif?raw=true)
 
-Pop is an extensible animation engine for iOS, tvOS, and OS X. In addition to basic static animations, it supports spring and decay dynamic animations, making it useful for building realistic, physics-based interactions. The API allows quick integration with existing Objective-C codebases and enables the animation of any property on any object. It's a mature and well-tested framework that drives all the animations and transitions in [Paper](http://www.facebook.com/paper).
+Pop is an extensible animation engine for iOS, tvOS, and OS X. In addition to basic static animations, it supports spring and decay dynamic animations, making it useful for building realistic, physics-based interactions. The API allows quick integration with existing Objective-C or Swift codebases and enables the animation of any property on any object. It's a mature and well-tested framework that drives all the animations and transitions in [Paper](http://www.facebook.com/paper).
 
 [![Build Status](https://travis-ci.org/facebook/pop.svg)](https://travis-ci.org/facebook/pop)
 
@@ -44,6 +44,12 @@ or if you're using the embedded framework:
 @import pop;
 ```
 
+In Swift:
+
+```swift
+import pop
+```
+
 ### Start, Stop & Update
 
 To start an animation, add it to the object you wish to animate:
@@ -54,10 +60,24 @@ POPSpringAnimation *anim = [POPSpringAnimation animation];
 [layer pop_addAnimation:anim forKey:@"myKey"];
 ```
 
+In Swift:
+
+```swift
+let anim = POPSpringAnimation()
+...
+layer.pop_add(anim, forKey: "myKey")
+```
+
 To stop an animation, remove it from the object referencing the key specified on start:
 
 ```objective-c
 [layer pop_removeAnimationForKey:@"myKey"];
+```
+
+In Swift:
+
+```swift
+layer.pop_removeAnimation(forKey: "myKey")
 ```
 
 The key can also be used to query for the existence of an animation. Updating the toValue of a running animation can provide the most seamless way to change course:
@@ -70,6 +90,18 @@ if (anim) {
 } else {
   /* create and start a new animation */
   ....
+}
+```
+
+In Swift:
+
+```swift
+if let anim = layer.pop_animation(forKey: "myKey") as? POPSpringAnimation {
+    /* update to value to new destination */
+    anim.toValue = 42.0
+} else {
+    /* create and start a new animation */
+    ....
 }
 ```
 
@@ -86,12 +118,31 @@ POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLa
 anim.toValue = [NSValue valueWithCGRect:CGRectMake(0, 0, 400, 400)];
 [layer pop_addAnimation:anim forKey:@"size"];
 ```
+
+In Swift:
+
+```swift
+if let anim = POPSpringAnimation(propertyNamed: kPOPLayerBounds) {
+    anim.toValue = NSValue(cgRect: CGRect(x: 0, y: 0, width: 400, height: 400))
+    layer.pop_add(anim, forKey: "size")
+}
+```
+
 Decay animations can be used to gradually slow an object to a halt. In this example, we decay a layer's positionX from it's current value and velocity 1000pts per second:
 
 ```objective-c
 POPDecayAnimation *anim = [POPDecayAnimation animationWithPropertyNamed:kPOPLayerPositionX];
 anim.velocity = @(1000.);
 [layer pop_addAnimation:anim forKey:@"slide"];
+```
+
+In Swift:
+
+```swift
+if let anim = POPDecayAnimation(propertyNamed: kPOPLayerPositionX) {
+    anim.velocity = 1000.0
+    layer.pop_add(anim, forKey: "slide")
+}
 ```
 
 Basic animations can be used to interpolate values over a specified time period. To use an ease-in ease-out animation to animate a view's alpha from 0.0 to 1.0 over the default duration:
@@ -102,6 +153,18 @@ anim.fromValue = @(0.0);
 anim.toValue = @(1.0);
 [view pop_addAnimation:anim forKey:@"fade"];
 ```
+
+In Swift:
+
+```swift
+if let anim = POPBasicAnimation(propertyNamed: kPOPViewAlpha) {
+    anim.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+    anim.fromValue = 0.0
+    anim.toValue = 1.0
+    view.pop_add(anim, forKey: "fade")
+}
+```
+
 `POPCustomAnimation` makes creating custom animations and transitions easier by handling CADisplayLink and associated time-step management. See header for more details.
 
 
@@ -112,6 +175,15 @@ The property animated is specified by the `POPAnimatableProperty` class. In this
 ```objective-c
 POPSpringAnimation *anim = [POPSpringAnimation animation];
 anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerBounds];
+```
+
+In Swift:
+
+```swift
+let anim = POPSpringAnimation()
+if let property = POPAnimatableProperty.property(withName: kPOPLayerBounds) as? POPAnimatableProperty {
+    anim.property = property
+}
 ```
 
 The framework provides many common layer and view animatable properties out of box. You can animate a custom property by creating a new instance of the class. In this example, we declare a custom volume property:
@@ -133,6 +205,36 @@ prop = [POPAnimatableProperty propertyWithName:@"com.foo.radio.volume" initializ
 anim.property = prop;
 ```
 
+In Swift:
+
+```swift
+if let prop = POPAnimatableProperty.property(withName: "com.foo.radio.volume", initializer: { prop in
+    guard let prop = prop else {
+        return
+    }
+    // read value
+    prop.readBlock = { obj, values in
+        guard let obj = obj as? Volumeable, let values = values else {
+            return
+        }
+
+        values[0] = obj.volume
+    }
+    // write value
+    prop.writeBlock = { obj, values in
+        guard var obj = obj as? Volumeable, let values = values else {
+            return
+        }
+
+        obj.volume = values[0]
+    }
+    // dynamics threshold
+    prop.threshold = 0.01
+}) as? POPAnimatableProperty {
+    anim.property = prop
+}
+```
+
 For a complete listing of provided animatable properties, as well more information on declaring custom properties see `POPAnimatableProperty.h`.
 
 
@@ -146,12 +248,27 @@ Consider naming your animations. This will allow you to more easily identify the
 anim.name = @"springOpen";
 ```
 
+In Swift:
+
+```swift
+anim.name = "springOpen"
+```
+
 Each animation comes with an associated tracer. The tracer allows you to record all animation-related events, in a fast and efficient manner, allowing you to query and analyze them after animation completion. The below example starts the tracer and configures it to log all events on animation completion:
 
 ```objective-c
 POPAnimationTracer *tracer = anim.tracer;
 tracer.shouldLogAndResetOnCompletion = YES;
 [tracer start];
+```
+
+In Swift:
+
+```swift
+if let tracer = anim.tracer {
+    tracer.shouldLogAndResetOnCompletion = true
+    tracer.start()
+}
 ```
 
 See `POPAnimationTracer.h` for more details.
