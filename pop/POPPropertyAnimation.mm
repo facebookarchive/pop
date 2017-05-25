@@ -123,3 +123,27 @@ DEFINE_RW_PROPERTY_OBJ_COPY(POPPropertyAnimationState, progressMarkers, setProgr
 }
 
 @end
+
+@implementation POPPropertyAnimation (CustomProperty)
+
++ (instancetype)animationWithCustomPropertyNamed:(NSString *)name
+                                       readBlock:(POPAnimatablePropertyReadBlock)readBlock
+                                      writeBlock:(POPAnimatablePropertyWriteBlock)writeBlock
+{
+  POPPropertyAnimation *animation = [[self alloc] init];
+  animation.property = [POPAnimatableProperty propertyWithName:name initializer:^(POPMutableAnimatableProperty *prop) {
+    prop.readBlock = readBlock;
+    prop.writeBlock = writeBlock;
+  }];
+  return animation;
+}
+
++ (instancetype)animationWithCustomPropertyReadBlock:(POPAnimatablePropertyReadBlock)readBlock
+                                          writeBlock:(POPAnimatablePropertyWriteBlock)writeBlock
+{
+  return [self animationWithCustomPropertyNamed:[NSUUID UUID].UUIDString
+                                      readBlock:readBlock
+                                     writeBlock:writeBlock];
+}
+
+@end

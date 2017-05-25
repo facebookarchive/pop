@@ -12,6 +12,7 @@
 #import <Foundation/NSObject.h>
 
 #import <pop/POPDefines.h>
+#import <pop/POPAnimatablePropertyTypes.h>
 
 @class POPMutableAnimatableProperty;
 
@@ -46,12 +47,12 @@
 /**
  @abstract Block used to read values from a property into an array of floats.
  */
-@property (readonly, nonatomic, copy) void (^readBlock)(id obj, CGFloat values[]);
+@property (readonly, nonatomic, copy) POPAnimatablePropertyReadBlock readBlock;
 
 /**
  @abstract Block used to write values from an array of floats into a property.
  */
-@property (readonly, nonatomic, copy) void (^writeBlock)(id obj, const CGFloat values[]);
+@property (readonly, nonatomic, copy) POPAnimatablePropertyWriteBlock writeBlock;
 
 /**
  @abstract The threshold value used when determining completion of dynamics simulations.
@@ -73,12 +74,12 @@
 /**
  @abstract A read-write version of POPAnimatableProperty readBlock property.
  */
-@property (readwrite, nonatomic, copy) void (^readBlock)(id obj, CGFloat values[]);
+@property (readwrite, nonatomic, copy) POPAnimatablePropertyReadBlock readBlock;
 
 /**
  @abstract A read-write version of POPAnimatableProperty writeBlock property.
  */
-@property (readwrite, nonatomic, copy) void (^writeBlock)(id obj, const CGFloat values[]);
+@property (readwrite, nonatomic, copy) POPAnimatablePropertyWriteBlock writeBlock;
 
 /**
  @abstract A read-write version of POPAnimatableProperty threshold property.

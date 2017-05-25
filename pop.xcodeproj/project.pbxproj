@@ -110,6 +110,10 @@
 		1818937E1B3B79D7002C4A59 /* pop-tests-osx-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1818937D1B3B79D7002C4A59 /* pop-tests-osx-Info.plist */; };
 		1836BBE41B3B7B9C0041334F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1836BBE31B3B7B9C0041334F /* Cocoa.framework */; };
 		4A5B97399E5024273715DD47 /* libPods-Tests-pop-tests-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0648E9DF7DFD7360DDB00E86 /* libPods-Tests-pop-tests-ios.a */; };
+		5C8B2FCA1E847C1000A6A646 /* POPAnimatablePropertyTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C8B2FC91E847C1000A6A646 /* POPAnimatablePropertyTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C8B2FCB1E847C4700A6A646 /* POPAnimatablePropertyTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C8B2FC91E847C1000A6A646 /* POPAnimatablePropertyTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C8B2FCC1E847C4700A6A646 /* POPAnimatablePropertyTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C8B2FC91E847C1000A6A646 /* POPAnimatablePropertyTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C8B2FCF1E847C4B00A6A646 /* POPAnimatablePropertyTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C8B2FC91E847C1000A6A646 /* POPAnimatablePropertyTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E17BB2017457345009842B6 /* POPCustomAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E17BB1E17457345009842B6 /* POPCustomAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E17BB2117457345009842B6 /* POPCustomAnimation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E17BB1F17457345009842B6 /* POPCustomAnimation.mm */; };
 		6868EA130B28C6C61C4A4BD2 /* libPods-Tests-pop-tests-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 432CE3E78A1381BD39B03505 /* libPods-Tests-pop-tests-osx.a */; };
@@ -290,7 +294,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		04C0670F1B8D577C00ED0525 /* Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Framework.xcconfig; path = Framework.xcconfig; sourceTree = "<group>"; };
+		04C0670F1B8D577C00ED0525 /* Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Framework.xcconfig; sourceTree = "<group>"; };
 		0648E9DF7DFD7360DDB00E86 /* libPods-Tests-pop-tests-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests-pop-tests-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0755AE4F1BEA15950094AB41 /* pop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = pop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0755AE531BEA15950094AB41 /* pop-tvos-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "pop-tvos-Info.plist"; path = "pop-tvos-framework/pop-tvos-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -313,6 +317,7 @@
 		55AC0296922C5E9D7B593C59 /* Pods-Tests-pop-tests-osx.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-pop-tests-osx.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests-pop-tests-osx/Pods-Tests-pop-tests-osx.release.xcconfig"; sourceTree = "<group>"; };
 		55EA9621113E7E17CB5A65C3 /* Pods-Tests-pop-tests-tvos.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-pop-tests-tvos.profile.xcconfig"; path = "Pods/Target Support Files/Pods-Tests-pop-tests-tvos/Pods-Tests-pop-tests-tvos.profile.xcconfig"; sourceTree = "<group>"; };
 		5677DA2A8DA5A9DF667D2F25 /* Pods-Tests-pop-tests-osx.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests-pop-tests-osx.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests-pop-tests-osx/Pods-Tests-pop-tests-osx.debug.xcconfig"; sourceTree = "<group>"; };
+		5C8B2FC91E847C1000A6A646 /* POPAnimatablePropertyTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPAnimatablePropertyTypes.h; sourceTree = "<group>"; };
 		5E17BB1E17457345009842B6 /* POPCustomAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POPCustomAnimation.h; sourceTree = "<group>"; };
 		5E17BB1F17457345009842B6 /* POPCustomAnimation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = POPCustomAnimation.mm; sourceTree = "<group>"; };
 		62526242E5E68FDF16B4B25D /* libPods-Tests-pop-tests-tvos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests-pop-tests-tvos.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -400,8 +405,8 @@
 		ECC1DB1718CA291B008C7DEA /* Project-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Release.xcconfig"; sourceTree = "<group>"; };
 		ECC1DB1818CA291B008C7DEA /* Project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
 		ECC1DB1A18CA291B008C7DEA /* StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = StaticLibrary.xcconfig; sourceTree = "<group>"; };
-		ECC1DB1D18CA291B008C7DEA /* ApplicationTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = ApplicationTests.xcconfig; path = ApplicationTests.xcconfig; sourceTree = "<group>"; };
-		ECC1DB1E18CA291B008C7DEA /* LogicTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = LogicTests.xcconfig; path = LogicTests.xcconfig; sourceTree = "<group>"; };
+		ECC1DB1D18CA291B008C7DEA /* ApplicationTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ApplicationTests.xcconfig; sourceTree = "<group>"; };
+		ECC1DB1E18CA291B008C7DEA /* LogicTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = LogicTests.xcconfig; sourceTree = "<group>"; };
 		ECC5A887162FBD6200F7F15C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ECC5A89D162FBD9B00F7F15C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		ECCBC57117D96DBD00C69976 /* FloatConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FloatConversion.h; path = WebCore/FloatConversion.h; sourceTree = "<group>"; };
@@ -711,6 +716,7 @@
 			children = (
 				EC19128E162FB5B700E0CC76 /* POPAnimatableProperty.h */,
 				EC19128F162FB5B700E0CC76 /* POPAnimatableProperty.mm */,
+				5C8B2FC91E847C1000A6A646 /* POPAnimatablePropertyTypes.h */,
 				EC9997531756A0C300A73F49 /* POPAnimationEvent.h */,
 				EC9997541756A0C300A73F49 /* POPAnimationEvent.mm */,
 				EC9997571756A17B00A73F49 /* POPAnimationEventInternal.h */,
@@ -757,7 +763,6 @@
 				ECC1DB1718CA291B008C7DEA /* Project-Release.xcconfig */,
 				ECC1DB1818CA291B008C7DEA /* Project.xcconfig */,
 			);
-			name = Project;
 			path = Project;
 			sourceTree = "<group>";
 		};
@@ -769,7 +774,6 @@
 				ECC1DB1D18CA291B008C7DEA /* ApplicationTests.xcconfig */,
 				ECC1DB1E18CA291B008C7DEA /* LogicTests.xcconfig */,
 			);
-			name = Product;
 			path = Product;
 			sourceTree = "<group>";
 		};
@@ -789,6 +793,7 @@
 				0755AE651BEA17620094AB41 /* POP.h in Headers */,
 				0755AE771BEA17BC0094AB41 /* POPAnimationExtras.h in Headers */,
 				0755AE671BEA17780094AB41 /* POPAnimationPrivate.h in Headers */,
+				5C8B2FCC1E847C4700A6A646 /* POPAnimatablePropertyTypes.h in Headers */,
 				0755AE831BEA17F50094AB41 /* POPLayerExtras.h in Headers */,
 				0755AE681BEA177C0094AB41 /* POPPropertyAnimation.h in Headers */,
 				0755AE6C1BEA17980094AB41 /* POPSpringAnimation.h in Headers */,
@@ -813,6 +818,7 @@
 				0B6BE76819FFD3FF00762101 /* POPAnimationTracer.h in Headers */,
 				0B6BE77519FFD49100762101 /* POPAnimator.h in Headers */,
 				0B6BE77319FFD47F00762101 /* POPBasicAnimation.h in Headers */,
+				5C8B2FCB1E847C4700A6A646 /* POPAnimatablePropertyTypes.h in Headers */,
 				0B6BE76E19FFD43800762101 /* POPCustomAnimation.h in Headers */,
 				0B6BE76C19FFD41D00762101 /* POPDecayAnimation.h in Headers */,
 				0B6BE77819FFD4AB00762101 /* POPGeometry.h in Headers */,
@@ -859,6 +865,7 @@
 				EC9997591756A17B00A73F49 /* POPAnimationEventInternal.h in Headers */,
 				EC94B07A17D95447003CE2C8 /* TransformationMatrix.h in Headers */,
 				EC8F015518FFBD5600DF8905 /* POPBasicAnimationInternal.h in Headers */,
+				5C8B2FCA1E847C1000A6A646 /* POPAnimatablePropertyTypes.h in Headers */,
 				EC35DB2918EE3E820023E077 /* POPAnimationTracer.h in Headers */,
 				ECA0D5C018D8196A003720DF /* UnitBezier.h in Headers */,
 			);
@@ -899,6 +906,7 @@
 				EC6885B018C7BD0A00C6194C /* POPAnimatableProperty.h in Headers */,
 				ECA0D5C118D8196A003720DF /* UnitBezier.h in Headers */,
 				EC8F015618FFBD5600DF8905 /* POPBasicAnimationInternal.h in Headers */,
+				5C8B2FCF1E847C4B00A6A646 /* POPAnimatablePropertyTypes.h in Headers */,
 				EC35DB2A18EE3E820023E077 /* POPAnimationTracer.h in Headers */,
 				EC6885BD18C7BD3E00C6194C /* POPAnimationRuntime.h in Headers */,
 			);
@@ -929,12 +937,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0755AE941BEA19580094AB41 /* Build configuration list for PBXNativeTarget "pop-tests-tvos" */;
 			buildPhases = (
-				438D7049A40532D60B1CFFD1 /* 📦 Check Pods Manifest.lock */,
+				438D7049A40532D60B1CFFD1 /* [CP] Check Pods Manifest.lock */,
 				0755AE881BEA19580094AB41 /* Sources */,
 				0755AE891BEA19580094AB41 /* Frameworks */,
 				0755AE8A1BEA19580094AB41 /* Resources */,
-				3A53D0B6BA95C3BBF6D969C3 /* 📦 Embed Pods Frameworks */,
-				C1BD52275F7F60A567C78D67 /* 📦 Copy Pods Resources */,
+				3A53D0B6BA95C3BBF6D969C3 /* [CP] Embed Pods Frameworks */,
+				C1BD52275F7F60A567C78D67 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1004,12 +1012,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC7E31A618C93D6600B38170 /* Build configuration list for PBXNativeTarget "pop-tests-osx" */;
 			buildPhases = (
-				F4415E40040FA8BD0169207E /* 📦 Check Pods Manifest.lock */,
+				F4415E40040FA8BD0169207E /* [CP] Check Pods Manifest.lock */,
 				EC7E319518C93D6500B38170 /* Sources */,
 				EC7E319618C93D6500B38170 /* Frameworks */,
 				EC7E319718C93D6500B38170 /* Resources */,
-				8C22F2D1DF67D20F75F93301 /* 📦 Embed Pods Frameworks */,
-				87C11C7E3C11F27907D777EE /* 📦 Copy Pods Resources */,
+				8C22F2D1DF67D20F75F93301 /* [CP] Embed Pods Frameworks */,
+				87C11C7E3C11F27907D777EE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1025,12 +1033,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ECF01EE218C92B80009E0AD1 /* Build configuration list for PBXNativeTarget "pop-tests-ios" */;
 			buildPhases = (
-				CA15F9BB92BDB47C58EBAC0D /* 📦 Check Pods Manifest.lock */,
+				CA15F9BB92BDB47C58EBAC0D /* [CP] Check Pods Manifest.lock */,
 				ECF01ECF18C92B7F009E0AD1 /* Sources */,
 				ECF01ED018C92B7F009E0AD1 /* Frameworks */,
 				ECF01ED118C92B7F009E0AD1 /* Resources */,
-				CFC3BF04D331650C5B4A16CC /* 📦 Embed Pods Frameworks */,
-				691A59DA7BDEDCB681FC9C87 /* 📦 Copy Pods Resources */,
+				CFC3BF04D331650C5B4A16CC /* [CP] Embed Pods Frameworks */,
+				691A59DA7BDEDCB681FC9C87 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1139,14 +1147,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A53D0B6BA95C3BBF6D969C3 /* 📦 Embed Pods Frameworks */ = {
+		3A53D0B6BA95C3BBF6D969C3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1154,29 +1162,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests-pop-tests-tvos/Pods-Tests-pop-tests-tvos-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		438D7049A40532D60B1CFFD1 /* 📦 Check Pods Manifest.lock */ = {
+		438D7049A40532D60B1CFFD1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		691A59DA7BDEDCB681FC9C87 /* 📦 Copy Pods Resources */ = {
+		691A59DA7BDEDCB681FC9C87 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1184,14 +1192,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests-pop-tests-ios/Pods-Tests-pop-tests-ios-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		87C11C7E3C11F27907D777EE /* 📦 Copy Pods Resources */ = {
+		87C11C7E3C11F27907D777EE /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1199,14 +1207,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests-pop-tests-osx/Pods-Tests-pop-tests-osx-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8C22F2D1DF67D20F75F93301 /* 📦 Embed Pods Frameworks */ = {
+		8C22F2D1DF67D20F75F93301 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1214,14 +1222,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests-pop-tests-osx/Pods-Tests-pop-tests-osx-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C1BD52275F7F60A567C78D67 /* 📦 Copy Pods Resources */ = {
+		C1BD52275F7F60A567C78D67 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1229,29 +1237,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests-pop-tests-tvos/Pods-Tests-pop-tests-tvos-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CA15F9BB92BDB47C58EBAC0D /* 📦 Check Pods Manifest.lock */ = {
+		CA15F9BB92BDB47C58EBAC0D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		CFC3BF04D331650C5B4A16CC /* 📦 Embed Pods Frameworks */ = {
+		CFC3BF04D331650C5B4A16CC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1259,19 +1267,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests-pop-tests-ios/Pods-Tests-pop-tests-ios-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F4415E40040FA8BD0169207E /* 📦 Check Pods Manifest.lock */ = {
+		F4415E40040FA8BD0169207E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

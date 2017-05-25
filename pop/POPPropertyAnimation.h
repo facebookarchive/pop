@@ -63,3 +63,14 @@ typedef NS_OPTIONS(NSUInteger, POPAnimationClampFlags)
 @property (assign, nonatomic, getter = isAdditive) BOOL additive;
 
 @end
+
+@interface POPPropertyAnimation (CustomProperty)
+
++ (instancetype)animationWithCustomPropertyNamed:(NSString *)name
+                                       readBlock:(POPAnimatablePropertyReadBlock)readBlock
+                                      writeBlock:(POPAnimatablePropertyWriteBlock)writeBlock;
+
++ (instancetype)animationWithCustomPropertyReadBlock:(POPAnimatablePropertyReadBlock)readBlock
+                                          writeBlock:(POPAnimatablePropertyWriteBlock)writeBlock;
+
+@end

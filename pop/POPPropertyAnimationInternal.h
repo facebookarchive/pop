@@ -245,7 +245,7 @@ struct _POPPropertyAnimationState : _POPAnimationState
   void readObjectValue(VectorRef *ptrVec, id obj)
   {
     // use current object value as from value
-    pop_animatable_read_block read = property.readBlock;
+    POPAnimatablePropertyReadBlock read = property.readBlock;
     if (NULL != read) {
 
       Vector4r vec = read_values(read, obj, valueCount);
