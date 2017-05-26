@@ -68,6 +68,7 @@ NSString * const kPOPShapeLayerLineDashPhase = @"shapeLayer.lineDashPhase";
 
 // NSLayoutConstraint
 NSString * const kPOPLayoutConstraintConstant = @"layoutConstraint.constant";
+NSString * const kPOPLayoutConstraintMultiplier = @"layoutConstraint.multiplier";
 
 #if TARGET_OS_IPHONE
 
@@ -568,7 +569,25 @@ static POPStaticAnimatablePropertyState _staticStates[] =
     },
     0.01
   },
-
+  
+  {kPOPLayoutConstraintMultiplier,
+    ^(NSLayoutConstraint *obj, CGFloat values[]) {
+      values[0] = obj.multiplier;
+    },
+    ^(NSLayoutConstraint *obj, const CGFloat values[]) {
+//  The multiplier property is read-only so recreate the constraint with all existing attributes
+//  besides the desired multiplier.
+      obj = [NSLayoutConstraint constraintWithItem:obj.firstItem
+                                         attribute:obj.firstAttribute
+                                         relatedBy:obj.relation
+                                            toItem:obj.secondItem
+                                         attribute:obj.secondAttribute
+                                        multiplier:values[0]
+                                          constant:obj.constant];
+    },
+    0.01
+  },
+  
 #if TARGET_OS_IPHONE
 
   /* UIView */

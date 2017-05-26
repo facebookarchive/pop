@@ -136,6 +136,7 @@ extern NSString * const kPOPShapeLayerLineDashPhase;
  Common NSLayoutConstraint property names.
  */
 extern NSString * const kPOPLayoutConstraintConstant;
+extern NSString * const kPOPLayoutConstraintMultiplier;
 
 
 #if TARGET_OS_IPHONE
