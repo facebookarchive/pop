@@ -172,6 +172,8 @@ typedef struct
 } _POPStaticAnimatablePropertyState;
 typedef _POPStaticAnimatablePropertyState POPStaticAnimatablePropertyState;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wglobal-constructors"
 static POPStaticAnimatablePropertyState _staticStates[] =
 {
   /* CALayer */
@@ -1113,6 +1115,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
 #endif
 
 };
+#pragma clang diagnostic pop
 
 static NSUInteger staticIndexWithName(NSString *aName)
 {
