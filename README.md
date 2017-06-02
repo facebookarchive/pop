@@ -12,6 +12,12 @@ Pop is available on [CocoaPods](http://cocoapods.org). Just add the following to
 pod 'pop', '~> 1.0'
 ```
 
+You can also install Pop through [Carthage](https://github.com/Carthage/Carthage). By adding this to your project's Cartfile:
+
+```
+github "facebook/pop"
+```
+
 Bugs are first fixed in master and then made available via a designated release. If you tend to live on the bleeding edge, you can use Pop from master with the following Podfile entry:
 
 ```ruby
