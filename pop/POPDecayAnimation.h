@@ -61,6 +61,6 @@
  @abstract The reversed velocity.
  @discussion The reversed velocity based on the originalVelocity when the animation was set up.
  */
-- (id)reversedVelocity;
+- (instancetype)reversedVelocity;
 
 @end
