@@ -34,6 +34,8 @@ Alternatively, you can add the project to your workspace and adopt the provided 
 
 Pop adopts the Core Animation explicit animation programming model. Use by including the following import:
 
+#### Objective-C
+
 ```objective-c
 #import <pop/POP.h>
 ```
@@ -44,7 +46,7 @@ or if you're using the embedded framework:
 @import pop;
 ```
 
-In Swift:
+#### Swift
 
 ```swift
 import pop
@@ -54,13 +56,15 @@ import pop
 
 To start an animation, add it to the object you wish to animate:
 
+#### Objective-C
+
 ```objective-c
 POPSpringAnimation *anim = [POPSpringAnimation animation];
 ...
 [layer pop_addAnimation:anim forKey:@"myKey"];
 ```
 
-In Swift:
+#### Swift
 
 ```swift
 let anim = POPSpringAnimation()
@@ -70,17 +74,21 @@ layer.pop_add(anim, forKey: "myKey")
 
 To stop an animation, remove it from the object referencing the key specified on start:
 
+#### Objective-C
+
 ```objective-c
 [layer pop_removeAnimationForKey:@"myKey"];
 ```
 
-In Swift:
+#### Swift
 
 ```swift
 layer.pop_removeAnimation(forKey: "myKey")
 ```
 
 The key can also be used to query for the existence of an animation. Updating the toValue of a running animation can provide the most seamless way to change course:
+
+#### Objective-C
 
 ```objective-c
 anim = [layer pop_animationForKey:@"myKey"];
@@ -93,7 +101,7 @@ if (anim) {
 }
 ```
 
-In Swift:
+#### Swift
 
 ```swift
 if let anim = layer.pop_animation(forKey: "myKey") as? POPSpringAnimation {
@@ -113,13 +121,15 @@ There are four concrete animation types: spring, decay, basic and custom.
 
 Spring animations can be used to give objects a delightful bounce. In this example, we use a spring animation to animate a layer's bounds from its current value to (0, 0, 400, 400):
 
+#### Objective-C
+
 ```objective-c
 POPSpringAnimation *anim = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerBounds];
 anim.toValue = [NSValue valueWithCGRect:CGRectMake(0, 0, 400, 400)];
 [layer pop_addAnimation:anim forKey:@"size"];
 ```
 
-In Swift:
+#### Swift
 
 ```swift
 if let anim = POPSpringAnimation(propertyNamed: kPOPLayerBounds) {
@@ -130,13 +140,15 @@ if let anim = POPSpringAnimation(propertyNamed: kPOPLayerBounds) {
 
 Decay animations can be used to gradually slow an object to a halt. In this example, we decay a layer's positionX from it's current value and velocity 1000pts per second:
 
+#### Objective-C
+
 ```objective-c
 POPDecayAnimation *anim = [POPDecayAnimation animationWithPropertyNamed:kPOPLayerPositionX];
 anim.velocity = @(1000.);
 [layer pop_addAnimation:anim forKey:@"slide"];
 ```
 
-In Swift:
+#### Swift
 
 ```swift
 if let anim = POPDecayAnimation(propertyNamed: kPOPLayerPositionX) {
@@ -146,6 +158,9 @@ if let anim = POPDecayAnimation(propertyNamed: kPOPLayerPositionX) {
 ```
 
 Basic animations can be used to interpolate values over a specified time period. To use an ease-in ease-out animation to animate a view's alpha from 0.0 to 1.0 over the default duration:
+
+#### Objective-C
+
 ```objective-c
 POPBasicAnimation *anim = [POPBasicAnimation animationWithPropertyNamed:kPOPViewAlpha];
 anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -154,7 +169,7 @@ anim.toValue = @(1.0);
 [view pop_addAnimation:anim forKey:@"fade"];
 ```
 
-In Swift:
+#### Swift
 
 ```swift
 if let anim = POPBasicAnimation(propertyNamed: kPOPViewAlpha) {
@@ -172,12 +187,14 @@ if let anim = POPBasicAnimation(propertyNamed: kPOPViewAlpha) {
 
 The property animated is specified by the `POPAnimatableProperty` class. In this example we create a spring animation and explicitly set the animatable property corresponding to `-[CALayer bounds]`:
 
+#### Objective-C
+
 ```objective-c
 POPSpringAnimation *anim = [POPSpringAnimation animation];
 anim.property = [POPAnimatableProperty propertyWithName:kPOPLayerBounds];
 ```
 
-In Swift:
+#### Swift
 
 ```swift
 let anim = POPSpringAnimation()
@@ -187,6 +204,8 @@ if let property = POPAnimatableProperty.property(withName: kPOPLayerBounds) as? 
 ```
 
 The framework provides many common layer and view animatable properties out of box. You can animate a custom property by creating a new instance of the class. In this example, we declare a custom volume property:
+
+#### Objective-C
 
 ```objective-c
 prop = [POPAnimatableProperty propertyWithName:@"com.foo.radio.volume" initializer:^(POPMutableAnimatableProperty *prop) {
@@ -205,7 +224,7 @@ prop = [POPAnimatableProperty propertyWithName:@"com.foo.radio.volume" initializ
 anim.property = prop;
 ```
 
-In Swift:
+#### Swift
 
 ```swift
 if let prop = POPAnimatableProperty.property(withName: "com.foo.radio.volume", initializer: { prop in
@@ -244,11 +263,13 @@ Here are a few tips when debugging. Pop obeys the Simulator's Toggle Slow Animat
 
 Consider naming your animations. This will allow you to more easily identify them when referencing them, either via logging or in the debugger:
 
+#### Objective-C
+
 ```objective-c
 anim.name = @"springOpen";
 ```
 
-In Swift:
+#### Swift
 
 ```swift
 anim.name = "springOpen"
@@ -256,13 +277,15 @@ anim.name = "springOpen"
 
 Each animation comes with an associated tracer. The tracer allows you to record all animation-related events, in a fast and efficient manner, allowing you to query and analyze them after animation completion. The below example starts the tracer and configures it to log all events on animation completion:
 
+#### Objective-C
+
 ```objective-c
 POPAnimationTracer *tracer = anim.tracer;
 tracer.shouldLogAndResetOnCompletion = YES;
 [tracer start];
 ```
 
-In Swift:
+#### Swift
 
 ```swift
 if let tracer = anim.tracer {
