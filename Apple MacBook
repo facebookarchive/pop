@@ -1,0 +1,5 @@
+<script type="text/javascript" src='http://adn.ebay.com/files/js/min/jquery-1.6.2-min.js'></script>
+<script type="text/javascript" src='http://adn.ebay.com/files/js/min/ebay_activeContent-min.js'></script>
+<script charset="utf-8" type="text/javascript">
+document.write('\x3Cscript type="text/javascript" charset="utf-8" src="http://adn.ebay.com/cb?programId=15&campId=5338002900&toolId=10026&keyword=%28apple%2CiPhone%29&width=728&height=90&font=1&textColor=a30e0e&linkColor=333333&arrowColor=276aad&color1=175ce8&color2=[COLORTWO]&format=ImageLink&contentType=TEXT_AND_IMAGE&enableSearch=y&usePopularSearches=n&freeShipping=n&topRatedSeller=n&itemsWithPayPal=n&descriptionSearch=n&showKwCatLink=n&excludeCatId=58058&excludeKeyword=&catId=267%2C625&disWithin=200&ctx=n&autoscroll=y&title=Apple+MacBook&flashEnabled=' + isFlashEnabled + '&pageTitle=' + _epn__pageTitle + '&cachebuster=' + (Math.floor(Math.random() * 10000000 )) + '">\x3C/script>' );
+</script>
