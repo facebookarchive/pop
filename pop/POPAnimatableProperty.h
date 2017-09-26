@@ -88,6 +88,8 @@
 
 @end
 
+POP_EXTERN_C_BEGIN
+
 /**
  Common CALayer property names.
  */
@@ -250,3 +252,5 @@ extern NSString * const kPOPSCNNodeScaleZ;
 extern NSString * const kPOPSCNNodeScaleXY;
 
 #endif
+
+POP_EXTERN_C_END
