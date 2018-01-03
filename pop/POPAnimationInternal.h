@@ -248,7 +248,7 @@ struct _POPAnimationState
   progress(0),
   repeatCount(0),
   active(false),
-  paused(true),
+  paused(false),
   removedOnCompletion(true),
   delegateDidStart(false),
   delegateDidStop(false),
@@ -324,7 +324,7 @@ struct _POPAnimationState
       
       // activate & unpause
       active = true;
-      setPaused(false);
+      //setPaused(false);
       
       // note start time
       startTime = lastTime = time;
