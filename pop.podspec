@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
        'CLANG_CXX_LANGUAGE_STANDARD' => 'c++11',
        'CLANG_CXX_LIBRARY' => 'libc++'
   }
-  spec.ios.deployment_target = '6.0'
-  spec.osx.deployment_target = '10.7'
+  spec.ios.deployment_target = '8.0'
+  spec.osx.deployment_target = '10.8'
   spec.tvos.deployment_target = '9.0'
 end
