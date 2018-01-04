@@ -28,10 +28,8 @@
 # define POP_NOTHROW
 #endif
 
-#if defined(POP_USE_SCENEKIT)
 # if TARGET_OS_MAC || TARGET_OS_IPHONE
 #  define SCENEKIT_SDK_AVAILABLE 1
 # endif
-#endif
 
 #endif
