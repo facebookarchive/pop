@@ -16,7 +16,7 @@
  @abstract The current drag coefficient.
  @discussion A value greater than 1.0 indicates Simulator slow-motion animations are enabled. Defaults to 1.0.
  */
-extern CGFloat POPAnimationDragCoefficient();
+extern CGFloat POPAnimationDragCoefficient(void);
 
 @interface CAAnimation (POPAnimationExtras)
 
