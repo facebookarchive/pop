@@ -1,7 +1,7 @@
 /**
  Copyright (c) 2014-present, Facebook, Inc.
  All rights reserved.
- 
+
  This source code is licensed under the BSD-style license found in the
  LICENSE file in the root directory of this source tree. An additional grant
  of patent rights can be found in the PATENTS file in the same directory.
@@ -14,6 +14,7 @@
 #import "POPAction.h"
 #import "POPAnimationRuntime.h"
 #import "POPAnimationTracerInternal.h"
+#import "POPMath.h"
 #import "POPSpringSolver.h"
 
 using namespace POP;
@@ -116,7 +117,7 @@ struct ComputeProgressFunctor<Vector4r> {
     CGFloat s = (value - start).squaredNorm(); // distance from start
     CGFloat e = (value - end).squaredNorm();   // distance from end
     CGFloat d = (end - start).squaredNorm();   // distance from start to end
-    
+
     if (0 == d) {
       return 1;
     } else if (s > e) {
@@ -211,17 +212,17 @@ struct _POPAnimationState
   POPAnimationTracer *tracer;
   CGFloat progress;
   NSInteger repeatCount;
-  
+
   bool active:1;
   bool paused:1;
   bool removedOnCompletion:1;
-  
+
   bool delegateDidStart:1;
   bool delegateDidStop:1;
   bool delegateDidProgress:1;
   bool delegateDidApply:1;
   bool delegateDidReachToValue:1;
-  
+
   bool additive:1;
   bool didReachToValue:1;
   bool tracing:1; // corresponds to tracer started
@@ -262,7 +263,7 @@ struct _POPAnimationState
   autoreverses(false),
   repeatForever(false),
   customFinished(false) {}
-  
+
   virtual ~_POPAnimationState()
   {
     name = nil;
@@ -273,11 +274,11 @@ struct _POPAnimationState
     completionBlock = NULL;
     animationDidApplyBlock = NULL;
   }
-  
+
   bool isCustom() {
     return kPOPAnimationCustom == type;
   }
-  
+
   bool isStarted() {
     return 0 != startTime;
   }
@@ -285,7 +286,7 @@ struct _POPAnimationState
   id getDelegate() {
     return delegate;
   }
-  
+
   void setDelegate(id d) {
     if (d != delegate) {
       delegate = d;
@@ -300,7 +301,7 @@ struct _POPAnimationState
   bool getPaused() {
     return paused;
   }
-  
+
   void setPaused(bool f) {
     if (f != paused) {
       paused = f;
@@ -309,23 +310,23 @@ struct _POPAnimationState
       }
     }
   }
-  
+
   CGFloat getProgress() {
     return progress;
   }
-  
+
   /* returns true if started */
   bool startIfNeeded(id obj, CFTimeInterval time, CFTimeInterval offset)
   {
     bool started = false;
-    
+
     // detect start based on time
     if (0 == startTime && time >= beginTime + offset) {
-      
+
       // activate & unpause
       active = true;
       setPaused(false);
-      
+
       // note start time
       startTime = lastTime = time;
       started = true;
@@ -352,14 +353,14 @@ struct _POPAnimationState
       if (done) {
         delegateProgress();
       }
-      
+
       if (removing) {
         active = false;
       }
-      
+
       handleDidStop(done);
     } else {
-      
+
       // stopped before even started
       // delegate start and stop regardless; matches CA behavior
       if (!isStarted()) {
@@ -367,10 +368,10 @@ struct _POPAnimationState
         handleDidStop(false);
       }
     }
-    
+
     setPaused(true);
   }
-  
+
   virtual void handleDidStart()
   {
     if (delegateDidStart) {
@@ -383,26 +384,26 @@ struct _POPAnimationState
       ActionEnabler enabler;
       block(self);
     }
-    
+
     if (tracing) {
       [tracer didStart];
     }
   }
-  
+
   void handleDidStop(BOOL done)
   {
     if (delegateDidStop) {
       ActionEnabler enabler;
       [delegate pop_animationDidStop:self finished:done];
     }
-    
+
     // add another strong reference to completion block before callout
     POPAnimationCompletionBlock block = completionBlock;
     if (block != NULL) {
       ActionEnabler enabler;
       block(self, done);
     }
-    
+
     if (tracing) {
       [tracer didStop:done];
     }
@@ -413,10 +414,10 @@ struct _POPAnimationState
     if (isCustom()) {
       return customFinished;
     }
-    
+
     return false;
   }
-  
+
   bool advanceTime(CFTimeInterval time, id obj) {
     bool advanced = false;
     bool computedProgress = false;
@@ -442,24 +443,24 @@ struct _POPAnimationState
       default:
         break;
     }
-    
+
     if (advanced) {
-      
+
       // estimate progress
       if (!computedProgress) {
         computeProgress();
       }
-      
+
       // delegate progress
       delegateProgress();
-      
+
       // update time
       lastTime = time;
     }
-    
+
     return advanced;
   }
-  
+
   virtual void willRun(bool started, id obj) {}
   virtual bool advance(CFTimeInterval time, CFTimeInterval dt, id obj) { return false; }
   virtual void computeProgress() {}
@@ -477,7 +478,7 @@ struct _POPAnimationState
       block(self);
     }
   }
-  
+
   virtual void reset(bool all) {
     startTime = 0;
     lastTime = 0;
