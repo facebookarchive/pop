@@ -95,6 +95,8 @@
 		0B6BE7DF19FFD92700762101 /* POPLayerExtras.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC94B07C17D95CAA003CE2C8 /* POPLayerExtras.mm */; };
 		0B6BE7E019FFD92800762101 /* POPMath.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC6465CF1794B4660014176F /* POPMath.mm */; };
 		0B6BE7E119FFD92800762101 /* POPVector.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC70AC4218CCF4FC0067018C /* POPVector.mm */; };
+		0BB8E7B920A498AA00AAA7F1 /* POPVector.h in Headers */ = {isa = PBXBuildFile; fileRef = EC70AC4318CCF4FC0067018C /* POPVector.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0BB8E7BA20A498C900AAA7F1 /* POPVector.h in Headers */ = {isa = PBXBuildFile; fileRef = EC70AC4318CCF4FC0067018C /* POPVector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		181893701B3B7763002C4A59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5A887162FBD6200F7F15C /* QuartzCore.framework */; };
 		181893711B3B7767002C4A59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC5A89D162FBD9B00F7F15C /* CoreGraphics.framework */; };
 		181893721B3B776A002C4A59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC19121B162FB53A00E0CC76 /* Foundation.framework */; };
@@ -183,8 +185,8 @@
 		EC6C098A19141BBD00F8EA96 /* POPBasicAnimationTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC6C098819141BBD00F8EA96 /* POPBasicAnimationTests.mm */; };
 		EC70AC4418CCF4FC0067018C /* POPVector.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC70AC4218CCF4FC0067018C /* POPVector.mm */; };
 		EC70AC4518CCF4FC0067018C /* POPVector.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC70AC4218CCF4FC0067018C /* POPVector.mm */; };
-		EC70AC4618CCF4FC0067018C /* POPVector.h in Headers */ = {isa = PBXBuildFile; fileRef = EC70AC4318CCF4FC0067018C /* POPVector.h */; };
-		EC70AC4718CCF4FC0067018C /* POPVector.h in Headers */ = {isa = PBXBuildFile; fileRef = EC70AC4318CCF4FC0067018C /* POPVector.h */; };
+		EC70AC4618CCF4FC0067018C /* POPVector.h in Headers */ = {isa = PBXBuildFile; fileRef = EC70AC4318CCF4FC0067018C /* POPVector.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC70AC4718CCF4FC0067018C /* POPVector.h in Headers */ = {isa = PBXBuildFile; fileRef = EC70AC4318CCF4FC0067018C /* POPVector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC72875518E13348006EEE54 /* POPCustomAnimationTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC72875418E13348006EEE54 /* POPCustomAnimationTests.mm */; };
 		EC72875618E13348006EEE54 /* POPCustomAnimationTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC72875418E13348006EEE54 /* POPCustomAnimationTests.mm */; };
 		EC7E31AB18C9419000B38170 /* POPAnimatable.mm in Sources */ = {isa = PBXBuildFile; fileRef = EC99974A17568DAD00A73F49 /* POPAnimatable.mm */; };
@@ -800,6 +802,7 @@
 				0755AE7E1BEA17D60094AB41 /* POPAnimatorPrivate.h in Headers */,
 				0755AE6A1BEA178B0094AB41 /* POPCustomAnimation.h in Headers */,
 				0755AE6B1BEA17930094AB41 /* POPDecayAnimation.h in Headers */,
+				0BB8E7BA20A498C900AAA7F1 /* POPVector.h in Headers */,
 				0755AE661BEA17670094AB41 /* POPAnimation.h in Headers */,
 				0755AE801BEA17EA0094AB41 /* POPDefines.h in Headers */,
 			);
@@ -825,6 +828,7 @@
 				0B6BE77019FFD46600762101 /* POPLayerExtras.h in Headers */,
 				0B6BE77219FFD47800762101 /* POPPropertyAnimation.h in Headers */,
 				0B6BE76F19FFD44000762101 /* POPSpringAnimation.h in Headers */,
+				0BB8E7B920A498AA00AAA7F1 /* POPVector.h in Headers */,
 				0B6BE77119FFD46F00762101 /* POPAnimatorPrivate.h in Headers */,
 				0B6BE77719FFD4A300762101 /* POPAnimationPrivate.h in Headers */,
 			);
@@ -851,12 +855,12 @@
 				EC67007218D3D89F00F7387F /* POPCGUtils.h in Headers */,
 				EC8F016218FFBE9D00DF8905 /* POPDecayAnimationInternal.h in Headers */,
 				EC0AE13116BC73CE001DA2CE /* POPAnimationExtras.h in Headers */,
+				EC70AC4618CCF4FC0067018C /* POPVector.h in Headers */,
 				EC91E96E18C014DE0025B8AD /* POPAction.h in Headers */,
 				90AA30B718988BBE00E3BDF7 /* POPSpringSolver.h in Headers */,
 				EC8F014618FFBC2D00DF8905 /* POPPropertyAnimationInternal.h in Headers */,
 				EC8F015C18FFBE8C00DF8905 /* POPDecayAnimation.h in Headers */,
 				EC91E96018C00EC90025B8AD /* POPDefines.h in Headers */,
-				EC70AC4618CCF4FC0067018C /* POPVector.h in Headers */,
 				EC9553901743E278001E6AF2 /* POPAnimationRuntime.h in Headers */,
 				EC6465D01794B4660014176F /* POPMath.h in Headers */,
 				EC8F016E18FFBEC200DF8905 /* POPSpringAnimationInternal.h in Headers */,

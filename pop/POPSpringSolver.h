@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "POPVector.h"
+#import <pop/POPVector.h>
 
 namespace POP {
   
