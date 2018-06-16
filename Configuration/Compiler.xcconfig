@@ -7,6 +7,11 @@
 // of patent rights can be found in the PATENTS file in the same directory.
 //
 
+// Deployment targets
+MACOSX_DEPLOYMENT_TARGET = 10.7
+IPHONEOS_DEPLOYMENT_TARGET = 8.0
+TVOS_DEPLOYMENT_TARGET = 9.0
+
 // Warnings
 GCC_TREAT_WARNINGS_AS_ERRORS = YES
 CLANG_WARN_CONSTANT_CONVERSION = YES
