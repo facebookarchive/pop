@@ -1057,7 +1057,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastTestingUpgradeCheck = 0700;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					0755AE4E1BEA15950094AB41 = {
@@ -1550,7 +1550,7 @@
 				INFOPLIST_FILE = "$(PROJECT_DIR)/pop-tests/pop-tests-tvos-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "pop-tests";
 				SDKROOT = appletvos;
 			};
@@ -1581,7 +1581,7 @@
 				INFOPLIST_FILE = "$(PROJECT_DIR)/pop-tests/pop-tests-tvos-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "pop-tests";
 				SDKROOT = appletvos;
 				VALIDATE_PRODUCT = YES;
@@ -1613,7 +1613,7 @@
 				INFOPLIST_FILE = "$(PROJECT_DIR)/pop-tests/pop-tests-tvos-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "pop-tests";
 				SDKROOT = appletvos;
 				VALIDATE_PRODUCT = YES;
@@ -1767,6 +1767,7 @@
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/pop-tests/pop-tests-osx-Info.plist";
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "pop-tests";
 				SDKROOT = macosx;
 			};
@@ -1783,6 +1784,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/pop-tests/pop-tests-osx-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "pop-tests";
 				SDKROOT = macosx;
 			};
@@ -1799,6 +1801,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/pop-tests/pop-tests-osx-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "pop-tests";
 				SDKROOT = macosx;
 			};
@@ -1814,6 +1817,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/pop-tests/pop-tests-ios-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "pop-tests";
 				SDKROOT = iphoneos;
 			};
@@ -1829,6 +1833,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/pop-tests/pop-tests-ios-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "pop-tests";
 				SDKROOT = iphoneos;
 			};
@@ -1844,6 +1849,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/pop-tests/pop-tests-ios-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "pop-tests";
 				SDKROOT = iphoneos;
 			};
