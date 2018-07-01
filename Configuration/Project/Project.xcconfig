@@ -11,3 +11,6 @@
 
 // Install
 SKIP_INSTALL = YES
+
+// Code Signing
+CODE_SIGN_IDENTITY =
