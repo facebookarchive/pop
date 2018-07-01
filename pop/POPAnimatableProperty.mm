@@ -1086,7 +1086,7 @@ static POPStaticAnimatablePropertyState _staticStates[] =
       values[0] = obj.scale.y;
     },
     ^(SCNNode *obj, const CGFloat values[]) {
-      obj.position = SCNVector3Make(obj.scale.x, values[0], obj.scale.z);
+      obj.scale = SCNVector3Make(obj.scale.x, values[0], obj.scale.z);
     },
     kPOPThresholdScale
   },
