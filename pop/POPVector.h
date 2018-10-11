@@ -10,6 +10,8 @@
 #ifndef __POP__FBVector__
 #define __POP__FBVector__
 
+#ifdef __cplusplus
+
 #include <iostream>
 #include <vector>
 
@@ -390,4 +392,5 @@ namespace POP {
   typedef std::shared_ptr<const Vector> VectorConstRef;
 
 }
+#endif /* __cplusplus */
 #endif /* defined(__POP__FBVector__) */
