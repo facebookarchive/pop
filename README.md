@@ -324,7 +324,6 @@ A collection of links to external resources that may prove valuable:
 * [Apple – Core Animation Programming Guide](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html)
 * [iOS Development Tips – UIScrollView-like deceleration with Pop](http://iosdevtips.co/post/84571595353/replicating-uiscrollviews-deceleration-with-facebook)
 * [Pop Playground – Repository of Pop animation examples](https://github.com/callmeed/pop-playground)
-* [Pop Playground 2 – Playing with Facebook's framework](http://victorbaro.com/2014/05/pop-playground-playing-with-facebooks-framework/)
 * [POP-MCAnimate – Concise syntax for the Pop animation framework](https://github.com/matthewcheok/POP-MCAnimate)
 * [Popping - Great examples in one project](https://github.com/schneiderandre/popping)
 * [Rebound – Spring Animations for Android](http://facebook.github.io/rebound/)
