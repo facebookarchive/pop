@@ -26,3 +26,7 @@ clear and has sufficient instructions to be able to reproduce the issue.
 ## License
 By contributing to Pop you agree that your contributions will be licensed
 under its BSD license.
+
+## Issue Triage [![Open Source Helpers](https://www.codetriage.com/facebook/pop/badges/users.svg)](https://www.codetriage.com/facebook/pop)
+
+You can triage issues which may include reproducing bug reports or asking for vital information, such as version numbers or reproduction instructions. If you would like to start triaging issues, one easy way to get started is to [subscribe to pop on CodeTriage](https://www.codetriage.com/facebook/pop).
