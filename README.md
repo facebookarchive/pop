@@ -12,7 +12,7 @@ Pop is available on [CocoaPods](http://cocoapods.org). Just add the following to
 pod 'pop', '~> 1.0'
 ```
 
-Bugs are first fixed in master and then made available via a designated release. If you tend to live on the bleeding edge, you can use Pop from master with the following Podfile entry:
+Bugs are first fixed in master and then made available via a designated release. If you tend to live on the bleeding edge, you can use Pop from the master with the following Podfile entry:
 
 ```ruby
 pod 'pop', :git => 'https://github.com/facebook/pop.git'
@@ -25,7 +25,7 @@ By adding the project to your project and adding pop.embedded framework to the E
 
 ![Embedded Binaries](Images/EmbeddedBinaries.png?raw=true)
 
-**Note 2**: this method does not currently play nicely with workspaces. Since targets can only depend on and embed products from other targets in the same project, it only works when pop.xcodeproj is added as a subproject to the current target's project. Otherwise, you'll need to manually set the build ordering in the scheme and copy in the product.
+**Note 2**: this method does not currently play nicely with workspaces. Since targets can only depend on and embed products from other targets in the same project, it only works when pop.xcodeproj is added as a subproject to the current target's project. Otherwise, you'll need to manually set the build order in the scheme and copy it in the product.
 
 ### Static Library (manual)
 Alternatively, you can add the project to your workspace and adopt the provided configuration files or manually copy the files under the pop subdirectory into your project. If installing manually, ensure the C++ standard library is also linked by including `-lc++` to your project linker flags.
@@ -180,7 +180,7 @@ if let anim = POPBasicAnimation(propertyNamed: kPOPViewAlpha) {
 }
 ```
 
-`POPCustomAnimation` makes creating custom animations and transitions easier by handling CADisplayLink and associated time-step management. See header for more details.
+`POPCustomAnimation` makes creating custom animations and transitions easier by handling CADisplayLink and associated time-step management. See the header for more details.
 
 
 ### Properties
@@ -338,4 +338,4 @@ See the CONTRIBUTING file for how to help out.
 
 ## License
 
-Pop is released under a BSD License. See LICENSE file for details.
+Pop is released under a BSD License. See the LICENSE file for details.
