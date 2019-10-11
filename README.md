@@ -1,6 +1,6 @@
 ![pop](https://github.com/facebook/pop/blob/master/Images/pop.gif?raw=true)
 
-Pop is an extensible animation engine for iOS, tvOS, and OS X. In addition to basic static animations, it supports spring and decay dynamic animations, making it useful for building realistic, physics-based interactions. The API allows quick integration with existing Objective-C or Swift codebases and enables the animation of any property on any object. It's a mature and well-tested framework that drives all the animations and transitions in [Paper](https://en.wikipedia.org/wiki/Facebook_Paper).
+Pop is an extensible animation engine for iOS, tvOS, and OS X. In addition to basic static animations, it supports spring and decays dynamic animations, making it useful for building realistic, physics-based interactions. The API allows quick integration with existing Objective-C or Swift codebases and enables the animation of any property on any object. It's a mature and well-tested framework that drives all the animations and transitions in [Paper](https://en.wikipedia.org/wiki/Facebook_Paper).
 
 [![Build Status](https://travis-ci.org/facebook/pop.svg)](https://travis-ci.org/facebook/pop)
 
@@ -19,7 +19,7 @@ pod 'pop', :git => 'https://github.com/facebook/pop.git'
 ```
 
 ### Framework (manual)
-By adding the project to your project and adding pop.embedded framework to the Embedded Binaries section on the General tab of your app's target, you can set up pop in seconds! This also enables `@import pop` syntax with header modules.
+By adding the project to your project and adding a pop.embedded framework to the Embedded Binaries section on the General tab of your app's target, you can set up pop in seconds! This also enables `@import pop` syntax with header modules.
 
 **Note**: because of some awkward limitations with Xcode, embedded binaries must share the same name as the module and must have `.framework` as an extension. This means that you'll see three pop.frameworks when adding embedded binaries (one for OS X, one for tvOS, and one for iOS). You'll need to be sure to add the right one; they appear identically in the list but note the list is populated in order of targets. You can verify the correct one was chosen by checking the path next to the framework listed, in the format `<configuration>-<platform>` (e.g. `Debug-iphoneos`).
 
@@ -86,7 +86,7 @@ To stop an animation, remove it from the object referencing the key specified on
 layer.pop_removeAnimation(forKey: "myKey")
 ```
 
-The key can also be used to query for the existence of an animation. Updating the toValue of a running animation can provide the most seamless way to change course:
+The key can also be used to query for the existence of an animation. Updating the value of a running animation can provide the most seamless way to change course:
 
 #### Objective-C
 
@@ -138,7 +138,7 @@ if let anim = POPSpringAnimation(propertyNamed: kPOPLayerBounds) {
 }
 ```
 
-Decay animations can be used to gradually slow an object to a halt. In this example, we decay a layer's positionX from it's current value and velocity 1000pts per second:
+Decay animations can be used to gradually slow an object to a halt. In this example, we decay a layer's position from its current value and velocity 1000pts per second:
 
 #### Objective-C
 
@@ -203,7 +203,7 @@ if let property = POPAnimatableProperty.property(withName: kPOPLayerBounds) as? 
 }
 ```
 
-The framework provides many common layer and view animatable properties out of box. You can animate a custom property by creating a new instance of the class. In this example, we declare a custom volume property:
+The framework provides many common layer and views animatable properties out of the box. You can animate a custom property by creating a new instance of the class. In this example, we declare a custom volume property:
 
 #### Objective-C
 
@@ -308,7 +308,7 @@ Assuming CocoaPods is installed, this will include the necessary OCMock dependen
 
 ## SceneKit
 
-Due to SceneKit requiring iOS 8 and OS X 10.9, POP's SceneKit extensions aren't provided out of box. Unfortunately, [weakly linked frameworks](https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/WeakLinking.html) cannot be used due to issues mentioned in the [Xcode 6.1 Release Notes](https://developer.apple.com/library/ios/releasenotes/DeveloperTools/RN-Xcode/Chapters/xc6_release_notes.html).
+Due to SceneKit requiring iOS 8 and OS X 10.9, POP's SceneKit extensions aren't provided out of the box. Unfortunately, [weakly linked frameworks](https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/WeakLinking.html) cannot be used due to issues mentioned in the [Xcode 6.1 Release Notes](https://developer.apple.com/library/ios/releasenotes/DeveloperTools/RN-Xcode/Chapters/xc6_release_notes.html).
 
 To remedy this, you can easily opt-in to use SceneKit! Simply add this to the Preprocessor Macros section of your Xcode Project:
 
