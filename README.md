@@ -334,8 +334,8 @@ A collection of links to external resources that may prove valuable:
 * [VBFPopFlatButton – Flat animatable button, using Pop to transition between states](https://github.com/victorBaro/VBFPopFlatButton)
 
 ## Contributing
-See the CONTRIBUTING file for how to help out.
+See the [CONTRIBUTING](https://github.com/facebook/pop/blob/master/CONTRIBUTING.md) file for how to help out.
 
 ## License
 
-Pop is released under a BSD License. See LICENSE file for details.
+Pop is released under a [BSD License.](https://en.wikipedia.org/wiki/BSD_licenses) See [LICENSE](https://github.com/facebook/pop/blob/master/LICENSE) file for details.
