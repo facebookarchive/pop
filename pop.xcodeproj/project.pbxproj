@@ -1083,10 +1083,11 @@
 			};
 			buildConfigurationList = EC191212162FB53A00E0CC76 /* Build configuration list for PBXProject "pop" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = EC19120D162FB53A00E0CC76;
 			productRefGroup = EC191219162FB53A00E0CC76 /* Products */;
